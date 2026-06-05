@@ -1,0 +1,57 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  # v1.13.27: pdfkit usa archivos .afm en runtime que esbuild no empaqueta.
+  # Lo dejamos como dependencia externa para que se instale en node_modules.
+  external_node_modules = ["pdfkit"]
+
+# Timeout largo: catálogo puede crecer y el upload de fotos suma latencia
+[functions."*"]
+  timeout = 26
+
+# v1.17.1 — Registro de accesos por email 2x/día.
+# Cron en UTC: 12:00 y 20:00 UTC ≈ 13:00 y 21:00 en Canarias (horario de verano).
+[functions."registro-accesos-cron"]
+  schedule = "0 12,20 * * *"
+
+# v1.21.19 — AUDITORÍA DIARIA DE ACCESOS + AUTO-BLOQUEO.
+# 21:00 UTC ≈ 22:00 Canarias. Analiza últimos 30 días, bloquea automáticamente
+# cualquier cliente con acceso desde país fuera de España, envía email resumen.
+[functions."analisis-accesos-cron"]
+  schedule = "0 21 * * *"
+
+# Cache control: HTML no-cache, estáticos sí
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/icon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/manifest+json"
+
+# Redirects: limpiar query strings y SPA fallback
+[[redirects]]
+  from = "/admin"
+  to = "/admin.html"
+  status = 200
+
+[[redirects]]
+  from = "/almacen"
+  to = "/almacen.html"
+  status = 200

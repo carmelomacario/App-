@@ -1,0 +1,19 @@
+{
+  "name": "Canary Modas B2B",
+  "short_name": "Canary B2B",
+  "description": "Catálogo y pedidos B2B — Canary Modas Mayorista textil",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#faf7f2",
+  "theme_color": "#7a2014",
+  "lang": "es",
+  "categories": ["business", "shopping", "productivity"],
+  "icons": [
+    { "src": "/icon.svg?v=2", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon.svg?v=2", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
