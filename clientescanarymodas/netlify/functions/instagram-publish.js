@@ -6,18 +6,22 @@
 //   1) POST /{IG_BUSINESS_ID}/media          -> crea el "contenedor" (image_url + caption)
 //   2) POST /{IG_BUSINESS_ID}/media_publish  -> publica el contenedor -> devuelve el id del post
 //
-// Requisitos (se configuran en Netlify → Site settings → Environment variables):
-//   IG_BUSINESS_ID     ID de la cuenta de Instagram Business (numérico).
-//   IG_ACCESS_TOKEN    Token de acceso de larga duración con permiso instagram_content_publish.
-//   IG_GRAPH_VERSION   (opcional) versión de la Graph API. Por defecto: v21.0
-//   IG_HASHTAGS        (opcional) bloque de hashtags que se añade al final del pie de foto.
-//   INSTAGRAM_FN_SECRET (opcional) si se define, la función exige la cabecera
-//                       'x-ig-secret' con ese valor. Úsalo para que solo tu panel
-//                       de admin pueda invocarla.
+// Se invoca desde admin.html con el mismo helper api() del panel:
+//   api("instagram-publish", { imageUrl, descripcion, token })
+// El endpoint valida el token de sesión llamando a la función 'auth' (action: 'me'),
+// de modo que solo un administrador logueado puede publicar.
+//
+// Variables de entorno (Netlify → Site settings → Environment variables):
+//   IG_BUSINESS_ID      ID de la cuenta de Instagram Business (numérico).
+//   IG_ACCESS_TOKEN     Token de acceso de larga duración con permiso instagram_content_publish.
+//   IG_GRAPH_VERSION    (opcional) versión de la Graph API. Por defecto: v21.0
+//   IG_HASHTAGS         (opcional) bloque de hashtags que se añade al final del pie de foto.
+//   INSTAGRAM_FN_SECRET (opcional) alternativa a la sesión para pruebas: si se define,
+//                       se acepta también la cabecera 'x-ig-secret' con ese valor.
 //
 // IMPORTANTE: Instagram exige que 'image_url' sea una URL pública accesible por
-// internet (JPEG/PNG). Las fotos servidas por el catálogo ya cumplen esto; si en
-// algún caso la foto viniera de Google Drive, hay que pasarla por una URL pública.
+// internet (JPEG/PNG). Las fotos del catálogo (Google user-content, con sz=w…) ya
+// cumplen esto.
 
 const GRAPH_VERSION = process.env.IG_GRAPH_VERSION || 'v21.0';
 const GRAPH_BASE = `https://graph.facebook.com/${GRAPH_VERSION}`;
@@ -44,6 +48,25 @@ function buildCaption(descripcion) {
   return [cuerpo, hashtags].filter(Boolean).join('\n\n').slice(0, 2200); // límite de IG: 2200 chars
 }
 
+// Valida el token de sesión del panel llamando a la propia función 'auth' (action 'me').
+async function validarSesion(event, token) {
+  if (!token) return false;
+  const proto = event.headers?.['x-forwarded-proto'] || 'https';
+  const host = event.headers?.host;
+  const base = process.env.URL || (host ? `${proto}://${host}` : '');
+  if (!base) return false;
+  try {
+    const res = await fetch(`${base}/.netlify/functions/auth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'me', token }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 async function graphPost(path, params) {
   const url = `${GRAPH_BASE}/${path}`;
   const body = new URLSearchParams({ ...params, access_token: process.env.IG_ACCESS_TOKEN });
@@ -67,13 +90,21 @@ export const handler = async (event) => {
     return json(405, { ok: false, error: 'Método no permitido. Usa POST.' });
   }
 
-  // Auth opcional por secreto compartido
+  // Parseo de entrada
+  let payload;
+  try {
+    payload = JSON.parse(event.body || '{}');
+  } catch {
+    return json(400, { ok: false, error: 'JSON inválido en el cuerpo de la petición.' });
+  }
+
+  // Autorización: sesión de admin válida, o secreto compartido (para pruebas)
   const secret = process.env.INSTAGRAM_FN_SECRET;
-  if (secret) {
-    const provided = event.headers?.['x-ig-secret'] || event.headers?.['X-Ig-Secret'];
-    if (provided !== secret) {
-      return json(401, { ok: false, error: 'No autorizado.' });
-    }
+  const provided = event.headers?.['x-ig-secret'] || event.headers?.['X-Ig-Secret'];
+  const bySecret = !!secret && provided === secret;
+  const bySesion = await validarSesion(event, payload.token);
+  if (!bySecret && !bySesion) {
+    return json(401, { ok: false, error: 'No autorizado. Inicia sesión en el panel.' });
   }
 
   // Comprobación de configuración
@@ -82,14 +113,6 @@ export const handler = async (event) => {
       ok: false,
       error: 'Falta configuración: define IG_BUSINESS_ID e IG_ACCESS_TOKEN en Netlify.',
     });
-  }
-
-  // Parseo de entrada
-  let payload;
-  try {
-    payload = JSON.parse(event.body || '{}');
-  } catch {
-    return json(400, { ok: false, error: 'JSON inválido en el cuerpo de la petición.' });
   }
 
   const imageUrl = payload.imageUrl || payload.image_url;

@@ -1,0 +1,3368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#7a2014" />
+<title>Canary Modas · Admin</title>
+<link rel="icon" href="/icon.svg?v=2" type="image/svg+xml" />
+<style>
+  :root{
+    --bg:#faf7f2;--bg-card:#fff;--bg-soft:#f0ebe1;--line:#e0d8c8;--line-strong:#c9bfa9;
+    --ink:#1a1a1a;--ink-2:#4a4338;--ink-3:#888272;--ink-4:#b8b0a0;
+    --brand:#7a2014;--brand-bright:#9c2614;--brand-dark:#4a1208;
+    --accent:#f08020;--accent-bright:#f7a04a;
+    --info:#1e60c4;--ok:#1f8a4c;--ok-bright:#22a06b;--warn:#c4671e;
+    --sombra:0 1px 3px rgba(60,40,20,.06),0 1px 2px rgba(60,40,20,.04);
+    --radio:14px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,sans-serif;font-size:16px;line-height:1.4}
+  #app{min-height:100vh;display:flex;flex-direction:column}
+  .vista{flex:1;display:none;flex-direction:column}
+  .vista.activa{display:flex}
+
+  .topbar{position:sticky;top:0;z-index:20;background:linear-gradient(160deg,var(--brand-bright),var(--brand));color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;box-shadow:var(--sombra)}
+  .topbar .back{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.18);font-size:20px;cursor:pointer;flex-shrink:0}
+  .topbar h1{font-size:18px;margin:0;font-weight:700;flex:1;letter-spacing:-.2px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar h1 .sub{display:block;font-size:12px;font-weight:500;opacity:.85;margin-top:1px}
+  .topbar .icono-accion{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:18px}
+  /* v1.14.12 — botón guardar (disquete) destacado en blanco */
+  .topbar .icono-accion.icono-guardar{background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.25)}
+  .topbar .icono-accion.icono-guardar:active{transform:scale(.92)}
+  .topbar .icono-accion.icono-guardar.guardando{opacity:.5;pointer-events:none}
+  /* v1.14.16 — toggle de publicación (Borrador / Publicado) */
+  .pub-toggle{display:inline-flex;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;margin-top:4px}
+  .pub-opt{padding:9px 16px;font-size:13.5px;font-weight:700;background:#fff;color:var(--ink-3);border:none;cursor:pointer;transition:all .12s}
+  .pub-opt+.pub-opt{border-left:1.5px solid var(--line)}
+  #btnEstBorrador.activo{background:#fff4d6;color:#9a6a00}
+  #btnEstPublicado.activo{background:#e6f6ec;color:#1f8a4c}
+  .logo-mini{width:38px;height:38px;border-radius:10px;background:#fff;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:4px}
+  .logo-mini img{width:100%;height:auto;object-fit:contain}
+
+  .contenido{flex:1;padding:14px;max-width:720px;width:100%;margin:0 auto;padding-bottom:40px}
+
+  .card{background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radio);padding:16px;box-shadow:var(--sombra);margin-bottom:12px}
+  .card h2{font-size:12px;margin:0 0 12px;color:var(--ink-3);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+
+  .login-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+  .login-logo{width:220px;max-width:80%;margin-bottom:14px}
+  .login-logo img{width:100%;display:block}
+  .login-title{font-size:22px;font-weight:800;margin:0;color:var(--brand-dark);letter-spacing:-.3px}
+  .login-sub{color:var(--ink-3);font-size:13px;margin:6px 0 24px}
+  .login-form{width:100%;max-width:320px;display:flex;flex-direction:column;gap:12px}
+
+  .field{margin-bottom:14px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:block;font-size:13px;color:var(--ink-2);margin-bottom:6px;font-weight:600}
+  .field .req{color:var(--brand)}
+  .input-wrap{position:relative}
+  .input-wrap input,.input-wrap select,.input-wrap textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:#fff;color:var(--ink)}
+  .input-wrap input:focus,.input-wrap select:focus,.input-wrap textarea:focus{outline:none;border-color:var(--brand)}
+  .input-wrap textarea{min-height:70px;resize:vertical;line-height:1.4}
+  .row{display:flex;gap:10px}
+  .row > *{flex:1}
+  .row > .fit{flex:0}
+
+  .btn{padding:12px 16px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .12s;width:100%}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:linear-gradient(160deg,var(--brand-bright),var(--brand));color:#fff;box-shadow:0 2px 8px rgba(122,32,20,.25)}
+  .btn-primary:disabled{background:var(--bg-soft);color:var(--ink-4);box-shadow:none;cursor:not-allowed}
+  .btn-ok{background:linear-gradient(160deg,var(--ok-bright),var(--ok));color:#fff}
+  .btn-secundario{background:var(--bg-soft);color:var(--ink-2);border:1px solid var(--line)}
+  .btn-peligro{background:#fde8e8;color:#a02020;border:1px solid #f5b8b8}
+  .btn-mini{padding:8px 12px;font-size:13px;width:auto}
+
+  /* Dashboard tiles */
+  .tile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:var(--radio);padding:18px;cursor:pointer;box-shadow:var(--sombra);min-height:130px;display:flex;flex-direction:column;align-items:flex-start;position:relative}
+  .tile:active{transform:scale(.97)}
+  .tile-icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;margin-bottom:10px}
+  .tile-icon.rojo{background:linear-gradient(160deg,#ff8a8a,var(--brand-bright))}
+  .tile-icon.azul{background:linear-gradient(160deg,#5eb3ff,#1e6df0)}
+  .tile-icon.verde{background:linear-gradient(160deg,#79e095,var(--ok))}
+  .tile-icon.naranja{background:linear-gradient(160deg,var(--accent-bright),var(--accent))}
+  .tile-icon.gris{background:linear-gradient(160deg,#a9adb6,#586073)}
+  .tile-titulo{font-size:16px;font-weight:700;margin:0 0 2px}
+  .tile-desc{font-size:12px;color:var(--ink-3);line-height:1.35}
+  .tile .badge{position:absolute;top:14px;right:14px;background:var(--brand);color:#fff;font-size:11px;font-weight:700;border-radius:10px;padding:2px 7px;min-width:20px;text-align:center}
+
+  /* Foto upload (multi) */
+  .fotos-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(110px, 1fr));gap:8px}
+  .foto-slot{position:relative;aspect-ratio:1/1;border:2px dashed var(--line-strong);border-radius:10px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+  .foto-slot.con-foto{border-style:solid;border-color:var(--ok);padding:0}
+  .foto-slot img{width:100%;height:100%;object-fit:cover}
+  .foto-slot .ico-add{font-size:32px;color:var(--ink-3);opacity:.7}
+  .foto-slot .quitar{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer}
+  .foto-slot .ord{position:absolute;bottom:6px;left:6px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;border-radius:8px;padding:1px 6px}
+  .foto-slot .principal{position:absolute;top:6px;left:6px;background:var(--accent);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;letter-spacing:.3px}
+
+  /* Chips */
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .chip{padding:8px 12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:18px;font-size:13px;font-weight:600;cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:5px}
+  .chip:active{transform:scale(.96)}
+  .chip.activo{background:linear-gradient(160deg,var(--brand-bright),var(--brand));color:#fff;border-color:var(--brand);box-shadow:0 2px 4px rgba(122,32,20,.2)}
+  /* v1.11.5: tallas custom (no preset) llevan borde violeta para distinguirlas */
+  .chip.chip-custom{border-color:#7c3aed;border-style:dashed}
+  .chip.chip-custom.activo{background:linear-gradient(160deg,#a78bfa,#7c3aed);border-color:#7c3aed;box-shadow:0 2px 4px rgba(124,58,237,.25)}
+  /* v1.11.6: flechas ←/→ dentro de chips activos para reordenar */
+  .chip-arrow{background:rgba(255,255,255,.22);color:#fff;border:none;width:20px;height:20px;border-radius:50%;font-size:14px;font-weight:700;line-height:1;cursor:pointer;padding:0;display:inline-flex;align-items:center;justify-content:center;transition:background .15s}
+  .chip-arrow:hover:not(:disabled){background:rgba(255,255,255,.4)}
+  .chip-arrow:active:not(:disabled){transform:scale(.9)}
+  .chip-arrow:disabled{opacity:.3;cursor:not-allowed}
+  .chip.add{border-style:dashed;color:var(--ink-3);background:transparent}
+  .chip .punto{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.1)}
+  .chip .sup{font-size:10px;font-weight:600;opacity:.85;margin-left:3px}
+
+  /* Matriz de disponibilidad color x talla */
+  .disp-wrap{overflow-x:auto;margin:0 -16px;padding:0 16px}
+  .disp-table{border-collapse:collapse;font-size:12px;min-width:100%}
+  .disp-table th, .disp-table td{padding:4px;text-align:center;border-bottom:1px solid var(--line)}
+  .disp-table thead th{background:var(--bg-soft);font-weight:700;color:var(--ink);position:sticky;top:0;font-size:11px}
+  .disp-table .col-talla{background:var(--bg-soft);font-weight:700;text-align:left;padding:6px 8px;font-size:12px;min-width:56px}
+  .disp-table tbody tr:hover{background:#fff8e8}
+  .disp-cell{
+    display:inline-block;width:34px;height:30px;
+    border-radius:6px;cursor:pointer;
+    background:#d6f5e2;border:1.5px solid #6bc28b;color:#0a6f37;
+    font-size:14px;font-weight:800;line-height:28px;
+    transition:all .12s;
+  }
+  .disp-cell:hover{transform:scale(1.06)}
+  .disp-cell.agotada{background:#fde8e8;border-color:#f5b8b8;color:#a02020}
+  .disp-acciones{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .disp-acciones .btn-mini{padding:6px 10px;font-size:11px}
+  .disp-bulk-link{cursor:pointer;font-size:11px;color:var(--brand);text-decoration:underline;font-weight:600}
+
+  /* Lista artículos / clientes */
+  .lista-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px;cursor:pointer}
+  .lista-item:active{background:var(--bg-soft)}
+  .lista-item .mini-foto{width:48px;height:48px;border-radius:8px;background:var(--bg-soft);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink-4)}
+  .lista-item .mini-foto img{width:100%;height:100%;object-fit:cover}
+  .lista-item .info{flex:1;min-width:0}
+  .lista-item .nombre{font-weight:700;font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lista-item .meta{font-size:12px;color:var(--ink-3);margin-top:1px}
+  .lista-item .precio{font-weight:800;color:var(--ink);font-size:15px;text-align:right;flex-shrink:0}
+  .lista-item .badge-mini{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:6px;margin-left:4px}
+  .lista-item .badge-novedad{background:var(--accent);color:#fff}
+  .lista-item .badge-inactivo{background:var(--bg-soft);color:var(--ink-3);text-decoration:line-through}
+
+  /* Editor masivo de precios */
+  .filtros-ep{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
+  .filtros-ep select{padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:13px;min-width:150px}
+  .filtros-ep label{display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer}
+  .filtros-ep input[type=checkbox]{accent-color:var(--brand)}
+  .ep-info-formato{font-size:11px;color:var(--ink-3);margin-left:auto}
+  .ep-info-formato code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-size:11px}
+  /* v1.19.2 — barra de filtros fija arriba al hacer scroll (top lo ajusta JS a la altura de la topbar) */
+  .ep-filtros-sticky{position:sticky;top:var(--ep-fb-top,56px);z-index:18;background:#faf7f2;padding:10px 0 4px;box-shadow:0 8px 8px -8px rgba(0,0,0,.18)}
+  .ep-tabla{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .ep-tabla th{font-size:10px;text-transform:uppercase;color:var(--ink-3);background:var(--bg-soft);padding:8px;text-align:left;letter-spacing:.3px;border-bottom:1px solid var(--line)}
+  .ep-tabla td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .ep-tabla tr:last-child td{border-bottom:none}
+  .ep-td-foto{width:60px}
+  .ep-foto{width:50px;height:50px;object-fit:cover;border-radius:8px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink-4)}
+  .ep-foto-vacia{display:flex;align-items:center;justify-content:center}
+  .ep-td-nombre{min-width:180px;max-width:280px}
+  .ep-nom{font-weight:600;color:var(--ink);font-size:13px;line-height:1.2}
+  .ep-meta{font-size:11px;color:var(--ink-3);margin-top:2px;font-family:monospace;line-height:1.3}
+  .ep-link-ficha{text-decoration:none;font-size:14px;margin-left:4px;cursor:pointer;opacity:.6;transition:opacity .15s}
+  .ep-link-ficha:hover{opacity:1}
+  .ep-btn-editar{background:var(--brand-tint);border:1px solid var(--brand);color:var(--brand);font-size:13px;cursor:pointer;padding:2px 8px;border-radius:6px;margin-left:6px;transition:all .15s;font-weight:700;vertical-align:middle}
+  .ep-btn-editar:hover{background:var(--brand);color:#fff}
+  /* Tabla de precios por talla en la ficha completa */
+  .tabla-precios-talla{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .tabla-precios-talla td{border-bottom:1px solid var(--line);font-size:13px}
+  .tabla-precios-talla tr:last-child td{border-bottom:none}
+  .inp-precio-talla{width:80px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;font-size:13px;text-align:right;font-weight:600}
+  .inp-precio-talla:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-tint)}
+  .ep-inp{padding:6px 8px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:13px;font-family:inherit}
+  .ep-inp:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-tint)}
+  .ep-inp-precio{width:90px;text-align:right;font-weight:600}
+  .ep-inp-tallas{width:200px;font-family:monospace;font-size:12px}
+  .ep-inp-colores{width:240px;font-family:monospace;font-size:12px}
+  .ep-row.modificado{background:#fff7e3}
+  .ep-row.modificado td{border-bottom-color:#e8a838}
+  .ep-row.modificado .ep-inp{border-color:#e8a838;background:#fffdef}
+  .ep-warning{margin-top:14px;padding:12px;background:var(--bg-soft);border-radius:8px;color:var(--ink-3);text-align:center;font-size:13px;border:1px dashed var(--line)}
+  /* Barra bulk para aplicar valores en masa */
+  .ep-bulk-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 14px;background:#f0f8ff;border:1.5px solid #92c2e8;border-radius:10px;margin-bottom:14px;font-size:13px}
+  .ep-bulk-bar strong{color:#1565a3;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  .ep-bulk-bar input[type=text],.ep-bulk-bar input[type=number]{padding:6px 8px;border:1px solid #92c2e8;border-radius:6px;background:#fff;font-size:13px}
+  .ep-bulk-bar button{padding:6px 10px;font-size:12px;cursor:pointer}
+  /* Foto: zoom on hover */
+  .ep-foto{transition:transform .2s ease, box-shadow .2s ease}
+  .ep-foto:hover{transform:scale(3); box-shadow:0 4px 20px rgba(0,0,0,.4); z-index:100; position:relative; cursor:zoom-in}
+  .ep-btn-del{background:transparent;border:1px solid transparent;color:var(--ink-4);font-size:18px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .15s}
+  .ep-btn-del:hover{background:#fde8e8;color:#a02020;border-color:#f5b5b5}
+  /* Checkbox de seleccion masiva */
+  .ep-th-chk, .ep-td-chk{width:36px;text-align:center;padding-left:6px !important;padding-right:6px !important}
+  .ep-chk-sel{width:18px;height:18px;cursor:pointer;accent-color:var(--brand)}
+  .ep-row.seleccionado{background:#fef3e8 !important}
+  .ep-row.seleccionado td{border-bottom-color:#f0c280 !important}
+  #epChkAll{width:18px;height:18px;cursor:pointer;accent-color:var(--brand)}
+  /* Presets chips */
+  .ep-presets{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;padding:10px 14px;background:#f7f3eb;border:1px solid var(--line);border-radius:10px}
+  .ep-presets-grupo{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px}
+  .ep-presets-grupo strong{color:var(--ink-2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;min-width:120px}
+  .ep-chip-preset{padding:4px 10px;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:14px;cursor:pointer;color:var(--ink);transition:all .12s;font-family:inherit}
+  .ep-chip-preset:hover{background:var(--brand-tint);border-color:var(--brand);color:var(--brand)}
+  .ep-chip-preset:active{transform:scale(.95)}
+  @media (max-width: 760px){
+    .ep-tabla, .ep-tabla thead, .ep-tabla tbody, .ep-tabla tr, .ep-tabla th, .ep-tabla td{display:block;width:auto}
+    .ep-tabla thead{display:none}
+    .ep-tabla tr{margin-bottom:10px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+    .ep-tabla td{border:none;padding:4px 0}
+    .ep-td-foto{display:inline-block;width:auto}
+    .ep-td-nombre{display:inline-block;margin-left:10px;vertical-align:top}
+    .ep-inp-precio,.ep-inp-tallas,.ep-inp-colores{width:100%;max-width:400px;margin-top:4px}
+  }
+
+  .buscador{margin-bottom:12px;position:relative}
+  .buscador input{width:100%;padding:11px 14px 11px 38px;border:1.5px solid var(--line);border-radius:10px;font-size:14px;background:#fff}
+  .buscador .ico-busc{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+
+  .hint{font-size:12px;color:var(--ink-3);margin-top:6px}
+  .alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px}
+  .alert-ok{background:#e8f7ee;border:1px solid #6bc28b;color:#0a6f37}
+  .alert-warn{background:#fef9e7;border:1px solid #eab308;color:#7c4a03}
+  .alert-error{background:#fde8e8;border:1px solid #f5b8b8;color:#a02020}
+
+  .toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--ok);color:#fff;padding:10px 18px;border-radius:24px;font-size:13px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.18);opacity:0;transition:all .25s;pointer-events:none;z-index:50;max-width:90vw;text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.error{background:var(--brand)}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:30;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-bg.show{display:flex}
+  .modal{background:#fff;border-radius:14px;width:100%;max-width:480px;padding:20px;max-height:90vh;overflow-y:auto;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+  .modal h3{margin:0 0 14px;font-size:17px;font-weight:800}
+
+  .empty{padding:40px 20px;text-align:center;color:var(--ink-3)}
+  .empty .ico-empty{font-size:48px;margin-bottom:10px;opacity:.4}
+  .empty .titulo{font-size:15px;font-weight:700;color:var(--ink-2);margin-bottom:4px}
+
+  .seccion-titulo{font-size:11px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.5px;margin:18px 0 8px;padding:0 4px}
+  .seccion-titulo:first-child{margin-top:6px}
+
+  details{background:var(--bg-soft);border-radius:8px;padding:8px 12px;margin-bottom:10px}
+  details summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-2);user-select:none}
+  details[open] summary{margin-bottom:8px}
+  details pre{margin:0;padding:8px;background:#fff;border-radius:6px;font-size:12px;overflow-x:auto;word-wrap:break-word;white-space:pre-wrap}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- LOGIN ADMIN -->
+  <div class="vista activa" id="v-login">
+    <div class="login-wrap">
+      <div class="login-logo"><img src="/logo-canary.png" alt="Canary Modas" onerror="this.style.display='none'" /></div>
+      <h1 class="login-title">Admin · Almacén</h1>
+      <div class="login-sub">Gestión de catálogo y clientes</div>
+      <div class="login-form">
+        <div class="field"><label>Contraseña</label><div class="input-wrap"><input type="password" id="loginPin" placeholder="••••••" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" onkeydown="if(event.key==='Enter')hacerLogin()" /></div></div>
+        <button class="btn btn-primary" id="btnEntrar" onclick="hacerLogin()">Entrar</button>
+        <div class="hint" style="text-align:center;margin-top:12px">¿Sin PIN configurado? Genera tu hash con la utilidad en <code>?setup</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD ADMIN -->
+  <div class="vista" id="v-dashboard">
+    <div class="topbar">
+      <div class="logo-mini"><img src="/logo-canary.png" alt="" onerror="this.parentElement.style.display='none'" /></div>
+      <h1>Panel admin<span class="sub">Almacén · Canary Modas</span></h1>
+      <div class="icono-accion" onclick="logout()" title="Salir">⏏</div>
+    </div>
+    <div class="contenido">
+      <div class="tile-grid">
+        <div class="tile" onclick="navegar('editorPrecios')"><div class="tile-icon naranja">📦</div><div class="tile-titulo">Catálogo de artículos</div><div class="tile-desc">Ver, crear, editar, borrar todo</div><div class="badge" id="badgeArts">0</div></div>
+        <div class="tile" onclick="navegar('clientes')"><div class="tile-icon verde">👥</div><div class="tile-titulo">Clientes</div><div class="tile-desc">Alta, edición, contraseñas</div><div class="badge" id="badgeCli">0</div></div>
+        <div class="tile" onclick="navegar('comerciales')"><div class="tile-icon azul">👔</div><div class="tile-titulo">Comerciales</div><div class="tile-desc">Vendedores y clientes asignados</div><div class="badge" id="badgeCom">0</div></div>
+        <div class="tile" onclick="navegar('pedidos')"><div class="tile-icon gris">📋</div><div class="tile-titulo">Pedidos recibidos</div><div class="tile-desc">Histórico de todos los clientes</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBIR / EDITAR ARTÍCULO -->
+  <div class="vista" id="v-subirArt">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1 id="subirArtTitulo">Subir artículo</h1>
+      <div class="icono-accion" id="btnDuplicarArt" onclick="duplicarDesdeFormActual()" title="Duplicar este artículo (crear copia)" style="display:none">📋</div>
+      <div class="icono-accion" onclick="resetArtForm()" title="Vaciar">↻</div>
+      <!-- v1.14.12 — Guardar rápido desde la barra superior (disquete) -->
+      <div class="icono-accion icono-guardar" id="btnGuardarTop" onclick="guardarArticulo()" title="Guardar artículo">💾</div>
+    </div>
+    <div class="contenido">
+
+      <!-- v1.21.38 — ANALIZADOR IA: detecta datos desde una foto de catálogo -->
+      <div class="card" style="background:linear-gradient(135deg,#fff8e6 0%,#fde7d2 100%);border:2px solid #f59e0b">
+        <h2 style="color:#7c4a03">✨ Crear artículo desde foto del catálogo (IA Vision)</h2>
+        <div class="hint mb-12" style="color:#7c4a03">
+          Sube la foto de la ficha del catálogo (la que tiene producto + precio + datos). La IA leerá: nombre, precio, colores, pack, composición… y rellenará el formulario. Solo confirmas y guardas.
+        </div>
+        <input type="file" id="inputAnalizarIA" accept="image/*" style="display:none" />
+        <button class="btn btn-primary" style="background:#d97a0e;border-color:#d97a0e"
+                onclick="document.getElementById('inputAnalizarIA').click()">
+          🖼 Seleccionar foto del catálogo
+        </button>
+        <div id="iaEstado" style="margin-top:10px;font-size:13px;color:#7c4a03"></div>
+      </div>
+
+      <div class="card">
+        <h2>Fotos del producto</h2>
+        <div class="hint mb-12">Mínimo 1 foto · Recomendado 3-5. La primera será la principal.</div>
+        <!-- v1.21.29 — Aviso si el artículo tiene carpeta Drive asignada -->
+        <div id="avisoCarpetaDrive" style="display:none;background:#fff8e6;border:1.5px solid #f0c419;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;color:#7c4a03;line-height:1.45">
+          💡 <strong>Carpeta Drive asignada</strong>. Las fotos que añadas aquí se subirán <strong>directamente a esa carpeta Drive</strong> — no se duplicarán con las que ya estén ahí. Si prefieres, puedes subirlas también manualmente a Drive y aparecerán al refrescar.
+        </div>
+        <div class="fotos-grid" id="fotosGrid"></div>
+        <input type="file" id="inputFoto" accept="image/*" multiple style="display:none" />
+        <button class="btn btn-secundario" style="margin-top:10px" onclick="document.getElementById('inputFoto').click()">+ Añadir fotos</button>
+        <div class="field" style="margin-top:14px">
+          <label>Carpeta Drive (sistema "carpeta-por-artículo")</label>
+          <div class="input-wrap" style="display:flex;gap:8px;align-items:center">
+            <input type="text" id="artCarpetaId" placeholder="URL de Drive o ID de carpeta" autocomplete="off" oninput="actualizarAvisoCarpetaDrive();actualizarLinkCarpeta()" style="flex:1" />
+            <a id="linkCarpetaDrive" href="#" target="_blank" rel="noopener" style="display:none;white-space:nowrap;font-size:13px;font-weight:700;text-decoration:none;background:#eef3ff;border:1px solid #c9d8f5;border-radius:8px;padding:8px 10px">📁 Abrir carpeta</a>
+          </div>
+          <div class="hint">Los artículos nuevos se vinculan solos a su carpeta <b>articulos/&lt;CÓDIGO&gt;</b> de Drive. Suelta fotos en esa carpeta y la app las mostrará. También puedes pegar otra URL/ID.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Identificación</h2>
+        <div class="row">
+          <div class="field"><label>Código <span class="req">*</span></label>
+            <div class="input-wrap"><input type="text" id="artCodigo" placeholder="Ej. CB100" autocomplete="off" /></div>
+            <div class="hint" id="artCodigoHint"></div>
+          </div>
+          <div class="field"><label>Código a3 ERP</label>
+            <div class="input-wrap"><input type="text" id="artCodigoA3" placeholder="Ej. 12345" autocomplete="off" /></div>
+            <div class="hint">Referencia en tu programa a3 (para conciliar pedidos/facturas)</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Nombre <span class="req">*</span></label>
+            <div class="input-wrap"><input type="text" id="artNombre" placeholder="Ej. CAMISETA BÁSICA M/C" autocomplete="off" /></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Precio (€) <span class="req">*</span></label>
+            <div class="input-wrap"><input type="text" id="artPrecio" placeholder="0,00" inputmode="decimal" autocomplete="off" /></div>
+          </div>
+          <div class="field"><label>Portes (€)</label>
+            <div class="input-wrap"><input type="text" id="artPortes" placeholder="0,00" inputmode="decimal" autocomplete="off" /></div>
+            <div class="hint">Solo para artículos voluminosos (colchones, bases). Se suma automáticamente al pedido.</div>
+          </div>
+          <div class="field"><label>Unidad mínima de venta</label>
+            <div class="input-wrap"><input type="text" id="artUdsPorPack" placeholder="1 = sin mínimo" inputmode="numeric" autocomplete="off" /></div>
+            <div class="hint">Cantidad mínima a pedir POR VARIANTE (color+talla). Si pones <code>12</code> (ej. paños de cocina), los botones +/- del cliente irán de 12 en 12 (12, 24, 36…). Default <code>1</code> = venta suelta.</div>
+          </div>
+        </div>
+        <!-- Campo legacy oculto: minUnidadesPorColor (mantenido por compatibilidad) -->
+        <input type="hidden" id="artMinUnidPorColor" value="" />
+        <!-- v1.14.16 — Estado de publicación (toggle claro). El valor real vive en
+             el checkbox oculto artPendienteRevision (checked = NO publicado = borrador). -->
+        <div class="row">
+          <div class="field" style="flex:1">
+            <label>Estado de publicación</label>
+            <div class="pub-toggle">
+              <button type="button" id="btnEstBorrador" class="pub-opt" onclick="setPublicado(false)">📝 Borrador</button>
+              <button type="button" id="btnEstPublicado" class="pub-opt" onclick="setPublicado(true)">🌐 Publicado</button>
+            </div>
+            <input type="checkbox" id="artPendienteRevision" style="display:none" />
+            <div class="hint"><strong>Publicado</strong> = visible para clientes (en secciones con control de publicación, p.ej. TELAS Y HULES). <strong>Borrador</strong> = oculto a clientes; el almacén/comercial sí lo ve (badge ⚠).</div>
+          </div>
+        </div>
+        <!-- v1.14.1 — Descatalogado en fábrica (bloquea pedido a fábrica) -->
+        <div class="row">
+          <div class="field" style="flex:0;display:flex;align-items:flex-end;padding-bottom:4px">
+            <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--ink-2)">
+              <input type="checkbox" id="artSinReposicionFabrica" style="width:18px;height:18px;accent-color:#f08020" />
+              🏭 Descatalogado en fábrica (no admite pedido a fábrica)
+            </label>
+          </div>
+        </div>
+        <div class="hint" style="margin-top:-6px">Márcalo si el proveedor ya NO fabrica este artículo. Sus variantes agotadas se mostrarán como "Agotado" normal (sin opción de pedir a fábrica).</div>
+      </div>
+
+      <div class="card">
+        <h2>Clasificación <span class="req">*</span></h2>
+        <div class="hint mb-12">Selecciona en orden: sección → categoría → tipo (si la categoría tiene tipos definidos).</div>
+        <div class="row">
+          <div class="field"><label>Sección <span class="req">*</span></label>
+            <div class="input-wrap"><select id="artSeccion" onchange="onCambiaSeccion()"></select></div>
+          </div>
+          <div class="field"><label>Categoría <span class="req">*</span></label>
+            <div class="input-wrap"><select id="artCategoria" onchange="onCambiaCategoria()" disabled></select></div>
+          </div>
+        </div>
+        <div class="field"><label>Tipo</label>
+          <div class="input-wrap"><select id="artTipo" disabled></select></div>
+          <div class="hint" id="artTipoHint"></div>
+        </div>
+        <div class="row">
+          <div class="field" style="flex:0;display:flex;align-items:flex-end;padding-bottom:14px">
+            <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;color:var(--ink-2)">
+              <input type="checkbox" id="artNovedad" style="width:18px;height:18px;accent-color:var(--accent)" />
+              Marcar como novedad
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Colores disponibles <span class="req">*</span></h2>
+        <div class="chips-filtros" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px">
+          <input type="text" id="filtroBuscColor" placeholder="🔍 Buscar color (ej: rojo, azul, fluor)..." oninput="prepararFormArticulo()" style="flex:1;min-width:180px;padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:13px" autocomplete="off">
+          <select id="filtroGrupoColor" onchange="prepararFormArticulo()" style="padding:8px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:13px;background:#fff">
+            <option value="">📌 Todos los grupos</option>
+            <option value="basicos">Básicos</option>
+            <option value="seleccionados">⭐ Solo seleccionados</option>
+            <option value="roly-neutros">Roly · Neutros (blancos/grises/negros)</option>
+            <option value="roly-tierras">Roly · Tierras y beiges</option>
+            <option value="roly-amarillos">Roly · Amarillos y ocres</option>
+            <option value="roly-naranjas-rojos">Roly · Naranjas, rojos, vinos</option>
+            <option value="roly-rosas-lilas">Roly · Rosas, lilas, violetas</option>
+            <option value="roly-azules">Roly · Azules</option>
+            <option value="roly-verdes">Roly · Verdes</option>
+            <option value="roly-militares">Roly · Verdes militares y oscuros</option>
+            <option value="roly-lavado">Roly · Lavado</option>
+            <option value="roly-fluor">Roly · Flúor</option>
+            <option value="roly-vigore">Roly · Vigoré</option>
+          </select>
+        </div>
+        <div class="chips" id="chipsColores"></div>
+      </div>
+
+<div class="card">
+        <h2>Tallas disponibles <span class="req">*</span></h2>
+        <div class="hint mb-12">Marca solo las tallas que llegaron.</div>
+        <div class="chips" id="chipsTallas"></div>
+
+        <!-- Tabla de precios por talla — visible cuando hay tallas seleccionadas + precio base -->
+        <div id="tablaPreciosTallas" style="margin-top:14px"></div>
+
+        <div class="field" style="margin-top:14px">
+          <label>Copas (solo sujetadores / artículos con copa)</label>
+          <div class="input-wrap"><input type="text" id="artCopas" placeholder="A|B|C|D" autocomplete="off" /></div>
+          <div class="hint">Letras separadas por <code>|</code> (ej. <code>A|B|C|D</code>). Solo aparece como filtro en la app cuando un artículo tiene copas.</div>
+        </div>
+
+        <!-- v1.13.39 — Tipos de sujetador (filtro cliente) -->
+        <div class="field" style="margin-top:14px">
+          <label>Tipo de sujetador (solo sujetadores)</label>
+          <div class="chips" id="chipsTiposSujetador"></div>
+          <div class="hint">Marca uno o varios. Solo aparece como filtro en la app cuando un artículo tiene tipo(s).</div>
+        </div>
+      </div>
+
+      <!-- v1.11.8: la card "Disponibilidad por variante" se eliminó.
+           Sus celdas ✓/✕ se integran ahora como columnas dentro de la tabla
+           "Precio final por talla" arriba. -->
+
+      <div class="card">
+        <h2>Ficha técnica</h2>
+        <div class="field"><label>Composición</label><div class="input-wrap"><input type="text" id="ftComposicion" placeholder="Ej. 100% algodón orgánico, 180 g/m²" /></div></div>
+        <div class="field"><label>Packing</label><div class="input-wrap"><input type="text" id="ftPacking" placeholder="Ej. Bolsa individual · Caja de 12 uds" /></div></div>
+        <div class="row">
+          <div class="field"><label>Fabricante</label><div class="input-wrap"><input type="text" id="ftFabricante" placeholder="Nombre del proveedor" /></div></div>
+          <div class="field"><label>Origen</label><div class="input-wrap"><input type="text" id="ftOrigen" placeholder="Ej. Hecho en España" /></div></div>
+        </div>
+        <div class="field"><label>Lavado</label><div class="input-wrap"><textarea id="ftLavado" placeholder="Ej. Lavar a máquina 30°C · No usar lejía · Plancha media"></textarea></div></div>
+        <div class="field"><label>Ref. proveedor</label><div class="input-wrap"><input type="text" id="ftRefProveedor" placeholder="Código interno del fabricante" /></div></div>
+      </div>
+
+      <button class="btn btn-primary" id="btnGuardarArt" onclick="guardarArticulo()">Guardar artículo</button>
+      <button class="btn" id="btnGuardarSeguir" onclick="guardarArticulo(true)" style="margin-top:8px;background:#1f8a4c;color:#fff">➕ Guardar y subir otro (misma categoría)</button>
+      <button class="btn btn-secundario" id="btnBorrarArt" onclick="borrarArticulo()" style="display:none;margin-top:8px">⏸ Dar de baja (oculta a clientes)</button>
+      <button class="btn btn-peligro" id="btnEliminarArt" onclick="eliminarArticulo()" style="display:none;margin-top:8px">🗑 Eliminar definitivamente</button>
+      <div class="hint" style="text-align:center;margin-top:10px">El artículo aparecerá inmediatamente en la app de clientes/comerciales</div>
+    </div>
+  </div>
+
+  <!-- LISTA ARTÍCULOS -->
+  <div class="vista" id="v-articulos">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1>Artículos</h1>
+      <div class="icono-accion" onclick="cargarArticulos(true)" title="Recargar catálogo">↻</div>
+      <div class="icono-accion" onclick="navegar('subirArt')" title="Nuevo">+</div>
+    </div>
+    <div class="contenido">
+      <div class="buscador"><span class="ico-busc">🔍</span><input type="text" id="buscArts" placeholder="Buscar por nombre o referencia…" oninput="renderArticulos()" /></div>
+      <div id="filtrosEstadoArts" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px"></div>
+      <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-3);font-weight:600;margin-bottom:8px;cursor:pointer">
+        <input type="checkbox" id="incluirInactivos" onchange="renderArticulos()" style="accent-color:var(--brand)"> Mostrar también dados de baja
+      </label>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px">
+        <div id="contadorArts" style="font-size:12px;color:var(--ink-3)"></div>
+        <select id="ordenArts" onchange="renderArticulos()" style="font-size:12px;padding:6px 8px;border:1px solid var(--bd);border-radius:8px;background:#fff;color:var(--ink-2);font-weight:600">
+          <option value="recientes">Orden: recientes</option>
+          <option value="nombre">Nombre A → Z</option>
+          <option value="nombre_desc">Nombre Z → A</option>
+          <option value="precio">Precio ↑ (menor)</option>
+          <option value="precio_desc">Precio ↓ (mayor)</option>
+          <option value="ref">Referencia A → Z</option>
+        </select>
+      </div>
+      <div id="listaArts"></div>
+    </div>
+  </div>
+
+  <!-- LISTA CLIENTES -->
+  <!-- CATÁLOGO DE ARTÍCULOS (vista unificada) -->
+  <div class="vista" id="v-editorPrecios">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1>Catálogo de artículos <span class="sub" id="epContador">cargando…</span></h1>
+      <button class="icono-accion" onclick="nuevoArticuloDesdeEditor()" title="Crear nuevo artículo" style="background:var(--accent);border:none;color:#fff;font-size:18px;cursor:pointer;width:36px;height:36px;border-radius:50%;margin-right:6px;font-weight:700">+</button>
+      <button id="epBtnBorrarSel" onclick="borrarSeleccionadosEp()" title="Borrar seleccionados" disabled style="background:#e74c3c;color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;padding:8px 14px;border-radius:8px;opacity:0.45">🗑 Borrar <span id="epBtnBorrarSelN">0</span></button>
+      <button onclick="navegar('papelera')" title="Papelera (20 días)" style="background:#7f8c8d;color:#fff;border:none;font-size:14px;font-weight:600;cursor:pointer;margin-right:8px;padding:8px 12px;border-radius:8px">🗂 Papelera</button>
+      <button class="icono-accion" id="epBtnGuardar" onclick="guardarEditorPrecios()" title="Guardar cambios" disabled style="background:none;border:none;font-size:22px;cursor:pointer">💾</button>
+    </div>
+    <div class="contenido">
+      <div id="epFiltrosBar" class="ep-filtros-sticky">
+      <div class="buscador" style="margin-bottom:10px"><span class="ico-busc">🔍</span><input type="text" id="epBusqueda" placeholder="Buscar por nombre, código o referencia…" oninput="renderEditorPrecios()" autocomplete="off"></div>
+      <div class="filtros-ep">
+        <select id="epSeccion" onchange="onCambiaSeccionEp()"></select>
+        <select id="epCategoria" onchange="onCambiaCategoriaEp()"></select>
+        <select id="epTipo" onchange="renderEditorPrecios()" title="Filtrar por subcategoría / tipo"></select>
+        <select id="epFabricante" onchange="renderEditorPrecios()" title="Filtrar por marca / fabricante"></select>
+        <label><input type="checkbox" id="epSoloSinPrecio" onchange="renderEditorPrecios()"> Solo sin precio</label>
+        <label><input type="checkbox" id="epSoloPendientes" onchange="renderEditorPrecios()"> Solo pendientes revisión</label>
+        <span class="ep-info-formato">Tallas: <code>90|105|135+5</code> · Colores: <code>BLANCO|NEGRO</code> · Ctrl+D copia de arriba</span>
+      </div>
+      </div>
+      <div class="ep-bulk-bar" id="epBulkBar" style="display:none">
+        <strong>Aplicar a todos los visibles:</strong>
+        <input type="text" id="epBulkPrecio" placeholder="Precio €" inputmode="decimal" autocomplete="off" class="ep-inp ep-inp-precio">
+        <input type="text" id="epBulkTallas" placeholder="Tallas (90|105|135)" class="ep-inp ep-inp-tallas" list="dlTallas">
+        <input type="text" id="epBulkColores" placeholder="Colores (BLANCO|NEGRO)" class="ep-inp ep-inp-colores" list="dlColores">
+        <button class="btn btn-secundario btn-mini" onclick="aplicarBulkEp()">⤵ Aplicar a <span id="epBulkCount">0</span></button>
+        <button class="btn btn-ghost btn-mini" onclick="copiarBloqueEp()" title="Copia tallas+colores+precio de la 1a fila a TODAS las visibles">⎘ Copiar primera a todas</button>
+        <button id="epBtnBorrarSelBar" onclick="borrarSeleccionadosEp()" disabled style="background:#e74c3c;color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;padding:6px 12px;border-radius:6px;margin-left:auto;opacity:0.45">🗑 Borrar <span id="epBtnBorrarSelBarN">0</span> seleccionados</button>
+      </div>
+
+      <div class="ep-presets" id="epPresets" style="display:none">
+        <div class="ep-presets-grupo">
+          <strong>Tallas preset:</strong>
+          <button class="ep-chip-preset" onclick="setBulkTallas('S|M|L|XL|XXL')">Adulto S-XXL</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('XS|S|M|L|XL|2XL|3XL')">Adulto XS-3XL</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('90|105|135|150|180')">Sábanas</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('30x50|50x100|70x140|100x150')">Toallas</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('36|37|38|39|40|41|42|43|44|45|46')">Calzado 36-46</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('38|40|42|44|46|48')">Pantalón 38-48</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('0-3M|3-6M|6-12M|12-24M|2A|3A|4A|6A|8A')">Bebé/Niño</button>
+          <button class="ep-chip-preset" onclick="setBulkTallas('UNICA')">Única</button>
+        </div>
+        <div class="ep-presets-grupo">
+          <strong>Colores preset:</strong>
+          <button class="ep-chip-preset" onclick="setBulkColores('BLANCO|NEGRO|GRIS|BEIGE|MARRON')">Neutros</button>
+          <button class="ep-chip-preset" onclick="setBulkColores('BLANCO|NEGRO|AZUL|ROJO|VERDE|AMARILLO')">Básicos</button>
+          <button class="ep-chip-preset" onclick="setBulkColores('AZUL MARINO|GRIS|NEGRO|BURDEOS')">Laboral</button>
+          <button class="ep-chip-preset" onclick="setBulkColores('BLANCO|ROSA|CELESTE|AMARILLO|VERDE MENTA')">Pasteles</button>
+          <button class="ep-chip-preset" onclick="setBulkColores('VARIOS')">Varios (genérico)</button>
+        </div>
+      </div>
+      <datalist id="dlTallas"></datalist>
+      <datalist id="dlColores"></datalist>
+      <div id="listaEp"></div>
+    </div>
+  </div>
+
+  <!-- PAPELERA (20 días) -->
+  <div class="vista" id="v-papelera">
+    <div class="topbar">
+      <div class="back" onclick="navegar('editorPrecios')">←</div>
+      <h1>Papelera <span class="sub" id="papContador">cargando…</span></h1>
+      <button id="papBtnRestaurar" onclick="restaurarSeleccionadosPap()" disabled style="background:#27ae60;color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;margin-right:8px;padding:8px 14px;border-radius:8px;opacity:0.45">↩ Restaurar <span id="papBtnRestaurarN">0</span></button>
+      <button id="papBtnPurgar" onclick="purgarSeleccionadosPap()" disabled style="background:#c0392b;color:#fff;border:none;font-size:13px;font-weight:600;cursor:pointer;padding:7px 12px;border-radius:8px;opacity:0.45">🔥 Vaciar</button>
+    </div>
+    <div class="contenido">
+      <div style="background:#fff3cd;border:1px solid #ffecb5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#664d03">
+        <strong>ℹ Papelera de seguridad:</strong> los artículos eliminados quedan aquí durante <strong>20 días</strong>. Pasado ese plazo se purgan automáticamente. Puedes restaurarlos individualmente o en grupo.
+      </div>
+      <div id="listaPapelera"></div>
+    </div>
+  </div>
+
+  <div class="vista" id="v-clientes">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1>Clientes</h1>
+      <div class="icono-accion" onclick="abrirEditorCliente(null)" title="Nuevo">+</div>
+    </div>
+    <div class="contenido">
+      <div class="buscador"><span class="ico-busc">🔍</span><input type="text" id="buscCli" placeholder="Buscar cliente…" oninput="renderClientes()" /></div>
+      <div id="listaClientes"></div>
+    </div>
+  </div>
+
+  <!-- LISTA COMERCIALES -->
+  <div class="vista" id="v-comerciales">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1>Comerciales</h1>
+      <div class="icono-accion" onclick="abrirEditorComercial(null)" title="Nuevo">+</div>
+    </div>
+    <div class="contenido">
+      <div id="listaComerciales"></div>
+    </div>
+  </div>
+
+  <!-- PEDIDOS -->
+  <div class="vista" id="v-pedidos">
+    <div class="topbar">
+      <div class="back" onclick="navegar('dashboard')">←</div>
+      <h1>Pedidos recibidos</h1>
+    </div>
+    <div class="contenido" id="pedidosContenido"></div>
+  </div>
+
+  <!-- PROCESAR PEDIDO (v1.12.0) -->
+  <div class="vista" id="v-procesarPedido">
+    <div class="topbar">
+      <div class="back" onclick="navegar('pedidos')">←</div>
+      <h1>Procesar pedido <span class="sub" id="procPedidoSub"></span></h1>
+      <button id="btnProcGuardar" onclick="guardarProcesoPedido()" style="background:#e74c3c;color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:8px;opacity:0.45" disabled>⚠ Agotar <span id="procContadorFalta">0</span></button>
+    </div>
+    <div class="contenido">
+      <div style="background:#fff3cd;border:1px solid #ffecb5;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:13px;color:#664d03">
+        <strong>📋 Cómo procesar:</strong> separa el pedido físicamente en el almacén siguiendo el papel impreso. Después aquí pulsa <strong>❌ Falta</strong> en las líneas que NO pudiste separar (no había stock). Al pulsar <strong>⚠ Agotar X</strong>, esas variantes se marcarán como agotadas en la web automáticamente para que ningún cliente las vuelva a pedir.
+      </div>
+      <div id="procListaLineas"></div>
+    </div>
+  </div>
+
+  <!-- SETUP (utilidad pública: generar hash PIN admin) -->
+  <div class="vista" id="v-setup">
+    <div class="topbar">
+      <h1>Setup inicial · Generar hash PIN</h1>
+    </div>
+    <div class="contenido">
+      <div class="alert alert-warn"><strong>Solo para configuración inicial.</strong> Genera un hash de tu PIN admin para pegarlo como variable de entorno <code>ADMIN_PIN_HASH</code> en Netlify.</div>
+      <div class="card">
+        <div class="field"><label>PIN deseado (4-8 dígitos o más)</label><div class="input-wrap"><input type="text" id="setupPin" placeholder="Ej. 482917" /></div></div>
+        <button class="btn btn-primary" onclick="generarHashPin()">Generar hash</button>
+        <div id="setupResultado" style="margin-top:14px;display:none">
+          <div class="alert alert-ok"><strong>✓ Hash generado.</strong> Cópialo y pégalo como variable <code>ADMIN_PIN_HASH</code> en tu sitio de Netlify.</div>
+          <div class="input-wrap"><textarea id="setupHash" readonly style="font-family:monospace;font-size:12px;min-height:80px"></textarea></div>
+          <button class="btn btn-secundario" onclick="copiarHash()" style="margin-top:8px">📋 Copiar al portapapeles</button>
+        </div>
+        <div class="hint" style="margin-top:14px">⚠️ Tras configurar la variable en Netlify, espera ~30 seg al redeploy y luego entra desde la pantalla principal.</div>
+      </div>
+      <div class="card">
+        <h2>Variables de entorno necesarias en Netlify</h2>
+        <details open>
+          <summary>Ver lista completa</summary>
+<pre>GOOGLE_OAUTH_CLIENT_ID     = (mismo del sitio pedidosnuevo)
+GOOGLE_OAUTH_CLIENT_SECRET = (mismo del sitio pedidosnuevo)
+GOOGLE_OAUTH_REFRESH_TOKEN = (mismo del sitio pedidosnuevo)
+CATALOGO_B2B_FOLDER_ID     = (ID de la carpeta "CATALOGO B2B" que tienes que crear en Drive)
+SESSION_SECRET             = (string aleatorio largo, distinto del de otros sitios)
+ADMIN_PIN_HASH             = (el hash generado arriba)
+RESEND_API_KEY             = (mismo del sitio pedidosnuevo)
+EMAIL_FROM                 = Canary Modas B2B &lt;pedidos@canarymodas.com&gt;
+EMAIL_DESTINATARIOS_B2B    = ["oficina@canarymodas.com","ventascanarymodas@gmail.com"]</pre>
+        </details>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal-bg" id="modalBg" onclick="if(event.target.id==='modalBg')cerrarModal()"><div class="modal" id="modalContent"></div></div>
+
+<script>
+/* ============== CONFIG ============== */
+const COLORES = {
+  NEGRO:"#1a1a1a", BLANCO:"#ffffff", GRIS:"#9094a0", AZUL:"#2d6cdf",
+  MARINO:"#1c2c4f", ROJO:"#B91C1C", ROSA:"#f5a6b8", BEIGE:"#dcc9a3",
+  MARRON:"#6b4423", VERDE:"#3c8c54", AMARILLO:"#f0c419", CELESTE:"#7fc7e8",
+  NARANJA:"#f08020", BURDEOS:"#7a2014", VIOLETA:"#8c4dbf", TURQUESA:"#1bb6a6",
+  PLATA:"#c0c0c0", DORADO:"#d4af37", CRUDO:"#f5e9d3",
+  TIERRA:"#8b5a3c", CARNE:"#e8c5a8", NUDE:"#dfb89e", VARIOS:"#9094a0",
+  // (a partir de aqui colores ROLY 2026 — agrupados visualmente a continuacion)
+  // Paleta oficial ROLY 2026
+  "BLANCO PERLA":"#f5f3f0", "BLANCO VINTAGE":"#f0e8df",
+  "GRIS VIGORE":"#a8aaaf", "GRIS PIEDRA":"#a8a39f", "OPALO":"#8a93a3",
+  "PLOMO":"#6e7479", "EBANO":"#34373c", "PLOMO OSCURO":"#4e535a",
+  "ANGORA":"#ecdfd0", "ARENA":"#ccb38a", "ARENA OSCURA":"#8a7460",
+  "NOGAL":"#6e5640", "MOCA":"#836550", "CHOCOLATE":"#3a2516",
+  "AMARILLO SWEET":"#e8e09a", "AMARILLO GOLDEN":"#d9a017",
+  "OCRE":"#b88e3c", "AMARILLO CURRY":"#b67815",
+  "NARANJA GREEK":"#d97a3f", "CORAL":"#ee8a73",
+  "NARANJA BERMELLON":"#e54a2a", "NARANJA FUEGO":"#d83a25",
+  "NARANJA CLAY":"#c0856f", "TEJA":"#a96959",
+  "ROJO CRISANTEMO":"#be5165", "ROJO PALIDO":"#9e6063", "ROJO BAYAL":"#794551",
+  "GRANATE":"#6a1f2e", "ROJO VINO":"#5c1a2a", "BORGOÑA":"#4d1929",
+  "ARANDANO":"#3d1828", "ROJO CIRUELA":"#451026", "PURPURA":"#7c3a8a",
+  "ROSA CLARO":"#f8c7d6", "ROSA CHICLE":"#d68fa0", "ROSA SEDA":"#d09a9a",
+  "FRAMBUESA":"#b8345a", "ROSETON":"#a93e6a",
+  "LAVANDA":"#b3acb8", "LILA":"#7f6f80", "UVA":"#785080",
+  "ORQUIDEA":"#b2588d", "IRIS PURPURA":"#6a4880", "MORADO":"#6b1f74",
+  "AZUL MARINO":"#1c2c4f", "VAQUERO":"#1d3b67", "AZUL LUZ DE LUNA":"#0d2d4a",
+  "AZUL ZEN":"#6e7e8f", "TORMENTA AZUL":"#4e6378",
+  "AZUL CALMA":"#708898", "AZUL DUSTY":"#768f9a", "AZUL LAVADO":"#87a5b3",
+  "AGUAMARINA":"#3aafc7", "AZUL LAGO":"#176e7b",
+  "JADE":"#2eb39a", "VERDE LAB":"#4a9c8a",
+  "VERDE MENTA OSCURO":"#6b988e", "VERDE MENTA":"#95c4b4", "VERDE MIST":"#c7d8c4",
+  "LIMA LIMON":"#d8e030", "LIMA PUNCH":"#b8d039", "PISTACHO":"#b0a04a",
+  "VERDE MANTIS":"#93b95c", "VERDE OASIS":"#88c878", "LIMA":"#6cc35a",
+  "VERDE IRISH":"#4eb27a", "VERDE GRASS":"#45a86a",
+  "VERDE HELECHO":"#1f7f4f", "VERDE TROPICAL":"#1e8e4d", "VERDE KELLY":"#2c8c4c",
+  "VERDE BOTELLA":"#18483c", "VERDE LAUREL":"#6e7a6e", "VERDE MILITAR":"#515c2b",
+  "VERDE AVENTURA":"#535d4f", "VERDE PINO":"#404d40",
+  "VERDE MILITAR OSCURO":"#424438", "VERDE HUMO":"#3f4434",
+  "AMARILLO SWEET LAVADO":"#e8e3a6", "PAPAYA CLARO LAVADO":"#f4b58c",
+  "KAKI CLARO LAVADO":"#b09e6f", "VERDE PATO LAVADO":"#516860",
+  "GRIS PIEDRA LAVADO":"#a8a39f", "GRIS CIELO LAVADO":"#525a64",
+  "AMARILLO FLUOR":"#daff2b", "NARANJA FLUOR":"#ff7e3d",
+  "CORAL FLUOR":"#ff7466", "ROSA LADY FLUOR":"#ff90b4", "ROSA FLUOR":"#ff36a0",
+  "TURQUESA FLUOR":"#22c5e0", "VERDE FLUOR":"#a3eb2a",
+  "BLANCO VIGORE":"#f0f0f0", "BLANCO CENIZA VIGORE":"#d8d8d8",
+  "AMARILLO FLUOR VIGORE":"#d8e26e", "MOSTAZA VIGORE":"#d9a849",
+  "CORAL FLUOR VIGORE":"#ee7d70", "ROJO VIGORE":"#c43030",
+  "GRANATE VIGORE":"#823042", "ROSETON VIGORE":"#a85a78",
+  "ROYAL VIGORE":"#3268aa", "AZUL DENIM VIGORE":"#465c80",
+  "AZUL MARINO VIGORE":"#1f2c4a", "TURQUESA VIGORE":"#2db0bd",
+  "VERDE MANTIS VIGORE":"#7faf48", "LIMA VIGORE":"#5fbf4e",
+  "VERDE MILITAR OSCURO VIGORE":"#4a5142", "NEGRO VIGORE":"#1e1e1e",
+};
+
+// Agrupacion de colores por familia/marca para facilitar la busqueda en el form
+const COLORES_GRUPOS = {
+  "basicos": ["NEGRO","BLANCO","GRIS","AZUL","MARINO","ROJO","ROSA","BEIGE","MARRON","VERDE","AMARILLO","CELESTE","NARANJA","BURDEOS","VIOLETA","TURQUESA","PLATA","DORADO","CRUDO","TIERRA","CARNE","NUDE","VARIOS"],
+  "roly-neutros": ["BLANCO PERLA","BLANCO VINTAGE","GRIS VIGORE","GRIS PIEDRA","OPALO","PLOMO","EBANO","PLOMO OSCURO"],
+  "roly-tierras": ["ANGORA","ARENA","ARENA OSCURA","NOGAL","MOCA","CHOCOLATE"],
+  "roly-amarillos": ["AMARILLO SWEET","AMARILLO GOLDEN","OCRE","AMARILLO CURRY"],
+  "roly-naranjas-rojos": ["NARANJA GREEK","CORAL","NARANJA BERMELLON","NARANJA FUEGO","NARANJA CLAY","TEJA","ROJO CRISANTEMO","ROJO PALIDO","ROJO BAYAL","GRANATE","ROJO VINO","BORGOÑA","ARANDANO","ROJO CIRUELA","PURPURA"],
+  "roly-rosas-lilas": ["ROSA CLARO","ROSA CHICLE","ROSA SEDA","FRAMBUESA","ROSETON","LAVANDA","LILA","UVA","ORQUIDEA","IRIS PURPURA","MORADO"],
+  "roly-azules": ["AZUL MARINO","VAQUERO","AZUL LUZ DE LUNA","AZUL ZEN","TORMENTA AZUL","AZUL CALMA","AZUL DUSTY","AZUL LAVADO","AGUAMARINA","AZUL LAGO"],
+  "roly-verdes": ["JADE","VERDE LAB","VERDE MENTA OSCURO","VERDE MENTA","VERDE MIST","LIMA LIMON","LIMA PUNCH","PISTACHO","VERDE MANTIS","VERDE OASIS","LIMA","VERDE IRISH","VERDE GRASS","VERDE HELECHO","VERDE TROPICAL","VERDE KELLY"],
+  "roly-militares": ["VERDE BOTELLA","VERDE LAUREL","VERDE MILITAR","VERDE AVENTURA","VERDE PINO","VERDE MILITAR OSCURO","VERDE HUMO"],
+  "roly-lavado": ["AMARILLO SWEET LAVADO","PAPAYA CLARO LAVADO","KAKI CLARO LAVADO","VERDE PATO LAVADO","GRIS PIEDRA LAVADO","GRIS CIELO LAVADO"],
+  "roly-fluor": ["AMARILLO FLUOR","NARANJA FLUOR","CORAL FLUOR","ROSA LADY FLUOR","ROSA FLUOR","TURQUESA FLUOR","VERDE FLUOR"],
+  "roly-vigore": ["BLANCO VIGORE","BLANCO CENIZA VIGORE","AMARILLO FLUOR VIGORE","MOSTAZA VIGORE","CORAL FLUOR VIGORE","ROJO VIGORE","GRANATE VIGORE","ROSETON VIGORE","ROYAL VIGORE","AZUL DENIM VIGORE","AZUL MARINO VIGORE","TURQUESA VIGORE","VERDE MANTIS VIGORE","LIMA VIGORE","VERDE MILITAR OSCURO VIGORE","NEGRO VIGORE"],
+};
+
+const TALLAS_DEFAULT = ["XS","S","M","L","XL","2XL","3XL","4XL","U"];
+const TALLAS_NUM = ["36","38","40","42","44","46","48"];
+// v1.13.39 — Tipos de sujetador (debe estar sincronizado con TIPOS_SUJETADOR en catalogo.js)
+const TIPOS_SUJETADOR = [
+  "Push up", "Doble push up", "Triple push up",
+  "Bralette", "Algodón", "Funcionales", "Copa spacer",
+  "Sin tirantes",
+  "Con aros con relleno", "Con aros sin relleno", "Sin aros con relleno", "Sin aros sin relleno",
+  "Reductor", "Multiposición", "Mediocuerpo",
+  "Maternal", "Deportivo", "Apertura delantera",
+];
+const TOKEN_KEY = "canary_admin_token";
+
+const state = {
+  vista:"login", token:null,
+  catalogo:[], clientes:[], comerciales:[],
+  jerarquia:[],              // árbol oficial cargado desde el server
+  // Form artículo:
+  artEditando:null,          // código si estamos editando, null si nuevo
+  fotos:[],                  // array de { dataUrl, url, fileId? } - dataUrl si nueva, url si existente
+  coloresSel:new Set(),
+  tallasSel:new Map(),       // v1.13.20: talla → PRECIO ABSOLUTO (no suplemento). Si no se ha definido, hereda artPrecio del padre al guardar.
+  tallasCodigoA3:new Map(),  // v1.11.4: talla → codigoA3 (string vacío si hereda del padre)
+  tallasUdsPorPack:new Map(),// v1.11.7: talla → udsPorPack (>1 = pack; ausente = hereda del padre)
+  agotadas:new Set(),        // strings "COLOR:TALLA"
+  tiposSujetadorSel:new Set(),// v1.13.39: tipos seleccionados para el artículo (sujetadores)
+  // Selección de jerarquía actual en el form
+  seccionId:null, categoriaId:null, tipoId:null,
+};
+
+/* ============== HELPERS ============== */
+const $ = id => document.getElementById(id);
+const E = (tag, props={}, ...children) => {
+  const el = document.createElement(tag);
+  for(const k in props){
+    if(k==="className") el.className = props[k];
+    else if(k==="onclick") el.onclick = props[k];
+    else if(k==="html") el.innerHTML = props[k];
+    else if(k.startsWith("data-")) el.setAttribute(k, props[k]);
+    else el[k] = props[k];
+  }
+  for(const c of children.flat()){
+    if(c==null||c===false) continue;
+    if(typeof c === "string") el.appendChild(document.createTextNode(c));
+    else el.appendChild(c);
+  }
+  return el;
+};
+function fmt(n){ return Number(n||0).toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+/* v1.13.16 — Parsea un precio que puede venir con coma o punto como separador
+   decimal. Acepta también espacios y miles con punto (1.234,56). Devuelve
+   Number o NaN si no es válido.
+   Casos: "4,95" → 4.95 · "4.95" → 4.95 · "1.234,56" → 1234.56 · "" → NaN */
+function parsearPrecio(str) {
+  if (str == null) return NaN;
+  let s = String(str).trim().replace(/\s/g, "");
+  if (!s) return NaN;
+  // Si tiene tanto coma como punto: el último es decimal, el otro es miles
+  const hasComma = s.includes(",");
+  const hasDot = s.includes(".");
+  if (hasComma && hasDot) {
+    // El último símbolo decide
+    if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
+      s = s.replace(/\./g, "").replace(",", ".");   // ES: 1.234,56 → 1234.56
+    } else {
+      s = s.replace(/,/g, "");                       // EN: 1,234.56 → 1234.56
+    }
+  } else if (hasComma) {
+    s = s.replace(",", ".");                         // 4,95 → 4.95
+  }
+  const n = parseFloat(s);
+  return isFinite(n) ? n : NaN;
+}
+/* Helper: ajusta cualquier <input> de precio para que funcione bien en iPad
+   (teclado numérico decimal) y PC (numpad + coma). Sustituye type="number"
+   por type="text" + inputmode="decimal". */
+function configurarInputPrecio(inp, opts = {}) {
+  inp.type = "text";
+  inp.inputMode = "decimal";
+  inp.autocomplete = "off";
+  if (opts.alignRight) inp.style.textAlign = "right";
+  // Selecciona todo al focus para sobreescribir rápido
+  inp.addEventListener("focus", () => inp.select());
+}
+function toast(msg, tipo){
+  const t=$("toast"); t.textContent=msg; t.className="toast "+(tipo==="error"?"error":"");
+  requestAnimationFrame(()=>t.classList.add("show"));
+  setTimeout(()=>t.classList.remove("show"), tipo==="error"?3500:2400);
+}
+function abrirModal(html){ $("modalContent").innerHTML = html; $("modalBg").classList.add("show"); }
+function cerrarModal(){ $("modalBg").classList.remove("show"); }
+
+async function api(fn, body){
+  const res = await fetch(`/.netlify/functions/${fn}`, {
+    method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body||{}),
+  });
+  let data = {};
+  try { data = await res.json(); } catch{}
+  if(!res.ok){ const e = new Error(data.error || `Error ${res.status}`); e.status = res.status; throw e; }
+  return data;
+}
+const tokenize = (action, p={}) => ({ action, token: state.token, ...p });
+
+/* ============== NAVEGACIÓN ============== */
+function navegar(vista){
+  document.querySelectorAll(".vista").forEach(v=>v.classList.remove("activa"));
+  $("v-"+vista).classList.add("activa");
+  state.vista = vista;
+  if(vista==="dashboard")    cargarDashboard();
+  if(vista==="subirArt")     prepararFormArticulo();
+  if(vista==="articulos")    cargarArticulos();
+  if(vista==="editorPrecios") cargarEditorPrecios();
+  if(vista==="papelera")     cargarPapelera();
+  if(vista==="clientes")     cargarClientes();
+  if(vista==="comerciales")  cargarComerciales();
+  if(vista==="pedidos")      cargarPedidosAdmin();
+  if(vista==="procesarPedido") {/* se llama desde abrirProcesarPedido() */}
+  window.scrollTo(0,0);
+}
+
+/* ============== LOGIN ============== */
+async function hacerLogin(){
+  const pin = $("loginPin").value.trim();
+  if(!pin) return toast("Introduce el PIN","error");
+  $("btnEntrar").disabled = true; $("btnEntrar").textContent = "Entrando…";
+  try {
+    const r = await api("auth", { action:"login-admin", pin });
+    state.token = r.token;
+    localStorage.setItem(TOKEN_KEY, state.token);
+    $("loginPin").value = "";
+    navegar("dashboard");
+  } catch(e){ toast(e.message,"error"); }
+  finally { $("btnEntrar").disabled=false; $("btnEntrar").textContent="Entrar"; }
+}
+function logout(){
+  state.token=null; localStorage.removeItem(TOKEN_KEY); navegar("login");
+}
+async function intentarAutoLogin(){
+  const t = localStorage.getItem(TOKEN_KEY);
+  if(!t) return false;
+  state.token = t;
+  try {
+    await api("auth", { action:"me", token:t });
+    navegar("dashboard");
+    return true;
+  } catch { state.token=null; localStorage.removeItem(TOKEN_KEY); return false; }
+}
+
+/* ============== DASHBOARD ============== */
+async function cargarDashboard(){
+  try {
+    const [c, cl, co] = await Promise.all([
+      api("catalogo", tokenize("list")),
+      api("admin", tokenize("listar-clientes")),
+      api("admin", tokenize("listar-comerciales")),
+    ]);
+    state.catalogo = c.articulos || [];
+    state.clientes = cl.clientes || [];
+    state.comerciales = co.comerciales || [];
+    $("badgeArts").textContent = state.catalogo.length;
+    $("badgeCli").textContent = state.clientes.filter(x=>x.activo!==false).length;
+    $("badgeCom").textContent = state.comerciales.filter(x=>x.activo!==false).length;
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+}
+
+/* ============== FORM ARTÍCULO ============== */
+/* v1.11.8: la disponibilidad ahora vive DENTRO de renderTablaPreciosTallas.
+   renderDisponibilidad se mantiene como wrapper para compatibilidad con
+   código que la llamaba directamente. */
+function renderDisponibilidad(){
+  renderTablaPreciosTallas();
+}
+function toggleAgotada(color, talla){
+  const key = `${color}:${talla}`;
+  if (state.agotadas.has(key)) state.agotadas.delete(key);
+  else state.agotadas.add(key);
+  renderTablaPreciosTallas();
+}
+function agotarColor(color){
+  [...state.tallasSel.keys()].forEach(t => state.agotadas.add(`${color}:${t}`));
+  renderTablaPreciosTallas();
+}
+function agotarTalla(talla){
+  [...state.coloresSel].forEach(c => state.agotadas.add(`${c}:${talla}`));
+  renderTablaPreciosTallas();
+}
+function agotarTodo(){
+  [...state.coloresSel].forEach(c => {
+    [...state.tallasSel.keys()].forEach(t => state.agotadas.add(`${c}:${t}`));
+  });
+  renderTablaPreciosTallas();
+}
+function reactivarTodo(){
+  state.agotadas.clear();
+  renderTablaPreciosTallas();
+}
+
+async function cargarJerarquiaSiHaceFalta(){
+  if (state.jerarquia.length) return;
+  try {
+    const r = await api("catalogo", { action:"get-jerarquia" });
+    state.jerarquia = r.jerarquia || [];
+  } catch(e){ toast("No se pudo cargar la jerarquía: "+e.message, "error"); }
+}
+
+function pintarSelectSeccion(){
+  const sel = $("artSeccion");
+  sel.innerHTML = '<option value="">— Selecciona sección —</option>';
+  state.jerarquia.forEach(s => {
+    const opt = document.createElement("option");
+    opt.value = s.id;
+    opt.textContent = `${s.icono || ""} ${s.nombre}`.trim();
+    if (state.seccionId === s.id) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function pintarSelectCategoria(){
+  const selCat = $("artCategoria");
+  const selTipo = $("artTipo");
+  selCat.innerHTML = '<option value="">— Selecciona categoría —</option>';
+  selTipo.innerHTML = '<option value="">— (sin tipo) —</option>';
+  selCat.disabled = true;
+  selTipo.disabled = true;
+  $("artTipoHint").textContent = "";
+  if (!state.seccionId) return;
+  const sec = state.jerarquia.find(s => s.id === state.seccionId);
+  if (!sec) return;
+  selCat.disabled = false;
+  sec.categorias.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.id;
+    opt.textContent = c.nombre;
+    if (state.categoriaId === c.id) opt.selected = true;
+    selCat.appendChild(opt);
+  });
+}
+
+function pintarSelectTipo(){
+  const selTipo = $("artTipo");
+  selTipo.innerHTML = '<option value="">— (sin tipo) —</option>';
+  selTipo.disabled = true;
+  $("artTipoHint").textContent = "";
+  if (!state.seccionId || !state.categoriaId) return;
+  const sec = state.jerarquia.find(s => s.id === state.seccionId);
+  const cat = sec?.categorias.find(c => c.id === state.categoriaId);
+  if (!cat || !cat.tipos.length) {
+    $("artTipoHint").textContent = "Esta categoría no tiene tipos. Deja como (sin tipo).";
+    return;
+  }
+  selTipo.disabled = false;
+  $("artTipoHint").innerHTML = '<span style="color:var(--brand)">⚠ Tipo obligatorio</span> · '+cat.tipos.length+' opciones';
+  cat.tipos.forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.id;
+    opt.textContent = t.nombre;
+    if (state.tipoId === t.id) opt.selected = true;
+    selTipo.appendChild(opt);
+  });
+}
+
+function onCambiaSeccion(){
+  const sel = $("artSeccion");
+  state.seccionId = sel.value ? parseInt(sel.value) : null;
+  state.categoriaId = null;
+  state.tipoId = null;
+  pintarSelectCategoria();
+  pintarSelectTipo();
+}
+
+function onCambiaCategoria(){
+  const sel = $("artCategoria");
+  state.categoriaId = sel.value ? parseInt(sel.value) : null;
+  state.tipoId = null;
+  pintarSelectTipo();
+}
+
+function onCambiaTipo(){
+  const sel = $("artTipo");
+  state.tipoId = sel.value ? parseInt(sel.value) : null;
+}
+
+function prepararFormArticulo(){
+  // Pintar chips colores: paleta predefinida + cualquier color legacy del artículo
+  // que no esté en la paleta (así se puede deseleccionar). Filtros: busqueda + grupo.
+  const cc = $("chipsColores");
+  cc.innerHTML = "";
+
+  // Recoger filtros (si existen los inputs)
+  const filtroTxt = ($("filtroBuscColor")?.value || "").trim().toUpperCase();
+  const filtroGrupo = $("filtroGrupoColor")?.value || "";
+
+  // Lista base: paleta predefinida + colores existentes del articulo (los legacy)
+  let todosColores = Array.from(new Set([...Object.keys(COLORES), ...state.coloresSel]));
+
+  // Filtro por grupo
+  if (filtroGrupo) {
+    if (filtroGrupo === "seleccionados") {
+      todosColores = todosColores.filter(c => state.coloresSel.has(c));
+    } else {
+      const grupo = COLORES_GRUPOS[filtroGrupo] || [];
+      // Incluir también los seleccionados aunque no estén en el grupo (para poder deseleccionar)
+      todosColores = todosColores.filter(c => grupo.includes(c) || state.coloresSel.has(c));
+    }
+  }
+
+  // Filtro por busqueda de texto
+  if (filtroTxt) {
+    todosColores = todosColores.filter(c => c.toUpperCase().includes(filtroTxt) || state.coloresSel.has(c));
+  }
+
+  if (todosColores.length === 0) {
+    cc.appendChild(E("div",{style:"padding:14px;color:var(--ink-3);font-style:italic;font-size:13px"},"No hay colores en este filtro. Borra el filtro o pulsa + Otro para añadir uno."));
+  } else {
+    todosColores.forEach(c => {
+      const chip = E("div",{className:"chip", "data-color":c, onclick:()=>toggleColor(c)},
+        E("span",{className:"punto", style:`background:${COLORES[c]||'#9094a0'}`}),
+        c
+      );
+      if(state.coloresSel.has(c)) chip.classList.add("activo");
+      cc.appendChild(chip);
+    });
+  }
+
+  // Botón para añadir un color custom (escribes el nombre y se añade como chip activo)
+  const btnAdd = E("div",{className:"chip", style:"cursor:pointer;border:1px dashed #999", onclick:()=>{
+    const nombre = prompt("Nombre del color (en mayúsculas):");
+    if (!nombre) return;
+    const norm = String(nombre).trim().toUpperCase();
+    if (!norm) return;
+    state.coloresSel.add(norm);
+    prepararFormArticulo();
+  }}, "+ Otro");
+  cc.appendChild(btnAdd);
+
+  // Contador visible si hay filtro activo
+  if (filtroTxt || filtroGrupo) {
+    cc.appendChild(E("div",{style:"width:100%;text-align:center;color:var(--ink-3);font-size:11px;margin-top:8px"},
+      `Mostrando ${todosColores.length} colores · ${state.coloresSel.size} seleccionados`));
+  }
+
+  // Tallas — v1.11.6:
+  // 1) Primero mostramos las SELECCIONADAS en el orden del Map (reordenable con ←/→)
+  // 2) Después las preset NO seleccionadas (en orden natural, para añadirlas con click)
+  // 3) Al final el botón "+ Otra"
+  // El orden de las seleccionadas se persiste porque state.tallasSel es un Map
+  // y se serializa con .entries() preservando el orden de inserción.
+  const ct = $("chipsTallas");
+  ct.innerHTML = "";
+  const TALLAS_PRESET = [...TALLAS_DEFAULT, ...TALLAS_NUM];
+  const setPreset = new Set(TALLAS_PRESET);
+  const seleccionadasOrdenadas = [...state.tallasSel.keys()];
+  const noSeleccionadasPreset = TALLAS_PRESET.filter(t => !state.tallasSel.has(t));
+
+  // 1) SELECCIONADAS — con flechas para reordenar
+  seleccionadasOrdenadas.forEach((t, idx) => {
+    const esCustom = !setPreset.has(t);
+    const esPrimera = idx === 0;
+    const esUltima  = idx === seleccionadasOrdenadas.length - 1;
+    const chip = E("div",{
+      className: "chip activo" + (esCustom ? " chip-custom" : ""),
+      title: esCustom ? "Talla custom (no preset). Pulsa ← → para reordenar." : "Pulsa ← → para reordenar.",
+      onclick:()=>toggleTalla(t)
+    },
+      // Flecha ← (mover a la izquierda)
+      E("button",{
+        className:"chip-arrow",
+        disabled: esPrimera,
+        title:"Mover a la izquierda",
+        onclick:(e)=>{ e.stopPropagation(); moverTalla(t, -1); }
+      }, "‹"),
+      // Texto de la talla
+      E("span",{style:"padding:0 2px"}, t),
+      // Flecha → (mover a la derecha)
+      E("button",{
+        className:"chip-arrow",
+        disabled: esUltima,
+        title:"Mover a la derecha",
+        onclick:(e)=>{ e.stopPropagation(); moverTalla(t, +1); }
+      }, "›"),
+      // v1.13.20: precio absoluto (clicable para editar). Si no se ha tocado, muestra €.
+      E("span",{className:"sup", onclick:(e)=>{e.stopPropagation();editarPrecioTalla(t)}, style:"cursor:pointer;background:rgba(255,255,255,.25);padding:1px 5px;border-radius:6px;margin-left:2px"},
+        (state.tallasSel.get(t) > 0) ? fmt(state.tallasSel.get(t))+" €" : "€"
+      )
+    );
+    ct.appendChild(chip);
+  });
+
+  // Separador visual si hay seleccionadas Y no seleccionadas
+  if (seleccionadasOrdenadas.length > 0 && noSeleccionadasPreset.length > 0) {
+    ct.appendChild(E("div",{style:"width:1px;height:24px;background:var(--bd);margin:0 4px;align-self:center"}));
+  }
+
+  // 2) PRESET NO SELECCIONADAS — para añadir con click
+  noSeleccionadasPreset.forEach(t => {
+    const chip = E("div",{className:"chip", onclick:()=>toggleTalla(t)}, t);
+    ct.appendChild(chip);
+  });
+
+  // 3) Botón "+ Otra" — añadir talla custom (texto libre)
+  const btnAddTalla = E("div",{className:"chip", style:"cursor:pointer;border:1px dashed #999", onclick:()=>{
+    const nombre = prompt("Nombre de la talla / medida (texto libre):\n\nEjemplos: 500 ML, 1000 ML, 70x140, Saco grande, XXXL, 5XL\n\nDespués podrás meter su precio y código a3 en la tabla de precios.");
+    if (!nombre) return;
+    const norm = String(nombre).trim().toUpperCase();
+    if (!norm) return;
+    if (state.tallasSel.has(norm)) { toast("Esa talla ya está añadida","error"); return; }
+    state.tallasSel.set(norm, 0);
+    prepararFormArticulo();
+  }}, "+ Otra");
+  ct.appendChild(btnAddTalla);
+
+  // Jerarquía (3 niveles)
+  cargarJerarquiaSiHaceFalta().then(() => {
+    pintarSelectSeccion();
+    pintarSelectCategoria();
+    pintarSelectTipo();
+    $("artTipo").onchange = onCambiaTipo;
+  });
+
+  // Disponibilidad por variante
+  renderDisponibilidad();
+
+  // Tabla de precios por talla (precio FINAL editable por cada talla)
+  renderTablaPreciosTallas();
+
+  // v1.13.39 — Chips tipos de sujetador
+  pintarChipsTiposSujetador();
+  // v1.14.16 — reflejar estado publicado/borrador en el toggle
+  actualizarToggleEstado();
+
+  // Fotos
+  renderFotos();
+
+  // Si estamos editando: cargar datos
+  if(state.artEditando){
+    $("subirArtTitulo").textContent = "Editar artículo";
+    $("btnGuardarArt").textContent = "Guardar cambios";
+    $("btnBorrarArt").style.display = "";
+    $("btnEliminarArt").style.display = "";
+    const bd = $("btnDuplicarArt"); if (bd) bd.style.display = "";   // v1.13.30
+    const gs = $("btnGuardarSeguir"); if (gs) gs.style.display = "none";   // v1.19.0: no en edición
+  } else {
+    $("subirArtTitulo").textContent = "Subir artículo";
+    $("btnGuardarArt").textContent = "Guardar artículo";
+    $("btnBorrarArt").style.display = "none";
+    $("btnEliminarArt").style.display = "none";
+    const bd = $("btnDuplicarArt"); if (bd) bd.style.display = "none"; // v1.13.30
+    const gs = $("btnGuardarSeguir"); if (gs) gs.style.display = "";   // v1.19.0: alta en cadena
+  }
+
+  // Validar código en tiempo real
+  $("artCodigo").oninput = () => {
+    const cod = $("artCodigo").value.trim().toUpperCase();
+    const hint = $("artCodigoHint");
+    if(!cod) { hint.textContent = ""; return; }
+    const existe = state.catalogo.find(a => a.codigo === cod);
+    if(existe && cod !== state.artEditando){
+      hint.innerHTML = `<span style="color:var(--warn)">⚠ Ya existe: <strong>${existe.nombre}</strong>. Si guardas, se sobrescribirá.</span>`;
+    } else { hint.textContent = ""; }
+  };
+}
+
+function resetArtForm(keep){
+  // v1.19.0: keep=true conserva sección/categoría/tipo + ficha técnica (para "Guardar y subir otro").
+  state.artEditando = null;
+  state.fotos = [];
+  state.coloresSel.clear();
+  state.tallasSel.clear();
+  state.tallasCodigoA3.clear();
+  state.tallasUdsPorPack.clear();
+  state.agotadas.clear();
+  state.tiposSujetadorSel.clear();   // v1.13.39
+  if (!keep) {
+    state.seccionId = null;
+    state.categoriaId = null;
+    state.tipoId = null;
+  }
+  const ids = ["artCodigo","artCodigoA3","artNombre","artPrecio","artPortes","artMinUnidPorColor","artUdsPorPack","artCopas","artCarpetaId"];
+  if (!keep) ids.push("ftComposicion","ftPacking","ftFabricante","ftOrigen","ftLavado","ftRefProveedor");
+  ids.forEach(id => { const el = $(id); if (el) el.value = ""; });
+  $("artNovedad").checked = false;
+  const pr = $("artPendienteRevision"); if (pr) pr.checked = false;
+  const sr = $("artSinReposicionFabrica"); if (sr) sr.checked = false;   // v1.14.1
+  $("artCodigoHint").textContent = "";
+  prepararFormArticulo();
+}
+
+/* v1.13.39 — Render chips de tipos de sujetador (multi-select).
+   Solo es relevante para sujetadores; en otros artículos se deja vacío. */
+function pintarChipsTiposSujetador(){
+  const cont = $("chipsTiposSujetador");
+  if (!cont) return;
+  cont.innerHTML = "";
+  TIPOS_SUJETADOR.forEach(t => {
+    const activo = state.tiposSujetadorSel.has(t);
+    const chip = E("div", {
+      className: "chip" + (activo ? " activo" : ""),
+      onclick: () => toggleTipoSujetador(t),
+    }, t);
+    cont.appendChild(chip);
+  });
+}
+function toggleTipoSujetador(t){
+  if (state.tiposSujetadorSel.has(t)) state.tiposSujetadorSel.delete(t);
+  else state.tiposSujetadorSel.add(t);
+  pintarChipsTiposSujetador();
+}
+
+/* v1.14.16 — Toggle de publicación. El valor real es el checkbox oculto
+   artPendienteRevision: checked = NO publicado (borrador). publicado = !checked. */
+function setPublicado(pub){
+  const cb = $("artPendienteRevision");
+  if (cb) cb.checked = !pub;   // pendienteRevision = !publicado
+  actualizarToggleEstado();
+}
+function actualizarToggleEstado(){
+  const cb = $("artPendienteRevision");
+  const publicado = cb ? !cb.checked : true;
+  const bP = $("btnEstPublicado"), bB = $("btnEstBorrador");
+  if (bP) bP.classList.toggle("activo", publicado);
+  if (bB) bB.classList.toggle("activo", !publicado);
+}
+
+function toggleColor(c){
+  if(state.coloresSel.has(c)) state.coloresSel.delete(c);
+  else state.coloresSel.add(c);
+  prepararFormArticulo();
+}
+function toggleTalla(t){
+  if(state.tallasSel.has(t)) state.tallasSel.delete(t);
+  else state.tallasSel.set(t, 0);
+  prepararFormArticulo();
+}
+/* v1.13.20: precio ABSOLUTO de la talla (no suplemento). Sin anidamiento. */
+function editarPrecioTalla(t){
+  const base = parsearPrecio($("artPrecio").value) || 0;
+  const actual = state.tallasSel.get(t) || base;
+  const v = prompt(`Precio para talla ${t} (€). Vacío = usar precio base (${base.toFixed(2)} €):`, actual);
+  if(v == null) return;
+  const num = parsearPrecio(v) || 0;
+  state.tallasSel.set(t, num);
+  prepararFormArticulo();
+}
+/* v1.11.6 — Reordenar tallas con flechas. delta = -1 (izquierda) o +1 (derecha).
+   Como state.tallasSel es un Map y JS preserva orden de inserción, reordenamos
+   reconstruyendo el Map con las entradas intercambiadas. El orden se persiste
+   al guardar el artículo (tallas: [...state.tallasSel.entries()].map(...)). */
+function moverTalla(t, delta){
+  const arr = [...state.tallasSel.entries()];
+  const idx = arr.findIndex(([k]) => k === t);
+  if (idx < 0) return;
+  const nuevoIdx = idx + delta;
+  if (nuevoIdx < 0 || nuevoIdx >= arr.length) return;
+  [arr[idx], arr[nuevoIdx]] = [arr[nuevoIdx], arr[idx]];
+  state.tallasSel = new Map(arr);
+  // No tocamos tallasCodigoA3 (es Map por clave talla, no por orden, sigue válido)
+  prepararFormArticulo();
+}
+
+/* Tabla de PRECIOS POR TALLA — visible cuando hay tallas seleccionadas.
+   Para cada talla muestra: nombre + input con el precio FINAL (base + sup).
+   Editar el input ajusta el sup automáticamente (sup = precio - base). */
+function renderTablaPreciosTallas(){
+  const cont = $("tablaPreciosTallas");
+  if (!cont) return;
+  cont.innerHTML = "";
+
+  const tallasArr = [...state.tallasSel.entries()];
+  if (tallasArr.length === 0) return;
+
+  const basePrecio = parsearPrecio($("artPrecio").value) || 0;
+  const codigoA3Padre = ($("artCodigoA3")?.value || "").trim();
+
+  // v1.13.20: precios ABSOLUTOS. Cada talla guarda su precio en state.tallasSel.
+  // Si una talla no tiene valor (>0) → usa el precio padre.
+  const precioEfectivo = (val) => (val && val > 0) ? val : basePrecio;
+  // Si entre las tallas hay precios distintos → cada precio necesita su cód a3
+  const preciosUnicos = new Set(tallasArr.map(([t, val]) => precioEfectivo(val).toFixed(2)));
+  const necesitaA3PorTalla = preciosUnicos.size > 1;
+
+  const titulo = E("div",{style:"font-weight:600;color:var(--ink-2);font-size:13px;margin-bottom:8px"},
+    "💰 Precio final por talla ", E("span",{style:"font-weight:400;color:var(--ink-3);font-size:12px"},
+    `(base ${basePrecio.toFixed(2)}€${codigoA3Padre ? ` · a3 padre: ${codigoA3Padre}` : ""})`));
+  cont.appendChild(titulo);
+
+  if (necesitaA3PorTalla) {
+    cont.appendChild(E("div",{style:"background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:12px;color:#78350f"},
+      "⚠ Hay tallas con PRECIOS DISTINTOS. Como en a3 cada precio tiene su propio código, rellena la columna ‘Cód. a3’ de cada talla."));
+  }
+
+  // v1.11.8: tabla unificada — añadimos columnas dinámicas por color para
+  // marcar agotado/disponible directamente aquí (antes era una card aparte).
+  const coloresArr = [...state.coloresSel];
+  // Limpiar agotadas que ya no son válidas (color o talla que se quitó)
+  const setColV = new Set(coloresArr), setTalV = new Set(tallasArr.map(([t])=>t));
+  [...state.agotadas].forEach(k => {
+    const [c, t] = k.split(":");
+    if (!setColV.has(c) || !setTalV.has(t)) state.agotadas.delete(k);
+  });
+
+  // Wrapper con scroll horizontal para artículos con muchos colores
+  const wrapTabla = E("div",{style:"overflow-x:auto;margin:0 -4px;padding:0 4px"});
+  const tabla = E("table",{className:"tabla-precios-talla", style:"width:100%;min-width:fit-content"});
+  // Header con columnas fijas + una columna por color
+  const thFix = (txt) => E("th",{style:"padding:4px 8px;text-align:left;font-size:11px;color:var(--ink-3)"}, txt);
+  const thCol = (c) => E("th",{style:"padding:4px 8px;text-align:center;font-size:11px;color:var(--ink-3);min-width:60px"},
+    E("div",{style:"font-weight:700;color:var(--ink-2)"}, c),
+    E("div",{
+      style:"font-size:10px;color:var(--brand);cursor:pointer;text-decoration:underline;margin-top:1px",
+      onclick:(e)=>{ e.stopPropagation(); agotarColor(c); }
+    }, "agotar todo")
+  );
+  const thead = E("thead",{}, E("tr",{},
+    thFix("Talla"),
+    thFix("Precio €"),
+    thFix("Mín. uds"),
+    thFix("Cód. a3 (opcional)"),
+    ...coloresArr.map(thCol)
+  ));
+  tabla.appendChild(thead);
+  const tbody = E("tbody",{});
+  tallasArr.forEach(([t, val]) => {
+    const precioFinal = +precioEfectivo(val).toFixed(2);
+    // v1.13.20: input con precio ABSOLUTO. Guarda directamente el precio (no diferencia con base).
+    const inp = document.createElement("input");
+    configurarInputPrecio(inp, { alignRight: true });
+    inp.value = precioFinal.toFixed(2).replace(".", ",");
+    inp.className = "inp-precio-talla";
+    inp.oninput = () => {
+      const nuevoPrecio = parsearPrecio(inp.value);
+      if (!isFinite(nuevoPrecio)) return;
+      // Guardamos el precio absoluto directamente
+      state.tallasSel.set(t, nuevoPrecio);
+    };
+    inp.onchange = () => {
+      renderTablaPreciosTallas();
+    };
+    // Hint discreto solo si la talla difiere del precio padre
+    const hintTxt = (val && val > 0 && Math.abs(val - basePrecio) > 0.001) ? "" : "(=base)";
+    const hint = E("span",{className:"hint-precio-talla", style:"font-size:11px;color:var(--ink-3);margin-left:6px"}, hintTxt);
+
+    // Input para udsPorPack (mínimo / pack) de esta talla — entero, teclado numérico
+    const udsPadre = parseInt(($("artUdsPorPack")?.value || "").replace(/\D/g, ""), 10) || 1;
+    const inpUds = document.createElement("input");
+    inpUds.type = "text"; inpUds.inputMode = "numeric"; inpUds.autocomplete = "off";
+    inpUds.placeholder = udsPadre > 1 ? String(udsPadre) : "1";
+    inpUds.value = state.tallasUdsPorPack.get(t) || "";
+    inpUds.style.cssText = "width:70px;padding:4px 6px;border:1px solid var(--bd);border-radius:4px;font-size:12px;text-align:center";
+    inpUds.title = "Mínimo de unidades por pedido para ESTA talla. Vacío = hereda del padre.";
+    inpUds.addEventListener("focus", () => inpUds.select());
+    inpUds.oninput = () => {
+      const v = parseInt(inpUds.value.replace(/\D/g, ""), 10);
+      if (v && v > 1) state.tallasUdsPorPack.set(t, v);
+      else state.tallasUdsPorPack.delete(t);
+    };
+
+    // Input para codigoA3 de esta talla
+    const inpA3 = document.createElement("input");
+    inpA3.type = "text";
+    inpA3.placeholder = codigoA3Padre || "p.ej. ABC123";
+    inpA3.value = state.tallasCodigoA3.get(t) || "";
+    inpA3.style.cssText = "width:120px;padding:4px 6px;border:1px solid var(--bd);border-radius:4px;font-size:12px;font-family:monospace";
+    if (necesitaA3PorTalla && !inpA3.value) inpA3.style.borderColor = "#f59e0b"; // amarillo si falta
+    inpA3.oninput = () => {
+      const v = inpA3.value.trim();
+      if (v) state.tallasCodigoA3.set(t, v);
+      else state.tallasCodigoA3.delete(t);
+      inpA3.style.borderColor = (necesitaA3PorTalla && !v) ? "#f59e0b" : "var(--bd)";
+    };
+
+    // v1.11.8: celdas de disponibilidad ✓/✕ por color
+    const cellsColor = coloresArr.map(c => {
+      const key = `${c}:${t}`;
+      const agot = state.agotadas.has(key);
+      const cell = E("div",{
+        className: "disp-cell" + (agot ? " agotada" : ""),
+        title: agot ? `${c} · ${t} agotado · toca para reactivar` : `${c} · ${t} disponible · toca para marcar agotado`,
+        onclick: (e) => { e.stopPropagation(); toggleAgotada(c, t); }
+      }, agot ? "✕" : "✓");
+      return E("td",{style:"padding:4px;text-align:center"}, cell);
+    });
+
+    // Celda talla con link "toda la fila" si hay colores
+    const tdTalla = E("td",{style:"padding:6px 10px;font-weight:600;background:var(--bg-soft);white-space:nowrap"}, t);
+    if (coloresArr.length > 0) {
+      tdTalla.appendChild(E("div",{
+        style:"font-size:10px;color:var(--brand);cursor:pointer;text-decoration:underline;font-weight:500;margin-top:1px",
+        onclick:(e)=>{ e.stopPropagation(); agotarTalla(t); }
+      }, "toda la fila"));
+    }
+
+    const tr = E("tr",{},
+      tdTalla,
+      E("td",{style:"padding:6px 10px;white-space:nowrap"}, inp, " €", hint),
+      E("td",{style:"padding:6px 10px;text-align:center"}, inpUds),
+      E("td",{style:"padding:6px 10px"}, inpA3),
+      ...cellsColor
+    );
+    tbody.appendChild(tr);
+  });
+  tabla.appendChild(tbody);
+  wrapTabla.appendChild(tabla);
+  cont.appendChild(wrapTabla);
+
+  cont.appendChild(E("div",{className:"hint",style:"margin-top:6px"},
+    "Cambia el precio de cada talla. Si dos tallas tienen precios distintos, en a3 son códigos distintos: rellena la 4ª columna. Si la dejas vacía, hereda el código a3 padre.",
+    coloresArr.length > 0 ? " · Las columnas de colores marcan disponibilidad: ✓=disponible, ✕=agotado (oculto al cliente)." : ""));
+
+  // v1.11.8: acciones masivas de disponibilidad (solo si hay >=1 color)
+  if (coloresArr.length > 0) {
+    cont.appendChild(E("div",{style:"margin-top:10px;padding-top:10px;border-top:1px dashed var(--bd);display:flex;gap:8px;flex-wrap:wrap;align-items:center"},
+      E("span",{style:"font-size:11px;color:var(--ink-3);margin-right:4px"}, "Disponibilidad:"),
+      E("button",{type:"button", className:"btn btn-secundario btn-mini", onclick:agotarTodo}, "Agotar todo"),
+      E("button",{type:"button", className:"btn btn-secundario btn-mini", onclick:reactivarTodo}, "Reactivar todo"),
+      E("span",{style:"font-size:11px;color:var(--ink-3);margin-left:auto"},
+        `${state.agotadas.size} de ${coloresArr.length * tallasArr.length} variantes agotadas`)
+    ));
+  }
+
+  // v1.13.17: usar "change" (al perder foco) en vez de "input" para no romper
+  // la edición de los precios por talla con la coma decimal.
+  const inpBase = $("artPrecio");
+  if (inpBase && !inpBase._listenerTallas) {
+    inpBase._listenerTallas = true;
+    inpBase.addEventListener("change", () => renderTablaPreciosTallas());
+  }
+  const inpA3padre = $("artCodigoA3");
+  if (inpA3padre && !inpA3padre._listenerTallas) {
+    inpA3padre._listenerTallas = true;
+    inpA3padre.addEventListener("change", () => renderTablaPreciosTallas());
+  }
+}
+
+/* ============== FOTOS ============== */
+function renderFotos(){
+  const grid = $("fotosGrid");
+  grid.innerHTML = "";
+  state.fotos.forEach((f, i) => {
+    const slot = E("div",{className:"foto-slot con-foto"},
+      E("img",{src: f.dataUrl || f.url, alt:""}),
+      i === 0 ? E("div",{className:"principal"},"PRINCIPAL") : null,
+      E("div",{className:"ord"}, "#"+(i+1)),
+      E("div",{className:"quitar", onclick:()=>quitarFoto(i)},"✕")
+    );
+    // Drag/reorder simple: con flechas
+    if(i > 0){
+      slot.appendChild(E("div",{
+        style:"position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.55);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px",
+        onclick:()=>{ const t=state.fotos[i]; state.fotos[i]=state.fotos[i-1]; state.fotos[i-1]=t; renderFotos(); }
+      }, "↑"));
+    }
+    grid.appendChild(slot);
+  });
+  // Slot vacío para añadir
+  if(state.fotos.length < 10){
+    grid.appendChild(E("div",{className:"foto-slot", onclick:()=>document.getElementById("inputFoto").click()},
+      E("div",{className:"ico-add"},"+")));
+  }
+}
+function quitarFoto(i){
+  if(!confirm("¿Quitar esta foto?")) return;
+  state.fotos.splice(i,1);
+  renderFotos();
+}
+
+/* v1.21.38 — Analizador IA: lee foto de catálogo y pre-rellena el formulario */
+$("inputAnalizarIA").addEventListener("change", async (e) => {
+  const file = e.target.files?.[0];
+  e.target.value = "";
+  if (!file) return;
+  if (!file.type.startsWith("image/")) { toast("No es imagen","error"); return; }
+  const est = $("iaEstado");
+  est.innerHTML = "🔄 <strong>Analizando foto con IA…</strong> (puede tardar 5-15 segundos)";
+  try {
+    // Convertir a base64 (compresión previa para no enviar fotos enormes)
+    const dataUrl = await comprimirImagen(file);   // ya existe, devuelve dataUrl JPG
+    const b64 = dataUrl.split(",")[1];
+    const r = await api("catalogo", tokenize("analizar-foto", { fotoBase64: b64, mimeType: "image/jpeg" }));
+    if (!r?.datos) throw new Error("Respuesta vacía");
+    rellenarFormDesdeIA(r.datos);
+    // Añadir la foto subida al pool de fotos del artículo (1ª foto = la del catálogo)
+    if (state.fotos.length === 0) state.fotos.push({ dataUrl });
+    renderFotos();
+    est.innerHTML = `✅ <strong>Datos extraídos.</strong> Revisa y completa lo que falte. <span style="color:#888">(${r.coste?.tokens_in||0}+${r.coste?.tokens_out||0} tokens)</span>`;
+    toast("✓ Foto analizada — revisa los campos");
+  } catch(err) {
+    est.innerHTML = `❌ <strong style="color:#c0392b">Error:</strong> ${err.message||"falló el análisis"}`;
+    toast("Error IA: " + (err.message||""), "error");
+  }
+});
+
+/* Rellena el formulario con los datos extraídos por la IA */
+function rellenarFormDesdeIA(d){
+  if (d.nombre) $("artNombre").value = d.nombre;
+  if (d.precio != null) $("artPrecio").value = String(d.precio).replace(".", ",");
+  if (d.descripcion) {
+    const el = $("ftDescripcion") || $("ftComposicion");   // si no hay descripción, lo metemos en composicion como fallback
+    // composicion específica si existe
+    if (d.composicion) $("ftComposicion").value = d.composicion;
+  } else if (d.composicion) {
+    $("ftComposicion").value = d.composicion;
+  }
+  if (d.packing) $("ftPacking").value = d.packing;
+  if (d.udsPorPack > 1) $("artUdsPorPack").value = d.udsPorPack;
+  if (d.minUnidadesPorColor > 0) $("artMinUnidPorColor").value = d.minUnidadesPorColor;
+  // Colores: añadir a state.coloresSel
+  if (Array.isArray(d.colores) && d.colores.length) {
+    d.colores.forEach(c => {
+      const cN = String(c).toUpperCase().trim();
+      if (cN) state.coloresSel.add(cN);
+    });
+    if (typeof renderColores === "function") renderColores();
+  }
+  // Tallas: añadir a state.tallasSel
+  if (Array.isArray(d.tallas) && d.tallas.length) {
+    d.tallas.forEach(t => {
+      const tN = String(t).toUpperCase().trim();
+      if (tN && !state.tallasSel.has(tN)) {
+        state.tallasSel.set(tN, parseFloat(d.precio) || 0);
+      }
+    });
+    if (typeof renderTallas === "function") renderTallas();
+    if (typeof renderTablaPreciosTallas === "function") renderTablaPreciosTallas();
+  }
+  // Aviso sobre sección/categoría sugerida (no auto-aplico, lo decide Carmelo)
+  if (d.categoria_sugerida || d.tipo_sugerido) {
+    const sug = [d.categoria_sugerida, d.tipo_sugerido].filter(Boolean).join(" → ");
+    setTimeout(() => toast(`💡 IA sugiere: ${sug} (selecciona manual si encaja)`, "ok", 6000), 1500);
+  }
+}
+
+/* v1.21.29 — Muestra/oculta el aviso de carpeta Drive según si hay un ID válido */
+function actualizarAvisoCarpetaDrive(){
+  const ciEl = $("artCarpetaId");
+  const aviso = $("avisoCarpetaDrive");
+  if (!ciEl || !aviso) return;
+  const raw = (ciEl.value || "").trim();
+  const tieneCarpeta = raw.length > 25 && (/folders\//.test(raw) || /^[A-Za-z0-9_-]{25,}$/.test(raw));
+  aviso.style.display = tieneCarpeta ? "" : "none";
+}
+/* v1.21.184 — Enlace directo a la carpeta Drive del artículo (arrastrar fotos). */
+function actualizarLinkCarpeta(){
+  const el = $("linkCarpetaDrive");
+  const raw = ($("artCarpetaId")?.value || "").trim();
+  if (!el) return;
+  let id = null;
+  const m = raw.match(/folders\/([A-Za-z0-9_-]{10,})/);
+  if (m) id = m[1];
+  else if (/^[A-Za-z0-9_-]{25,}$/.test(raw)) id = raw;
+  if (id) { el.href = "https://drive.google.com/drive/folders/" + id; el.style.display = ""; }
+  else { el.style.display = "none"; }
+}
+$("inputFoto").addEventListener("change", async (e) => {
+  const files = [...e.target.files];
+  e.target.value = "";  // reset
+  for(const f of files){
+    if(state.fotos.length >= 10){ toast("Máximo 10 fotos","error"); break; }
+    try {
+      const dataUrl = await comprimirImagen(f);
+      state.fotos.push({ dataUrl });
+    } catch(err) { toast(err.message,"error"); }
+  }
+  renderFotos();
+});
+
+/* Comprime imagen client-side a JPG max 1200px y 80% calidad → ~150-400KB */
+function comprimirImagen(file){
+  return new Promise((resolve, reject) => {
+    if(!file.type.startsWith("image/")) return reject(new Error("No es imagen"));
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const MAX = 1200;
+        let w = img.width, h = img.height;
+        if(w > h && w > MAX){ h = h * MAX / w; w = MAX; }
+        else if(h > MAX){ w = w * MAX / h; h = MAX; }
+        const canvas = document.createElement("canvas");
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ffffff"; ctx.fillRect(0,0,w,h);
+        ctx.drawImage(img, 0, 0, w, h);
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.82);
+        resolve(dataUrl);
+      };
+      img.onerror = () => reject(new Error("No se pudo cargar la imagen"));
+      img.src = reader.result;
+    };
+    reader.onerror = () => reject(new Error("No se pudo leer el archivo"));
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ============== GUARDAR ARTÍCULO ============== */
+async function guardarArticulo(seguir){
+  const cod = $("artCodigo").value.trim().toUpperCase();
+  const nombre = $("artNombre").value.trim();
+  const precio = parsearPrecio($("artPrecio").value);
+  if(!cod) return toast("Falta código","error");
+  if(!nombre) return toast("Falta nombre","error");
+  if(!isFinite(precio) || precio < 0) return toast("Precio inválido","error");
+  if(state.fotos.length === 0) return toast("Sube al menos 1 foto","error");
+  if(state.coloresSel.size === 0) return toast("Marca al menos un color","error");
+  if(state.tallasSel.size === 0) return toast("Marca al menos una talla","error");
+  if(!state.seccionId) return toast("Selecciona una sección","error");
+  // v1.13.21: la categoría solo es obligatoria si la sección tiene categorías.
+  // Si la sección está vacía (ej. AROMAS tras v1.13.18), saltamos la validación.
+  const sec = state.jerarquia.find(s => s.id === state.seccionId);
+  const seccionTieneCategorias = !!(sec && sec.categorias && sec.categorias.length > 0);
+  if (seccionTieneCategorias && !state.categoriaId) {
+    return toast("Selecciona una categoría","error");
+  }
+  // Si la categoría tiene tipos definidos, el tipo es obligatorio
+  const cat = state.categoriaId ? sec?.categorias.find(c => c.id === state.categoriaId) : null;
+  if (cat && cat.tipos.length > 0 && !state.tipoId) {
+    return toast("Esta categoría requiere un tipo. Selecciona uno.","error");
+  }
+
+  const portesRaw = parsearPrecio($("artPortes").value);
+  const portes = isFinite(portesRaw) && portesRaw > 0 ? portesRaw : 0;
+
+  // Parsear copas (pipe-separadas) y carpetaId (URL o ID directo)
+  const copasStr = ($("artCopas")?.value || "").trim();
+  const copas = copasStr ? copasStr.split("|").map(s => s.trim().toUpperCase()).filter(Boolean) : [];
+  const carpetaRaw = ($("artCarpetaId")?.value || "").trim();
+  let carpetaId = null;
+  if (carpetaRaw) {
+    const m = carpetaRaw.match(/\/folders\/([A-Za-z0-9_-]{25,})/);
+    if (m) carpetaId = m[1];
+    else if (/^[A-Za-z0-9_-]{25,}$/.test(carpetaRaw)) carpetaId = carpetaRaw;
+  }
+
+  const articulo = {
+    codigo: cod,
+    codigoA3: ($("artCodigoA3")?.value || "").trim() || null,
+    nombre,
+    seccionId: state.seccionId,
+    categoriaId: state.categoriaId,
+    tipoId: state.tipoId,
+    precio, portes,
+    colores: [...state.coloresSel],
+    tallas: [...state.tallasSel.entries()].map(([t, val]) => {
+      // v1.13.20: precio ABSOLUTO por talla. Si difiere del padre, lo guardamos.
+      // Si es igual al padre o no se ha tocado, lo omitimos (hereda al leer).
+      const obj = { t };
+      if (val && val > 0 && Math.abs(val - precio) > 0.001) {
+        obj.precio = +Number(val).toFixed(2);
+      }
+      const a3 = (state.tallasCodigoA3.get(t) || "").trim();
+      if (a3) obj.codigoA3 = a3;
+      const ud = parseInt(state.tallasUdsPorPack.get(t)) || 0;
+      if (ud > 1) obj.udsPorPack = ud;
+      return obj;
+    }),
+    copas,
+    tiposSujetador: [...state.tiposSujetadorSel],   // v1.13.39
+    fichaTecnica: {
+      composicion:  $("ftComposicion").value.trim(),
+      packing:      $("ftPacking").value.trim(),
+      fabricante:   $("ftFabricante").value.trim(),
+      lavado:       $("ftLavado").value.trim(),
+      origen:       $("ftOrigen").value.trim(),
+      refProveedor: $("ftRefProveedor").value.trim(),
+    },
+    agotadas: [...state.agotadas],
+    novedad: $("artNovedad").checked,
+    sinReposicionFabrica: ($("artSinReposicionFabrica")?.checked === true),   // v1.14.1
+    activo: true,
+    pendienteRevision: ($("artPendienteRevision")?.checked === true),
+    minUnidadesPorColor: parseInt($("artMinUnidPorColor")?.value) || 0,
+    udsPorPack: Math.max(1, parseInt(($("artUdsPorPack")?.value || "").replace(/\D/g, ""), 10) || 1),
+  };
+  if (carpetaId) articulo.carpetaId = carpetaId;
+
+  // Preparar fotos: dataUrl si nuevas, URL si ya estaban
+  const fotosPayload = state.fotos.map(f => f.dataUrl || f.url);
+
+  const btn = $("btnGuardarArt");
+  btn.disabled = true; btn.textContent = "Guardando…";
+  const btnTop = $("btnGuardarTop"); if (btnTop) btnTop.classList.add("guardando");   // v1.14.12
+  try {
+    const r = await api("catalogo", tokenize("upload", { articulo, fotos: fotosPayload }));
+    // v1.14.11: actualizar el catálogo EN MEMORIA con el artículo guardado, en vez
+    // de re-descargar los 2.458 artículos. La lista se ve al instante.
+    if (r?.articulo && Array.isArray(state.catalogo)) {
+      const i = state.catalogo.findIndex(a => a.codigo === r.articulo.codigo);
+      if (i >= 0) state.catalogo[i] = r.articulo;
+      else state.catalogo.unshift(r.articulo);
+    }
+    // v1.19.0 — Alta en cadena: guarda y deja el formulario listo para el siguiente,
+    // conservando sección/categoría/tipo + ficha técnica. No navega.
+    if (seguir === true) {
+      toast("Guardado ✓ — sigue con el siguiente");
+      resetArtForm(true);
+      setTimeout(() => { const c = $("artCodigo"); if (c) c.focus(); }, 60);
+      return;
+    }
+    toast("Artículo guardado ✓");
+    const volverEditor = state._volverEditorPrecios === true;
+    resetArtForm();
+    if (volverEditor) {
+      state._volverEditorPrecios = false;
+      navegar("editorPrecios");   // vuelve al editor donde estábamos
+    } else {
+      navegar("articulos");
+    }
+  } catch(e){
+    toast(e.message,"error");
+  } finally {
+    btn.disabled = false; btn.textContent = state.artEditando ? "Guardar cambios" : "Guardar artículo";
+    const bt = $("btnGuardarTop"); if (bt) bt.classList.remove("guardando");   // v1.14.12
+  }
+}
+
+async function borrarArticulo(){
+  if(!state.artEditando) return;
+  if(!confirm(`¿Dar de baja el artículo ${state.artEditando}?\nNo lo verán los clientes pero los pedidos antiguos se mantienen.`)) return;
+  const cod = state.artEditando;
+  try {
+    await api("catalogo", tokenize("delete", { codigo: cod }));
+    // v1.14.11: marcar baja en memoria (sin re-descargar catálogo)
+    const i = (state.catalogo||[]).findIndex(a => a.codigo === cod);
+    if (i >= 0) state.catalogo[i].activo = false;
+    toast("Artículo dado de baja");
+    resetArtForm();
+    navegar("articulos");
+  } catch(e){ toast(e.message,"error"); }
+}
+
+/* ELIMINAR DEFINITIVAMENTE — borrado permanente del catálogo, irreversible.
+   Pide DOBLE confirmación porque no hay marcha atrás. */
+async function eliminarArticulo(){
+  if(!state.artEditando) return;
+  const cod = state.artEditando;
+  if(!confirm(`⚠ ELIMINACIÓN DEFINITIVA del artículo ${cod}\n\nEsta acción NO se puede deshacer. El artículo se borra del catálogo para siempre (los pedidos antiguos siguen, pero el artículo desaparece).\n\n¿Continuar?`)) return;
+  const texto = prompt(`Para confirmar, escribe "${cod}" (el código del artículo):`);
+  if (texto !== cod) { toast("Cancelado: el código no coincide","error"); return; }
+  try {
+    await api("catalogo", tokenize("delete-permanent", { codigo: cod }));
+    // v1.14.11: quitar del catálogo en memoria (sin re-descargar)
+    state.catalogo = (state.catalogo||[]).filter(x => x.codigo !== cod);
+    toast("Artículo eliminado definitivamente");
+    resetArtForm();
+    navegar("articulos");
+  } catch(e){ toast(e.message,"error"); }
+}
+
+/* v1.13.30 — Duplicar el artículo actualmente cargado en el form de edición.
+   Equivalente a pulsar el botón duplicar del editor masivo. */
+function duplicarDesdeFormActual(){
+  if (!state.artEditando) return;
+  duplicarArticulo(state.artEditando);
+}
+
+/* v1.13.30 — Duplicar artículo: copia TODOS los datos (colores, tallas, precios,
+   ficha técnica, jerarquía, fotos) a un formulario nuevo. NO copia el código
+   ni el código a3 (que deben ser únicos). El usuario solo tiene que rellenar
+   el código nuevo y opcionalmente ajustar lo que cambie. */
+function duplicarArticulo(cod){
+  const a = state.catalogo.find(x => x.codigo === cod);
+  if(!a) return;
+  if(!confirm(`Vas a crear una COPIA de "${a.nombre}".\n\nTodos los datos se copiarán excepto:\n  • Código (deberás escribir uno nuevo)\n  • Código a3 (deberás escribir uno nuevo)\n\n¿Continuar?`)) return;
+  // Importante: state.artEditando = null para que se guarde como NUEVO artículo
+  state.artEditando = null;
+  state.fotos = (a.fotos||[]).map(url => ({ url }));   // mismas fotos (URLs Drive)
+  state.coloresSel = new Set(a.colores || []);
+  state.tallasSel = new Map((a.tallas||[]).map(t => {
+    let precio = 0;
+    if (t.precio != null) precio = +Number(t.precio).toFixed(2);
+    else if (t.sup) precio = +((a.precio||0) + Number(t.sup)).toFixed(2);
+    return [t.t, precio];
+  }));
+  state.tallasCodigoA3 = new Map();   // ← NO copiar codA3 de variantes (deben ser únicas)
+  state.tallasUdsPorPack = new Map((a.tallas||[]).filter(t => t.udsPorPack && t.udsPorPack > 1).map(t => [t.t, t.udsPorPack]));
+  state.agotadas = new Set(a.agotadas || []);
+  state.tiposSujetadorSel = new Set(a.tiposSujetador || []);   // v1.13.39
+  state.seccionId = a.seccionId || null;
+  state.categoriaId = a.categoriaId || null;
+  state.tipoId = a.tipoId || null;
+  navegar("subirArt");
+  setTimeout(() => {
+    $("artCodigo").value = "";                              // ← VACÍO
+    $("artNombre").value = (a.nombre || "") + " (COPIA)";  // sufijo recordatorio
+    $("artPrecio").value = a.precio || "";
+    $("artPortes").value = a.portes > 0 ? a.portes : "";
+    $("artNovedad").checked = !!a.novedad;
+    const a3El = $("artCodigoA3"); if (a3El) a3El.value = "";                // ← VACÍO
+    const cpEl = $("artCopas"); if (cpEl) cpEl.value = (a.copas||[]).join("|");
+    const ciEl = $("artCarpetaId"); if (ciEl) ciEl.value = "";               // carpeta nueva
+    actualizarLinkCarpeta();   // v1.21.184
+    const prEl = $("artPendienteRevision"); if (prEl) prEl.checked = (a.pendienteRevision === true);
+    const srEl = $("artSinReposicionFabrica"); if (srEl) srEl.checked = (a.sinReposicionFabrica === true);   // v1.14.1
+    actualizarToggleEstado();   // v1.14.16: refrescar toggle publicado/borrador tras cargar
+    const muEl = $("artMinUnidPorColor"); if (muEl) muEl.value = a.minUnidadesPorColor > 0 ? a.minUnidadesPorColor : "";
+    const pkEl = $("artUdsPorPack"); if (pkEl) pkEl.value = (a.udsPorPack && a.udsPorPack > 1) ? a.udsPorPack : "";
+    const ft = a.fichaTecnica || {};
+    $("ftComposicion").value = ft.composicion || "";
+    $("ftPacking").value = ft.packing || "";
+    $("ftFabricante").value = ft.fabricante || "";
+    $("ftOrigen").value = ft.origen || "";
+    $("ftLavado").value = ft.lavado || "";
+    $("ftRefProveedor").value = ft.refProveedor || "";
+    toast("📋 Datos copiados. Rellena el código y guarda.", null, 4500);
+    // Foco en el campo de código para que el usuario empiece directo
+    setTimeout(() => $("artCodigo")?.focus(), 200);
+  }, 50);
+}
+
+function editarArticulo(cod){
+  const a = state.catalogo.find(x => x.codigo === cod);
+  if(!a) return;
+  state.artEditando = cod;
+  state.fotos = (a.fotos||[]).map(url => ({ url }));
+  state.coloresSel = new Set(a.colores || []);
+  // v1.13.20: tallasSel = talla → PRECIO ABSOLUTO (no sup). Compatibilidad legacy:
+  // si una talla viene con sup, calculamos precio = padre.precio + sup.
+  state.tallasSel = new Map((a.tallas||[]).map(t => {
+    let precio = 0;
+    if (t.precio != null) precio = +Number(t.precio).toFixed(2);
+    else if (t.sup) precio = +((a.precio||0) + Number(t.sup)).toFixed(2);
+    return [t.t, precio];
+  }));
+  state.tallasCodigoA3 = new Map((a.tallas||[]).filter(t => t.codigoA3).map(t => [t.t, t.codigoA3]));
+  state.tallasUdsPorPack = new Map((a.tallas||[]).filter(t => t.udsPorPack && t.udsPorPack > 1).map(t => [t.t, t.udsPorPack]));
+  state.agotadas = new Set(a.agotadas || []);
+  state.tiposSujetadorSel = new Set(a.tiposSujetador || []);   // v1.13.39
+  // Jerarquía (si existe)
+  state.seccionId = a.seccionId || null;
+  state.categoriaId = a.categoriaId || null;
+  state.tipoId = a.tipoId || null;
+  navegar("subirArt");
+  // Tras navegar, prepararFormArticulo se ejecuta. Llenar campos:
+  setTimeout(() => {
+    $("artCodigo").value = a.codigo;
+    $("artNombre").value = a.nombre;
+    $("artPrecio").value = a.precio;
+    $("artPortes").value = a.portes > 0 ? a.portes : "";
+    $("artNovedad").checked = !!a.novedad;
+    // Campos nuevos v1.9.5+
+    const a3El = $("artCodigoA3"); if (a3El) a3El.value = a.codigoA3 || "";
+    const cpEl = $("artCopas"); if (cpEl) cpEl.value = (a.copas||[]).join("|");
+    const ciEl = $("artCarpetaId"); if (ciEl) ciEl.value = a.carpetaId || "";
+    actualizarLinkCarpeta();   // v1.21.184 — botón "📁 Abrir carpeta" si tiene Drive vinculado
+    actualizarAvisoCarpetaDrive();   // v1.21.29
+    const prEl = $("artPendienteRevision"); if (prEl) prEl.checked = (a.pendienteRevision === true);
+    const srEl = $("artSinReposicionFabrica"); if (srEl) srEl.checked = (a.sinReposicionFabrica === true);   // v1.14.1
+    actualizarToggleEstado();   // v1.14.16: refrescar toggle publicado/borrador tras cargar
+    const muEl = $("artMinUnidPorColor"); if (muEl) muEl.value = a.minUnidadesPorColor > 0 ? a.minUnidadesPorColor : "";
+    const pkEl = $("artUdsPorPack"); if (pkEl) pkEl.value = (a.udsPorPack && a.udsPorPack > 1) ? a.udsPorPack : "";
+    const ft = a.fichaTecnica || {};
+    $("ftComposicion").value = ft.composicion || "";
+    $("ftPacking").value = ft.packing || "";
+    $("ftFabricante").value = ft.fabricante || "";
+    $("ftOrigen").value = ft.origen || "";
+    $("ftLavado").value = ft.lavado || "";
+    $("ftRefProveedor").value = ft.refProveedor || "";
+  }, 50);
+}
+
+/* ============== LISTA ARTÍCULOS ============== */
+async function cargarArticulos(forzar){
+  // v1.14.11: si ya tenemos el catálogo en memoria y no se fuerza, NO re-descargamos
+  // (2.458 artículos = ~2,2s). El catálogo se baja 1 vez al entrar (dashboard) y
+  // se mantiene actualizado en memoria tras cada guardado/borrado. Botón ↻ fuerza.
+  if (!forzar && Array.isArray(state.catalogo) && state.catalogo.length) {
+    renderArticulos();
+    return;
+  }
+  try {
+    const r = await api("catalogo", tokenize("list"));
+    state.catalogo = r.articulos || [];
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+  renderArticulos();
+}
+function renderArticulos(){
+  if (!state.filtroEstadoArts) state.filtroEstadoArts = "todos";
+  const q = ($("buscArts").value||"").trim().toLowerCase();
+  const incInact = $("incluirInactivos").checked;
+  const fe = state.filtroEstadoArts;
+
+  // v1.19.0 — Barra de filtros de estado (chips) para encontrar y corregir rápido
+  const fbar = $("filtrosEstadoArts");
+  if (fbar) {
+    fbar.innerHTML = "";
+    [["todos","Todos"],["borrador","📝 Borrador"],["sinprecio","€ Sin precio"],["agotado","⛔ Con agotados"],["novedad","✨ Novedad"]].forEach(([k,lbl]) => {
+      fbar.appendChild(E("div",{className:"chip"+(fe===k?" activo":""), onclick:()=>setFiltroEstadoArts(k)}, lbl));
+    });
+  }
+
+  let lista = state.catalogo.filter(a => incInact || a.activo !== false);
+  if (fe === "borrador")       lista = lista.filter(a => a.pendienteRevision === true);
+  else if (fe === "sinprecio") lista = lista.filter(a => !a.precio || Number(a.precio) <= 0);
+  else if (fe === "agotado")   lista = lista.filter(a => (a.agotadas||[]).length > 0);
+  else if (fe === "novedad")   lista = lista.filter(a => a.novedad === true);
+  if (q) lista = lista.filter(a =>
+    (a.nombre||"").toLowerCase().includes(q) ||
+    (a.codigo||"").toLowerCase().includes(q) ||
+    (a.categoria||"").toLowerCase().includes(q)
+  );
+
+  // v1.19.1 — Ordenación (no muta state.catalogo: 'lista' ya es un array filtrado)
+  const orden = ($("ordenArts") && $("ordenArts").value) || "recientes";
+  if (orden === "nombre")           lista.sort((a,b)=>(a.nombre||"").localeCompare(b.nombre||"", "es", {sensitivity:"base"}));
+  else if (orden === "nombre_desc") lista.sort((a,b)=>(b.nombre||"").localeCompare(a.nombre||"", "es", {sensitivity:"base"}));
+  else if (orden === "precio")      lista.sort((a,b)=>(Number(a.precio)||0)-(Number(b.precio)||0));
+  else if (orden === "precio_desc") lista.sort((a,b)=>(Number(b.precio)||0)-(Number(a.precio)||0));
+  else if (orden === "ref")         lista.sort((a,b)=>(a.codigo||"").localeCompare(b.codigo||"", "es", {sensitivity:"base"}));
+
+  const cnt = $("contadorArts"); if (cnt) cnt.textContent = lista.length + " artículo" + (lista.length===1?"":"s");
+
+  const cont = $("listaArts");
+  cont.innerHTML = "";
+  if(!lista.length){
+    cont.appendChild(E("div",{className:"empty"},
+      E("div",{className:"ico-empty"},"🛍️"),
+      E("div",{className:"titulo"},"Sin artículos"),
+      E("div",{}, q ? "Prueba otra búsqueda" : "No hay artículos con este filtro")));
+    return;
+  }
+  lista.forEach(a => {
+    const foto = (a.fotos||[])[0];
+    const esBorr = a.pendienteRevision === true;
+    const sinPrecio = !a.precio || Number(a.precio) <= 0;
+    const item = E("div",{className:"lista-item", onclick:()=>editarArticulo(a.codigo)},
+      E("div",{className:"mini-foto"}, foto ? E("img",{src:foto, alt:""}) : "📦"),
+      E("div",{className:"info"},
+        E("div",{className:"nombre"}, a.nombre,
+          a.novedad ? E("span",{className:"badge-mini badge-novedad"}, "NUEVO") : null,
+          esBorr ? E("span",{className:"badge-mini", style:"background:#fde68a;color:#78350f"}, "BORRADOR") : null,
+          sinPrecio ? E("span",{className:"badge-mini", style:"background:#fecaca;color:#991b1b"}, "SIN PRECIO") : null,
+          a.activo === false ? E("span",{className:"badge-mini badge-inactivo"}, "BAJA") : null),
+        E("div",{className:"meta"}, "Ref. "+a.codigo+" · "+(a.categoria||"") + " · "+(a.colores||[]).length+" col × "+(a.tallas||[]).length+" tallas")),
+      E("div",{style:"display:flex;flex-direction:column;align-items:flex-end;gap:6px"},
+        E("div",{className:"precio"}, fmt(a.precio)+" €"),
+        E("button",{
+          className:"btn",
+          style:"padding:5px 10px;font-size:11px;font-weight:700;white-space:nowrap;"+(esBorr?"background:#1f8a4c;color:#fff":"background:#f0ebe1;color:#4a4338;border:1px solid #e0d8c8"),
+          onclick:(e)=>togglePublicarRapido(a.codigo, e)
+        }, esBorr ? "✓ Publicar" : "Despublicar"),
+        E("button",{
+          className:"btn",
+          style:"padding:5px 10px;font-size:11px;font-weight:700;white-space:nowrap;background:#E1306C;color:#fff",
+          onclick:(e)=>publicarEnInstagram(a.codigo, e)
+        }, "📷 Instagram"))
+    );
+    cont.appendChild(item);
+  });
+}
+function setFiltroEstadoArts(f){ state.filtroEstadoArts = f; renderArticulos(); }
+/* v1.19.0 — Publicar/Despublicar 1 artículo desde el listado, sin abrir la ficha. */
+async function togglePublicarRapido(cod, ev){
+  if (ev) ev.stopPropagation();
+  const a = state.catalogo.find(x => x.codigo === cod);
+  if (!a) return;
+  const esBorr = a.pendienteRevision === true;
+  const valor = !esBorr;   // borrador→publicar (valor=false) · publicado→borrador (valor=true)
+  try {
+    await api("catalogo", tokenize("set-pendiente-revision-bulk", { codigos:[cod], valor }));
+    a.pendienteRevision = valor;
+    a.modificado = new Date().toISOString();
+    toast(valor ? "Pasado a borrador (oculto a clientes)" : "Publicado ✓");
+    renderArticulos();
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message, "error");
+  }
+}
+
+/* v1.22.0 — Publicar 1 artículo en Instagram (foto + descripción SIN precio).
+   Dispara la Netlify Function 'instagram-publish', que valida la sesión y publica
+   vía la Instagram Graph API. La foto usa la URL pública del catálogo a mayor
+   resolución; el pie de foto es la ficha técnica (composición) o, si falta, el nombre. */
+async function publicarEnInstagram(cod, ev){
+  if (ev) ev.stopPropagation();
+  const a = state.catalogo.find(x => x.codigo === cod);
+  if (!a) return;
+  const foto = (a.fotos||[])[0];
+  if (!foto) return toast("Este artículo no tiene foto", "error");
+  // URL pública de la foto a mayor resolución para Instagram
+  const imageUrl = foto.replace(/sz=w\d+/, "sz=w1080");
+  // Pie de foto = descripción (composición de la ficha) o el nombre como respaldo. NUNCA el precio.
+  const descripcion = ((a.fichaTecnica && a.fichaTecnica.composicion) || a.nombre || "").trim();
+  if (!confirm("¿Publicar “"+a.nombre+"” en Instagram? (se publica SIN precio)")) return;
+  const btn = ev && ev.target && ev.target.closest("button");
+  const txt = btn ? btn.textContent : "";
+  if (btn){ btn.disabled = true; btn.textContent = "⏳…"; }
+  try {
+    await api("instagram-publish", { imageUrl, descripcion, token: state.token });
+    toast("Publicado en Instagram ✓");
+    if (btn){ btn.textContent = "✅ IG"; }
+  } catch(e){
+    if (e.status===401){ toast("Sesión caducada, vuelve a entrar", "error"); logout(); return; }
+    toast("Instagram: " + e.message, "error");
+    if (btn){ btn.disabled = false; btn.textContent = txt || "📷 Instagram"; }
+  }
+}
+
+/* ============== CLIENTES ============== */
+async function cargarClientes(){
+  try {
+    const r = await api("admin", tokenize("listar-clientes"));
+    state.clientes = r.clientes || [];
+    const co = await api("admin", tokenize("listar-comerciales"));
+    state.comerciales = co.comerciales || [];
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+  renderClientes();
+}
+function renderClientes(){
+  const q = ($("buscCli").value||"").trim().toLowerCase();
+  const cont = $("listaClientes");
+  cont.innerHTML = "";
+  const lista = state.clientes.filter(c =>
+    !q || (c.nombre||"").toLowerCase().includes(q) ||
+          (c.codigo||"").toLowerCase().includes(q) ||
+          (c.email||"").toLowerCase().includes(q)
+  );
+  if(!lista.length){
+    cont.appendChild(E("div",{className:"empty"},
+      E("div",{className:"ico-empty"},"👥"),
+      E("div",{className:"titulo"},"Sin clientes"),
+      E("div",{}, "Toca + arriba para crear el primero")));
+    return;
+  }
+  lista.forEach(c => {
+    const com = state.comerciales.find(x=>x.id===c.comercial);
+    const item = E("div",{className:"lista-item", onclick:()=>abrirEditorCliente(c.id)},
+      E("div",{className:"mini-foto"}, c.nombre.slice(0,2).toUpperCase()),
+      E("div",{className:"info"},
+        E("div",{className:"nombre"}, c.nombre,
+          c.activo === false ? E("span",{className:"badge-mini badge-inactivo"}, "INACTIVO") : null),
+        E("div",{className:"meta"}, (c.codigo?"#"+c.codigo+" · ":"") + (c.email||"") + (c.ciudad?" · "+c.ciudad:"") + (com?" · "+com.nombre:""))),
+      E("div",{className:"precio", style:"font-size:13px;color:var(--ok)"}, "Dto "+(c.descuento||0)+"%")
+    );
+    cont.appendChild(item);
+  });
+}
+
+function abrirEditorCliente(id){
+  const c = id ? state.clientes.find(x=>x.id===id) : null;
+  const comOpts = state.comerciales.map(x =>
+    `<option value="${x.id}"${c?.comercial===x.id?" selected":""}>${x.nombre}</option>`).join("");
+  abrirModal(`
+    <h3>${c ? "Editar cliente" : "Nuevo cliente"}</h3>
+    ${c ? `<div class="hint mb-12">ID: <code>${c.id}</code></div>` : ""}
+    <div class="field"><label>Nombre <span class="req">*</span></label><div class="input-wrap"><input id="ecNombre" value="${c?.nombre||""}" /></div></div>
+    <div class="row">
+      <div class="field"><label>Código</label><div class="input-wrap"><input id="ecCodigo" value="${c?.codigo||""}" placeholder="00451" /></div></div>
+      <div class="field"><label>CIF / NIF</label><div class="input-wrap"><input id="ecCif" value="${c?.cif||""}" placeholder="B12345678" /></div></div>
+    </div>
+    <div class="row">
+      <div class="field"><label>Email <span class="req">*</span></label><div class="input-wrap"><input type="email" id="ecEmail" value="${c?.email||""}" /></div></div>
+      <div class="field"><label>Teléfono</label><div class="input-wrap"><input id="ecTelefono" value="${c?.telefono||""}" placeholder="928 123 456" /></div></div>
+    </div>
+    <div class="field"><label>Ciudad</label><div class="input-wrap"><input id="ecCiudad" value="${c?.ciudad||""}" /></div></div>
+    <div class="field"><label>Dirección de entrega</label><div class="input-wrap"><input id="ecDirEntrega" value="${c?.direccionEntrega||c?.direccion||""}" placeholder="Calle, número, CP, ciudad" /></div></div>
+    <div class="field"><label>Dirección fiscal</label><div class="input-wrap"><input id="ecDirFiscal" value="${c?.direccionFiscal||c?.direccion||""}" placeholder="Si es distinta de la de entrega" /></div></div>
+    <div class="row">
+      <div class="field"><label>Forma de pago</label><div class="input-wrap"><input id="ecFormaPago" value="${c?.formaPago||""}" placeholder="Transferencia / Giro / Contado" /></div></div>
+      <div class="field"><label>Vencimiento</label><div class="input-wrap"><input id="ecVencimiento" value="${c?.vencimiento||""}" placeholder="30 días / 60 días / Contado" /></div></div>
+    </div>
+    <div class="field"><label>Transporte</label><div class="input-wrap"><input id="ecTransporte" value="${c?.transporte||""}" placeholder="Recogida / Mensajería / Portes pagados" /></div></div>
+    <div class="row">
+      <div class="field"><label>Descuento (%)</label><div class="input-wrap"><input type="number" id="ecDescuento" value="${c?.descuento||0}" step="0.5" /></div></div>
+      <div class="field"><label>Comercial</label><div class="input-wrap"><select id="ecComercial"><option value="">— Sin comercial —</option>${comOpts}</select></div></div>
+    </div>
+    ${!c ? `<div class="field"><label>Contraseña inicial <span class="req">*</span></label><div class="input-wrap"><input id="ecPass" placeholder="Mín. 6 caracteres" /></div><div class="hint">El cliente debería cambiarla en su primer login</div></div>` : ""}
+    ${c ? `<div class="alert alert-warn" style="margin:14px 0">Para resetear la contraseña, usa el botón <strong>Reset password</strong> abajo.</div>` : ""}
+    <div class="row" style="margin-top:14px">
+      <button class="btn btn-secundario" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarCliente('${c?.id||""}')">${c ? "Guardar" : "Crear"}</button>
+    </div>
+    ${c ? `
+      <div class="row" style="margin-top:8px">
+        <button class="btn btn-secundario" onclick="resetPassCliente('${c.id}')">🔑 Reset password</button>
+        ${c.activo !== false
+          ? `<button class="btn btn-peligro" onclick="desactivarCliente('${c.id}')">Desactivar</button>`
+          : `<button class="btn btn-ok" onclick="reactivarCliente('${c.id}')">Reactivar</button>`}
+      </div>` : ""}
+  `);
+}
+
+async function guardarCliente(id){
+  const datos = {
+    nombre: $("ecNombre").value.trim(),
+    codigo: $("ecCodigo").value.trim() || null,
+    cif: $("ecCif")?.value.trim().toUpperCase() || null,
+    ciudad: $("ecCiudad").value.trim() || null,
+    email: $("ecEmail").value.trim().toLowerCase(),
+    telefono: $("ecTelefono")?.value.trim() || null,
+    direccionEntrega: $("ecDirEntrega")?.value.trim() || null,
+    direccionFiscal:  $("ecDirFiscal")?.value.trim() || null,
+    formaPago:   $("ecFormaPago")?.value.trim() || null,
+    vencimiento: $("ecVencimiento")?.value.trim() || null,
+    transporte:  $("ecTransporte")?.value.trim() || null,
+    descuento: parseFloat($("ecDescuento").value) || 0,
+    comercial: $("ecComercial").value || null,
+  };
+  if(!datos.nombre || !datos.email) return toast("Nombre y email obligatorios","error");
+  try {
+    if(id){
+      await api("admin", tokenize("editar-cliente", { id, cambios: datos }));
+      toast("Cliente actualizado");
+    } else {
+      const passwordInicial = $("ecPass").value;
+      if(!passwordInicial || passwordInicial.length < 6) return toast("Contraseña mínimo 6 caracteres","error");
+      await api("admin", tokenize("crear-cliente", { datos: { ...datos, passwordInicial } }));
+      toast("Cliente creado");
+    }
+    cerrarModal();
+    await cargarClientes();
+  } catch(e){ toast(e.message,"error"); }
+}
+
+async function resetPassCliente(id){
+  const nueva = prompt("Nueva contraseña (mín. 6 caracteres):");
+  if(!nueva || nueva.length < 6) return;
+  try {
+    await api("admin", tokenize("reset-password-cliente", { id, nuevaPassword: nueva }));
+    toast("Contraseña reseteada");
+    cerrarModal();
+  } catch(e){ toast(e.message,"error"); }
+}
+
+async function desactivarCliente(id){
+  if(!confirm("¿Desactivar este cliente? No podrá entrar a la app.")) return;
+  try {
+    await api("admin", tokenize("editar-cliente", { id, cambios:{ activo:false } }));
+    toast("Cliente desactivado");
+    cerrarModal(); cargarClientes();
+  } catch(e){ toast(e.message,"error"); }
+}
+async function reactivarCliente(id){
+  try {
+    await api("admin", tokenize("editar-cliente", { id, cambios:{ activo:true } }));
+    toast("Cliente reactivado");
+    cerrarModal(); cargarClientes();
+  } catch(e){ toast(e.message,"error"); }
+}
+
+/* ============== COMERCIALES ============== */
+async function cargarComerciales(){
+  try {
+    const r = await api("admin", tokenize("listar-comerciales"));
+    state.comerciales = r.comerciales || [];
+    const cl = await api("admin", tokenize("listar-clientes"));
+    state.clientes = cl.clientes || [];
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+  renderComerciales();
+}
+function renderComerciales(){
+  const cont = $("listaComerciales");
+  cont.innerHTML = "";
+  if(!state.comerciales.length){
+    cont.appendChild(E("div",{className:"empty"},
+      E("div",{className:"ico-empty"},"👔"),
+      E("div",{className:"titulo"},"Sin comerciales"),
+      E("div",{}, "Toca + arriba para crear el primero")));
+    return;
+  }
+  state.comerciales.forEach(c => {
+    const item = E("div",{className:"lista-item", onclick:()=>abrirEditorComercial(c.id)},
+      E("div",{className:"mini-foto"}, c.nombre.slice(0,2).toUpperCase()),
+      E("div",{className:"info"},
+        E("div",{className:"nombre"}, c.nombre,
+          c.activo === false ? E("span",{className:"badge-mini badge-inactivo"}, "INACTIVO") : null),
+        E("div",{className:"meta"}, "ID: "+c.id+" · "+(c.clientes?.length||0)+" clientes asignados")),
+      E("div",{className:"precio", style:"font-size:12px;color:var(--ink-3)"}, "›")
+    );
+    cont.appendChild(item);
+  });
+}
+
+function abrirEditorComercial(id){
+  const c = id ? state.comerciales.find(x=>x.id===id) : null;
+  const idDisabled = c ? "disabled" : "";
+  const asignados = new Set(c?.clientes || []);
+  const opcionesCli = state.clientes
+    .filter(cli => cli.activo !== false)
+    .map(cli =>
+      `<label style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer">
+        <input type="checkbox" class="ec-cli" value="${cli.id}"${asignados.has(cli.id)?" checked":""} style="accent-color:var(--brand)">
+        ${cli.nombre} <span style="color:var(--ink-3);margin-left:auto;font-size:11px">${cli.codigo?"#"+cli.codigo:""}</span>
+      </label>`).join("");
+
+  abrirModal(`
+    <h3>${c ? "Editar comercial" : "Nuevo comercial"}</h3>
+    <div class="row">
+      <div class="field"><label>ID (slug) <span class="req">*</span></label><div class="input-wrap"><input id="ekId" value="${c?.id||""}" placeholder="carlos" ${idDisabled} /></div><div class="hint">Sin espacios, sin acentos</div></div>
+      <div class="field"><label>Nombre <span class="req">*</span></label><div class="input-wrap"><input id="ekNombre" value="${c?.nombre||""}" placeholder="CARLOS" /></div></div>
+    </div>
+    <div class="field"><label>PIN ${c?"(deja vacío para no cambiar)":""} <span class="req">${c?"":"*"}</span></label><div class="input-wrap"><input id="ekPin" type="text" inputmode="numeric" placeholder="${c?"••••":"Mín. 4 cifras"}" /></div></div>
+    ${c ? `<div class="seccion-titulo">Clientes asignados</div>
+      <div style="max-height:200px;overflow-y:auto;border:1px solid var(--line);border-radius:8px;padding:0 12px">
+      ${opcionesCli || '<div style="padding:14px;color:var(--ink-3);font-size:13px">Aún no hay clientes para asignar</div>'}
+      </div>` : `<div class="hint">Tras crear, podrás asignarle clientes desde aquí.</div>`}
+    <div class="row" style="margin-top:14px">
+      <button class="btn btn-secundario" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="guardarComercial(${c?"true":"false"})">${c ? "Guardar" : "Crear"}</button>
+    </div>
+    ${c && c.activo !== false ? `<button class="btn btn-peligro" style="margin-top:8px" onclick="desactivarComercial('${c.id}')">Desactivar</button>` : ""}
+    ${c && c.activo === false ? `<button class="btn btn-ok" style="margin-top:8px" onclick="reactivarComercial('${c.id}')">Reactivar</button>` : ""}
+  `);
+}
+
+async function guardarComercial(esEdicion){
+  const id = $("ekId").value.trim();
+  const nombre = $("ekNombre").value.trim();
+  const pin = $("ekPin").value.trim();
+  if(!id || !nombre) return toast("ID y nombre obligatorios","error");
+  if(!esEdicion && !pin) return toast("PIN inicial obligatorio","error");
+  try {
+    if(esEdicion){
+      const cambios = { nombre };
+      if(pin) cambios.pin = pin;
+      await api("admin", tokenize("editar-comercial", { id, cambios }));
+      // Clientes asignados
+      const seleccionados = [...document.querySelectorAll(".ec-cli:checked")].map(x => x.value);
+      await api("admin", tokenize("set-clientes-comercial", { id, clientes: seleccionados }));
+      toast("Comercial actualizado");
+    } else {
+      await api("admin", tokenize("crear-comercial", { datos:{ id, nombre, pin } }));
+      toast("Comercial creado");
+    }
+    cerrarModal(); cargarComerciales();
+  } catch(e){ toast(e.message,"error"); }
+}
+
+async function desactivarComercial(id){
+  if(!confirm("¿Desactivar este comercial?")) return;
+  try { await api("admin", tokenize("editar-comercial", { id, cambios:{ activo:false }}));
+    toast("Desactivado"); cerrarModal(); cargarComerciales(); }
+  catch(e){ toast(e.message,"error"); }
+}
+async function reactivarComercial(id){
+  try { await api("admin", tokenize("editar-comercial", { id, cambios:{ activo:true }}));
+    toast("Reactivado"); cerrarModal(); cargarComerciales(); }
+  catch(e){ toast(e.message,"error"); }
+}
+
+/* ============== PEDIDOS ADMIN ============== */
+/* v1.13.2 — Cambiar estado del pedido */
+async function cambiarEstadoPedido(numero, estado){
+  try {
+    await api("pedidos", tokenize("set-estado", { numero, estado }));
+    toast(`Pedido ${numero} → ${estado}`);
+    cargarPedidosAdmin();
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+    cargarPedidosAdmin();   // refrescar para revertir el select
+  }
+}
+
+async function borrarPedido(numero){
+  if (!confirm(`¿Borrar definitivamente el pedido ${numero}? Esta acción NO se puede deshacer.`)) return;
+  try {
+    await api("pedidos", tokenize("borrar", { numero }));
+    toast("Pedido " + numero + " borrado");
+    cargarPedidosAdmin();
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+}
+
+/* ============== PROCESAR PEDIDO (v1.12.0) ==============
+   Después de imprimir el pedido y separar físicamente en almacén, el operario
+   marca aquí las líneas que NO pudo separar (en falta). Al guardar, esas
+   variantes se marcan AGOTADAS en el catálogo (web/app) y se registran en
+   rotura-stock.json para histórico. */
+state.procPedido = null;       // pedido cargado
+state.procFaltas = new Set();  // claves "codigo|color|talla" marcadas como falta
+
+async function abrirProcesarPedido(numero){
+  state.procPedido = null;
+  state.procFaltas = new Set();
+  navegar("procesarPedido");
+  $("procPedidoSub").textContent = "cargando…";
+  $("procListaLineas").innerHTML = "<div style='padding:30px;text-align:center;color:var(--ink-3)'>Cargando pedido y catálogo…</div>";
+  try {
+    // Asegurar catálogo cargado (para fotos)
+    if (!state.catalogo || !state.catalogo.length) await cargarArticulos();
+    const r = await api("pedidos", tokenize("get", { numero }));
+    state.procPedido = r.pedido;
+    renderProcesarPedido();
+  } catch(e) {
+    if(e.status===401){ logout(); return; }
+    $("procListaLineas").innerHTML = `<div class="alert alert-error">${e.message}</div>`;
+    $("procPedidoSub").textContent = "error";
+  }
+}
+
+function renderProcesarPedido(){
+  const p = state.procPedido;
+  if (!p) return;
+  $("procPedidoSub").textContent = `#${p.numero} · ${p.clienteNombre}`;
+  const cont = $("procListaLineas");
+  cont.innerHTML = "";
+
+  (p.lineas || []).forEach((l, idx) => {
+    const art = (state.catalogo || []).find(a => a.codigo === l.codigo);
+    const foto = art && (art.fotos||[])[0];
+    const fotoMini = foto
+      ? E("img",{src: foto.replace(/sz=w\d+/, "sz=w120"), style:"width:60px;height:60px;object-fit:cover;border-radius:6px;background:var(--bg-soft)", loading:"lazy"})
+      : E("div",{style:"width:60px;height:60px;border-radius:6px;background:var(--bg-soft);display:flex;align-items:center;justify-content:center;font-size:24px"}, "📦");
+
+    const key = `${l.codigo}|${l.color}|${l.talla}`;
+    const enFalta = state.procFaltas.has(key);
+
+    const refInfo = l.codigoA3 ? `a3: ${l.codigoA3}` : `Ref: ${l.codigo}`;
+    const fila = E("div",{
+      style: `display:flex;align-items:center;gap:12px;padding:10px;border:2px solid ${enFalta ? "#e74c3c" : "var(--bd)"};border-radius:10px;margin-bottom:8px;background:${enFalta ? "#fef2f2" : "#fff"};transition:all .15s`
+    },
+      fotoMini,
+      E("div",{style:"flex:1;min-width:0"},
+        E("div",{style:"font-weight:700;font-size:14px;color:var(--ink)"}, l.producto || l.codigo),
+        E("div",{style:"font-size:12px;color:var(--ink-3);margin-top:2px"},
+          `${refInfo} · ${l.color} · ${l.talla} · `,
+          E("strong",{style:"color:var(--brand)"}, `${l.cant} ud`)
+        )
+      ),
+      E("button",{
+        style: `background:${enFalta ? "#e74c3c" : "var(--bg-soft)"};color:${enFalta ? "#fff" : "var(--ink-2)"};border:2px solid ${enFalta ? "#c0392b" : "var(--bd)"};font-size:14px;font-weight:700;cursor:pointer;padding:10px 14px;border-radius:8px;min-width:110px;transition:all .15s`,
+        onclick: () => toggleFaltaLinea(key)
+      }, enFalta ? "❌ EN FALTA" : "✓ Separado")
+    );
+    cont.appendChild(fila);
+  });
+
+  cont.appendChild(E("div",{style:"margin-top:16px;padding:12px;background:var(--bg-soft);border-radius:8px;font-size:13px;color:var(--ink-2);text-align:center"},
+    "Al pulsar ", E("strong",{}, "⚠ Agotar X"), " arriba, las variantes marcadas en falta se ocultarán en la app/web hasta que las reactives en el editor del catálogo."
+  ));
+
+  actualizarBotonAgotar();
+}
+
+function toggleFaltaLinea(key){
+  if (state.procFaltas.has(key)) state.procFaltas.delete(key);
+  else state.procFaltas.add(key);
+  renderProcesarPedido();
+}
+
+function actualizarBotonAgotar(){
+  const n = state.procFaltas.size;
+  const btn = $("btnProcGuardar");
+  const lbl = $("procContadorFalta");
+  if (btn) {
+    btn.disabled = n === 0;
+    btn.style.opacity = n === 0 ? "0.45" : "1";
+    btn.style.boxShadow = n === 0 ? "none" : "0 2px 8px rgba(231,76,60,.45)";
+  }
+  if (lbl) lbl.textContent = n;
+}
+
+async function guardarProcesoPedido(){
+  const n = state.procFaltas.size;
+  if (n === 0) return;
+  const items = [...state.procFaltas].map(key => {
+    const [codigo, color, talla] = key.split("|");
+    const linea = state.procPedido.lineas.find(l => l.codigo === codigo && l.color === color && l.talla === talla);
+    return { codigo, color, talla, cant: linea?.cant || 0 };
+  });
+  const msg = `⚠ Vas a marcar como AGOTADAS ${n} variante(s) en el catálogo:\n\n` +
+    items.map(it => `  · ${it.codigo} · ${it.color} · ${it.talla}`).join("\n") +
+    "\n\nEstas variantes desaparecerán de la web/app hasta que las reactives manualmente desde el editor del catálogo.\n\n¿Continuar?";
+  if (!confirm(msg)) return;
+  const btn = $("btnProcGuardar");
+  if (btn) { btn.disabled = true; btn.textContent = "Guardando…"; }
+  try {
+    const r = await api("catalogo", tokenize("marcar-en-falta", {
+      items,
+      pedidoNumero: state.procPedido.numero,
+    }));
+    toast(`Procesado: ${r.agotadas} variantes agotadas en ${r.actualizados} artículo(s)`);
+    // Refrescar catalogo local para que se vea actualizado
+    state.catalogo = null;
+    state.procFaltas.clear();
+    navegar("pedidos");
+  } catch(e) {
+    if(e.status===401){ logout(); return; }
+    toast(e.message, "error");
+    if (btn) { btn.disabled = false; }
+    actualizarBotonAgotar();
+  }
+}
+
+async function cargarPedidosAdmin(){
+  const cont = $("pedidosContenido");
+  cont.innerHTML = "<div style='padding:30px;text-align:center;color:var(--ink-3)'>Cargando…</div>";
+  try {
+    const r = await api("pedidos", tokenize("list"));
+    cont.innerHTML = "";
+    const pedidos = r.pedidos || [];
+    if(!pedidos.length){
+      cont.appendChild(E("div",{className:"empty"},
+        E("div",{className:"ico-empty"},"📋"),
+        E("div",{className:"titulo"},"Sin pedidos todavía")));
+      return;
+    }
+    pedidos.forEach(p => {
+      // v1.13.2: chip de estado + selector inline
+      const estado = (p.estado || "PENDIENTE").toUpperCase();
+      const colores = {
+        PENDIENTE: { bg:"#fef9e7", fg:"#7a2014" },
+        PREPARADO: { bg:"#dbeafe", fg:"#1e40af" },
+        ENVIADO:   { bg:"#dcfce7", fg:"#166534" },
+        FACTURADO: { bg:"#e9d5ff", fg:"#6b21a8" },
+        CANCELADO: { bg:"#fee2e2", fg:"#991b1b" }
+      };
+      const col = colores[estado] || colores.PENDIENTE;
+      const selEstado = document.createElement("select");
+      selEstado.title = "Cambiar estado del pedido";
+      selEstado.style.cssText = `background:${col.bg};color:${col.fg};border:1px solid ${col.fg}40;padding:5px 10px;border-radius:14px;font-size:11px;font-weight:700;letter-spacing:.5px;cursor:pointer;margin-left:8px`;
+      ["PENDIENTE","PREPARADO","ENVIADO","FACTURADO","CANCELADO"].forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = s; opt.textContent = s;
+        if (s === estado) opt.selected = true;
+        selEstado.appendChild(opt);
+      });
+      selEstado.onchange = () => cambiarEstadoPedido(p.numero, selEstado.value);
+
+      const item = E("div",{className:"lista-item"},
+        E("div",{className:"mini-foto"},"📦"),
+        E("div",{className:"info"},
+          E("div",{className:"nombre"}, "#"+p.numero+" · "+p.clienteNombre),
+          E("div",{className:"meta"}, new Date(p.fecha).toLocaleDateString("es-ES")+" · "+(p.variantes||0)+" variantes · "+(p.uds||0)+" uds"+(p.comercialNombre?" · "+p.comercialNombre:""))
+        ),
+        E("div",{className:"precio"}, fmt(p.total)+" €"),
+        selEstado,
+        E("button",{
+          className:"btn btn-primary",
+          style:"padding:6px 12px;font-size:12px;margin-left:8px",
+          onclick:()=>abrirProcesarPedido(p.numero)
+        }, "📦 Procesar"),
+        E("button",{
+          className:"btn btn-danger",
+          style:"padding:6px 12px;font-size:12px;margin-left:6px",
+          onclick:()=>borrarPedido(p.numero)
+        }, "🗑 Borrar")
+      );
+      cont.appendChild(item);
+    });
+  } catch(e){
+    if(e.status===401){ logout(); return; }
+    cont.innerHTML = `<div class="alert alert-error">${e.message}</div>`;
+  }
+}
+
+/* ============== SETUP / HASH PIN ============== */
+async function generarHashPin(){
+  const pin = $("setupPin").value.trim();
+  if(!pin || pin.length < 4) return toast("PIN mínimo 4 caracteres","error");
+  // Necesitamos llamar generar-hash que requiere admin… pero si no hay admin todavía,
+  // usamos un fallback client-side: PBKDF2 con WebCrypto (mismos parámetros que el server)
+  try {
+    const hash = await pbkdf2WebCrypto(pin);
+    $("setupHash").value = hash;
+    $("setupResultado").style.display = "";
+  } catch(e){ toast(e.message,"error"); }
+}
+
+async function pbkdf2WebCrypto(password){
+  // Compatible con session.js: salt 16 bytes hex, PBKDF2-SHA256 100k iter, derive 32 bytes
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const saltHex = [...salt].map(b => b.toString(16).padStart(2,"0")).join("");
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]
+  );
+  const bits = await crypto.subtle.deriveBits({
+    name:"PBKDF2", salt, iterations:100000, hash:"SHA-256"
+  }, key, 256);
+  const hashHex = [...new Uint8Array(bits)].map(b => b.toString(16).padStart(2,"0")).join("");
+  return saltHex + ":" + hashHex;
+}
+
+function copiarHash(){
+  const ta = $("setupHash");
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(()=>toast("Copiado al portapapeles"));
+}
+
+/* ============== INIT ============== */
+(async function init(){
+  // Modo setup: ?setup en URL muestra utilidad de generar hash sin login
+  if(new URLSearchParams(location.search).has("setup")){
+    document.querySelectorAll(".vista").forEach(v=>v.classList.remove("activa"));
+    $("v-setup").classList.add("activa");
+    return;
+  }
+  if(!await intentarAutoLogin()){
+    // Mantener login visible
+  }
+})();
+
+/* ============== EDITOR DE PRECIOS MASIVO ============== */
+state.editorCambios = {};   // { codigo: {precio, tallas, colores} }
+state.epFiltro = state.epFiltro || {};   // v1.19.2: filtros del editor (se conservan tras guardar)
+
+async function cargarEditorPrecios(){
+  // Asegurar que tenemos catalogo y jerarquia cargados
+  if (!state.catalogo || !state.catalogo.length) await cargarArticulos();
+  if (!state.jerarquia || !state.jerarquia.length) {
+    try {
+      const r = await api("catalogo", tokenize("get-jerarquia"));
+      state.jerarquia = r.jerarquia || [];
+    } catch(e) { console.warn("jerarquia no cargada", e); state.jerarquia = []; }
+  }
+  // limpiar seleccion previa al entrar (pero NO el filtro: se conserva entre guardados)
+  if (state.editorSeleccionados) state.editorSeleccionados.clear();
+  poblarSeccionesEp();
+  poblarCategoriasEp();
+  poblarTiposEp();
+  poblarFabricantesEp();
+  actualizarDatalistsEp();
+  // v1.19.2: restaurar búsqueda + checkboxes del filtro persistido (selects ya restaurados al poblar)
+  const f = state.epFiltro || {};
+  if ($("epBusqueda")) $("epBusqueda").value = f.busqueda || "";
+  if ($("epSoloSinPrecio")) $("epSoloSinPrecio").checked = !!f.soloSin;
+  if ($("epSoloPendientes")) $("epSoloPendientes").checked = !!f.soloPen;
+  if ($("epFabricante") && f.fabricante) $("epFabricante").value = f.fabricante;
+  ajustarStickyFiltrosEp();
+  renderEditorPrecios();
+}
+/* v1.19.2 — Fija la barra de filtros justo debajo de la topbar y apila la
+   cabecera de la tabla debajo de los filtros (sticky escalonado). */
+function ajustarStickyFiltrosEp(){
+  try {
+    const tb = document.querySelector('#v-editorPrecios .topbar');
+    const tbH = (tb && tb.offsetHeight) ? tb.offsetHeight : 56;
+    const v = $("v-editorPrecios");
+    if (v) v.style.setProperty("--ep-fb-top", tbH + "px");
+  } catch(_) {}
+}
+
+function poblarSeccionesEp(){
+  const sel = $("epSeccion");
+  sel.innerHTML = '<option value="">— Todas las secciones —</option>';
+  (state.jerarquia||[]).forEach(s => {
+    const opt = document.createElement("option");
+    opt.value = s.id; opt.textContent = s.nombre;
+    sel.appendChild(opt);
+  });
+  if (state.epFiltro && state.epFiltro.seccion) sel.value = state.epFiltro.seccion;   // v1.19.2 persistir
+}
+function poblarCategoriasEp(){
+  const secId = $("epSeccion").value;
+  const sel = $("epCategoria");
+  sel.innerHTML = '<option value="">— Todas las categorías —</option>';
+  if (!secId) return;
+  const sec = (state.jerarquia||[]).find(s => String(s.id) === String(secId));
+  if (!sec) return;
+  (sec.categorias||[]).forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.id; opt.textContent = c.nombre;
+    sel.appendChild(opt);
+  });
+  if (state.epFiltro && state.epFiltro.categoria) sel.value = state.epFiltro.categoria;   // v1.19.2 persistir
+}
+/* v1.19.2 — Subcategoría (tipo) según la categoría seleccionada. */
+function poblarTiposEp(){
+  const sel = $("epTipo"); if (!sel) return;
+  const secId = $("epSeccion").value;
+  const catId = $("epCategoria").value;
+  sel.innerHTML = '<option value="">— Todas las subcategorías —</option>';
+  sel.disabled = true;
+  if (!secId || !catId) return;
+  const sec = (state.jerarquia||[]).find(s => String(s.id) === String(secId));
+  const cat = sec && (sec.categorias||[]).find(c => String(c.id) === String(catId));
+  if (!cat || !(cat.tipos||[]).length) return;   // categoría sin subcategorías
+  sel.disabled = false;
+  (cat.tipos||[]).forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.id; opt.textContent = t.nombre;
+    sel.appendChild(opt);
+  });
+  if (state.epFiltro && state.epFiltro.tipo) sel.value = state.epFiltro.tipo;
+}
+function onCambiaCategoriaEp(){ poblarTiposEp(); renderEditorPrecios(); }
+/* Poblar select de Marca/Fabricante con los valores únicos que hay en el
+   catálogo. Cada vez que se carga el editor se refresca (por si se han
+   añadido nuevas marcas). Mantiene la selección actual si todavía existe. */
+function poblarFabricantesEp(){
+  const sel = $("epFabricante");
+  if (!sel) return;
+  const prev = sel.value;
+  const set = new Set();
+  let sinMarca = 0;
+  (state.catalogo||[]).forEach(a => {
+    if (a.activo === false) return;
+    const f = (a.fichaTecnica?.fabricante || "").trim();
+    if (f) set.add(f);
+    else sinMarca++;
+  });
+  const ordenadas = Array.from(set).sort((a,b) => a.localeCompare(b, "es", {sensitivity:"base"}));
+  sel.innerHTML = '<option value="">— Todas las marcas —</option>';
+  ordenadas.forEach(f => {
+    const opt = document.createElement("option");
+    opt.value = f; opt.textContent = f;
+    sel.appendChild(opt);
+  });
+  if (sinMarca > 0) {
+    const opt = document.createElement("option");
+    opt.value = "__SIN__"; opt.textContent = `(sin marca) · ${sinMarca}`;
+    sel.appendChild(opt);
+  }
+  // Restaurar seleccion previa si sigue existiendo
+  if (prev && (ordenadas.includes(prev) || prev === "__SIN__")) sel.value = prev;
+}
+function onCambiaSeccionEp(){ poblarCategoriasEp(); poblarTiposEp(); renderEditorPrecios(); }
+
+function renderEditorPrecios(){
+  const cont = $("listaEp");
+  cont.innerHTML = "";
+  const secId = $("epSeccion").value;
+  const catId = $("epCategoria").value;
+  const tipoId = $("epTipo")?.value || "";
+  const fabri = $("epFabricante")?.value || "";
+  const soloSin = $("epSoloSinPrecio").checked;
+  const soloPen = $("epSoloPendientes").checked;
+  // v1.19.2: persistir el filtro para conservarlo tras guardar/actualizar/recargar
+  state.epFiltro = { seccion: secId, categoria: catId, tipo: tipoId, fabricante: fabri, busqueda: ($("epBusqueda")?.value || ""), soloSin, soloPen };
+
+  const q = ($("epBusqueda")?.value || "").trim().toLowerCase();
+  let lista = (state.catalogo||[]).filter(a => a.activo !== false);
+  if (q) {
+    lista = lista.filter(a =>
+      (a.nombre||"").toLowerCase().includes(q) ||
+      (a.codigo||"").toLowerCase().includes(q) ||
+      (a.codigoA3||"").toLowerCase().includes(q) ||
+      (a.fichaTecnica?.refProveedor||"").toLowerCase().includes(q)
+    );
+  }
+  if (secId) lista = lista.filter(a => String(a.seccionId) === String(secId));
+  if (catId) lista = lista.filter(a => String(a.categoriaId) === String(catId));
+  if (tipoId) lista = lista.filter(a => String(a.tipoId) === String(tipoId));   // v1.19.2 subcategoría
+  if (fabri) {
+    if (fabri === "__SIN__") lista = lista.filter(a => !((a.fichaTecnica?.fabricante||"").trim()));
+    else lista = lista.filter(a => (a.fichaTecnica?.fabricante||"").trim() === fabri);
+  }
+  if (soloSin) lista = lista.filter(a => (Number(a.precio)||0) <= 0);
+  if (soloPen) lista = lista.filter(a => a.pendienteRevision === true);
+
+  // Orden: precio=0 primero, luego alfabético
+  lista.sort((a,b) => {
+    const pa = (Number(a.precio)||0) <= 0 ? 0 : 1;
+    const pb = (Number(b.precio)||0) <= 0 ? 0 : 1;
+    if (pa !== pb) return pa - pb;
+    return (a.nombre||"").localeCompare(b.nombre||"");
+  });
+
+  actualizarContadorEp(lista.length);
+
+  if (!lista.length) {
+    cont.appendChild(E("div",{className:"empty"},
+      E("div",{className:"ico-empty"},"🎉"),
+      E("div",{className:"titulo"},"Nada que editar"),
+      E("div",{},"Cambia los filtros o desmarca 'Solo sin precio'")));
+    return;
+  }
+
+  // Limitamos a 200 visibles para no colgar el navegador (catálogo grande)
+  const MAX = 200;
+  const visibles = lista.slice(0, MAX);
+
+  const tabla = E("table",{className:"ep-tabla"});
+  const chkAll = document.createElement("input");
+  chkAll.type = "checkbox";
+  chkAll.id = "epChkAll";
+  chkAll.title = "Seleccionar todos los visibles";
+  chkAll.onchange = () => toggleSeleccionarTodosEp(chkAll.checked);
+  const thead = E("thead",{}, E("tr",{},
+    E("th",{className:"ep-th-chk"}, chkAll),
+    E("th",{}, ""),
+    E("th",{}, "Código / Nombre"),
+    E("th",{}, "Precio €"),
+    E("th",{}, "Tallas (separadas por |)"),
+    E("th",{}, "Colores (separadas por |)"),
+    E("th",{}, "")
+  ));
+  const tbody = E("tbody",{});
+
+  visibles.forEach(a => {
+    const foto = (a.fotos||[])[0];
+    const fotoMini = foto
+      ? E("img",{src: foto.replace(/sz=w\d+/, "sz=w120"), className:"ep-foto", loading:"lazy"})
+      : E("div",{className:"ep-foto ep-foto-vacia"},"📦");
+
+    const isSel = state.editorSeleccionados && state.editorSeleccionados.has(a.codigo);
+    const tr = E("tr",{className:"ep-row" + (state.editorCambios[a.codigo] ? " modificado" : "") + (isSel ? " seleccionado" : ""), "data-codigo": a.codigo});
+
+    // Checkbox de seleccion para borrar masivo
+    const chk = document.createElement("input");
+    chk.type = "checkbox";
+    chk.className = "ep-chk-sel";
+    chk.checked = isSel;
+    chk.onchange = () => toggleSeleccionEp(a.codigo);
+    tr.appendChild(E("td",{className:"ep-td-chk"}, chk));
+
+    // Foto clickable: abre en grande en nueva pestaña
+    if (foto) {
+      fotoMini.style.cursor = "zoom-in";
+      fotoMini.onclick = (e) => { e.stopPropagation(); window.open(foto, "_blank"); };
+    }
+    tr.appendChild(E("td",{className:"ep-td-foto"}, fotoMini));
+
+    // Construir línea de meta con tipo + ficha técnica (composición)
+    const tipo = a.tipo ? `[${a.tipo}]` : "";
+    const compo = a.fichaTecnica?.composicion ? `· ${a.fichaTecnica.composicion}` : "";
+    const a3 = a.codigoA3 ? `· a3: ${a.codigoA3}` : "";
+    const btnFicha = E("button",{
+      className:"ep-btn-editar",
+      title:"Editar TODOS los campos del artículo (nombre, fotos, ficha técnica, jerarquía, etc.)",
+      onclick:(e)=>{ e.stopPropagation(); state._volverEditorPrecios = true; editarArticulo(a.codigo); }
+    }, "✏");
+    // v1.13.30: botón duplicar
+    const btnDup = E("button",{
+      className:"ep-btn-editar",
+      style:"background:#dbeafe;border-color:#3b82f6;color:#1e40af",
+      title:"Duplicar este artículo (copia datos y abre formulario nuevo)",
+      onclick:(e)=>{ e.stopPropagation(); duplicarArticulo(a.codigo); }
+    }, "📋");
+    tr.appendChild(E("td",{className:"ep-td-nombre"},
+      E("div",{className:"ep-nom"}, a.nombre || a.codigo, " ", btnFicha, " ", btnDup),
+      E("div",{className:"ep-meta"}, `${a.codigo} ${tipo} ${a3} ${compo}`.trim())
+    ));
+
+    const inpP = document.createElement("input");
+    // v1.13.16: text + inputmode=decimal, acepta coma y punto, teclado numérico iPad
+    configurarInputPrecio(inpP, { alignRight: true });
+    inpP.placeholder = "0,00";
+    inpP.className = "ep-inp ep-inp-precio";
+    inpP.value = a.precio ? String(a.precio).replace(".", ",") : "";
+    inpP.oninput = () => marcarEditorCambio(a.codigo);
+    tr.appendChild(E("td",{}, inpP));
+
+    const inpT = document.createElement("input");
+    inpT.type = "text"; inpT.className = "ep-inp ep-inp-tallas";
+    inpT.placeholder = "90|105|135+5";
+    inpT.setAttribute("list", "dlTallas");   // autocompletado con tallas existentes
+    inpT.value = (a.tallas||[]).map(t => t.t).join("|");
+    inpT.oninput = () => marcarEditorCambio(a.codigo);
+    tr.appendChild(E("td",{}, inpT));
+
+    const inpC = document.createElement("input");
+    inpC.type = "text"; inpC.className = "ep-inp ep-inp-colores";
+    inpC.placeholder = "BLANCO|NEGRO|AZUL";
+    inpC.setAttribute("list", "dlColores"); // autocompletado con colores existentes
+    inpC.value = (a.colores||[]).join("|");
+    inpC.oninput = () => marcarEditorCambio(a.codigo);
+    tr.appendChild(E("td",{}, inpC));
+
+    // v1.13.38: botón rápido para marcar revisado / pendiente
+    const pendiente = a.pendienteRevision === true;
+    const btnRev = E("button",{
+      title: pendiente ? "Marcar como REVISADO (quita el flag pendiente)" : "Marcar como PENDIENTE de revisión",
+      style: pendiente
+        ? "background:#fef3c7;border:1.5px solid #f59e0b;color:#92400e;font-size:14px;cursor:pointer;padding:4px 8px;border-radius:6px;font-weight:700"
+        : "background:#dcfce7;border:1.5px solid #16a34a;color:#166534;font-size:14px;cursor:pointer;padding:4px 8px;border-radius:6px;font-weight:700",
+      onclick: (e)=>{ e.stopPropagation(); togglePendienteEp(a.codigo, !pendiente); }
+    }, pendiente ? "⏳" : "✓");
+    tr.appendChild(E("td",{}, btnRev));
+
+    // Botón eliminar definitivo
+    const btnDel = E("button",{
+      className:"ep-btn-del",
+      title:"Eliminar definitivamente",
+      onclick: (e)=>{ e.stopPropagation(); eliminarArticuloEp(a.codigo, a.nombre); }
+    }, "🗑");
+    tr.appendChild(E("td",{}, btnDel));
+
+    tbody.appendChild(tr);
+  });
+
+  tabla.appendChild(thead);
+  tabla.appendChild(tbody);
+  cont.appendChild(tabla);
+
+  if (lista.length > MAX) {
+    cont.appendChild(E("div",{className:"ep-warning"},
+      `Mostrando ${MAX} de ${lista.length} artículos. Filtra por sección/categoría para ver el resto.`));
+  }
+
+  // mantener contador del boton "Borrar N" en sync tras filtrar/buscar
+  actualizarBotonBorrarSel();
+}
+
+/* v1.13.38 — Marcar un artículo como revisado (pendienteRevision=false) o
+   pendiente (pendienteRevision=true) en 1 click desde el editor masivo.
+   Llama al endpoint set-pendiente-revision-bulk con un solo código. */
+async function togglePendienteEp(codigo, nuevoValor){
+  try {
+    const r = await api("catalogo", tokenize("set-pendiente-revision-bulk", {
+      codigos: [codigo],
+      valor: !!nuevoValor,
+    }));
+    if (r.updated > 0) {
+      // Actualizar el estado local (state.catalogo) sin recargar
+      const art = (state.catalogo || []).find(x => x.codigo === codigo);
+      if (art) art.pendienteRevision = !!nuevoValor;
+      // Si el filtro "solo pendientes" está activo y acabamos de revisarlo, sale del listado
+      const soloPen = $("epSoloPendientes")?.checked;
+      if (soloPen && !nuevoValor) {
+        // Quitar la fila del DOM directamente para feedback instantáneo
+        const row = document.querySelector(`tr.ep-row[data-codigo="${codigo}"]`);
+        if (row) row.remove();
+        // Recontar
+        const visibles = document.querySelectorAll("tr.ep-row").length;
+        actualizarContadorEp(visibles);
+      } else {
+        // Re-render para actualizar el botón
+        renderEditorPrecios();
+      }
+      toast(nuevoValor ? "Marcado pendiente" : "✓ Revisado", "ok", 1500);
+    } else {
+      toast("No se pudo actualizar","error");
+    }
+  } catch(e) {
+    if(e.status===401){ logout(); return; }
+    toast(e.message,"error");
+  }
+}
+
+function marcarEditorCambio(codigo){
+  const row = document.querySelector(`tr[data-codigo="${codigo}"]`);
+  if (!row) return;
+  state.editorCambios[codigo] = {
+    precio:  row.querySelector(".ep-inp-precio").value,
+    tallas:  row.querySelector(".ep-inp-tallas").value,
+    colores: row.querySelector(".ep-inp-colores").value,
+  };
+  row.classList.add("modificado");
+  actualizarContadorEp();
+}
+
+function actualizarContadorEp(visibles){
+  const n = Object.keys(state.editorCambios).length;
+  const total = visibles ?? (state.catalogo||[]).length;
+  $("epContador").textContent = `${n} modificados · ${total} visibles`;
+  $("epBtnGuardar").disabled = n === 0;
+  // Barra bulk solo visible si hay >=2 filas visibles
+  const bar = $("epBulkBar");
+  const presets = $("epPresets");
+  if (bar)     bar.style.display = (total > 1) ? "" : "none";
+  if (presets) presets.style.display = (total > 1) ? "" : "none";
+  const cnt = $("epBulkCount");
+  if (cnt) cnt.textContent = total;
+}
+
+/* Helpers para chips preset */
+function setBulkTallas(val){
+  $("epBulkTallas").value = val;
+  $("epBulkTallas").focus();
+}
+function setBulkColores(val){
+  $("epBulkColores").value = val;
+  $("epBulkColores").focus();
+}
+
+/* Rellena los <datalist> con TODAS las tallas y colores existentes en el catálogo,
+   para que el editor sugiera autocompletado mientras el usuario escribe. Permite
+   crear NUEVOS valores tipeándolos directamente (no aparecen sugeridos, pero al
+   guardar pasan al backend igualmente). */
+function actualizarDatalistsEp(){
+  const tallasSet = new Set();
+  const coloresSet = new Set();
+  (state.catalogo||[]).forEach(a => {
+    (a.tallas||[]).forEach(t => { if (t && t.t) tallasSet.add(t.t); });
+    (a.colores||[]).forEach(c => { if (c) coloresSet.add(c); });
+  });
+  // Combinaciones útiles pipe-separadas que vio el editor
+  const tallasComb = new Set();
+  const coloresComb = new Set();
+  (state.catalogo||[]).forEach(a => {
+    const tStr = (a.tallas||[]).map(t => t.t).join("|");
+    const cStr = (a.colores||[]).join("|");
+    if (tStr && tStr.split("|").length > 1) tallasComb.add(tStr);
+    if (cStr && cStr.split("|").length > 1) coloresComb.add(cStr);
+  });
+  const dlT = $("dlTallas"); dlT.innerHTML = "";
+  // Primero combinaciones populares, luego individuales
+  Array.from(tallasComb).slice(0,30).forEach(v => {
+    const o = document.createElement("option"); o.value = v; dlT.appendChild(o);
+  });
+  Array.from(tallasSet).sort().forEach(v => {
+    const o = document.createElement("option"); o.value = v; dlT.appendChild(o);
+  });
+  const dlC = $("dlColores"); dlC.innerHTML = "";
+  Array.from(coloresComb).slice(0,30).forEach(v => {
+    const o = document.createElement("option"); o.value = v; dlC.appendChild(o);
+  });
+  Array.from(coloresSet).sort().forEach(v => {
+    const o = document.createElement("option"); o.value = v; dlC.appendChild(o);
+  });
+}
+
+/* Aplicar valores defecto a TODAS las filas visibles del editor */
+function aplicarBulkEp(){
+  const precio  = $("epBulkPrecio").value.trim();
+  const tallas  = $("epBulkTallas").value.trim();
+  const colores = $("epBulkColores").value.trim();
+  if (!precio && !tallas && !colores) { toast("Rellena al menos un campo en la barra superior","error"); return; }
+  const rows = document.querySelectorAll(".ep-row");
+  if (!rows.length) return;
+  if (!confirm(`¿Aplicar a los ${rows.length} artículos visibles?\n${precio?"Precio: "+precio+"\n":""}${tallas?"Tallas: "+tallas+"\n":""}${colores?"Colores: "+colores:""}`)) return;
+  rows.forEach(r => {
+    if (precio)  r.querySelector(".ep-inp-precio").value = precio;
+    if (tallas)  r.querySelector(".ep-inp-tallas").value = tallas;
+    if (colores) r.querySelector(".ep-inp-colores").value = colores;
+    marcarEditorCambio(r.dataset.codigo);
+  });
+  toast(`Aplicado a ${rows.length} artículos. Pulsa 💾 para guardar.`);
+}
+
+/* Copia tallas+colores+precio de la PRIMERA fila visible a todas las demás */
+function copiarBloqueEp(){
+  const rows = document.querySelectorAll(".ep-row");
+  if (rows.length < 2) return;
+  const first = rows[0];
+  const precio  = first.querySelector(".ep-inp-precio").value;
+  const tallas  = first.querySelector(".ep-inp-tallas").value;
+  const colores = first.querySelector(".ep-inp-colores").value;
+  if (!precio && !tallas && !colores) { toast("La primera fila está vacía. Rellena la primera primero.","error"); return; }
+  if (!confirm(`¿Copiar valores de la 1ª fila a los ${rows.length-1} artículos restantes?\nPrecio: ${precio}\nTallas: ${tallas}\nColores: ${colores}`)) return;
+  for (let i = 1; i < rows.length; i++) {
+    if (precio)  rows[i].querySelector(".ep-inp-precio").value = precio;
+    if (tallas)  rows[i].querySelector(".ep-inp-tallas").value = tallas;
+    if (colores) rows[i].querySelector(".ep-inp-colores").value = colores;
+    marcarEditorCambio(rows[i].dataset.codigo);
+  }
+  toast(`Copiado a ${rows.length-1} artículos.`);
+}
+
+/* Copia el valor del mismo campo de la fila anterior (botón ⬆ o Ctrl+D) */
+function copiarDeArribaEp(input){
+  const row = input.closest("tr.ep-row");
+  if (!row) return;
+  const prev = row.previousElementSibling;
+  if (!prev || !prev.classList.contains("ep-row")) {
+    toast("No hay fila anterior", "error");
+    return;
+  }
+  // Determinar qué clase de input (precio, tallas, colores)
+  const cls = Array.from(input.classList).find(c => c.startsWith("ep-inp-") && c !== "ep-inp");
+  if (!cls) return;
+  const prevInp = prev.querySelector("." + cls);
+  if (prevInp) {
+    input.value = prevInp.value;
+    marcarEditorCambio(row.dataset.codigo);
+    input.focus();
+    input.select();
+  }
+}
+
+/* Atajo de teclado Ctrl+D en cualquier input del editor copia el valor de arriba */
+document.addEventListener("keydown", function(e){
+  if (state.vista !== "editorPrecios") return;
+  if (!e.ctrlKey || e.key.toLowerCase() !== "d") return;
+  const el = document.activeElement;
+  if (!el || !el.classList.contains("ep-inp")) return;
+  e.preventDefault();
+  copiarDeArribaEp(el);
+});
+
+/* Eliminar definitivo desde el editor de precios */
+async function eliminarArticuloEp(codigo, nombre){
+  if (!confirm(`⚠ ELIMINAR DEFINITIVAMENTE\n\n${nombre}\n(${codigo})\n\nEsta acción NO se puede deshacer. ¿Continuar?`)) return;
+  try {
+    await api("catalogo", tokenize("delete-permanent", { codigo }));
+    // Quitar del estado local
+    state.catalogo = (state.catalogo||[]).filter(x => x.codigo !== codigo);
+    delete state.editorCambios[codigo];
+    if (state.editorSeleccionados) state.editorSeleccionados.delete(codigo);
+    toast(`${codigo} eliminado`);
+    renderEditorPrecios();
+  } catch(e) { toast(e.message, "error"); }
+}
+
+/* ====== SELECCION MULTIPLE + BORRADO MASIVO ====== */
+state.editorSeleccionados = new Set();   // codigos marcados
+
+function toggleSeleccionEp(codigo){
+  if (!state.editorSeleccionados) state.editorSeleccionados = new Set();
+  if (state.editorSeleccionados.has(codigo)) state.editorSeleccionados.delete(codigo);
+  else state.editorSeleccionados.add(codigo);
+  // marcar fila visualmente
+  const row = document.querySelector(`tr.ep-row[data-codigo="${codigo}"]`);
+  if (row) row.classList.toggle("seleccionado", state.editorSeleccionados.has(codigo));
+  actualizarBotonBorrarSel();
+}
+
+function toggleSeleccionarTodosEp(checked){
+  if (!state.editorSeleccionados) state.editorSeleccionados = new Set();
+  document.querySelectorAll(".ep-row").forEach(row => {
+    const cod = row.dataset.codigo;
+    if (!cod) return;
+    if (checked) state.editorSeleccionados.add(cod);
+    else state.editorSeleccionados.delete(cod);
+    row.classList.toggle("seleccionado", checked);
+    const chk = row.querySelector(".ep-chk-sel");
+    if (chk) chk.checked = checked;
+  });
+  actualizarBotonBorrarSel();
+}
+
+function actualizarBotonBorrarSel(){
+  const btn = $("epBtnBorrarSel");
+  const lbl = $("epBtnBorrarSelN");
+  const n = state.editorSeleccionados ? state.editorSeleccionados.size : 0;
+  if (btn) {
+    btn.disabled = n === 0;
+    btn.style.opacity = n === 0 ? "0.45" : "1";
+    btn.style.boxShadow = n === 0 ? "none" : "0 2px 8px rgba(231,76,60,.45)";
+    btn.title = n === 0 ? "Selecciona artículos con el checkbox" : `Borrar definitivamente ${n} seleccionado(s)`;
+  }
+  if (lbl) lbl.textContent = n;
+  // espejo en la barra bulk (botón secundario)
+  const btn2 = $("epBtnBorrarSelBar");
+  const lbl2 = $("epBtnBorrarSelBarN");
+  if (btn2) {
+    btn2.disabled = n === 0;
+    btn2.style.opacity = n === 0 ? "0.45" : "1";
+  }
+  if (lbl2) lbl2.textContent = n;
+}
+
+/* Crear nuevo articulo desde el editor: navega a v-subirArt limpio y al guardar
+   vuelve al editor (gracias al flag state._volverEditorPrecios). */
+function nuevoArticuloDesdeEditor(){
+  state._volverEditorPrecios = true;
+  resetArtForm();   // limpia el form
+  navegar("subirArt");
+}
+
+async function borrarSeleccionadosEp(){
+  if (!state.editorSeleccionados || state.editorSeleccionados.size === 0) {
+    toast("Marca primero artículos con el checkbox de la izquierda", "error");
+    return;
+  }
+  const codigos = Array.from(state.editorSeleccionados);
+  const n = codigos.length;
+  if (!confirm(`⚠ ELIMINAR DEFINITIVAMENTE ${n} artículos\n\nEsta acción NO se puede deshacer.\n\n¿Continuar?`)) return;
+  const txt = prompt(`Para confirmar el borrado de ${n} artículos, escribe BORRAR en mayúsculas:`);
+  if (txt !== "BORRAR") { toast("Cancelado: texto incorrecto","error"); return; }
+
+  const btn  = $("epBtnBorrarSel");
+  const btn2 = $("epBtnBorrarSelBar");
+  if (btn)  btn.disabled  = true;
+  if (btn2) btn2.disabled = true;
+  let ok = 0, err = 0, i = 0;
+  for (const cod of codigos) {
+    i++;
+    if (btn) btn.innerHTML = `Borrando ${i}/${n}…`;
+    try {
+      await api("catalogo", tokenize("delete-permanent", { codigo: cod }));
+      state.catalogo = (state.catalogo||[]).filter(x => x.codigo !== cod);
+      delete state.editorCambios[cod];
+      ok++;
+    } catch(e) { err++; console.error("Fallo borrar", cod, e); }
+  }
+  state.editorSeleccionados.clear();
+  toast(`Borrados ${ok} · ${err} errores · movidos a 🗂 Papelera (20 días)`, err > 0 ? "error" : "ok");
+  // restaurar etiqueta del boton
+  if (btn) btn.innerHTML = `🗑 Borrar <span id="epBtnBorrarSelN">0</span>`;
+  renderEditorPrecios();
+  actualizarBotonBorrarSel();
+}
+
+/* ====================== PAPELERA (20 dias) ====================== */
+state.papelera = [];
+state.papeleraSeleccion = new Set();
+
+async function cargarPapelera(){
+  state.papeleraSeleccion.clear();
+  $("papContador").textContent = "cargando...";
+  $("listaPapelera").innerHTML = '<div class="empty"><div class="ico-empty">⏳</div><div>Cargando papelera...</div></div>';
+  try {
+    const r = await api("catalogo", tokenize("papelera-list"));
+    state.papelera = r.items || [];
+    state.papeleraDiasMax = r.diasMax || 20;
+    if (r.purgadosAuto > 0) toast(`Auto-purgados ${r.purgadosAuto} antiguos`, "ok");
+    renderPapelera();
+  } catch(e) {
+    $("listaPapelera").innerHTML = `<div class="empty"><div class="ico-empty">❌</div><div>Error: ${e.message}</div></div>`;
+    $("papContador").textContent = "error";
+  }
+}
+
+function renderPapelera(){
+  const items = state.papelera || [];
+  const cont = $("listaPapelera");
+  cont.innerHTML = "";
+  $("papContador").textContent = items.length === 0 ? "(vacía)" : `${items.length} artículo(s) · auto-purga a los ${state.papeleraDiasMax || 20} días`;
+
+  if (!items.length) {
+    cont.appendChild(E("div",{className:"empty"},
+      E("div",{className:"ico-empty"},"🗂"),
+      E("div",{className:"titulo"},"Papelera vacía"),
+      E("div",{},"No hay borrados recientes")));
+    actualizarBotonesPapelera();
+    return;
+  }
+
+  const tabla = E("table",{className:"ep-tabla"});
+  const chkAll = document.createElement("input");
+  chkAll.type = "checkbox";
+  chkAll.onchange = () => toggleSelTodosPap(chkAll.checked);
+  const thead = E("thead",{}, E("tr",{},
+    E("th",{className:"ep-th-chk"}, chkAll),
+    E("th",{}, ""),
+    E("th",{}, "Código / Nombre"),
+    E("th",{}, "Eliminado"),
+    E("th",{}, "Días restantes"),
+    E("th",{}, "")
+  ));
+  const tbody = E("tbody",{});
+
+  items.forEach(it => {
+    const a = it.articulo || {};
+    const cod = a.codigo;
+    const foto = (a.fotos||[])[0];
+    const fotoMini = foto
+      ? E("img",{src: foto.replace(/sz=w\d+/, "sz=w120"), className:"ep-foto", loading:"lazy"})
+      : E("div",{className:"ep-foto ep-foto-vacia"},"📦");
+
+    const isSel = state.papeleraSeleccion.has(cod);
+    const tr = E("tr",{className:"ep-row" + (isSel ? " seleccionado" : ""), "data-codigo": cod});
+
+    const chk = document.createElement("input");
+    chk.type = "checkbox";
+    chk.className = "ep-chk-sel";
+    chk.checked = isSel;
+    chk.onchange = () => toggleSelPap(cod);
+    tr.appendChild(E("td",{className:"ep-td-chk"}, chk));
+
+    tr.appendChild(E("td",{className:"ep-td-foto"}, fotoMini));
+
+    const nombre = a.nombre || "(sin nombre)";
+    const meta = `${a.codigo}${a.referencia ? " · "+a.referencia : ""}${a.tipo ? " · ["+a.tipo+"]" : ""}`;
+    tr.appendChild(E("td",{},
+      E("div",{style:"font-weight:600"}, nombre),
+      E("div",{style:"font-size:12px;color:var(--ink-3)"}, meta)
+    ));
+
+    const fecha = it.eliminadoEn ? new Date(it.eliminadoEn).toLocaleString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "?";
+    tr.appendChild(E("td",{style:"font-size:12px"}, fecha));
+
+    const dias = it.diasRestantes != null ? it.diasRestantes : "?";
+    const color = dias <= 3 ? "#e74c3c" : dias <= 7 ? "#f39c12" : "#27ae60";
+    tr.appendChild(E("td",{style:`font-weight:700;color:${color}`}, `${dias} día(s)`));
+
+    const btnR = E("button",{
+      className:"btn btn-mini",
+      style:"background:#27ae60;color:#fff;border:none;padding:5px 10px;border-radius:5px;cursor:pointer;font-weight:600",
+      onclick: () => restaurarPap([cod])
+    }, "↩ Restaurar");
+    tr.appendChild(E("td",{}, btnR));
+
+    tbody.appendChild(tr);
+  });
+
+  tabla.appendChild(thead);
+  tabla.appendChild(tbody);
+  cont.appendChild(tabla);
+
+  actualizarBotonesPapelera();
+}
+
+function toggleSelPap(cod){
+  if (state.papeleraSeleccion.has(cod)) state.papeleraSeleccion.delete(cod);
+  else state.papeleraSeleccion.add(cod);
+  const row = document.querySelector(`#listaPapelera tr[data-codigo="${cod}"]`);
+  if (row) row.classList.toggle("seleccionado", state.papeleraSeleccion.has(cod));
+  actualizarBotonesPapelera();
+}
+
+function toggleSelTodosPap(checked){
+  document.querySelectorAll("#listaPapelera tr[data-codigo]").forEach(row => {
+    const cod = row.dataset.codigo;
+    if (checked) state.papeleraSeleccion.add(cod);
+    else state.papeleraSeleccion.delete(cod);
+    row.classList.toggle("seleccionado", checked);
+    const chk = row.querySelector(".ep-chk-sel");
+    if (chk) chk.checked = checked;
+  });
+  actualizarBotonesPapelera();
+}
+
+function actualizarBotonesPapelera(){
+  const n = state.papeleraSeleccion.size;
+  const totalPap = (state.papelera || []).length;
+  const btnR = $("papBtnRestaurar");
+  const lblR = $("papBtnRestaurarN");
+  if (btnR) {
+    btnR.disabled = n === 0;
+    btnR.style.opacity = n === 0 ? "0.45" : "1";
+    btnR.style.boxShadow = n === 0 ? "none" : "0 2px 8px rgba(39,174,96,.45)";
+  }
+  if (lblR) lblR.textContent = n;
+  const btnP = $("papBtnPurgar");
+  if (btnP) {
+    // Vaciar permite: o vaciar todo si n=0, o purgar solo seleccionados si n>0
+    btnP.disabled = totalPap === 0;
+    btnP.style.opacity = totalPap === 0 ? "0.45" : "1";
+    btnP.textContent = n > 0 ? `🔥 Purgar ${n}` : "🔥 Vaciar todo";
+  }
+}
+
+async function restaurarPap(codigos){
+  if (!codigos || !codigos.length) return;
+  const n = codigos.length;
+  if (!confirm(`¿Restaurar ${n} artículo(s) al catálogo activo?`)) return;
+  try {
+    const r = await api("catalogo", tokenize("papelera-restore", { codigos }));
+    const ok = (r.restaurados || []).length;
+    const conf = (r.conflictos || []).length;
+    if (conf) toast(`Restaurados ${ok}. ${conf} con conflicto (ya existían).`, "error");
+    else toast(`Restaurados ${ok} artículos`, "ok");
+    // refrescar catalogo local + papelera
+    state.catalogo = null;
+    await cargarPapelera();
+  } catch(e) { toast(e.message,"error"); }
+}
+
+async function restaurarSeleccionadosPap(){
+  const codigos = Array.from(state.papeleraSeleccion);
+  if (!codigos.length) return;
+  await restaurarPap(codigos);
+}
+
+async function purgarSeleccionadosPap(){
+  const sel = Array.from(state.papeleraSeleccion);
+  const n = sel.length;
+  const total = (state.papelera || []).length;
+  if (total === 0) return;
+  const msg = n > 0
+    ? `⚠ PURGAR DEFINITIVAMENTE ${n} artículo(s) de la papelera.\n\nYa NO podrán recuperarse.\n\n¿Continuar?`
+    : `⚠ VACIAR TODA LA PAPELERA (${total} artículos).\n\nNINGUNO podrá recuperarse.\n\n¿Continuar?`;
+  if (!confirm(msg)) return;
+  const txt = prompt(`Para confirmar, escribe PURGAR en mayúsculas:`);
+  if (txt !== "PURGAR") { toast("Cancelado","error"); return; }
+  try {
+    const r = await api("catalogo", tokenize("papelera-purge", n > 0 ? { codigos: sel } : {}));
+    toast(`Purgados ${r.eliminados} definitivamente`, "ok");
+    await cargarPapelera();
+  } catch(e) { toast(e.message,"error"); }
+}
+
+async function guardarEditorPrecios(){
+  const cambios = state.editorCambios;
+  const codigos = Object.keys(cambios);
+  if (!codigos.length) return;
+  if (!confirm(`Vas a guardar cambios en ${codigos.length} artículo(s). ¿Continuar?`)) return;
+
+  $("epBtnGuardar").disabled = true;
+  let ok = 0, err = 0;
+  for (const cod of codigos) {
+    const orig = (state.catalogo||[]).find(x => x.codigo === cod);
+    if (!orig) { err++; continue; }
+    const ch = cambios[cod];
+
+    // v1.13.20: parsear tallas como nombres simples. El sufijo "+X" (legacy)
+    // se ignora porque ya no se usan suplementos — el precio se edita en la tabla detallada.
+    const tallas = (ch.tallas||"").split("|").map(s => s.trim()).filter(Boolean).map(s => {
+      const m = s.match(/^(.+?)(?:\+[\d\.,]+)?$/);
+      return m ? { t: m[1].trim().toUpperCase() } : null;
+    }).filter(Boolean);
+    const colores = (ch.colores||"").split("|").map(s => s.trim().toUpperCase()).filter(Boolean);
+    const precio = parsearPrecio(ch.precio) || 0;
+
+    const articulo = {
+      codigo: orig.codigo,
+      codigoA3: orig.codigoA3,
+      nombre: orig.nombre,
+      seccion: orig.seccion,
+      categoria: orig.categoria,
+      precio: precio,
+      colores: colores.length ? colores : (orig.colores||["VARIOS"]),
+      tallas: tallas.length ? tallas : (orig.tallas||[{t:"U"}]),
+      fichaTecnica: orig.fichaTecnica || {},
+      novedad: orig.novedad === true,
+      activo: orig.activo !== false,
+      pendienteRevision: orig.pendienteRevision === true,
+    };
+    if (orig.tipo) articulo.tipo = orig.tipo;
+    if (orig.carpetaId) articulo.carpetaId = orig.carpetaId;
+
+    try {
+      await api("catalogo", tokenize("upload", { articulo, fotos: orig.fotos || [] }));
+      ok++;
+      // Actualizar local
+      Object.assign(orig, { precio, tallas, colores });
+    } catch (e) {
+      err++; console.error("Fallo guardar", cod, e);
+    }
+  }
+
+  state.editorCambios = {};
+  toast(`Guardados ${ok} OK · ${err} errores`, err > 0 ? "error" : "ok");
+  renderEditorPrecios();
+}
+</script>
+
+</body>
+</html>

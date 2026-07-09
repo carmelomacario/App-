@@ -4,11 +4,12 @@ Esta guía te lleva de "no estoy seguro de qué tengo" a **poder pulsar un botó
 "Publicar en IG" en el panel de administración** y que la foto aparezca en tu
 Instagram con la **descripción del artículo pero sin el precio**.
 
-El código ya está en el repo:
+El código ya está en el repo **y el botón ya está integrado**:
 
-- **Backend:** `netlify/functions/instagram-publish.js` (llama a la API de Instagram).
-- **Botón para el panel:** `netlify/functions/instagram-publish-boton.html.txt`
-  (fragmento listo para pegar en `admin.html`).
+- **Backend:** `netlify/functions/instagram-publish.js` (llama a la API de Instagram
+  y valida la sesión del panel antes de publicar).
+- **Botón en el panel:** ya integrado en `admin.html`. En el listado de artículos
+  aparece un botón rosa **"📷 Instagram"** junto a "Publicar/Despublicar".
 
 Lo único que falta es lo que **solo puedes hacer tú**: preparar la cuenta y
 conseguir 2 datos (un ID y un token) que se pegan en Netlify.
@@ -79,18 +80,19 @@ En Netlify → tu sitio → **Site settings → Environment variables**, crea:
 
 Vuelve a desplegar el sitio para que las variables tengan efecto.
 
-## Paso 5 · Añade el botón al panel
+## Paso 5 · Usa el botón (ya está en el panel)
 
-Abre `admin.html` y pega el contenido de
-`netlify/functions/instagram-publish-boton.html.txt`:
+No hay que tocar código: en el **listado de artículos** de `admin.html`, cada
+artículo tiene un botón rosa **"📷 Instagram"** junto a "Publicar/Despublicar".
 
-- El `<button>` va dentro de la ficha de cada publicación, rellenando
-  `data-image-url` con la **URL pública de la foto** y `data-descripcion` con la
-  descripción del artículo (sin precio).
-- El `<script>` va una sola vez cerca del final del `<body>`.
+Flujo típico: subes/creas el artículo → lo publicas en la web ("✓ Publicar") →
+pulsas **"📷 Instagram"** y confirmas. La foto se sube a Instagram con la
+descripción del artículo (composición de la ficha técnica, o el nombre si no hay
+ficha) y **siempre sin precio**.
 
-Si activaste `INSTAGRAM_FN_SECRET`, pon el mismo valor en la constante
-`IG_SECRET` del script.
+> El botón usa la foto principal del artículo a resolución `w1080`. Requiere que
+> el artículo tenga al menos una foto y que hayas rellenado las variables de
+> Netlify del Paso 4.
 
 ---
 

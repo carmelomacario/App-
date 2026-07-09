@@ -24,7 +24,7 @@ clientescanarymodas/
 ├── .netlifyignore          ✅ rescatado
 ├── sw.js                   ⬆️ pendiente subir   (Service Worker, 4,5 KB)
 ├── index.html              ⬆️ pendiente subir   (240 KB)
-├── admin.html              ⬆️ pendiente subir   (165 KB)
+├── admin.html              ✅ rescatado   (165 KB · con botón "📷 Instagram")
 ├── almacen.html            ⬆️ pendiente subir   (59 KB)
 ├── logo-canary.png         ⬆️ pendiente subir
 ├── portada-*.png           ⬆️ pendiente subir   (preventa, licencias, novedades-semana)
