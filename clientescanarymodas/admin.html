@@ -479,6 +479,7 @@
       <button class="btn" id="btnGuardarSeguir" onclick="guardarArticulo(true)" style="margin-top:8px;background:#1f8a4c;color:#fff">➕ Guardar y subir otro (misma categoría)</button>
       <button class="btn btn-secundario" id="btnBorrarArt" onclick="borrarArticulo()" style="display:none;margin-top:8px">⏸ Dar de baja (oculta a clientes)</button>
       <button class="btn btn-peligro" id="btnEliminarArt" onclick="eliminarArticulo()" style="display:none;margin-top:8px">🗑 Eliminar definitivamente</button>
+      <button class="btn" id="btnInstagramArt" onclick="publicarEnInstagram(state.artEditando, event)" style="display:none;margin-top:8px;background:#E1306C;color:#fff">📷 Publicar en Instagram (sin precio)</button>
       <div class="hint" style="text-align:center;margin-top:10px">El artículo aparecerá inmediatamente en la app de clientes/comerciales</div>
     </div>
   </div>
@@ -1192,6 +1193,7 @@ function prepararFormArticulo(){
     $("btnGuardarArt").textContent = "Guardar cambios";
     $("btnBorrarArt").style.display = "";
     $("btnEliminarArt").style.display = "";
+    { const ig = $("btnInstagramArt"); if (ig) ig.style.display = ""; }   // v1.22.0
     const bd = $("btnDuplicarArt"); if (bd) bd.style.display = "";   // v1.13.30
     const gs = $("btnGuardarSeguir"); if (gs) gs.style.display = "none";   // v1.19.0: no en edición
   } else {
@@ -1199,6 +1201,7 @@ function prepararFormArticulo(){
     $("btnGuardarArt").textContent = "Guardar artículo";
     $("btnBorrarArt").style.display = "none";
     $("btnEliminarArt").style.display = "none";
+    { const ig = $("btnInstagramArt"); if (ig) ig.style.display = "none"; }   // v1.22.0
     const bd = $("btnDuplicarArt"); if (bd) bd.style.display = "none"; // v1.13.30
     const gs = $("btnGuardarSeguir"); if (gs) gs.style.display = "";   // v1.19.0: alta en cadena
   }
