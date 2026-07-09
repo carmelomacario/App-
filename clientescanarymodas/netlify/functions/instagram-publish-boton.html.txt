@@ -1,0 +1,71 @@
+<!--
+  FRAGMENTO PARA PEGAR EN admin.html
+  Botón "Publicar en IG" (disparo manual) + llamada a la Netlify Function.
+
+  Cómo integrarlo:
+  1) Coloca el <button> dentro de la ficha/tarjeta de cada publicación del panel.
+  2) Rellena data-image-url con la URL PÚBLICA de la foto del artículo
+     y data-descripcion con la descripción (NO incluyas el precio; además la
+     función lo vuelve a limpiar por seguridad).
+  3) El <script> de abajo va una sola vez, cerca del final del <body>.
+-->
+
+<!-- (A) Botón dentro de cada publicación -->
+<button
+  type="button"
+  class="btn-publicar-ig"
+  data-image-url="URL_PUBLICA_DE_LA_FOTO"
+  data-descripcion="DESCRIPCION_DEL_ARTICULO_SIN_PRECIO">
+  📷 Publicar en IG
+</button>
+
+<!-- (B) Script: una sola vez en la página -->
+<script>
+(function () {
+  // Si activaste INSTAGRAM_FN_SECRET en Netlify, pon aquí el mismo valor.
+  // Déjalo vacío si no usas secreto.
+  const IG_SECRET = '';
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.btn-publicar-ig');
+    if (!btn) return;
+
+    const imageUrl = btn.dataset.imageUrl;
+    const descripcion = btn.dataset.descripcion || '';
+
+    if (!imageUrl || imageUrl === 'URL_PUBLICA_DE_LA_FOTO') {
+      alert('Esta publicación no tiene una URL de foto pública asignada.');
+      return;
+    }
+
+    const textoOriginal = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '⏳ Publicando…';
+
+    try {
+      const res = await fetch('/.netlify/functions/instagram-publish', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(IG_SECRET ? { 'x-ig-secret': IG_SECRET } : {}),
+        },
+        body: JSON.stringify({ imageUrl, descripcion }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        btn.textContent = '✅ Publicado';
+        alert('Publicado en Instagram correctamente.');
+      } else {
+        btn.textContent = textoOriginal;
+        btn.disabled = false;
+        alert('No se pudo publicar: ' + (data.error || 'error desconocido'));
+      }
+    } catch (err) {
+      btn.textContent = textoOriginal;
+      btn.disabled = false;
+      alert('Error de red al publicar: ' + err.message);
+    }
+  });
+})();
+</script>

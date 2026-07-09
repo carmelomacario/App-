@@ -1,6 +1,6 @@
 {
   "name": "canary-modas-b2b",
-  "version": "1.21.32",
+  "version": "1.22.0",
   "description": "App B2B Canary Modas - Catálogo y pedidos online para clientes y comerciales",
   "private": true,
   "type": "module",
