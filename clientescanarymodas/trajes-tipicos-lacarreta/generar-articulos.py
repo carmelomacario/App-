@@ -180,8 +180,10 @@ add("Faldas","Falda Cuadros","80% poliéster / 20% viscosa",["Cuadros tradiciona
     [("Infantil",INF_4_16,12.70),("Adulto",AD_S_5XL,17.50)])
 
 # ---------- construir artículos ----------
-CAT_ID={"Camisas":810,"Chalecos":811,"Pantalones y calzones":812,"Complementos":813,"Blusas":814,"Faldas":815}
-SECCION_ID=606; SECCION="Trajes típicos y accesorios"
+# Estructura: PROGRAMACIONES (sección) › TÍPICO CANARIO (categoría) › prenda (tipo)
+SECCION_ID=607; SECCION="PROGRAMACIONES"
+CATEGORIA_ID=820; CATEGORIA="TÍPICO CANARIO"
+TIPO_ID={"Camisas":821,"Chalecos":822,"Pantalones y calzones":823,"Complementos":824,"Blusas":825,"Faldas":826}
 arts=[]; filas=[]
 for p in P:
     for suf,tallas,coste in p["variantes"]:
@@ -189,17 +191,17 @@ for p in P:
         precio = pvp(coste)
         codigo = "LACARRETA_"+slug(nombre)
         art = {
-            "codigo": codigo, "nombre": nombre, "categoria": p["fam"],
+            "codigo": codigo, "nombre": nombre,
             "precio": precio if precio is not None else 0,
             "portes": 0, "seccionId": SECCION_ID, "seccion": SECCION,
-            "categoriaId": CAT_ID[p["fam"]], "categoria": p["fam"],
-            "tipoId": None, "tipo": None,
+            "categoriaId": CATEGORIA_ID, "categoria": CATEGORIA,
+            "tipoId": TIPO_ID[p["fam"]], "tipo": p["fam"],
             "colores": p["colores"], "tallas": [{"t":t} for t in tallas],
             "tiposSujetador": [],
             "fichaTecnica": {"composicion": p["comp"], "packing": "",
                              "fabricante": "La Carreta", "lavado": p["nota"],
                              "origen": "España", "refProveedor": "La Carreta"},
-            "agotadas": [], "novedad": True, "activo": True,
+            "agotadas": [], "novedad": False, "activo": True,
             "pendienteRevision": (precio is None), "carpetaId": None, "codigoA3": None,
             "copas": [], "minUnidadesPorColor": 0, "udsPorPack": 1, "fotos": [],
             "creado": "2026-07-21T09:00:00.000Z", "modificado": "2026-07-21T09:00:00.000Z",
