@@ -1,0 +1,7582 @@
+[
+ {
+  "codigo": "LACARRETA_CAMISA_CUELLO_MAO_INFANTIL_0_4",
+  "nombre": "Camisa Cuello Mao · Infantil (0-4)",
+  "categoria": "Camisas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CUELLO_MAO_INFANTIL_6_16",
+  "nombre": "Camisa Cuello Mao · Infantil (6-16)",
+  "categoria": "Camisas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CUELLO_MAO_ADULTO",
+  "nombre": "Camisa Cuello Mao · Adulto",
+  "categoria": "Camisas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_RAYADA_INFANTIL",
+  "nombre": "Camisa Listada Rayada · Infantil",
+  "categoria": "Camisas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_RAYADA_ADULTO",
+  "nombre": "Camisa Listada Rayada · Adulto",
+  "categoria": "Camisas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_CRUDO_BLANCO_INFANTIL",
+  "nombre": "Camisa Romero Popelín (Crudo/Blanco) · Infantil",
+  "categoria": "Camisas",
+  "precio": 10.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_CRUDO_BLANCO_ADULTO",
+  "nombre": "Camisa Romero Popelín (Crudo/Blanco) · Adulto",
+  "categoria": "Camisas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_COLORES_INFANTIL",
+  "nombre": "Camisa Romero Popelín (Colores) · Infantil",
+  "categoria": "Camisas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural",
+   "Marino",
+   "Negro",
+   "Vino",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_COLORES_ADULTO",
+  "nombre": "Camisa Romero Popelín (Colores) · Adulto",
+  "categoria": "Camisas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural",
+   "Marino",
+   "Negro",
+   "Vino",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_CRUDO_BLANCO_INFANTIL",
+  "nombre": "Camisa Romero Lino Eco (Crudo/Blanco) · Infantil",
+  "categoria": "Camisas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_CRUDO_BLANCO_ADULTO",
+  "nombre": "Camisa Romero Lino Eco (Crudo/Blanco) · Adulto",
+  "categoria": "Camisas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_COLORES_INFANTIL",
+  "nombre": "Camisa Romero Lino Eco (Colores) · Infantil",
+  "categoria": "Camisas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural",
+   "Marino",
+   "Negro",
+   "Vino",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_COLORES_ADULTO",
+  "nombre": "Camisa Romero Lino Eco (Colores) · Adulto",
+  "categoria": "Camisas",
+  "precio": 16.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural",
+   "Marino",
+   "Negro",
+   "Vino",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LINO_ECO_LISA_CUELLO_MAO_INFANTIL",
+  "nombre": "Camisa Lino Eco Lisa Cuello Mao · Infantil",
+  "categoria": "Camisas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LINO_ECO_LISA_CUELLO_MAO_ADULTO",
+  "nombre": "Camisa Lino Eco Lisa Cuello Mao · Adulto",
+  "categoria": "Camisas",
+  "precio": 17.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISA_PINZA_CUELLO_MAO_INFANTIL",
+  "nombre": "Camisa Lisa Pinza Cuello Mao · Infantil",
+  "categoria": "Camisas",
+  "precio": 9.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Popelín Crudo",
+   "Popelín Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISA_PINZA_CUELLO_MAO_ADULTO",
+  "nombre": "Camisa Lisa Pinza Cuello Mao · Adulto",
+  "categoria": "Camisas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Popelín Crudo",
+   "Popelín Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CLEMENTE_POPELIN_INFANTIL",
+  "nombre": "Camisa Clemente Popelín · Infantil",
+  "categoria": "Camisas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CLEMENTE_POPELIN_ADULTO",
+  "nombre": "Camisa Clemente Popelín · Adulto",
+  "categoria": "Camisas",
+  "precio": 16.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CLEMENTE_LINO_ECO_INFANTIL",
+  "nombre": "Camisa Clemente Lino Eco · Infantil",
+  "categoria": "Camisas",
+  "precio": 20.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_CLEMENTE_LINO_ECO_ADULTO",
+  "nombre": "Camisa Clemente Lino Eco · Adulto",
+  "categoria": "Camisas",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_LINO_ECO_INFANTIL",
+  "nombre": "Camisa Listada Lino Eco · Infantil",
+  "categoria": "Camisas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige Rayado",
+   "Tierra Rayado",
+   "Azul",
+   "Gris/Tierra"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_LINO_ECO_ADULTO",
+  "nombre": "Camisa Listada Lino Eco · Adulto",
+  "categoria": "Camisas",
+  "precio": 21.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige Rayado",
+   "Tierra Rayado",
+   "Azul",
+   "Gris/Tierra"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_INFANTIL",
+  "nombre": "Camisa Listada Tapeta Cuadrada · Infantil",
+  "categoria": "Camisas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_ADULTO",
+  "nombre": "Camisa Listada Tapeta Cuadrada · Adulto",
+  "categoria": "Camisas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_LINO_ECO_INFANTIL",
+  "nombre": "Camisa Listada Tapeta Cuadrada Lino Eco · Infantil",
+  "categoria": "Camisas",
+  "precio": 17.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_LINO_ECO_ADULTO",
+  "nombre": "Camisa Listada Tapeta Cuadrada Lino Eco · Adulto",
+  "categoria": "Camisas",
+  "precio": 20.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 810,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Beige",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_BORDADO_SANTA_CRUZ",
+  "nombre": "Chaleco Bordado Santa Cruz",
+  "categoria": "Chalecos",
+  "precio": 33.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rojo tradicional"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lana / 45% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_BORDADO_LA_OROTAVA",
+  "nombre": "Chaleco Bordado La Orotava",
+  "categoria": "Chalecos",
+  "precio": 33.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rojo tradicional"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lana / 45% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_ARTESANO_TRUJILLO",
+  "nombre": "Chaleco Artesano Trujillo",
+  "categoria": "Chalecos",
+  "precio": 61.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Verde con rayas negras"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Se puede solicitar cualquier rayado/colorido",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_ARTESANO_MARINERO",
+  "nombre": "Chaleco Artesano Marinero",
+  "categoria": "Chalecos",
+  "precio": 61.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Listado con ribete rojo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Se puede solicitar cualquier rayado/colorido",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_ARTESANO_DUQUE",
+  "nombre": "Chaleco Artesano Duque",
+  "categoria": "Chalecos",
+  "precio": 61.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul marino con rayas amarillas y rojas"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Se puede solicitar cualquier rayado/colorido",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_CHESTER",
+  "nombre": "Chaleco Chester",
+  "categoria": "Chalecos",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Gris",
+   "Marrón"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_TEIDE_LANA_RAYAS",
+  "nombre": "Chaleco Teide Lana Rayas",
+  "categoria": "Chalecos",
+  "precio": 26.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Raya tradicional"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_DRILL",
+  "nombre": "Chaleco Drill",
+  "categoria": "Chalecos",
+  "precio": 17.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_LINO_GRUESO_LINOTIERRA",
+  "nombre": "Chaleco Lino Grueso (Linotierra)",
+  "categoria": "Chalecos",
+  "precio": 26.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural",
+   "+2 colores"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_MOD_AGUAVIVA",
+  "nombre": "Chaleco Mod. Aguaviva",
+  "categoria": "Chalecos",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rayas tejidas"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_LISTADO_ARTESANO",
+  "nombre": "Chaleco Listado Artesano",
+  "categoria": "Chalecos",
+  "precio": 26.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Listado artesanal"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CHALECO_ARTESANO_LINO_ECO_LISTAS",
+  "nombre": "Chaleco Artesano Lino Eco Listas",
+  "categoria": "Chalecos",
+  "precio": 25.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Varios rayados tradicionales"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_AMERICANA_ROMERIA_ESPIGA",
+  "nombre": "Americana Romería Espiga",
+  "categoria": "Chalecos",
+  "precio": 0,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 811,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Granate",
+   "Marrón",
+   "Tostado",
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "48"
+   },
+   {
+    "t": "50"
+   },
+   {
+    "t": "52"
+   },
+   {
+    "t": "54"
+   },
+   {
+    "t": "56"
+   },
+   {
+    "t": "58"
+   },
+   {
+    "t": "60"
+   },
+   {
+    "t": "62"
+   },
+   {
+    "t": "64"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "Espiga",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Bajo pedido: consultar presupuesto",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": true,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_AGUAVIVA",
+  "nombre": "Pantalón Aguaviva",
+  "categoria": "Pantalones y calzones",
+  "precio": 20.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Marrón Tierra Raya",
+   "Gris Marengo Raya"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_LA_CARRETA",
+  "nombre": "Pantalón La Carreta",
+  "categoria": "Pantalones y calzones",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Tostado",
+   "Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_DRILL",
+  "nombre": "Pantalón Drill",
+  "categoria": "Pantalones y calzones",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón drill",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_LINO_CON_CORDON",
+  "nombre": "Pantalón Lino con Cordón",
+  "categoria": "Pantalones y calzones",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CALZON_TRADICIONAL_DE_LINO",
+  "nombre": "Calzón Tradicional de Lino",
+  "categoria": "Pantalones y calzones",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_PESCADOR_CON_CREMALLERA",
+  "nombre": "Pantalón Pescador con Cremallera",
+  "categoria": "Pantalones y calzones",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Novedad",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_BORDADO_SANTA_CRUZ",
+  "nombre": "Pantalón Bordado Santa Cruz",
+  "categoria": "Pantalones y calzones",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Bordado floral"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lana / 45% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_PANTALON_BORDADO_LA_OROTAVA",
+  "nombre": "Pantalón Bordado La Orotava",
+  "categoria": "Pantalones y calzones",
+  "precio": 24.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 812,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Bordado floral"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   },
+   {
+    "t": "6XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lana / 45% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_LANA_ADULTO_6X20_CM",
+  "nombre": "Fajín Artesano Lana · Adulto (6x20 cm)",
+  "categoria": "Complementos",
+  "precio": 9.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rayado tradicional"
+  ],
+  "tallas": [
+   {
+    "t": "6x20 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% lana merina / 50% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_CANARIO_6X24_CM",
+  "nombre": "Fajín Artesano Canario · 6x24 cm",
+  "categoria": "Complementos",
+  "precio": 9.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul",
+   "Ocre",
+   "Verde",
+   "Negro",
+   "Crudo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "6x24 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_CANARIO_7X28_CM",
+  "nombre": "Fajín Artesano Canario · 7x28 cm",
+  "categoria": "Complementos",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul",
+   "Ocre",
+   "Verde",
+   "Negro",
+   "Crudo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "7x28 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_6X12_CM",
+  "nombre": "Fajín Artesano Rayas Algodón · 6x12 cm",
+  "categoria": "Complementos",
+  "precio": 2.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Granate",
+   "Marrón",
+   "Azulina",
+   "Oro",
+   "Botella"
+  ],
+  "tallas": [
+   {
+    "t": "6x12 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_6X24_CM",
+  "nombre": "Fajín Artesano Rayas Algodón · 6x24 cm",
+  "categoria": "Complementos",
+  "precio": 5.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Granate",
+   "Marrón",
+   "Azulina",
+   "Oro",
+   "Botella"
+  ],
+  "tallas": [
+   {
+    "t": "6x24 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_7X28_CM",
+  "nombre": "Fajín Artesano Rayas Algodón · 7x28 cm",
+  "categoria": "Complementos",
+  "precio": 5.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Granate",
+   "Marrón",
+   "Azulina",
+   "Oro",
+   "Botella"
+  ],
+  "tallas": [
+   {
+    "t": "7x28 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_CABALLERO_LISO_5X12_CM",
+  "nombre": "Fajín Caballero Liso · 5x12 cm",
+  "categoria": "Complementos",
+  "precio": 1.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Marrón",
+   "Crudo·Azul",
+   "Granate",
+   "Azulón",
+   "Morado"
+  ],
+  "tallas": [
+   {
+    "t": "5x12 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_CABALLERO_LISO_6X24_CM",
+  "nombre": "Fajín Caballero Liso · 6x24 cm",
+  "categoria": "Complementos",
+  "precio": 3.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Marrón",
+   "Crudo·Azul",
+   "Granate",
+   "Azulón",
+   "Morado"
+  ],
+  "tallas": [
+   {
+    "t": "6x24 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FAJIN_CABALLERO_LISO_7X28_CM",
+  "nombre": "Fajín Caballero Liso · 7x28 cm",
+  "categoria": "Complementos",
+  "precio": 5.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo·Marrón",
+   "Crudo·Azul",
+   "Granate",
+   "Azulón",
+   "Morado"
+  ],
+  "tallas": [
+   {
+    "t": "7x28 cm"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_0_2",
+  "nombre": "Polainas Caballero · Talla 0-2",
+  "categoria": "Complementos",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "1"
+   },
+   {
+    "t": "2"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_3",
+  "nombre": "Polainas Caballero · Talla 3",
+  "categoria": "Complementos",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "3"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_4",
+  "nombre": "Polainas Caballero · Talla 4",
+  "categoria": "Complementos",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "4"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_5",
+  "nombre": "Polainas Caballero · Talla 5",
+  "categoria": "Complementos",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "5"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_6",
+  "nombre": "Polainas Caballero · Talla 6",
+  "categoria": "Complementos",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "6"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_4",
+  "nombre": "Polainas Artesanas Trenzas · Talla 4",
+  "categoria": "Complementos",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "4"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_5",
+  "nombre": "Polainas Artesanas Trenzas · Talla 5",
+  "categoria": "Complementos",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "5"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_6",
+  "nombre": "Polainas Artesanas Trenzas · Talla 6",
+  "categoria": "Complementos",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "6"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% algodón / 50% acrílico",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CACHORRO_CABALLERO_LANA_FORRADO_INFANTIL_49_54",
+  "nombre": "Cachorro Caballero Lana Forrado · Infantil (49-54)",
+  "categoria": "Complementos",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Gris Marengo"
+  ],
+  "tallas": [
+   {
+    "t": "49"
+   },
+   {
+    "t": "50"
+   },
+   {
+    "t": "51"
+   },
+   {
+    "t": "52"
+   },
+   {
+    "t": "53"
+   },
+   {
+    "t": "54"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% paño de lana (forro piel)",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_CACHORRO_CABALLERO_LANA_FORRADO_ADULTO_55_60",
+  "nombre": "Cachorro Caballero Lana Forrado · Adulto (55-60)",
+  "categoria": "Complementos",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Gris Marengo"
+  ],
+  "tallas": [
+   {
+    "t": "55"
+   },
+   {
+    "t": "56"
+   },
+   {
+    "t": "57"
+   },
+   {
+    "t": "58"
+   },
+   {
+    "t": "59"
+   },
+   {
+    "t": "60"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% paño de lana (forro piel)",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_SOMBRERO_HOMBRE_PESCADOR_INFANTIL_48_52",
+  "nombre": "Sombrero Hombre Pescador · Infantil (48-52)",
+  "categoria": "Complementos",
+  "precio": 4.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Paja Natural"
+  ],
+  "tallas": [
+   {
+    "t": "48"
+   },
+   {
+    "t": "49"
+   },
+   {
+    "t": "50"
+   },
+   {
+    "t": "51"
+   },
+   {
+    "t": "52"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% paja natural",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_SOMBRERO_HOMBRE_PESCADOR_ADULTO_54_62",
+  "nombre": "Sombrero Hombre Pescador · Adulto (54-62)",
+  "categoria": "Complementos",
+  "precio": 5.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 813,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Paja Natural"
+  ],
+  "tallas": [
+   {
+    "t": "54"
+   },
+   {
+    "t": "55"
+   },
+   {
+    "t": "56"
+   },
+   {
+    "t": "57"
+   },
+   {
+    "t": "58"
+   },
+   {
+    "t": "59"
+   },
+   {
+    "t": "60"
+   },
+   {
+    "t": "61"
+   },
+   {
+    "t": "62"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% paja natural",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_LISOS_INFANTIL",
+  "nombre": "Blusa María (Manga Larga) · Lisos Infantil",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_LISOS_ADULTO",
+  "nombre": "Blusa María (Manga Larga) · Lisos Adulto",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESPECIALES_INFANTIL",
+  "nombre": "Blusa María (Manga Larga) · Especiales Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESPECIALES_ADULTO",
+  "nombre": "Blusa María (Manga Larga) · Especiales Adulto",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESTAMPADOS_INFANTIL",
+  "nombre": "Blusa María (Manga Larga) · Estampados Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESTAMPADOS_ADULTO",
+  "nombre": "Blusa María (Manga Larga) · Estampados Adulto",
+  "categoria": "Blusas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_LISOS_INFANTIL",
+  "nombre": "Blusa María (Manga Corta) · Lisos Infantil",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_LISOS_ADULTO",
+  "nombre": "Blusa María (Manga Corta) · Lisos Adulto",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESPECIALES_INFANTIL",
+  "nombre": "Blusa María (Manga Corta) · Especiales Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESPECIALES_ADULTO",
+  "nombre": "Blusa María (Manga Corta) · Especiales Adulto",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESTAMPADOS_INFANTIL",
+  "nombre": "Blusa María (Manga Corta) · Estampados Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESTAMPADOS_ADULTO",
+  "nombre": "Blusa María (Manga Corta) · Estampados Adulto",
+  "categoria": "Blusas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_LISOS_INFANTIL",
+  "nombre": "Blusa María (Manga Larga Volante) · Lisos Infantil",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_LISOS_ADULTO",
+  "nombre": "Blusa María (Manga Larga Volante) · Lisos Adulto",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESPECIALES_INFANTIL",
+  "nombre": "Blusa María (Manga Larga Volante) · Especiales Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESPECIALES_ADULTO",
+  "nombre": "Blusa María (Manga Larga Volante) · Especiales Adulto",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESTAMPADOS_INFANTIL",
+  "nombre": "Blusa María (Manga Larga Volante) · Estampados Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESTAMPADOS_ADULTO",
+  "nombre": "Blusa María (Manga Larga Volante) · Estampados Adulto",
+  "categoria": "Blusas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco",
+   "Crudo",
+   "Negro",
+   "Azul Floral (est.)",
+   "Rosa Floral (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio según acabado: liso / color especial / estampado",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_YAIZA_INFANTIL",
+  "nombre": "Blusa Yaiza · Infantil",
+  "categoria": "Blusas",
+  "precio": 10.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rojo",
+   "Blanco",
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_YAIZA_ADULTO",
+  "nombre": "Blusa Yaiza · Adulto",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Rojo",
+   "Blanco",
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DRAGO_INFANTIL",
+  "nombre": "Blusa Drago · Infantil",
+  "categoria": "Blusas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DRAGO_ADULTO",
+  "nombre": "Blusa Drago · Adulto",
+  "categoria": "Blusas",
+  "precio": 17.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_CALADA_LA_OROTAVA_INFANTIL",
+  "nombre": "Blusa Calada La Orotava · Infantil",
+  "categoria": "Blusas",
+  "precio": 21.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco/Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_CALADA_LA_OROTAVA_ADULTO",
+  "nombre": "Blusa Calada La Orotava · Adulto",
+  "categoria": "Blusas",
+  "precio": 23.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco/Crudo"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_VANJAR_INFANTIL",
+  "nombre": "Blusa Vanjar · Infantil",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Ocre",
+   "Tabaco",
+   "Vino",
+   "Marino",
+   "Crudo",
+   "Blanco",
+   "Negro",
+   "Verde Botella",
+   "Azul (est.)",
+   "Rosa (est.)",
+   "Granate (est.)",
+   "Morado (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_VANJAR_ADULTO",
+  "nombre": "Blusa Vanjar · Adulto",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Ocre",
+   "Tabaco",
+   "Vino",
+   "Marino",
+   "Crudo",
+   "Blanco",
+   "Negro",
+   "Verde Botella",
+   "Azul (est.)",
+   "Rosa (est.)",
+   "Granate (est.)",
+   "Morado (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_NAYARA_INFANTIL",
+  "nombre": "Blusa Nayara · Infantil",
+  "categoria": "Blusas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% lino / 50% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_NAYARA_ADULTO",
+  "nombre": "Blusa Nayara · Adulto",
+  "categoria": "Blusas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% lino / 50% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DELIA_LINO_ECO_INFANTIL",
+  "nombre": "Blusa Delia Lino Eco · Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Crudo Natural",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% lino / 50% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DELIA_LINO_ECO_ADULTO",
+  "nombre": "Blusa Delia Lino Eco · Adulto",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Crudo Natural",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "50% lino / 50% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DELIA_POPELIN_INFANTIL",
+  "nombre": "Blusa Delia Popelín · Infantil",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco",
+   "Natural",
+   "Negro Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_DELIA_POPELIN_ADULTO",
+  "nombre": "Blusa Delia Popelín · Adulto",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo",
+   "Blanco",
+   "Natural",
+   "Negro Óptico"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_IBALLA_INFANTIL",
+  "nombre": "Blusa Iballa · Infantil",
+  "categoria": "Blusas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural",
+   "Negro",
+   "Gris Marengo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_IBALLA_ADULTO",
+  "nombre": "Blusa Iballa · Adulto",
+  "categoria": "Blusas",
+  "precio": 17.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural",
+   "Negro",
+   "Gris Marengo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_TAIS_INFANTIL",
+  "nombre": "Blusa Tais · Infantil",
+  "categoria": "Blusas",
+  "precio": 13.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul (est.)",
+   "Granate (est.)",
+   "Rosa (est.)",
+   "Morado (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio a confirmar (bloque ambiguo en el PDF)",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_TAIS_ADULTO",
+  "nombre": "Blusa Tais · Adulto",
+  "categoria": "Blusas",
+  "precio": 16.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Azul (est.)",
+   "Granate (est.)",
+   "Rosa (est.)",
+   "Morado (est.)"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "Precio a confirmar (bloque ambiguo en el PDF)",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_ELISA_ADULTO",
+  "nombre": "Blusa Elisa · Adulto",
+  "categoria": "Blusas",
+  "precio": 22.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Bordado inglés"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_AZUCENA_LINO_ECO_ADULTO",
+  "nombre": "Blusa Azucena Lino Eco · Adulto",
+  "categoria": "Blusas",
+  "precio": 16.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Negro",
+   "Gris Marengo",
+   "Vino",
+   "Índigo",
+   "Tabaco"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_AZUCENA_POPELIN_INFANTIL",
+  "nombre": "Blusa Azucena Popelín · Infantil",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_AZUCENA_POPELIN_ADULTO",
+  "nombre": "Blusa Azucena Popelín · Adulto",
+  "categoria": "Blusas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_TRADICIONAL_ADULTO",
+  "nombre": "Blusa Tradicional · Adulto",
+  "categoria": "Blusas",
+  "precio": 29.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "55% lino / 45% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MAR_INFANTIL",
+  "nombre": "Blusa Mar · Infantil",
+  "categoria": "Blusas",
+  "precio": 14.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_MAR_ADULTO",
+  "nombre": "Blusa Mar · Adulto",
+  "categoria": "Blusas",
+  "precio": 16.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_ANGIE_INFANTIL",
+  "nombre": "Blusa Angie · Infantil",
+  "categoria": "Blusas",
+  "precio": 10.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural",
+   "Negro",
+   "Marino",
+   "Gris Marengo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "0"
+   },
+   {
+    "t": "2"
+   },
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_ANGIE_ADULTO",
+  "nombre": "Blusa Angie · Adulto",
+  "categoria": "Blusas",
+  "precio": 11.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural",
+   "Negro",
+   "Marino",
+   "Gris Marengo",
+   "Vino"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_TAIRA_ADULTO",
+  "nombre": "Blusa Taira · Adulto",
+  "categoria": "Blusas",
+  "precio": 19.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Blanco Óptico",
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_BLUSA_JENYFER_ADULTO",
+  "nombre": "Blusa Jenyfer · Adulto",
+  "categoria": "Blusas",
+  "precio": 26.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 814,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Crudo Natural"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_GALA",
+  "nombre": "Falda Gala",
+  "categoria": "Faldas",
+  "precio": 47.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Verde Esmeralda",
+   "Marino",
+   "Gris Marengo",
+   "Granate",
+   "Morado",
+   "Caldero"
+  ],
+  "tallas": [
+   {
+    "t": "Única"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_LUJO",
+  "nombre": "Falda Lujo",
+  "categoria": "Faldas",
+  "precio": 39.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Verde Esmeralda",
+   "Marino",
+   "Gris Marengo",
+   "Granate",
+   "Morado",
+   "Caldero"
+  ],
+  "tallas": [
+   {
+    "t": "Única"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "65% poliéster / 35% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_MORELLA_INFANTIL",
+  "nombre": "Falda Morella · Infantil",
+  "categoria": "Faldas",
+  "precio": 12.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Verde Esmeralda",
+   "Marino",
+   "Gris Marengo",
+   "Granate",
+   "Morado",
+   "Caldero"
+  ],
+  "tallas": [
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_MORELLA_ADULTO",
+  "nombre": "Falda Morella · Adulto",
+  "categoria": "Faldas",
+  "precio": 15.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Negro",
+   "Marrón",
+   "Verde Esmeralda",
+   "Marino",
+   "Gris Marengo",
+   "Granate",
+   "Morado",
+   "Caldero"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_CUADROS_INFANTIL",
+  "nombre": "Falda Cuadros · Infantil",
+  "categoria": "Faldas",
+  "precio": 18.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Cuadros tradicionales"
+  ],
+  "tallas": [
+   {
+    "t": "4"
+   },
+   {
+    "t": "6"
+   },
+   {
+    "t": "8"
+   },
+   {
+    "t": "10"
+   },
+   {
+    "t": "12"
+   },
+   {
+    "t": "14"
+   },
+   {
+    "t": "16"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "80% poliéster / 20% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ },
+ {
+  "codigo": "LACARRETA_FALDA_CUADROS_ADULTO",
+  "nombre": "Falda Cuadros · Adulto",
+  "categoria": "Faldas",
+  "precio": 25.95,
+  "portes": 0,
+  "seccionId": 606,
+  "seccion": "Trajes típicos y accesorios",
+  "categoriaId": 815,
+  "tipoId": null,
+  "tipo": null,
+  "colores": [
+   "Cuadros tradicionales"
+  ],
+  "tallas": [
+   {
+    "t": "S"
+   },
+   {
+    "t": "M"
+   },
+   {
+    "t": "L"
+   },
+   {
+    "t": "XL"
+   },
+   {
+    "t": "2XL"
+   },
+   {
+    "t": "3XL"
+   },
+   {
+    "t": "4XL"
+   },
+   {
+    "t": "5XL"
+   }
+  ],
+  "tiposSujetador": [],
+  "fichaTecnica": {
+   "composicion": "80% poliéster / 20% viscosa",
+   "packing": "",
+   "fabricante": "La Carreta",
+   "lavado": "",
+   "origen": "España",
+   "refProveedor": "La Carreta"
+  },
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-07-21T09:00:00.000Z",
+  "modificado": "2026-07-21T09:00:00.000Z"
+ }
+]
