@@ -81,12 +81,12 @@ Incrustadas en `LA CARRETA.pdf` (Drive, 27 MB):
 
 ---
 
-## EXTRA — Quitar la carátula de «Merchandising Mundial España»
-En `jerarquia.js`, sección `id 604`, **elimina la propiedad `portada`**:
-```js
-// ANTES
-{ id: 604, nombre: "Merchan Mundial", icono: "🇪🇸", portada: PORTADA("1DcbrNcDB5c993uasx2sUyKorTpWnE8zH"), categorias: [] },
-// DESPUÉS
-{ id: 604, nombre: "Merchan Mundial", icono: "🇪🇸", categorias: [] },
-```
+## EXTRA — Eliminar el tile «Merchandising Mundial España» del home
+Quitar el tile por completo (no solo la carátula). En `catalogo.js`, dentro de `VITRINA_HOME`:
+1. **Borra la entrada de `destacadas`** cuyo `seccionId: 604` (el tile «MERCHAN MUNDIAL» /
+   «MERCHANDISING MUNDIAL ESPAÑA»).
+2. Si el `604` aparece en `proximas`, **quítalo también**.
+3. (Opcional) En `jerarquia.js`, a la sección `id 604`, añádele `ocultarHome: true` para que
+   tampoco aparezca en el home del admin/comercial.
+
 Luego entra en el mismo `netlify deploy --prod`.
