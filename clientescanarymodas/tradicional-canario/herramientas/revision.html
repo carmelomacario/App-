@@ -1,0 +1,287 @@
+<!-- content only -->
+<title>Revisión · PROGRAMACIONES › Típico Canario</title>
+<style>
+  :root{
+    --bg:#f6f2ea;--panel:#fffdf8;--ink:#241c17;--muted:#6b5d4f;--line:#e4dccc;
+    --accent:#a5232f;--accent-soft:#f3dcd8;--tierra:#7a6a3f;
+    --ok:#3d7a3d;--ok-bg:#e7f1e3;--warn:#9a6a15;--warn-bg:#f7ecd4;--fix:#a5232f;--fix-bg:#f6ddd9;
+    --field:#fbf7ee;--pvp-bg:#eef3e9;--pvp-ink:#3d5127;
+    --shadow:0 1px 2px rgba(60,40,20,.06),0 8px 24px rgba(60,40,20,.05);
+    --serif:ui-serif,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#191411;--panel:#231b16;--ink:#f0e7db;--muted:#a99a86;--line:#3a2e24;
+    --accent:#e8737d;--accent-soft:#40201f;--tierra:#c3ad74;
+    --ok:#93c17d;--ok-bg:#22301c;--warn:#d9b061;--warn-bg:#322813;--fix:#e8737d;--fix-bg:#3a1f1f;
+    --field:#1c1510;--pvp-bg:#20291b;--pvp-ink:#a9c68a;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);}}
+  :root[data-theme="light"]{--bg:#f6f2ea;--panel:#fffdf8;--ink:#241c17;--muted:#6b5d4f;--line:#e4dccc;--accent:#a5232f;--accent-soft:#f3dcd8;--tierra:#7a6a3f;--ok:#3d7a3d;--ok-bg:#e7f1e3;--warn:#9a6a15;--warn-bg:#f7ecd4;--fix:#a5232f;--fix-bg:#f6ddd9;--field:#fbf7ee;--pvp-bg:#eef3e9;--pvp-ink:#3d5127;}
+  :root[data-theme="dark"]{--bg:#191411;--panel:#231b16;--ink:#f0e7db;--muted:#a99a86;--line:#3a2e24;--accent:#e8737d;--accent-soft:#40201f;--tierra:#c3ad74;--ok:#93c17d;--ok-bg:#22301c;--warn:#d9b061;--warn-bg:#322813;--fix:#e8737d;--fix-bg:#3a1f1f;--field:#1c1510;--pvp-bg:#20291b;--pvp-ink:#a9c68a;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.45;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:20px 14px 120px}
+  header.top{border-bottom:2px solid var(--accent);padding-bottom:16px;margin-bottom:16px}
+  .eyebrow{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,4vw,2.1rem);margin:.2em 0 .1em;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:.92rem;max-width:62ch}
+  /* barra pegajosa */
+  .bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);
+    padding:10px 0;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .counts{display:flex;gap:6px;flex-wrap:wrap;font-size:.78rem}
+  .pill{padding:3px 9px;border-radius:999px;font-weight:700;font-variant-numeric:tabular-nums;border:1px solid var(--line)}
+  .pill.tot{background:var(--panel);color:var(--muted)}
+  .pill.ok{background:var(--ok-bg);color:var(--ok)}
+  .pill.warn{background:var(--warn-bg);color:var(--warn)}
+  .pill.fix{background:var(--fix-bg);color:var(--fix)}
+  .pill.pend{background:var(--panel);color:var(--muted)}
+  .spacer{flex:1 1 auto}
+  select,input,textarea{font-family:inherit;font-size:.86rem;color:var(--ink);background:var(--field);
+    border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+  input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .btn{cursor:pointer;font-weight:700;font-size:.82rem;border:1px solid var(--accent);background:var(--accent);
+    color:#fff;border-radius:9px;padding:8px 12px}
+  .btn.ghost{background:transparent;color:var(--accent)}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .filters input[type=search]{flex:1 1 180px;min-width:140px}
+  /* grupos */
+  .grp-h{display:flex;align-items:baseline;gap:10px;margin:22px 0 10px}
+  .grp-h h2{font-family:var(--serif);font-weight:600;font-size:1.25rem;margin:0}
+  .badge{font-size:.62rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--panel);
+    background:var(--tierra);padding:3px 8px;border-radius:999px}
+  .grp-h .c{margin-left:auto;color:var(--muted);font-size:.78rem;font-variant-numeric:tabular-nums}
+  /* tarjeta artículo */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);
+    padding:12px 13px;margin-bottom:10px;display:grid;gap:10px}
+  .card.st-ok{border-left:4px solid var(--ok)}
+  .card.st-revisar{border-left:4px solid var(--warn)}
+  .card.st-corregir{border-left:4px solid var(--fix)}
+  .card .name{font-weight:700;font-size:.98rem}
+  .card .meta{color:var(--muted);font-size:.76rem}
+  .fields{display:grid;grid-template-columns:1fr;gap:9px}
+  @media(min-width:620px){.fields{grid-template-columns:1.4fr .6fr 1fr}}
+  .f label{display:block;font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:3px;font-weight:700}
+  .f input{width:100%}
+  .f .pvp-badge{display:inline-block;margin-left:6px;background:var(--pvp-bg);color:var(--pvp-ink);
+    border-radius:6px;padding:1px 7px;font-weight:700;font-variant-numeric:tabular-nums;font-size:.78rem}
+  .row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .status{display:flex;gap:6px;flex-wrap:wrap}
+  .sbtn{cursor:pointer;border:1px solid var(--line);background:var(--field);color:var(--muted);
+    border-radius:999px;padding:5px 11px;font-size:.78rem;font-weight:700}
+  .sbtn[aria-pressed="true"][data-s="ok"]{background:var(--ok-bg);color:var(--ok);border-color:var(--ok)}
+  .sbtn[aria-pressed="true"][data-s="revisar"]{background:var(--warn-bg);color:var(--warn);border-color:var(--warn)}
+  .sbtn[aria-pressed="true"][data-s="corregir"]{background:var(--fix-bg);color:var(--fix);border-color:var(--fix)}
+  .notewrap{display:none}.notewrap.show{display:block}
+  .notewrap textarea{width:100%;min-height:48px;resize:vertical}
+  .notebtn{cursor:pointer;background:none;border:none;color:var(--accent);font-weight:700;font-size:.78rem;padding:5px}
+  .hidden{display:none!important}
+  .empty{color:var(--muted);text-align:center;padding:40px;font-style:italic}
+  footer{margin-top:30px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:14px}
+  /* barra inferior fija de exportar */
+  .export{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--panel);border-top:1px solid var(--line);
+    box-shadow:0 -6px 20px rgba(60,40,20,.08);padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .export .info{color:var(--muted);font-size:.78rem;margin-right:auto}
+  @media(max-width:560px){.export .info{width:100%;margin-bottom:4px;text-align:center}}
+</style>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Revisión · La Carreta 2027</div>
+    <h1>PROGRAMACIONES › Típico Canario</h1>
+    <p class="sub">Repasa cada artículo: edita <b>colores</b>, <b>precio</b> y <b>tallas</b>, y márcalo
+    <b>OK</b>, <b>Revisar</b> o <b>Corregir</b>. Tu trabajo se guarda solo en este navegador.
+    Cuando termines, pulsa <b>Descargar revisión</b> abajo y me lo pasas.</p>
+  </header>
+
+  <div class="bar">
+    <div class="counts" id="counts"></div>
+    <span class="spacer"></span>
+    <button class="btn ghost" id="markAllOk" type="button">Marcar visibles OK</button>
+  </div>
+
+  <div class="filters">
+    <input type="search" id="q" placeholder="Buscar por nombre o color…" aria-label="Buscar">
+    <select id="fPrenda" aria-label="Filtrar por prenda"><option value="">Todas las prendas</option></select>
+    <select id="fEstado" aria-label="Filtrar por estado">
+      <option value="">Todos los estados</option>
+      <option value="pendiente">Pendientes</option>
+      <option value="ok">OK</option>
+      <option value="revisar">Revisar</option>
+      <option value="corregir">Corregir</option>
+    </select>
+  </div>
+
+  <div id="list"></div>
+  <div class="empty hidden" id="empty">No hay artículos con esos filtros.</div>
+
+  <footer>
+    122 artículos · Precio recalculado en vivo al editar (coste implícito × 1,5 → ,95 ya aplicado).
+    Los cambios se guardan en tu navegador; usa «Descargar revisión» para enviármelos.
+  </footer>
+</div>
+
+<div class="export">
+  <span class="info" id="expInfo">0 cambios · 0 marcados</span>
+  <button class="btn ghost" id="dlCorr" type="button">Descargar catálogo corregido</button>
+  <button class="btn" id="dlRev" type="button">Descargar revisión</button>
+</div>
+
+<script>
+const DATA = [{"codigo": "LACARRETA_CAMISA_CUELLO_MAO_INFANTIL_0_4", "nombre": "Camisa Cuello Mao · Infantil (0-4)", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo", "precio": 11.95, "tallas": "0 / 2 / 4", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CUELLO_MAO_INFANTIL_6_16", "nombre": "Camisa Cuello Mao · Infantil (6-16)", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo", "precio": 15.95, "tallas": "6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CUELLO_MAO_ADULTO", "nombre": "Camisa Cuello Mao · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo", "precio": 18.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_RAYADA_INFANTIL", "nombre": "Camisa Listada Rayada · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Azul, Marrón", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_RAYADA_ADULTO", "nombre": "Camisa Listada Rayada · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Azul, Marrón", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_CRUDO_BLANCO_INFANTIL", "nombre": "Camisa Romero Popelín (Crudo/Blanco) · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Crudo, Blanco Óptico", "precio": 10.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_CRUDO_BLANCO_ADULTO", "nombre": "Camisa Romero Popelín (Crudo/Blanco) · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Crudo, Blanco Óptico", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_COLORES_INFANTIL", "nombre": "Camisa Romero Popelín (Colores) · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Natural, Marino, Negro, Vino, Marrón", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_POPELIN_COLORES_ADULTO", "nombre": "Camisa Romero Popelín (Colores) · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Natural, Marino, Negro, Vino, Marrón", "precio": 15.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_CRUDO_BLANCO_INFANTIL", "nombre": "Camisa Romero Lino Eco (Crudo/Blanco) · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo, Blanco Óptico", "precio": 14.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_CRUDO_BLANCO_ADULTO", "nombre": "Camisa Romero Lino Eco (Crudo/Blanco) · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo, Blanco Óptico", "precio": 18.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_COLORES_INFANTIL", "nombre": "Camisa Romero Lino Eco (Colores) · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Natural, Marino, Negro, Vino, Marrón", "precio": 13.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_ROMERO_LINO_ECO_COLORES_ADULTO", "nombre": "Camisa Romero Lino Eco (Colores) · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Natural, Marino, Negro, Vino, Marrón", "precio": 16.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LINO_ECO_LISA_CUELLO_MAO_INFANTIL", "nombre": "Camisa Lino Eco Lisa Cuello Mao · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo", "precio": 14.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LINO_ECO_LISA_CUELLO_MAO_ADULTO", "nombre": "Camisa Lino Eco Lisa Cuello Mao · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo", "precio": 17.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISA_PINZA_CUELLO_MAO_INFANTIL", "nombre": "Camisa Lisa Pinza Cuello Mao · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Popelín Crudo, Popelín Blanco", "precio": 9.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISA_PINZA_CUELLO_MAO_ADULTO", "nombre": "Camisa Lisa Pinza Cuello Mao · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Popelín Crudo, Popelín Blanco", "precio": 11.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CLEMENTE_POPELIN_INFANTIL", "nombre": "Camisa Clemente Popelín · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco, Crudo", "precio": 13.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CLEMENTE_POPELIN_ADULTO", "nombre": "Camisa Clemente Popelín · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco, Crudo", "precio": 16.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CLEMENTE_LINO_ECO_INFANTIL", "nombre": "Camisa Clemente Lino Eco · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo, Blanco", "precio": 20.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_CLEMENTE_LINO_ECO_ADULTO", "nombre": "Camisa Clemente Lino Eco · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo, Blanco", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_LINO_ECO_INFANTIL", "nombre": "Camisa Listada Lino Eco · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Beige Rayado, Tierra Rayado, Azul, Gris/Tierra", "precio": 18.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_LINO_ECO_ADULTO", "nombre": "Camisa Listada Lino Eco · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Beige Rayado, Tierra Rayado, Azul, Gris/Tierra", "precio": 21.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_INFANTIL", "nombre": "Camisa Listada Tapeta Cuadrada · Infantil", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Beige, Gris", "precio": 15.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_ADULTO", "nombre": "Camisa Listada Tapeta Cuadrada · Adulto", "prenda": "Camisas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Beige, Gris", "precio": 18.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_LINO_ECO_INFANTIL", "nombre": "Camisa Listada Tapeta Cuadrada Lino Eco · Infantil", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Beige, Gris", "precio": 17.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_CAMISA_LISTADA_TAPETA_CUADRADA_LINO_ECO_ADULTO", "nombre": "Camisa Listada Tapeta Cuadrada Lino Eco · Adulto", "prenda": "Camisas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Beige, Gris", "precio": 20.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_BORDADO_SANTA_CRUZ", "nombre": "Chaleco Bordado Santa Cruz", "prenda": "Chalecos", "comp": "55% lana / 45% viscosa", "nota": "", "colores": "Rojo tradicional", "precio": 33.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_BORDADO_LA_OROTAVA", "nombre": "Chaleco Bordado La Orotava", "prenda": "Chalecos", "comp": "55% lana / 45% viscosa", "nota": "", "colores": "Rojo tradicional", "precio": 33.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_ARTESANO_TRUJILLO", "nombre": "Chaleco Artesano Trujillo", "prenda": "Chalecos", "comp": "65% poliéster / 35% algodón", "nota": "Se puede solicitar cualquier rayado/colorido", "colores": "Verde con rayas negras", "precio": 61.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_ARTESANO_MARINERO", "nombre": "Chaleco Artesano Marinero", "prenda": "Chalecos", "comp": "55% lino / 45% algodón", "nota": "Se puede solicitar cualquier rayado/colorido", "colores": "Listado con ribete rojo", "precio": 61.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_ARTESANO_DUQUE", "nombre": "Chaleco Artesano Duque", "prenda": "Chalecos", "comp": "65% poliéster / 35% algodón", "nota": "Se puede solicitar cualquier rayado/colorido", "colores": "Azul marino con rayas amarillas y rojas", "precio": 61.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_CHESTER", "nombre": "Chaleco Chester", "prenda": "Chalecos", "comp": "65% poliéster / 35% viscosa", "nota": "", "colores": "Gris, Marrón", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_TEIDE_LANA_RAYAS", "nombre": "Chaleco Teide Lana Rayas", "prenda": "Chalecos", "comp": "100% acrílico", "nota": "", "colores": "Raya tradicional", "precio": 26.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_DRILL", "nombre": "Chaleco Drill", "prenda": "Chalecos", "comp": "65% poliéster / 35% viscosa", "nota": "", "colores": "Gris", "precio": 17.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_LINO_GRUESO_LINOTIERRA", "nombre": "Chaleco Lino Grueso (Linotierra)", "prenda": "Chalecos", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Natural, +2 colores", "precio": 26.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_MOD_AGUAVIVA", "nombre": "Chaleco Mod. Aguaviva", "prenda": "Chalecos", "comp": "65% poliéster / 35% viscosa", "nota": "", "colores": "Rayas tejidas", "precio": 12.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_LISTADO_ARTESANO", "nombre": "Chaleco Listado Artesano", "prenda": "Chalecos", "comp": "100% acrílico", "nota": "", "colores": "Listado artesanal", "precio": 26.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CHALECO_ARTESANO_LINO_ECO_LISTAS", "nombre": "Chaleco Artesano Lino Eco Listas", "prenda": "Chalecos", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Varios rayados tradicionales", "precio": 25.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_AMERICANA_ROMERIA_ESPIGA", "nombre": "Americana Romería Espiga", "prenda": "Chalecos", "comp": "Espiga", "nota": "Bajo pedido: consultar presupuesto", "colores": "Granate, Marrón, Tostado, Crudo", "precio": 0, "tallas": "48 / 50 / 52 / 54 / 56 / 58 / 60 / 62 / 64", "bajopedido": true}, {"codigo": "LACARRETA_PANTALON_AGUAVIVA", "nombre": "Pantalón Aguaviva", "prenda": "Pantalones y calzones", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Marrón Tierra Raya, Gris Marengo Raya", "precio": 20.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_LA_CARRETA", "nombre": "Pantalón La Carreta", "prenda": "Pantalones y calzones", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Tostado, Crudo", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_DRILL", "nombre": "Pantalón Drill", "prenda": "Pantalones y calzones", "comp": "100% algodón drill", "nota": "", "colores": "Natural", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_LINO_CON_CORDON", "nombre": "Pantalón Lino con Cordón", "prenda": "Pantalones y calzones", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Natural", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_CALZON_TRADICIONAL_DE_LINO", "nombre": "Calzón Tradicional de Lino", "prenda": "Pantalones y calzones", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Natural", "precio": 15.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_PESCADOR_CON_CREMALLERA", "nombre": "Pantalón Pescador con Cremallera", "prenda": "Pantalones y calzones", "comp": "55% lino / 45% algodón", "nota": "Novedad", "colores": "Natural", "precio": 15.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_BORDADO_SANTA_CRUZ", "nombre": "Pantalón Bordado Santa Cruz", "prenda": "Pantalones y calzones", "comp": "55% lana / 45% viscosa", "nota": "", "colores": "Bordado floral", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_PANTALON_BORDADO_LA_OROTAVA", "nombre": "Pantalón Bordado La Orotava", "prenda": "Pantalones y calzones", "comp": "55% lana / 45% viscosa", "nota": "", "colores": "Bordado floral", "precio": 24.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL / 6XL", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_LANA_ADULTO_6X20_CM", "nombre": "Fajín Artesano Lana · Adulto (6x20 cm)", "prenda": "Complementos", "comp": "50% lana merina / 50% algodón", "nota": "", "colores": "Rayado tradicional", "precio": 9.95, "tallas": "6x20 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_CANARIO_6X24_CM", "nombre": "Fajín Artesano Canario · 6x24 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Azul, Ocre, Verde, Negro, Crudo, Vino", "precio": 9.95, "tallas": "6x24 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_CANARIO_7X28_CM", "nombre": "Fajín Artesano Canario · 7x28 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Azul, Ocre, Verde, Negro, Crudo, Vino", "precio": 12.95, "tallas": "7x28 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_6X12_CM", "nombre": "Fajín Artesano Rayas Algodón · 6x12 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Granate, Marrón, Azulina, Oro, Botella", "precio": 2.95, "tallas": "6x12 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_6X24_CM", "nombre": "Fajín Artesano Rayas Algodón · 6x24 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Granate, Marrón, Azulina, Oro, Botella", "precio": 5.95, "tallas": "6x24 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_ARTESANO_RAYAS_ALGODON_7X28_CM", "nombre": "Fajín Artesano Rayas Algodón · 7x28 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Granate, Marrón, Azulina, Oro, Botella", "precio": 5.95, "tallas": "7x28 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_CABALLERO_LISO_5X12_CM", "nombre": "Fajín Caballero Liso · 5x12 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Marrón, Crudo·Azul, Granate, Azulón, Morado", "precio": 1.95, "tallas": "5x12 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_CABALLERO_LISO_6X24_CM", "nombre": "Fajín Caballero Liso · 6x24 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Marrón, Crudo·Azul, Granate, Azulón, Morado", "precio": 3.95, "tallas": "6x24 cm", "bajopedido": false}, {"codigo": "LACARRETA_FAJIN_CABALLERO_LISO_7X28_CM", "nombre": "Fajín Caballero Liso · 7x28 cm", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Crudo·Marrón, Crudo·Azul, Granate, Azulón, Morado", "precio": 5.95, "tallas": "7x28 cm", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_0_2", "nombre": "Polainas Caballero · Talla 0-2", "prenda": "Complementos", "comp": "100% algodón", "nota": "", "colores": "Natural", "precio": 11.95, "tallas": "0 / 1 / 2", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_3", "nombre": "Polainas Caballero · Talla 3", "prenda": "Complementos", "comp": "100% algodón", "nota": "", "colores": "Natural", "precio": 11.95, "tallas": "3", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_4", "nombre": "Polainas Caballero · Talla 4", "prenda": "Complementos", "comp": "100% algodón", "nota": "", "colores": "Natural", "precio": 12.95, "tallas": "4", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_5", "nombre": "Polainas Caballero · Talla 5", "prenda": "Complementos", "comp": "100% algodón", "nota": "", "colores": "Natural", "precio": 13.95, "tallas": "5", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_CABALLERO_TALLA_6", "nombre": "Polainas Caballero · Talla 6", "prenda": "Complementos", "comp": "100% algodón", "nota": "", "colores": "Natural", "precio": 13.95, "tallas": "6", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_4", "nombre": "Polainas Artesanas Trenzas · Talla 4", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Natural", "precio": 12.95, "tallas": "4", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_5", "nombre": "Polainas Artesanas Trenzas · Talla 5", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Natural", "precio": 12.95, "tallas": "5", "bajopedido": false}, {"codigo": "LACARRETA_POLAINAS_ARTESANAS_TRENZAS_TALLA_6", "nombre": "Polainas Artesanas Trenzas · Talla 6", "prenda": "Complementos", "comp": "50% algodón / 50% acrílico", "nota": "", "colores": "Natural", "precio": 13.95, "tallas": "6", "bajopedido": false}, {"codigo": "LACARRETA_CACHORRO_CABALLERO_LANA_FORRADO_INFANTIL_49_54", "nombre": "Cachorro Caballero Lana Forrado · Infantil (49-54)", "prenda": "Complementos", "comp": "100% paño de lana (forro piel)", "nota": "", "colores": "Negro, Marrón, Gris Marengo", "precio": 11.95, "tallas": "49 / 50 / 51 / 52 / 53 / 54", "bajopedido": false}, {"codigo": "LACARRETA_CACHORRO_CABALLERO_LANA_FORRADO_ADULTO_55_60", "nombre": "Cachorro Caballero Lana Forrado · Adulto (55-60)", "prenda": "Complementos", "comp": "100% paño de lana (forro piel)", "nota": "", "colores": "Negro, Marrón, Gris Marengo", "precio": 13.95, "tallas": "55 / 56 / 57 / 58 / 59 / 60", "bajopedido": false}, {"codigo": "LACARRETA_SOMBRERO_HOMBRE_PESCADOR_INFANTIL_48_52", "nombre": "Sombrero Hombre Pescador · Infantil (48-52)", "prenda": "Complementos", "comp": "100% paja natural", "nota": "", "colores": "Paja Natural", "precio": 4.95, "tallas": "48 / 49 / 50 / 51 / 52", "bajopedido": false}, {"codigo": "LACARRETA_SOMBRERO_HOMBRE_PESCADOR_ADULTO_54_62", "nombre": "Sombrero Hombre Pescador · Adulto (54-62)", "prenda": "Complementos", "comp": "100% paja natural", "nota": "", "colores": "Paja Natural", "precio": 5.95, "tallas": "54 / 55 / 56 / 57 / 58 / 59 / 60 / 61 / 62", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_LISOS_INFANTIL", "nombre": "Blusa María (Manga Larga) · Lisos Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_LISOS_ADULTO", "nombre": "Blusa María (Manga Larga) · Lisos Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESPECIALES_INFANTIL", "nombre": "Blusa María (Manga Larga) · Especiales Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESPECIALES_ADULTO", "nombre": "Blusa María (Manga Larga) · Especiales Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 13.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESTAMPADOS_INFANTIL", "nombre": "Blusa María (Manga Larga) · Estampados Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_ESTAMPADOS_ADULTO", "nombre": "Blusa María (Manga Larga) · Estampados Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_LISOS_INFANTIL", "nombre": "Blusa María (Manga Corta) · Lisos Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_LISOS_ADULTO", "nombre": "Blusa María (Manga Corta) · Lisos Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESPECIALES_INFANTIL", "nombre": "Blusa María (Manga Corta) · Especiales Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESPECIALES_ADULTO", "nombre": "Blusa María (Manga Corta) · Especiales Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 13.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESTAMPADOS_INFANTIL", "nombre": "Blusa María (Manga Corta) · Estampados Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_CORTA_ESTAMPADOS_ADULTO", "nombre": "Blusa María (Manga Corta) · Estampados Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_LISOS_INFANTIL", "nombre": "Blusa María (Manga Larga Volante) · Lisos Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_LISOS_ADULTO", "nombre": "Blusa María (Manga Larga Volante) · Lisos Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESPECIALES_INFANTIL", "nombre": "Blusa María (Manga Larga Volante) · Especiales Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESPECIALES_ADULTO", "nombre": "Blusa María (Manga Larga Volante) · Especiales Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 13.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESTAMPADOS_INFANTIL", "nombre": "Blusa María (Manga Larga Volante) · Estampados Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MARIA_MANGA_LARGA_VOLANTE_ESTAMPADOS_ADULTO", "nombre": "Blusa María (Manga Larga Volante) · Estampados Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio según acabado: liso / color especial / estampado", "colores": "Blanco, Crudo, Negro, Azul Floral (est.), Rosa Floral (est.)", "precio": 14.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_YAIZA_INFANTIL", "nombre": "Blusa Yaiza · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Rojo, Blanco, Negro", "precio": 10.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_YAIZA_ADULTO", "nombre": "Blusa Yaiza · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Rojo, Blanco, Negro", "precio": 11.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DRAGO_INFANTIL", "nombre": "Blusa Drago · Infantil", "prenda": "Blusas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo Natural", "precio": 15.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DRAGO_ADULTO", "nombre": "Blusa Drago · Adulto", "prenda": "Blusas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo Natural", "precio": 17.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_CALADA_LA_OROTAVA_INFANTIL", "nombre": "Blusa Calada La Orotava · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco/Crudo", "precio": 21.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_CALADA_LA_OROTAVA_ADULTO", "nombre": "Blusa Calada La Orotava · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco/Crudo", "precio": 23.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_VANJAR_INFANTIL", "nombre": "Blusa Vanjar · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Ocre, Tabaco, Vino, Marino, Crudo, Blanco, Negro, Verde Botella, Azul (est.), Rosa (est.), Granate (est.), Morado (est.)", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_VANJAR_ADULTO", "nombre": "Blusa Vanjar · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Ocre, Tabaco, Vino, Marino, Crudo, Blanco, Negro, Verde Botella, Azul (est.), Rosa (est.), Granate (est.), Morado (est.)", "precio": 11.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_NAYARA_INFANTIL", "nombre": "Blusa Nayara · Infantil", "prenda": "Blusas", "comp": "50% lino / 50% algodón", "nota": "", "colores": "Natural", "precio": 15.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_NAYARA_ADULTO", "nombre": "Blusa Nayara · Adulto", "prenda": "Blusas", "comp": "50% lino / 50% algodón", "nota": "", "colores": "Natural", "precio": 18.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DELIA_LINO_ECO_INFANTIL", "nombre": "Blusa Delia Lino Eco · Infantil", "prenda": "Blusas", "comp": "50% lino / 50% algodón", "nota": "", "colores": "Negro, Crudo Natural, Blanco", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DELIA_LINO_ECO_ADULTO", "nombre": "Blusa Delia Lino Eco · Adulto", "prenda": "Blusas", "comp": "50% lino / 50% algodón", "nota": "", "colores": "Negro, Crudo Natural, Blanco", "precio": 13.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DELIA_POPELIN_INFANTIL", "nombre": "Blusa Delia Popelín · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Crudo, Blanco, Natural, Negro Óptico", "precio": 12.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_DELIA_POPELIN_ADULTO", "nombre": "Blusa Delia Popelín · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Crudo, Blanco, Natural, Negro Óptico", "precio": 13.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_IBALLA_INFANTIL", "nombre": "Blusa Iballa · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural, Negro, Gris Marengo, Vino", "precio": 14.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_IBALLA_ADULTO", "nombre": "Blusa Iballa · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural, Negro, Gris Marengo, Vino", "precio": 17.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_TAIS_INFANTIL", "nombre": "Blusa Tais · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio a confirmar (bloque ambiguo en el PDF)", "colores": "Azul (est.), Granate (est.), Rosa (est.), Morado (est.)", "precio": 13.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_TAIS_ADULTO", "nombre": "Blusa Tais · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "Precio a confirmar (bloque ambiguo en el PDF)", "colores": "Azul (est.), Granate (est.), Rosa (est.), Morado (est.)", "precio": 16.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_ELISA_ADULTO", "nombre": "Blusa Elisa · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Bordado inglés", "precio": 22.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_AZUCENA_LINO_ECO_ADULTO", "nombre": "Blusa Azucena Lino Eco · Adulto", "prenda": "Blusas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Blanco Óptico, Negro, Gris Marengo, Vino, Índigo, Tabaco", "precio": 16.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_AZUCENA_POPELIN_INFANTIL", "nombre": "Blusa Azucena Popelín · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural", "precio": 11.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_AZUCENA_POPELIN_ADULTO", "nombre": "Blusa Azucena Popelín · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural", "precio": 12.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_TRADICIONAL_ADULTO", "nombre": "Blusa Tradicional · Adulto", "prenda": "Blusas", "comp": "55% lino / 45% algodón", "nota": "", "colores": "Crudo Natural", "precio": 29.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MAR_INFANTIL", "nombre": "Blusa Mar · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural", "precio": 14.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_MAR_ADULTO", "nombre": "Blusa Mar · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural", "precio": 16.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_ANGIE_INFANTIL", "nombre": "Blusa Angie · Infantil", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural, Negro, Marino, Gris Marengo, Vino", "precio": 10.95, "tallas": "0 / 2 / 4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_ANGIE_ADULTO", "nombre": "Blusa Angie · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural, Negro, Marino, Gris Marengo, Vino", "precio": 11.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_TAIRA_ADULTO", "nombre": "Blusa Taira · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Blanco Óptico, Crudo Natural", "precio": 19.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_BLUSA_JENYFER_ADULTO", "nombre": "Blusa Jenyfer · Adulto", "prenda": "Blusas", "comp": "65% poliéster / 35% algodón", "nota": "", "colores": "Crudo Natural", "precio": 26.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_GALA", "nombre": "Falda Gala", "prenda": "Faldas", "comp": "65% poliéster / 35% viscosa", "nota": "", "colores": "Negro, Marrón, Verde Esmeralda, Marino, Gris Marengo, Granate, Morado, Caldero", "precio": 47.95, "tallas": "Única", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_LUJO", "nombre": "Falda Lujo", "prenda": "Faldas", "comp": "65% poliéster / 35% viscosa", "nota": "", "colores": "Negro, Marrón, Verde Esmeralda, Marino, Gris Marengo, Granate, Morado, Caldero", "precio": 39.95, "tallas": "Única", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_MORELLA_INFANTIL", "nombre": "Falda Morella · Infantil", "prenda": "Faldas", "comp": "100% algodón", "nota": "", "colores": "Negro, Marrón, Verde Esmeralda, Marino, Gris Marengo, Granate, Morado, Caldero", "precio": 12.95, "tallas": "4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_MORELLA_ADULTO", "nombre": "Falda Morella · Adulto", "prenda": "Faldas", "comp": "100% algodón", "nota": "", "colores": "Negro, Marrón, Verde Esmeralda, Marino, Gris Marengo, Granate, Morado, Caldero", "precio": 15.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_CUADROS_INFANTIL", "nombre": "Falda Cuadros · Infantil", "prenda": "Faldas", "comp": "80% poliéster / 20% viscosa", "nota": "", "colores": "Cuadros tradicionales", "precio": 18.95, "tallas": "4 / 6 / 8 / 10 / 12 / 14 / 16", "bajopedido": false}, {"codigo": "LACARRETA_FALDA_CUADROS_ADULTO", "nombre": "Falda Cuadros · Adulto", "prenda": "Faldas", "comp": "80% poliéster / 20% viscosa", "nota": "", "colores": "Cuadros tradicionales", "precio": 25.95, "tallas": "S / M / L / XL / 2XL / 3XL / 4XL / 5XL", "bajopedido": false}];
+const PRENDAS = ["Camisas", "Chalecos", "Pantalones y calzones", "Complementos", "Blusas", "Faldas"];
+const GEN = {"Camisas": "Hombre", "Chalecos": "Hombre", "Pantalones y calzones": "Hombre", "Complementos": "Hombre", "Blusas": "Mujer", "Faldas": "Mujer"};
+const KEY = "lacarreta_review_v2";
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY)||"{}") }catch(e){ state={} }
+
+function st(cod){ return state[cod] || (state[cod]={estado:"pendiente"}); }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)) }catch(e){} }
+function val(cod,field,def){ const s=state[cod]; return (s&&s[field]!==undefined)?s[field]:def; }
+
+// precio: coste×1.5 -> ,95 más cercano (para recalcular si editan). Aquí ya viene el PVP,
+// solo validamos formato al editar el precio manualmente.
+function fmtE(n){ if(n===null||n===undefined||n==="") return "—"; const x=Number(n);
+  return isNaN(x)?"—":x.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
+
+const $=s=>document.querySelector(s);
+const list=$("#list");
+
+// poblar filtro prendas
+const fP=$("#fPrenda");
+PRENDAS.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;fP.appendChild(o);});
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function cardHTML(d){
+  const s=st(d.codigo);
+  const colores=val(d.codigo,"colores",d.colores);
+  const precio=val(d.codigo,"precio",d.precio);
+  const tallas=val(d.codigo,"tallas",d.tallas);
+  const nota=val(d.codigo,"nota","");
+  const est=s.estado||"pendiente";
+  return `<div class="card st-${est}" data-cod="${esc(d.codigo)}" data-prenda="${esc(d.prenda)}">
+    <div>
+      <div class="name">${esc(d.nombre)}</div>
+      <div class="meta">${esc(d.prenda)} · ${esc(GEN[d.prenda]||"")} · ${esc(d.comp)}${d.bajopedido?' · <b>bajo pedido</b>':''}</div>
+    </div>
+    <div class="fields">
+      <div class="f"><label>Colores</label><input type="text" data-f="colores" value="${esc(colores)}"></div>
+      <div class="f"><label>Precio (PVP) <span class="pvp-badge">${fmtE(precio)}</span></label>
+        <input type="number" step="0.05" data-f="precio" value="${precio===''||precio===null?'':esc(precio)}"></div>
+      <div class="f"><label>Tallas</label><input type="text" data-f="tallas" value="${esc(tallas)}"></div>
+    </div>
+    <div class="row2">
+      <div class="status">
+        <button class="sbtn" data-s="ok"       aria-pressed="${est==='ok'}"       type="button">✅ OK</button>
+        <button class="sbtn" data-s="revisar"  aria-pressed="${est==='revisar'}"  type="button">⚠️ Revisar</button>
+        <button class="sbtn" data-s="corregir" aria-pressed="${est==='corregir'}" type="button">✏️ Corregir</button>
+      </div>
+      <span class="spacer"></span>
+      <button class="notebtn" type="button" data-note>📝 Nota${nota?" •":""}</button>
+    </div>
+    <div class="notewrap ${nota?'show':''}"><textarea data-f="nota" placeholder="Qué hay que cambiar…">${esc(nota)}</textarea></div>
+  </div>`;
+}
+
+function passFilters(d){
+  const q=$("#q").value.trim().toLowerCase();
+  const fp=$("#fPrenda").value, fe=$("#fEstado").value;
+  if(fp && d.prenda!==fp) return false;
+  const est=(st(d.codigo).estado)||"pendiente";
+  if(fe && est!==fe) return false;
+  if(q){ const hay=(d.nombre+" "+val(d.codigo,"colores",d.colores)).toLowerCase(); if(!hay.includes(q)) return false; }
+  return true;
+}
+
+function render(){
+  const items=DATA.filter(passFilters);
+  $("#empty").classList.toggle("hidden", items.length>0);
+  // agrupar por prenda respetando orden PRENDAS
+  let html="";
+  PRENDAS.forEach(p=>{
+    const g=items.filter(d=>d.prenda===p);
+    if(!g.length) return;
+    html+=`<div class="grp-h"><span class="badge">${esc(GEN[p]||"")}</span><h2>${esc(p)}</h2><span class="c">${g.length}</span></div>`;
+    html+=g.map(cardHTML).join("");
+  });
+  list.innerHTML=html;
+  updateCounts();
+}
+
+function updateCounts(){
+  let ok=0,rev=0,fix=0,pend=0,changed=0;
+  DATA.forEach(d=>{
+    const s=state[d.codigo];
+    const est=(s&&s.estado)||"pendiente";
+    if(est==="ok")ok++; else if(est==="revisar")rev++; else if(est==="corregir")fix++; else pend++;
+    if(s && (s.colores!==undefined||s.precio!==undefined||s.tallas!==undefined||s.nota)) changed++;
+  });
+  $("#counts").innerHTML=
+    `<span class="pill tot">${DATA.length} total</span>`+
+    `<span class="pill ok">✅ ${ok}</span>`+
+    `<span class="pill warn">⚠️ ${rev}</span>`+
+    `<span class="pill fix">✏️ ${fix}</span>`+
+    `<span class="pill pend">· ${pend} sin marcar</span>`;
+  $("#expInfo").textContent=`${changed} editados · ${ok+rev+fix} marcados de ${DATA.length}`;
+}
+
+// eventos delegados
+list.addEventListener("input",e=>{
+  const card=e.target.closest(".card"); if(!card)return;
+  const cod=card.dataset.cod, f=e.target.dataset.f; if(!f)return;
+  st(cod)[f]=e.target.value; save(); updateCounts();
+});
+list.addEventListener("click",e=>{
+  const card=e.target.closest(".card"); if(!card)return;
+  const cod=card.dataset.cod;
+  if(e.target.matches("[data-s]")){
+    const s=e.target.dataset.s;
+    const cur=st(cod).estado;
+    st(cod).estado = (cur===s)?"pendiente":s;
+    save();
+    card.className="card st-"+((st(cod).estado)||"pendiente");
+    card.querySelectorAll("[data-s]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.s===st(cod).estado));
+    updateCounts();
+  }
+  if(e.target.matches("[data-note]")){
+    card.querySelector(".notewrap").classList.toggle("show");
+  }
+});
+["#q","#fPrenda","#fEstado"].forEach(sel=>$(sel).addEventListener("input",render));
+
+$("#markAllOk").addEventListener("click",()=>{
+  DATA.filter(passFilters).forEach(d=>{ st(d.codigo).estado="ok"; });
+  save(); render();
+});
+
+function download(name,obj){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();a.remove();
+}
+$("#dlRev").addEventListener("click",()=>{
+  const out=DATA.map(d=>{
+    const s=state[d.codigo]||{};
+    return {codigo:d.codigo,nombre:d.nombre,prenda:d.prenda,
+      estado:s.estado||"pendiente",
+      colores:val(d.codigo,"colores",d.colores),
+      precio:val(d.codigo,"precio",d.precio),
+      tallas:val(d.codigo,"tallas",d.tallas),
+      nota:s.nota||"",
+      cambiado: !!(s.colores!==undefined||s.precio!==undefined||s.tallas!==undefined||s.nota)};
+  }).filter(r=>r.estado!=="pendiente"||r.cambiado);
+  download("revision-tipico-canario.json",{generado:"revisión cliente",items:out});
+});
+$("#dlCorr").addEventListener("click",()=>{
+  const out=DATA.map(d=>({
+    codigo:d.codigo,nombre:d.nombre,
+    colores:String(val(d.codigo,"colores",d.colores)).split(",").map(x=>x.trim()).filter(Boolean),
+    precio:Number(val(d.codigo,"precio",d.precio)),
+    tallas:String(val(d.codigo,"tallas",d.tallas)).split("/").map(x=>x.trim()).filter(Boolean).map(t=>({t})),
+    estado:(state[d.codigo]||{}).estado||"pendiente"
+  }));
+  download("catalogo-corregido-tipico-canario.json",out);
+});
+
+render();
+</script>
