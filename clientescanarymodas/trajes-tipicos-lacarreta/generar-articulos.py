@@ -180,10 +180,18 @@ add("Faldas","Falda Cuadros","80% poliéster / 20% viscosa",["Cuadros tradiciona
     [("Infantil",INF_4_16,12.70),("Adulto",AD_S_5XL,17.50)])
 
 # ---------- construir artículos ----------
-# Estructura: PROGRAMACIONES (sección) › TÍPICO CANARIO (categoría) › prenda (tipo)
-SECCION_ID=607; SECCION="PROGRAMACIONES"
-CATEGORIA_ID=820; CATEGORIA="TÍPICO CANARIO"
-TIPO_ID={"Camisas":821,"Chalecos":822,"Pantalones y calzones":823,"Complementos":824,"Blusas":825,"Faldas":826}
+# Estructura REAL existente: PROGRAMACIÓN (606) › TRADICIONAL CANARIO (700) › tipo (prenda)
+SECCION_ID=606; SECCION="PROGRAMACIÓN"
+CATEGORIA_ID=700; CATEGORIA="TRADICIONAL CANARIO"
+# Mapeo de mi familia -> (tipoId real, nombre oficial del tipo en jerarquia.js)
+TIPO_MAP={
+  "Camisas":(701,"Camisas"),
+  "Chalecos":(702,"Chalecos"),
+  "Pantalones y calzones":(703,"Pantalones"),
+  "Complementos":(709,"Complementos"),
+  "Blusas":(705,"Blusas"),
+  "Faldas":(706,"Faldas"),
+}
 arts=[]; filas=[]
 for p in P:
     for suf,tallas,coste in p["variantes"]:
@@ -195,7 +203,7 @@ for p in P:
             "precio": precio if precio is not None else 0,
             "portes": 0, "seccionId": SECCION_ID, "seccion": SECCION,
             "categoriaId": CATEGORIA_ID, "categoria": CATEGORIA,
-            "tipoId": TIPO_ID[p["fam"]], "tipo": p["fam"],
+            "tipoId": TIPO_MAP[p["fam"]][0], "tipo": TIPO_MAP[p["fam"]][1],
             "colores": p["colores"], "tallas": [{"t":t} for t in tallas],
             "tiposSujetador": [],
             "fichaTecnica": {"composicion": p["comp"], "packing": "",
