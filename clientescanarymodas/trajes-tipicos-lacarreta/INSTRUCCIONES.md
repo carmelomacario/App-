@@ -117,3 +117,18 @@ Incrustadas en `LA CARRETA.pdf` (Drive, 27 MB):
 | Sección | PROGRAMACIONES | 607 |
 | Categoría | TÍPICO CANARIO | 820 |
 | Tipos (prenda) | Camisas / Chalecos / Pantalones y calzones / Complementos / Blusas / Faldas | 821 / 822 / 823 / 824 / 825 / 826 |
+
+---
+
+## EXTRA — Quitar la carátula de «Merchandising Mundial España»
+En `netlify/functions/lib/jerarquia.js`, en la sección **id 604** (Merchandising / Merchan Mundial),
+**elimina la propiedad `portada`** para que el mosaico no muestre esa imagen:
+
+```js
+// ANTES
+{ id: 604, nombre: "Merchan Mundial", icono: "🇪🇸", portada: PORTADA("1DcbrNcDB5c993uasx2sUyKorTpWnE8zH"), categorias: [] },
+// DESPUÉS
+{ id: 604, nombre: "Merchan Mundial", icono: "🇪🇸", categorias: [] },
+```
+> Si en tu versión desplegada el nombre es «MERCHANDISING MUNDIAL ESPAÑA», es la misma sección 604:
+> localízala por su `id: 604` y borra su `portada: PORTADA("…")`. Luego `netlify deploy --prod`.
