@@ -1,0 +1,1417 @@
+[
+  {
+    "id": 10,
+    "nombre": "HOGAR",
+    "icono": "🏠",
+    "portada": "https://drive.google.com/thumbnail?id=1fi56J_6gL49CgnnW2H8TkKkjZJX8WeX_&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 140,
+        "nombre": "Bases y colchones",
+        "portada": "https://drive.google.com/thumbnail?id=1rnEawWhywklwjMxh2rUMpMdcrpuAcGoy&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 141,
+        "nombre": "Protectores y fundas",
+        "portada": "https://drive.google.com/thumbnail?id=1S7Kr2spzqd7fmqX8SmD0lYb3AqQg6yDD&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 148,
+            "nombre": "Almohadas"
+          },
+          {
+            "id": 149,
+            "nombre": "Cama"
+          },
+          {
+            "id": 150,
+            "nombre": "Sofá"
+          }
+        ]
+      },
+      {
+        "id": 142,
+        "nombre": "Almohadas y rellenos",
+        "portada": "https://drive.google.com/thumbnail?id=1QvXWwCjB_iHR5xybk5tmSf1y8UNMoupG&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 320,
+        "nombre": "Accesorios",
+        "portada": "https://drive.google.com/thumbnail?id=1HIJvhTsVQKPcFuE6ZwqQ7DKrmPrP6jmD&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 143,
+        "nombre": "Juegos de sábana",
+        "portada": "https://drive.google.com/thumbnail?id=1rn-wD7mZG-tdEOltb48Vs4PciQbQF7UZ&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 151,
+            "nombre": "Franela"
+          },
+          {
+            "id": 152,
+            "nombre": "Térmico"
+          },
+          {
+            "id": 153,
+            "nombre": "Coralina"
+          },
+          {
+            "id": 154,
+            "nombre": "Algodón"
+          },
+          {
+            "id": 167,
+            "nombre": "Punto"
+          },
+          {
+            "id": 169,
+            "nombre": "Fundas"
+          },
+          {
+            "id": 178,
+            "nombre": "A componer"
+          },
+          {
+            "id": 195,
+            "nombre": "Licencia"
+          },
+          {
+            "id": 260,
+            "nombre": "Tergal"
+          }
+        ]
+      },
+      {
+        "id": 144,
+        "nombre": "Boutis, colchas y edredones",
+        "portada": "https://drive.google.com/thumbnail?id=1RCgTIY7I5r0pcIjqTpyPmzyvSaIz4JWc&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 321,
+            "nombre": "Boutis y colchas"
+          },
+          {
+            "id": 322,
+            "nombre": "Colchas multiusos"
+          },
+          {
+            "id": 323,
+            "nombre": "Edredones y cobertores"
+          },
+          {
+            "id": 324,
+            "nombre": "Fundas nórdicas"
+          }
+        ]
+      },
+      {
+        "id": 145,
+        "nombre": "Mantas",
+        "portada": "https://drive.google.com/thumbnail?id=1k5AL3LkOEAi04pSahLq3vmot3bCgTun-&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 155,
+            "nombre": "Sherpa"
+          },
+          {
+            "id": 156,
+            "nombre": "Coral"
+          },
+          {
+            "id": 157,
+            "nombre": "Terciopelo"
+          },
+          {
+            "id": 158,
+            "nombre": "Licencia"
+          }
+        ]
+      },
+      {
+        "id": 146,
+        "nombre": "Cocina",
+        "portada": "https://drive.google.com/thumbnail?id=1fxn6lnX2iWPNtSLoQenzr0SwFWAXbzR_&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 161,
+            "nombre": "Paños de cocina"
+          },
+          {
+            "id": 168,
+            "nombre": "Manteles, delantales y alfombras"
+          }
+        ]
+      },
+      {
+        "id": 147,
+        "nombre": "Toallas",
+        "portada": "https://drive.google.com/thumbnail?id=14k2-9ejezRZ1jLtT5Fn5kaLtdrnSIQbG&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 159,
+            "nombre": "Baño"
+          },
+          {
+            "id": 160,
+            "nombre": "Playa"
+          }
+        ]
+      },
+      {
+        "id": 162,
+        "nombre": "Cortinas",
+        "portada": "https://drive.google.com/thumbnail?id=1U3ea_lipoRJB1JLlgiz8L8xU6uSnbJWy&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 163,
+            "nombre": "Oscurantes"
+          },
+          {
+            "id": 164,
+            "nombre": "Baño"
+          },
+          {
+            "id": 165,
+            "nombre": "Visillos"
+          }
+        ]
+      },
+      {
+        "id": 179,
+        "nombre": "Artículos de licencia",
+        "portada": "https://drive.google.com/thumbnail?id=1edQ8ihi7df3UlRwKIis7OU_qfKJlvNst&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 196,
+        "nombre": "Alfombras",
+        "portada": "https://drive.google.com/thumbnail?id=1xX5MB382Q04zNAJ0DX06-RADjZeF6HI8&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 197,
+            "nombre": "Baño"
+          },
+          {
+            "id": 198,
+            "nombre": "Felpudos"
+          },
+          {
+            "id": 199,
+            "nombre": "Interior"
+          }
+        ]
+      },
+      {
+        "id": 325,
+        "nombre": "Funda nórdica",
+        "portada": "/portadas/10-325.png",
+        "tipos": [
+          {
+            "id": 326,
+            "nombre": "Tergal"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "nombre": "Señora",
+    "icono": "👗",
+    "portada": "https://drive.google.com/thumbnail?id=1TIi10-Qipe5sqdGkQILB6lQ5ck3pMvYC&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 300,
+        "nombre": "Pijamas",
+        "portada": "/portadas/12-300.png",
+        "tipos": [
+          {
+            "id": 301,
+            "nombre": "Invierno"
+          },
+          {
+            "id": 302,
+            "nombre": "Verano"
+          }
+        ]
+      },
+      {
+        "id": 350,
+        "nombre": "Moda íntima",
+        "portada": "/portadas/12-350.png",
+        "tipos": [
+          {
+            "id": 351,
+            "nombre": "Bragas"
+          },
+          {
+            "id": 352,
+            "nombre": "Sujetadores"
+          },
+          {
+            "id": 353,
+            "nombre": "Fajas"
+          },
+          {
+            "id": 354,
+            "nombre": "Medias y pantys"
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "nombre": "Partes altas",
+        "portada": "/portadas/12-17.png",
+        "tipos": []
+      },
+      {
+        "id": 18,
+        "nombre": "Partes bajas",
+        "portada": "/portadas/12-18.png",
+        "tipos": []
+      },
+      {
+        "id": 19,
+        "nombre": "Vestidos",
+        "portada": "/portadas/12-19.png",
+        "tipos": []
+      },
+      {
+        "id": 20,
+        "nombre": "Accesorios",
+        "portada": "/portadas/12-20.png",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "nombre": "Caballero",
+    "icono": "👔",
+    "portada": "https://drive.google.com/thumbnail?id=1UMbr4GcoUC7XZXeO6Vcg5jxYg_G5KMJw&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 21,
+        "nombre": "Camisas",
+        "portada": "/portadas/13-21.png",
+        "tipos": [
+          {
+            "id": 27,
+            "nombre": "Manga larga"
+          },
+          {
+            "id": 28,
+            "nombre": "Manga corta"
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "nombre": "Camisetas",
+        "portada": "/portadas/13-22.png",
+        "tipos": [
+          {
+            "id": 29,
+            "nombre": "Manga larga"
+          },
+          {
+            "id": 30,
+            "nombre": "Manga corta"
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "nombre": "Polos",
+        "portada": "/portadas/13-23.png",
+        "tipos": [
+          {
+            "id": 31,
+            "nombre": "Manga larga"
+          },
+          {
+            "id": 32,
+            "nombre": "Manga corta"
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "nombre": "Pantalones",
+        "portada": "/portadas/13-24.png",
+        "tipos": [
+          {
+            "id": 33,
+            "nombre": "Bermudas"
+          },
+          {
+            "id": 34,
+            "nombre": "Vaqueros"
+          },
+          {
+            "id": 35,
+            "nombre": "Vestir"
+          },
+          {
+            "id": 36,
+            "nombre": "Chándal"
+          },
+          {
+            "id": 183,
+            "nombre": "Bañadores"
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "nombre": "Abrigos",
+        "portada": "/portadas/13-25.png",
+        "tipos": [
+          {
+            "id": 37,
+            "nombre": "Suéters"
+          },
+          {
+            "id": 38,
+            "nombre": "Chaquetas"
+          },
+          {
+            "id": 39,
+            "nombre": "Chalecos"
+          },
+          {
+            "id": 184,
+            "nombre": "Jerseys"
+          },
+          {
+            "id": 185,
+            "nombre": "Polares"
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "nombre": "Accesorios",
+        "portada": "/portadas/13-26.png",
+        "tipos": [
+          {
+            "id": 40,
+            "nombre": "Carteras"
+          },
+          {
+            "id": 41,
+            "nombre": "Cinturones"
+          },
+          {
+            "id": 42,
+            "nombre": "Pañuelos"
+          },
+          {
+            "id": 180,
+            "nombre": "Corbatas"
+          },
+          {
+            "id": 181,
+            "nombre": "Tirantes"
+          },
+          {
+            "id": 182,
+            "nombre": "Tarjeteros"
+          }
+        ]
+      },
+      {
+        "id": 220,
+        "nombre": "Ropa interior",
+        "portada": "/portadas/13-220.png",
+        "tipos": [
+          {
+            "id": 223,
+            "nombre": "Slip"
+          },
+          {
+            "id": 224,
+            "nombre": "Boxer"
+          },
+          {
+            "id": 225,
+            "nombre": "Camisillas"
+          }
+        ]
+      },
+      {
+        "id": 221,
+        "nombre": "Pijamas",
+        "portada": "/portadas/13-221.png",
+        "tipos": [
+          {
+            "id": 226,
+            "nombre": "Invierno"
+          },
+          {
+            "id": 227,
+            "nombre": "Verano"
+          }
+        ]
+      },
+      {
+        "id": 222,
+        "nombre": "Térmico",
+        "portada": "/portadas/13-222.png",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "nombre": "Selene",
+    "icono": "👙",
+    "portada": "https://drive.google.com/thumbnail?id=1i1HfGJy0Ha50NgYL0_p8Ug-sPKeSm8cV&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 43,
+        "nombre": "Mujer",
+        "portada": "https://drive.google.com/thumbnail?id=1xCNtjoxLdLaPL0A0bv5Gqc784Vtpj6Mq&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 59,
+            "nombre": "Sujetadores"
+          },
+          {
+            "id": 60,
+            "nombre": "Bragas"
+          },
+          {
+            "id": 61,
+            "nombre": "Camisillas"
+          },
+          {
+            "id": 62,
+            "nombre": "Medias/Panties"
+          }
+        ]
+      },
+      {
+        "id": 44,
+        "nombre": "Hombre",
+        "portada": "https://drive.google.com/thumbnail?id=1Un_K4P31cCKrJY8EN39g6EhExVZtpov_&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 63,
+            "nombre": "Slip"
+          },
+          {
+            "id": 64,
+            "nombre": "Boxer"
+          },
+          {
+            "id": 65,
+            "nombre": "Camisillas"
+          }
+        ]
+      },
+      {
+        "id": 45,
+        "nombre": "Niñas",
+        "portada": "https://drive.google.com/thumbnail?id=1I0QfdaDeJvSRTt7JgtCayKwW7wZWliQr&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 54,
+            "nombre": "Bragas"
+          },
+          {
+            "id": 55,
+            "nombre": "Top"
+          }
+        ]
+      },
+      {
+        "id": 46,
+        "nombre": "Pijamas",
+        "portada": "https://drive.google.com/thumbnail?id=1xW9fBHnefRX056CzjxFCVXF77wKLK24n&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 66,
+            "nombre": "Invierno"
+          },
+          {
+            "id": 67,
+            "nombre": "Verano"
+          },
+          {
+            "id": 68,
+            "nombre": "Zapatillas"
+          }
+        ]
+      },
+      {
+        "id": 47,
+        "nombre": "Calcetines",
+        "portada": "https://drive.google.com/thumbnail?id=17gfko8V44SWIM8EaMJE3xXDI1n85yI3V&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 49,
+            "nombre": "Vestir"
+          },
+          {
+            "id": 50,
+            "nombre": "Deporte"
+          },
+          {
+            "id": 51,
+            "nombre": "Fantasía"
+          },
+          {
+            "id": 52,
+            "nombre": "Trabajo"
+          },
+          {
+            "id": 53,
+            "nombre": "Niño/Bebé"
+          }
+        ]
+      },
+      {
+        "id": 48,
+        "nombre": "Térmico",
+        "portada": "https://drive.google.com/thumbnail?id=1tSf3vz-6taxI12ZM5ecTLUCPFuRhwMCH&sz=w1000&v=2",
+        "tipos": [
+          {
+            "id": 56,
+            "nombre": "Hombre"
+          },
+          {
+            "id": 57,
+            "nombre": "Mujer"
+          },
+          {
+            "id": 58,
+            "nombre": "Niño/Bebé"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "nombre": "LABORAL",
+    "ocultarHome": true,
+    "icono": "👷",
+    "portada": "https://drive.google.com/thumbnail?id=1r1UCwYkCdw0QjbJxqhAOnuNfOxDRf_jB&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 84,
+        "nombre": "Calzado",
+        "tipos": [
+          {
+            "id": 89,
+            "nombre": "Dian"
+          },
+          {
+            "id": 90,
+            "nombre": "V Pro"
+          },
+          {
+            "id": 91,
+            "nombre": "Delta"
+          }
+        ]
+      },
+      {
+        "id": 85,
+        "nombre": "Sanitario",
+        "tipos": [
+          {
+            "id": 92,
+            "nombre": "Conjuntos"
+          },
+          {
+            "id": 93,
+            "nombre": "Casaca"
+          },
+          {
+            "id": 94,
+            "nombre": "Pantalón"
+          },
+          {
+            "id": 95,
+            "nombre": "Gorros"
+          }
+        ]
+      },
+      {
+        "id": 86,
+        "nombre": "Hostelería",
+        "tipos": [
+          {
+            "id": 96,
+            "nombre": "Delantales"
+          },
+          {
+            "id": 97,
+            "nombre": "Gorros"
+          },
+          {
+            "id": 98,
+            "nombre": "Pantalones"
+          },
+          {
+            "id": 99,
+            "nombre": "Camisas"
+          },
+          {
+            "id": 100,
+            "nombre": "Chaquetillas"
+          }
+        ]
+      },
+      {
+        "id": 87,
+        "nombre": "Industria base",
+        "tipos": [
+          {
+            "id": 101,
+            "nombre": "Guantes"
+          },
+          {
+            "id": 102,
+            "nombre": "Abrigos"
+          },
+          {
+            "id": 103,
+            "nombre": "Chalecos"
+          },
+          {
+            "id": 104,
+            "nombre": "Polos"
+          },
+          {
+            "id": 105,
+            "nombre": "Camisas"
+          },
+          {
+            "id": 106,
+            "nombre": "Pantalones"
+          },
+          {
+            "id": 107,
+            "nombre": "Bermudas"
+          },
+          {
+            "id": 108,
+            "nombre": "Camisetas"
+          }
+        ]
+      },
+      {
+        "id": 88,
+        "nombre": "Alta visibilidad",
+        "tipos": [
+          {
+            "id": 109,
+            "nombre": "Abrigos"
+          },
+          {
+            "id": 110,
+            "nombre": "Chalecos"
+          },
+          {
+            "id": 111,
+            "nombre": "Pantalones"
+          },
+          {
+            "id": 112,
+            "nombre": "Camisetas"
+          },
+          {
+            "id": 113,
+            "nombre": "Polos"
+          }
+        ]
+      },
+      {
+        "id": 230,
+        "nombre": "Partes altas",
+        "tipos": []
+      },
+      {
+        "id": 231,
+        "nombre": "Partes bajas",
+        "tipos": []
+      },
+      {
+        "id": 232,
+        "nombre": "Accesorios",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "nombre": "AROMAS",
+    "icono": "🕯️",
+    "portada": "https://drive.google.com/thumbnail?id=1eKDCDvHjm7zExWLl95zcQFepe3pbuHSI&sz=w1000&v=2",
+    "categorias": []
+  },
+  {
+    "id": 19,
+    "nombre": "TELAS Y HULES",
+    "icono": "🧵",
+    "portada": "https://drive.google.com/thumbnail?id=1T86LRZ1-EwRUhzn8EilXp8pSeYgK6DBa&sz=w1000&v=2",
+    "categorias": []
+  },
+  {
+    "id": 20,
+    "nombre": "VIVIENDA VACACIONAL",
+    "ocultarHome": true,
+    "icono": "🏖️",
+    "portada": "https://drive.google.com/thumbnail?id=1TqulkNUMRTFXzAXexEmUxCWSDQSaKa0-&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 210,
+        "nombre": "Lotes",
+        "tipos": []
+      },
+      {
+        "id": 211,
+        "nombre": "Sábanas",
+        "tipos": []
+      },
+      {
+        "id": 212,
+        "nombre": "Toallas",
+        "tipos": []
+      },
+      {
+        "id": 213,
+        "nombre": "Cocina",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "nombre": "Niño",
+    "icono": "🧒",
+    "portada": "https://drive.google.com/thumbnail?id=1WkA-mHdJCRW4SXJ6HfqUD_q5ekwFsGJU&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 305,
+        "nombre": "Pijamas",
+        "portada": "/portadas/18-305.png",
+        "tipos": [
+          {
+            "id": 306,
+            "nombre": "Invierno"
+          },
+          {
+            "id": 307,
+            "nombre": "Verano"
+          }
+        ]
+      },
+      {
+        "id": 186,
+        "nombre": "Camisetas",
+        "portada": "/portadas/18-186.png",
+        "tipos": []
+      },
+      {
+        "id": 187,
+        "nombre": "Polos",
+        "portada": "/portadas/18-187.png",
+        "tipos": []
+      },
+      {
+        "id": 188,
+        "nombre": "Sudaderas",
+        "portada": "/portadas/18-188.png",
+        "tipos": []
+      },
+      {
+        "id": 189,
+        "nombre": "Pantalones",
+        "portada": "/portadas/18-189.png",
+        "tipos": []
+      },
+      {
+        "id": 190,
+        "nombre": "Vestidos",
+        "portada": "/portadas/18-190.png",
+        "tipos": []
+      },
+      {
+        "id": 191,
+        "nombre": "Conjuntos",
+        "portada": "/portadas/18-191.png",
+        "tipos": []
+      },
+      {
+        "id": 192,
+        "nombre": "Abrigos",
+        "portada": "/portadas/18-192.png",
+        "tipos": []
+      },
+      {
+        "id": 193,
+        "nombre": "Bañadores",
+        "portada": "/portadas/18-193.png",
+        "tipos": []
+      },
+      {
+        "id": 194,
+        "nombre": "Otros",
+        "portada": "/portadas/18-194.png",
+        "tipos": []
+      },
+      {
+        "id": 114,
+        "nombre": "Bodys y peleles",
+        "portada": "/portadas/18-114.png",
+        "tipos": []
+      },
+      {
+        "id": 115,
+        "nombre": "Baberos",
+        "portada": "/portadas/18-115.png",
+        "tipos": []
+      },
+      {
+        "id": 116,
+        "nombre": "Muselinas y gasas",
+        "portada": "/portadas/18-116.png",
+        "tipos": []
+      },
+      {
+        "id": 117,
+        "nombre": "Hogar bebé",
+        "portada": "/portadas/18-117.png",
+        "tipos": [
+          {
+            "id": 119,
+            "nombre": "Protectores"
+          },
+          {
+            "id": 120,
+            "nombre": "Mantas"
+          },
+          {
+            "id": 121,
+            "nombre": "Sábanas"
+          },
+          {
+            "id": 122,
+            "nombre": "Toallas"
+          },
+          {
+            "id": 123,
+            "nombre": "Packs"
+          }
+        ]
+      },
+      {
+        "id": 118,
+        "nombre": "Productos personalizables",
+        "portada": "/portadas/18-118.png",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "nombre": "ROLY/STAMINA",
+    "icono": "🎽",
+    "portada": "https://drive.google.com/thumbnail?id=19VsJOO_vgwCShIrAy3pV7XqcYp3jjAg2&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 170,
+        "nombre": "Casual",
+        "portada": "/portadas/17-170.png",
+        "tipos": [
+          {
+            "id": 240,
+            "nombre": "Camisetas"
+          },
+          {
+            "id": 241,
+            "nombre": "Polos"
+          },
+          {
+            "id": 242,
+            "nombre": "Sudaderas"
+          },
+          {
+            "id": 243,
+            "nombre": "Pantalones"
+          },
+          {
+            "id": 244,
+            "nombre": "Ropa de abrigo"
+          }
+        ]
+      },
+      {
+        "id": 171,
+        "nombre": "Sport",
+        "portada": "/portadas/17-171.png",
+        "tipos": [
+          {
+            "id": 245,
+            "nombre": "Ropa técnica"
+          },
+          {
+            "id": 246,
+            "nombre": "Pantalones deportivos"
+          },
+          {
+            "id": 247,
+            "nombre": "Chándales"
+          },
+          {
+            "id": 248,
+            "nombre": "Winter sport"
+          }
+        ]
+      },
+      {
+        "id": 172,
+        "nombre": "Kids",
+        "portada": "/portadas/17-172.png",
+        "tipos": []
+      },
+      {
+        "id": 173,
+        "nombre": "Calzado",
+        "portada": "/portadas/17-173.png",
+        "tipos": [
+          {
+            "id": 249,
+            "nombre": "Casual"
+          },
+          {
+            "id": 250,
+            "nombre": "Workwear"
+          },
+          {
+            "id": 251,
+            "nombre": "Alta visibilidad"
+          },
+          {
+            "id": 252,
+            "nombre": "Ignífugos"
+          },
+          {
+            "id": 253,
+            "nombre": "Services"
+          }
+        ]
+      },
+      {
+        "id": 174,
+        "nombre": "Accesorios",
+        "portada": "/portadas/17-174.png",
+        "tipos": []
+      },
+      {
+        "id": 175,
+        "nombre": "Workwear básicos",
+        "portada": "/portadas/17-175.png",
+        "tipos": []
+      },
+      {
+        "id": 176,
+        "nombre": "Workwear especializado",
+        "portada": "/portadas/17-176.png",
+        "tipos": [
+          {
+            "id": 254,
+            "nombre": "Hostelería"
+          },
+          {
+            "id": 255,
+            "nombre": "Sanitario"
+          },
+          {
+            "id": 256,
+            "nombre": "Alimentación"
+          },
+          {
+            "id": 257,
+            "nombre": "Prendas combinadas"
+          }
+        ]
+      },
+      {
+        "id": 1701,
+        "nombre": "Escritura y papelería",
+        "portada": "/portadas/17-1701.png",
+        "tipos": []
+      },
+      {
+        "id": 1702,
+        "nombre": "Bolsas y bolsos",
+        "portada": "/portadas/17-1702.png",
+        "tipos": []
+      },
+      {
+        "id": 1703,
+        "nombre": "Mochilas y sacos",
+        "portada": "/portadas/17-1703.png",
+        "tipos": []
+      },
+      {
+        "id": 1704,
+        "nombre": "Bidones y termos",
+        "portada": "/portadas/17-1704.png",
+        "tipos": []
+      },
+      {
+        "id": 1705,
+        "nombre": "Tazas y vasos",
+        "portada": "/portadas/17-1705.png",
+        "tipos": []
+      },
+      {
+        "id": 1706,
+        "nombre": "Gorras/gorros/sombreros",
+        "portada": "/portadas/17-1706.png",
+        "tipos": []
+      },
+      {
+        "id": 1707,
+        "nombre": "Paraguas e impermeables",
+        "portada": "/portadas/17-1707.png",
+        "tipos": []
+      },
+      {
+        "id": 1708,
+        "nombre": "Carga y conectividad",
+        "portada": "/portadas/17-1708.png",
+        "tipos": []
+      },
+      {
+        "id": 1709,
+        "nombre": "Pulseras y eventos",
+        "portada": "/portadas/17-1709.png",
+        "tipos": []
+      },
+      {
+        "id": 1710,
+        "nombre": "Cocina y mesa",
+        "portada": "/portadas/17-1710.png",
+        "tipos": []
+      },
+      {
+        "id": 1711,
+        "nombre": "Neceseres",
+        "portada": "/portadas/17-1711.png",
+        "tipos": []
+      },
+      {
+        "id": 1712,
+        "nombre": "Textil",
+        "portada": "/portadas/17-1712.png",
+        "tipos": []
+      },
+      {
+        "id": 1713,
+        "nombre": "Herramientas",
+        "portada": "/portadas/17-1713.png",
+        "tipos": []
+      },
+      {
+        "id": 1714,
+        "nombre": "Altavoces",
+        "portada": "/portadas/17-1714.png",
+        "tipos": []
+      },
+      {
+        "id": 1715,
+        "nombre": "Llaveros",
+        "portada": "/portadas/17-1715.png",
+        "tipos": []
+      },
+      {
+        "id": 1716,
+        "nombre": "Toallas",
+        "portada": "/portadas/17-1716.png",
+        "tipos": []
+      },
+      {
+        "id": 1717,
+        "nombre": "Monederos/riñoneras",
+        "portada": "/portadas/17-1717.png",
+        "tipos": []
+      },
+      {
+        "id": 1718,
+        "nombre": "Auriculares",
+        "portada": "/portadas/17-1718.png",
+        "tipos": []
+      },
+      {
+        "id": 1719,
+        "nombre": "Gafas",
+        "portada": "/portadas/17-1719.png",
+        "tipos": []
+      },
+      {
+        "id": 1720,
+        "nombre": "Mantas",
+        "portada": "/portadas/17-1720.png",
+        "tipos": []
+      },
+      {
+        "id": 1721,
+        "nombre": "Higiene",
+        "portada": "/portadas/17-1721.png",
+        "tipos": []
+      },
+      {
+        "id": 1722,
+        "nombre": "Hogar/viaje",
+        "portada": "/portadas/17-1722.png",
+        "tipos": []
+      },
+      {
+        "id": 1723,
+        "nombre": "Trolleys/maletas",
+        "portada": "/portadas/17-1723.png",
+        "tipos": []
+      },
+      {
+        "id": 1724,
+        "nombre": "Juegos",
+        "portada": "/portadas/17-1724.png",
+        "tipos": []
+      },
+      {
+        "id": 1725,
+        "nombre": "Mascotas",
+        "portada": "/portadas/17-1725.png",
+        "tipos": []
+      },
+      {
+        "id": 1726,
+        "nombre": "Playa",
+        "portada": "/portadas/17-1726.png",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 500,
+    "nombre": "OUTLET / OFERTAS",
+    "ocultarHome": true,
+    "icono": "🏷️",
+    "portada": "https://drive.google.com/thumbnail?id=1rqlBQ1wILRRb57s9k4TUDKer-sF3W-fU&sz=w1000&v=2",
+    "categorias": []
+  },
+  {
+    "id": 501,
+    "nombre": "PREVENTA",
+    "ocultarHome": true,
+    "icono": "⏳",
+    "categorias": []
+  },
+  {
+    "id": 600,
+    "nombre": "Accesorios",
+    "ocultarHome": true,
+    "icono": "👜",
+    "categorias": []
+  },
+  {
+    "id": 601,
+    "nombre": "Calcetines",
+    "icono": "🧦",
+    "portada": "https://drive.google.com/thumbnail?id=1rFngKxU03K-iewdJiE1ZHGSeakWqo0Jt&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 310,
+        "nombre": "Vestir",
+        "portada": "https://drive.google.com/thumbnail?id=1H8gFBTrpbSTGacos65r1UeNXHB_KvrUl&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 311,
+        "nombre": "Deportivos",
+        "portada": "https://drive.google.com/thumbnail?id=1SzXiynjJ6OiFyvpDG3_Aj8bf7xgCEkeJ&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 312,
+        "nombre": "Trabajo",
+        "portada": "https://drive.google.com/thumbnail?id=1WrBB7h8R6vLCpWQCRRoFvf2blw0JIjdp&sz=w1000&v=2",
+        "tipos": []
+      },
+      {
+        "id": 313,
+        "nombre": "Fantasía",
+        "portada": "https://drive.google.com/thumbnail?id=1oHpRVhjuUtNo6pZA9lTXT9gsvR384fXs&sz=w1000&v=2",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 603,
+    "nombre": "Calzado",
+    "icono": "👟",
+    "portada": "https://drive.google.com/thumbnail?id=1azEVQWYHMQIxBfk5kH3kbWVRwOmq_c9T&sz=w1000&v=2",
+    "categorias": []
+  },
+  {
+    "id": 605,
+    "nombre": "Próxima entrada",
+    "icono": "🚚",
+    "portada": "https://drive.google.com/thumbnail?id=1yfJenooGyL0dQ-TdLWTpkRXlwS94zGMT&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 700,
+        "nombre": "Mantas",
+        "tipos": []
+      },
+      {
+        "id": 701,
+        "nombre": "Juegos de sábana / nórdico",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 604,
+    "nombre": "Merchan Mundial",
+    "icono": "🇪🇸",
+    "portada": "https://drive.google.com/thumbnail?id=1DcbrNcDB5c993uasx2sUyKorTpWnE8zH&sz=w1000&v=2",
+    "categorias": []
+  },
+  {
+    "id": 602,
+    "nombre": "Ropa térmica",
+    "icono": "🧥",
+    "portada": "https://drive.google.com/thumbnail?id=1TPvoTinbhY-sVwkYlDntE0bSyMqcczaK&sz=w1000&v=2",
+    "categorias": [
+      {
+        "id": 331,
+        "nombre": "Caballero",
+        "tipos": []
+      },
+      {
+        "id": 330,
+        "nombre": "Mujer",
+        "tipos": []
+      },
+      {
+        "id": 332,
+        "nombre": "Niño",
+        "tipos": []
+      }
+    ]
+  },
+  {
+    "id": 606,
+    "nombre": "PROGRAMACIÓN",
+    "icono": "👘",
+    "categorias": [
+      {
+        "id": 700,
+        "nombre": "TRADICIONAL CANARIO",
+        "portada": "/portada-tradicional-canario.png",
+        "tipos": [
+          {
+            "id": 701,
+            "nombre": "Camisas"
+          },
+          {
+            "id": 702,
+            "nombre": "Chalecos"
+          },
+          {
+            "id": 703,
+            "nombre": "Pantalones"
+          },
+          {
+            "id": 704,
+            "nombre": "Sombreros"
+          },
+          {
+            "id": 705,
+            "nombre": "Blusas"
+          },
+          {
+            "id": 706,
+            "nombre": "Faldas"
+          },
+          {
+            "id": 707,
+            "nombre": "Enaguas"
+          },
+          {
+            "id": 708,
+            "nombre": "Chaquetas"
+          },
+          {
+            "id": 709,
+            "nombre": "Complementos"
+          },
+          {
+            "id": 710,
+            "nombre": "Calzado"
+          },
+          {
+            "id": 711,
+            "nombre": "Accesorios"
+          },
+          {
+            "id": 712,
+            "nombre": "Mantones"
+          },
+          {
+            "id": 713,
+            "nombre": "Pañuelos"
+          },
+          {
+            "id": 714,
+            "nombre": "Delantales"
+          },
+          {
+            "id": 715,
+            "nombre": "Cintos"
+          },
+          {
+            "id": 716,
+            "nombre": "Medias"
+          },
+          {
+            "id": 717,
+            "nombre": "Corpiños"
+          },
+          {
+            "id": 718,
+            "nombre": "Jubones"
+          },
+          {
+            "id": 719,
+            "nombre": "Refajos"
+          },
+          {
+            "id": 720,
+            "nombre": "Chambras"
+          },
+          {
+            "id": 721,
+            "nombre": "Capotes"
+          },
+          {
+            "id": 722,
+            "nombre": "Sayas"
+          }
+        ]
+      }
+    ]
+  }
+]
