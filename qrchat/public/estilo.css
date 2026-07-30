@@ -46,14 +46,16 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Sistema visual ATMO: ondas concéntricas sutiles desde la esquina */
+/* Sistema visual ATMO: ondas concéntricas sutiles desde la esquina.
+   OJO: nunca usar background-attachment fixed — en Safari/iPhone obliga a
+   repintar los degradados en cada gesto y CONGELA la página entera. */
 body {
   background-image:
     radial-gradient(circle at 110% -10%, transparent 118px, rgba(36, 104, 253, 0.06) 120px, transparent 123px),
     radial-gradient(circle at 110% -10%, transparent 198px, rgba(36, 104, 253, 0.05) 200px, transparent 203px),
     radial-gradient(circle at 110% -10%, transparent 278px, rgba(36, 104, 253, 0.04) 280px, transparent 283px),
     radial-gradient(600px 380px at 100% 0%, rgba(36, 104, 253, 0.07), transparent 70%);
-  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 h1, h2, h3 {

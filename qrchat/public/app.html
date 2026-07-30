@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ATMO</title>
-  <link rel="stylesheet" href="/estilo.css?v=5" />
+  <link rel="stylesheet" href="/estilo.css?v=6" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <style>
@@ -18,7 +18,8 @@
     }
 
     /* ── Pantalla de perfil ─────────────────────────────── */
-    #pantalla-perfil { justify-content: center; padding: 20px; overflow-y: auto; }
+    #pantalla-perfil { justify-content: center; padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .lista-mensajes, #vista-gente, #vista-privados, .modal { -webkit-overflow-scrolling: touch; }
     #pantalla-perfil .tarjeta { max-width: 440px; margin: 0 auto; width: 100%; }
     .avatar-preview {
       width: 92px; height: 92px; border-radius: 50%;
@@ -454,6 +455,6 @@
     };
   </script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/app.js?v=5"></script>
+  <script src="/app.js?v=6"></script>
 </body>
 </html>

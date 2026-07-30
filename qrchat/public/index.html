@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ATMO · Vivir el momento</title>
-  <link rel="stylesheet" href="/estilo.css?v=5" />
+  <link rel="stylesheet" href="/estilo.css?v=6" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <style>
@@ -20,6 +20,22 @@
   </style>
 </head>
 <body>
+  <script>
+    window.onerror = function (mensaje, origen, linea) {
+      var b = document.getElementById('error-global');
+      if (!b) {
+        b = document.createElement('div');
+        b.id = 'error-global';
+        b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999;' +
+          'background:#7a1f22;color:#fff;font-size:12px;padding:8px 12px;' +
+          'font-family:monospace;word-break:break-all';
+        document.body.appendChild(b);
+      }
+      b.textContent = '⚠ Error: ' + mensaje + ' (' + (origen || '').split('/').pop() + ':' + linea + ') — haz captura y envíanosla';
+      return false;
+    };
+  </script>
+
   <main>
     <div class="cabecera">
       <img src="/icon.svg" alt="ATMO" style="width:76px; border-radius:18px; margin-bottom:10px" />

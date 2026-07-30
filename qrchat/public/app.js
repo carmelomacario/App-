@@ -930,10 +930,9 @@
   // visible para que la caja de escribir quede siempre sobre el teclado
   if (window.visualViewport) {
     const ajustarAltura = () => {
-      document.documentElement.style.setProperty(
-        '--alto-visible',
-        window.visualViewport.height + 'px'
-      );
+      const alto = window.visualViewport.height;
+      if (!alto || alto < 200) return; // lecturas raras: no tocar el layout
+      document.documentElement.style.setProperty('--alto-visible', alto + 'px');
       // Mantener el final de la conversación a la vista
       const lista = document.querySelector('.vista.activa .lista-mensajes');
       if (lista) lista.scrollTop = lista.scrollHeight;
