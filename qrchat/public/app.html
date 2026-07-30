@@ -4,12 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ATMO</title>
-  <link rel="stylesheet" href="/estilo.css?v=4" />
+  <link rel="stylesheet" href="/estilo.css?v=5" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <style>
     body { height: 100vh; height: 100dvh; overflow: hidden; }
-    .pantalla { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+    .pantalla {
+      height: 100vh; height: 100dvh;
+      /* La fija el JS con visualViewport: al abrir el teclado en iOS, la
+         pantalla se encoge y la caja de escribir queda SOBRE el teclado */
+      height: var(--alto-visible, 100dvh);
+      display: flex; flex-direction: column;
+    }
 
     /* ── Pantalla de perfil ─────────────────────────────── */
     #pantalla-perfil { justify-content: center; padding: 20px; overflow-y: auto; }
@@ -92,9 +98,15 @@
       user-drag: none;
       user-select: none;
     }
-    .lista-mensajes, .persona, .modal {
+    .lista-mensajes, .persona {
       -webkit-user-select: none;
       user-select: none;
+    }
+    /* Crucial en iOS: un contenedor con user-select:none impide ESCRIBIR en
+       los campos de dentro. Los campos siempre deben permitir selección. */
+    input, textarea, select {
+      -webkit-user-select: text !important;
+      user-select: text !important;
     }
 
     /* ── Estructura del chat ────────────────────────────── */
@@ -442,6 +454,6 @@
     };
   </script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/app.js?v=4"></script>
+  <script src="/app.js?v=5"></script>
 </body>
 </html>

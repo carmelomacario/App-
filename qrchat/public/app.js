@@ -926,6 +926,22 @@
 
   /* ───────────────────────────── Inicio ───────────────────────── */
 
+  // Teclado del móvil (iOS sobre todo): la pantalla se ajusta a la parte
+  // visible para que la caja de escribir quede siempre sobre el teclado
+  if (window.visualViewport) {
+    const ajustarAltura = () => {
+      document.documentElement.style.setProperty(
+        '--alto-visible',
+        window.visualViewport.height + 'px'
+      );
+      // Mantener el final de la conversación a la vista
+      const lista = document.querySelector('.vista.activa .lista-mensajes');
+      if (lista) lista.scrollTop = lista.scrollHeight;
+    };
+    window.visualViewport.addEventListener('resize', ajustarAltura);
+    ajustarAltura();
+  }
+
   prepararPerfil();
   prepararChatUI();
   activarProteccion();
