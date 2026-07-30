@@ -1,0 +1,4 @@
+# Landing de pre-lanzamiento de ATMO (web estática → perfecta para Netlify)
+# Al conectar el repo en Netlify: Base directory = atmo-landing
+[build]
+  publish = "."

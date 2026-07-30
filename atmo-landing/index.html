@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATMO · La capa social del mundo físico</title>
+  <meta name="description" content="ATMO convierte cualquier espacio físico en una comunidad digital privada y temporal. Escanea, conecta, vive el momento. Únete a la lista de espera." />
+  <meta property="og:title" content="ATMO · Vivir el momento" />
+  <meta property="og:description" content="La capa social del mundo físico. Comunidades privadas y temporales para quienes comparten un mismo espacio." />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <style>
+    /* ATMO · Manual de Marca v1.0 */
+    @font-face {
+      font-family: 'Inter';
+      src: url('/fuentes/inter.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Manrope';
+      src: url('/fuentes/manrope.woff2') format('woff2');
+      font-weight: 200 800;
+      font-display: swap;
+    }
+    :root {
+      --fondo: #0F0F10; --fondo-2: #17181B; --fondo-3: #1F2126; --borde: #2A2D33;
+      --texto: #FFFFFF; --suave: #8C8F96;
+      --azul: #2468FD; --azul-claro: #6EA0FF; --verde: #2ECC71; --rojo: #FF4D4F;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--fondo); color: var(--texto);
+      font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body {
+      background-image:
+        radial-gradient(circle at 85% -5%, transparent 158px, rgba(36,104,253,0.08) 160px, transparent 164px),
+        radial-gradient(circle at 85% -5%, transparent 258px, rgba(36,104,253,0.06) 260px, transparent 264px),
+        radial-gradient(circle at 85% -5%, transparent 378px, rgba(36,104,253,0.05) 380px, transparent 384px),
+        radial-gradient(900px 500px at 90% 0%, rgba(36,104,253,0.09), transparent 70%);
+      background-attachment: fixed;
+    }
+    h1, h2, h3 { font-family: 'Manrope', 'Inter', sans-serif; margin: 0 0 10px; }
+    main { max-width: 960px; margin: 0 auto; padding: 0 22px 80px; }
+    section { margin-top: 72px; }
+    .centrado { text-align: center; }
+    .suave { color: var(--suave); }
+
+    /* Héroe */
+    .heroe { text-align: center; padding-top: 64px; }
+    .heroe img.logo { width: 96px; border-radius: 22px; }
+    .heroe h1 { font-size: clamp(44px, 9vw, 72px); letter-spacing: 6px; font-weight: 800; margin: 14px 0 4px; }
+    .lema { color: var(--azul-claro); letter-spacing: 5px; text-transform: uppercase; font-size: 14px; font-weight: 700; }
+    .claim { font-size: clamp(22px, 4vw, 32px); font-weight: 800; margin: 26px 0 10px; }
+    .claim b { color: var(--azul); }
+    .pitch { color: var(--suave); max-width: 640px; margin: 0 auto; font-size: 17px; line-height: 1.6; }
+
+    .boton {
+      display: inline-block; background: var(--azul); color: #fff; border: 0; cursor: pointer;
+      border-radius: 999px; padding: 16px 34px; font-size: 17px; font-weight: 700; font-family: inherit;
+      text-decoration: none; margin-top: 26px; transition: filter .15s ease, transform .1s ease;
+    }
+    .boton:hover { filter: brightness(1.12); }
+    .boton:active { transform: scale(.97); }
+
+    /* Cuenta atrás */
+    .cuenta-atras { display: flex; gap: 14px; justify-content: center; margin-top: 34px; flex-wrap: wrap; }
+    .cifra {
+      background: var(--fondo-2); border: 1px solid var(--borde); border-radius: 16px;
+      min-width: 86px; padding: 16px 10px;
+    }
+    .cifra b { display: block; font-size: 34px; font-family: 'Manrope', sans-serif; color: var(--azul-claro); }
+    .cifra span { font-size: 12px; color: var(--suave); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* Tarjetas */
+    .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 26px; }
+    .tarjeta { background: var(--fondo-2); border: 1px solid var(--borde); border-radius: 18px; padding: 24px; }
+    .tarjeta h3 { font-size: 18px; }
+    .tarjeta p, .tarjeta li { color: var(--suave); font-size: 15px; line-height: 1.55; }
+    .tarjeta ul { margin: 8px 0 0; padding-left: 0; list-style: none; }
+    .tarjeta li { margin: 7px 0; }
+    .tarjeta li::before { content: '✔ '; color: var(--verde); }
+    .paso-num { font-family: 'Manrope', sans-serif; font-size: 30px; font-weight: 800; color: var(--azul); }
+
+    .titulo-seccion { text-align: center; font-size: clamp(26px, 5vw, 36px); }
+    .sub-seccion { text-align: center; color: var(--suave); max-width: 560px; margin: 0 auto; }
+
+    /* Precios */
+    .precio { font-family: 'Manrope', sans-serif; font-size: 26px; font-weight: 800; color: var(--azul-claro); margin-top: 8px; }
+    .precio small { font-size: 13px; color: var(--suave); font-weight: 600; }
+    .etiqueta {
+      display: inline-block; background: rgba(36,104,253,.14); color: var(--azul-claro);
+      font-size: 12px; font-weight: 700; border-radius: 999px; padding: 5px 12px; letter-spacing: 1px;
+    }
+
+    /* Lista de espera */
+    #lista-espera .tarjeta { max-width: 520px; margin: 26px auto 0; }
+    label { display: block; font-size: 13px; color: var(--suave); margin: 14px 0 6px; }
+    input, select {
+      width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid var(--borde);
+      background: var(--fondo-3); color: var(--texto); font-size: 16px; font-family: inherit; outline: none;
+    }
+    input:focus, select:focus { border-color: var(--azul); }
+    .gracias { display: none; text-align: center; padding: 18px 0 6px; font-size: 17px; }
+
+    footer { margin-top: 80px; border-top: 1px solid var(--borde); padding: 26px 0 10px; text-align: center; }
+    footer .suave { font-size: 13px; }
+    footer a { color: var(--azul-claro); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <main>
+
+    <!-- HÉROE -->
+    <div class="heroe">
+      <img class="logo" src="/icon.svg" alt="ATMO" />
+      <h1>ATMO</h1>
+      <div class="lema">Vivir el momento</div>
+      <div class="claim">La <b>capa social</b> del mundo físico.</div>
+      <p class="pitch">
+        ATMO convierte cualquier espacio —una discoteca, un festival, un congreso—
+        en una <b>comunidad digital privada y temporal</b> para las personas que lo
+        comparten. Escaneas el QR del lugar, conectas con quien está allí…
+        y al salir, todo desaparece.
+      </p>
+      <a class="boton" href="#lista-espera">✦ Únete a la lista de espera</a>
+
+      <div class="cuenta-atras" id="cuenta-atras">
+        <div class="cifra"><b id="ca-dias">–</b><span>días</span></div>
+        <div class="cifra"><b id="ca-horas">–</b><span>horas</span></div>
+        <div class="cifra"><b id="ca-min">–</b><span>minutos</span></div>
+        <div class="cifra"><b id="ca-seg">–</b><span>segundos</span></div>
+      </div>
+      <p class="suave" style="font-size:13px">para el lanzamiento</p>
+    </div>
+
+    <!-- CÓMO FUNCIONA -->
+    <section>
+      <h2 class="titulo-seccion">Conecta donde sucede.</h2>
+      <div class="rejilla">
+        <div class="tarjeta centrado">
+          <div class="paso-num">01</div>
+          <h3>Escanea y entra</h3>
+          <p>Sin descargar nada, sin registros eternos. El QR del local es la puerta:
+             crea tu perfil temporal en diez segundos.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <div class="paso-num">02</div>
+          <h3>Conoce a quien está aquí</h3>
+          <p>Canal general del evento y conversaciones privadas con la gente que
+             está ahora mismo en el mismo sitio que tú. Sin dar tu número.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <div class="paso-num">03</div>
+          <h3>Al salir, desaparece</h3>
+          <p>La comunidad solo existe dentro del espacio. Cuando te vas, tu perfil,
+             tus fotos y tus mensajes se borran por completo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA USUARIOS -->
+    <section>
+      <h2 class="titulo-seccion">Para ti</h2>
+      <p class="sub-seccion">Lo mejor de la noche es la gente. ATMO te lo pone fácil.</p>
+      <div class="rejilla">
+        <div class="tarjeta">
+          <h3>🕺 Rompe el hielo sin presión</h3>
+          <ul>
+            <li>Ve quién está en el local y su perfil</li>
+            <li>Escribe en privado sin dar tu teléfono</li>
+            <li>Equilibrio chicos/chicas para buen ambiente</li>
+          </ul>
+        </div>
+        <div class="tarjeta">
+          <h3>🔒 Privacidad de verdad</h3>
+          <ul>
+            <li>Todo se borra al abandonar el espacio</li>
+            <li>Fotos y chats con marca de agua rastreable</li>
+            <li>Bloqueo silencioso de quien moleste</li>
+          </ul>
+        </div>
+        <div class="tarjeta">
+          <h3>✦ ATMO Premium <span class="etiqueta">PRÓXIMAMENTE · 9,99 €/mes</span></h3>
+          <ul>
+            <li>Destaca tu perfil en el evento</li>
+            <li>Guarda contactos al salir (si ambos quieren)</li>
+            <li>Filtros, estadísticas y personalización</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA EMPRESAS -->
+    <section>
+      <h2 class="titulo-seccion">Para tu espacio</h2>
+      <p class="sub-seccion">
+        No vendes entradas: vendes experiencias. ATMO es la infraestructura social
+        que crea comunidad, fideliza y te da datos de tu público — en tu discoteca,
+        festival, hotel o campus.
+      </p>
+      <div class="rejilla">
+        <div class="tarjeta centrado">
+          <h3>Discotecas y salas</h3>
+          <div class="precio">99 €<small>/mes</small></div>
+          <p>La discoteca más conectada de tu ciudad. QR en pantalla, comunidad cada noche.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <h3>Conciertos</h3>
+          <div class="precio">500 €<small>/evento</small></div>
+          <p>Una comunidad por bolo: el público conecta antes, durante y en el bis.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <h3>Festivales</h3>
+          <div class="precio">desde 1.500 €</div>
+          <p>Miles de asistentes, un solo espacio social. Zonas, promociones y engagement.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <h3>Hoteles</h3>
+          <div class="precio">149 €<small>/mes</small></div>
+          <p>Tus huéspedes se conocen en la piscina antes que en el buffet.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <h3>Universidades</h3>
+          <div class="precio">299 €<small>/mes</small></div>
+          <p>La capa social del campus: eventos, facultades, semana de bienvenida.</p>
+        </div>
+        <div class="tarjeta centrado">
+          <h3>Fidelización y analítica</h3>
+          <div class="precio">Incluido</div>
+          <p>Aforo en vivo, tiempos de estancia, promociones dentro del chat y eventos interactivos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LISTA DE ESPERA -->
+    <section id="lista-espera">
+      <h2 class="titulo-seccion">Sé de los primeros</h2>
+      <p class="sub-seccion">Apúntate y te avisamos del lanzamiento. Los primeros
+        usuarios tendrán la cuenta ATMO gratis para siempre.</p>
+      <div class="tarjeta">
+        <!-- Netlify Forms: al desplegar en Netlify, los envíos llegan al panel Forms -->
+        <form name="lista-espera" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="formulario">
+          <input type="hidden" name="form-name" value="lista-espera" />
+          <p style="display:none"><input name="bot-field" /></p>
+          <label for="nombre">Tu nombre</label>
+          <input id="nombre" name="nombre" type="text" required maxlength="60" />
+          <label for="email">Tu email</label>
+          <input id="email" name="email" type="email" required maxlength="120" />
+          <label for="tipo">¿Qué eres?</label>
+          <select id="tipo" name="tipo">
+            <option value="usuario">Quiero usar ATMO en eventos</option>
+            <option value="local">Tengo un local / organizo eventos</option>
+            <option value="inversor">Me interesa invertir</option>
+          </select>
+          <button class="boton" type="submit" style="width:100%; margin-top:22px">✦ Apuntarme</button>
+        </form>
+        <div class="gracias" id="gracias">✅ ¡Estás dentro! Te avisaremos muy pronto.<br/>
+          <span class="suave" style="font-size:14px">Vivir el momento empieza en breve.</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <img src="/icon.svg" alt="" style="width:40px; border-radius:10px" /><br/>
+      <p class="suave">
+        <b style="color:var(--texto)">ATMO</b> · Vivir el momento ·
+        <a href="https://atmo.app">atmo.app</a><br/>
+        © 2026 ATMO. Todos los derechos reservados.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    // ⚙️ FECHA DE LANZAMIENTO: cámbiala aquí cuando la tengáis cerrada
+    const LANZAMIENTO = new Date('2026-10-01T22:00:00');
+
+    const pad = (n) => String(n).padStart(2, '0');
+    function tic() {
+      let resto = Math.max(0, LANZAMIENTO - new Date());
+      const dias = Math.floor(resto / 86400000);
+      const horas = Math.floor(resto / 3600000) % 24;
+      const min = Math.floor(resto / 60000) % 60;
+      const seg = Math.floor(resto / 1000) % 60;
+      document.getElementById('ca-dias').textContent = dias;
+      document.getElementById('ca-horas').textContent = pad(horas);
+      document.getElementById('ca-min').textContent = pad(min);
+      document.getElementById('ca-seg').textContent = pad(seg);
+    }
+    tic();
+    setInterval(tic, 1000);
+
+    // Envío de la lista de espera sin salir de la página (Netlify Forms)
+    document.getElementById('formulario').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const datos = new FormData(e.target);
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(datos).toString(),
+        });
+      } catch {}
+      e.target.style.display = 'none';
+      document.getElementById('gracias').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

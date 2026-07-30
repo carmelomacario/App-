@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Marca ATMO: ondas concéntricas (conexión, proximidad, energía del momento) -->
+  <rect width="128" height="128" rx="28" fill="#0F0F10"/>
+  <g fill="none" stroke="#2468FD" stroke-linecap="round">
+    <circle cx="64" cy="64" r="15" stroke-width="10" stroke-dasharray="66 29" transform="rotate(115 64 64)"/>
+    <circle cx="64" cy="64" r="31" stroke-width="10" stroke-dasharray="155 40" transform="rotate(210 64 64)"/>
+    <circle cx="64" cy="64" r="47" stroke-width="10" stroke-dasharray="225 71" transform="rotate(330 64 64)"/>
+  </g>
+  <circle cx="64" cy="64" r="6" fill="#2468FD"/>
+</svg>
