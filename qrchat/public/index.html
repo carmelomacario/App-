@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QRChat · Crea tu evento</title>
+  <link rel="stylesheet" href="/estilo.css" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <style>
+    main { max-width: 520px; margin: 0 auto; padding: 32px 20px 60px; }
+    .cabecera { text-align: center; margin-bottom: 28px; }
+    .cabecera h1 { font-size: 42px; }
+    .cabecera p { color: var(--texto-suave); margin: 6px 0 0; }
+    #resultado img { width: 100%; max-width: 320px; border-radius: 12px; background: #fff; padding: 12px; }
+    .fila-enlaces { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+    .codigo-grande { font-size: 34px; font-weight: 800; letter-spacing: 6px; }
+    .paso { display: flex; gap: 12px; margin: 10px 0; align-items: baseline; }
+    .paso b { color: var(--neon-2); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="cabecera">
+      <h1 class="marca">QRChat</h1>
+      <p>Chat efímero para tu discoteca, fiesta o evento.<br />Escanean el QR, chatean, y al acabar… todo desaparece. ✨</p>
+    </div>
+
+    <div class="tarjeta" id="formulario">
+      <h2>Crear un evento</h2>
+      <label for="nombre">Nombre del evento</label>
+      <input id="nombre" type="text" maxlength="60" placeholder="Sala Luna · Sábado noche" />
+      <label for="horas">Duración (horas hasta que todo se borre)</label>
+      <input id="horas" type="number" min="1" max="48" value="12" />
+      <div style="margin-top:20px">
+        <button class="boton" id="crear" style="width:100%">🎉 Crear evento y generar QR</button>
+      </div>
+      <p class="suave" id="error" style="color:#ff6b6b"></p>
+    </div>
+
+    <div class="tarjeta oculto centrado" id="resultado" style="margin-top:20px">
+      <h2 id="res-nombre"></h2>
+      <p class="suave">Código del evento</p>
+      <div class="codigo-grande" id="res-codigo"></div>
+      <p style="margin-top:16px"><img id="res-qr" alt="Código QR del evento" /></p>
+      <div class="fila-enlaces">
+        <a class="boton" id="res-pantalla" target="_blank">📺 Abrir pantalla para proyectar</a>
+        <a class="boton boton-secundario" id="res-entrar">📱 Entrar yo al chat</a>
+        <button class="boton boton-secundario" id="res-copiar">🔗 Copiar enlace de acceso</button>
+      </div>
+      <div style="text-align:left; margin-top:22px">
+        <div class="paso"><b>1.</b> Proyecta o imprime el QR en tu local.</div>
+        <div class="paso"><b>2.</b> La gente lo escanea y crea su perfil temporal.</div>
+        <div class="paso"><b>3.</b> Canal general + privados para romper el hielo.</div>
+        <div class="paso"><b>4.</b> Al expirar el evento, todo se borra solo.</div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    $('crear').addEventListener('click', async () => {
+      $('crear').disabled = true;
+      $('error').textContent = '';
+      try {
+        const respuesta = await fetch('/api/eventos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre: $('nombre').value, horas: Number($('horas').value) }),
+        });
+        if (!respuesta.ok) throw new Error('No se pudo crear el evento');
+        const ev = await respuesta.json();
+        $('res-nombre').textContent = ev.nombre;
+        $('res-codigo').textContent = ev.codigo;
+        $('res-qr').src = ev.qr;
+        $('res-pantalla').href = ev.pantalla;
+        $('res-entrar').href = ev.url;
+        $('res-copiar').onclick = async () => {
+          await navigator.clipboard.writeText(ev.url);
+          $('res-copiar').textContent = '✅ Enlace copiado';
+        };
+        $('resultado').classList.remove('oculto');
+        $('resultado').scrollIntoView({ behavior: 'smooth' });
+      } catch (e) {
+        $('error').textContent = e.message;
+      } finally {
+        $('crear').disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

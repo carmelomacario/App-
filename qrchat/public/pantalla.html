@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QRChat · Pantalla</title>
+  <link rel="stylesheet" href="/estilo.css" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .panel { text-align: center; padding: 24px; }
+    .panel h1 { font-size: clamp(28px, 5vw, 64px); }
+    .panel .evento { font-size: clamp(20px, 3vw, 40px); color: var(--texto-suave); margin-bottom: 24px; }
+    .qr { background: #fff; display: inline-block; padding: 20px; border-radius: 24px; box-shadow: 0 0 60px rgba(255, 45, 149, 0.35); }
+    .qr img { width: min(52vh, 80vw); display: block; }
+    .contador { margin-top: 26px; font-size: clamp(18px, 2.5vw, 32px); }
+    .contador b { color: var(--neon-2); font-size: 1.3em; }
+    .instruccion { margin-top: 10px; color: var(--texto-suave); font-size: clamp(15px, 2vw, 24px); }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1 class="marca">QRChat</h1>
+    <div class="evento" id="nombre">…</div>
+    <div class="qr"><img id="qr" alt="Escanea para entrar al chat" /></div>
+    <div class="contador">👥 <b id="personas">0</b> personas dentro</div>
+    <div class="instruccion">📲 Escanea el código y empieza a conocer gente</div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const codigo = location.pathname.split('/').pop().toUpperCase();
+
+    async function cargar() {
+      const r = await fetch('/api/eventos/' + codigo);
+      if (!r.ok) {
+        document.getElementById('nombre').textContent = 'Evento no encontrado o finalizado';
+        return;
+      }
+      const ev = await r.json();
+      document.getElementById('nombre').textContent = ev.nombre;
+      document.getElementById('qr').src = ev.qr;
+      document.getElementById('personas').textContent = ev.personas;
+
+      const socket = io();
+      socket.emit('pantalla:unirse', { codigo });
+      socket.on('usuarios:cambio', (usuarios) => {
+        document.getElementById('personas').textContent = usuarios.length;
+      });
+      socket.on('evento:finalizado', () => {
+        document.getElementById('nombre').textContent = 'Evento finalizado — ¡gracias por venir! 🌙';
+        document.querySelector('.qr').style.display = 'none';
+      });
+    }
+    cargar();
+  </script>
+</body>
+</html>
