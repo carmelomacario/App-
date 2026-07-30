@@ -1,0 +1,16 @@
+# Despliegue de QRChat en Render.com con un clic:
+# Dashboard de Render → New → Blueprint → conectar este repositorio.
+# (QRChat necesita un servidor Node permanente con WebSockets, por eso
+#  se despliega aquí y no en Netlify como las demás apps del repo.)
+services:
+  - type: web
+    name: qrchat
+    runtime: node
+    rootDir: qrchat
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /salud
+    envVars:
+      - key: NODE_VERSION
+        value: "20"

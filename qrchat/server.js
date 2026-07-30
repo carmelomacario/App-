@@ -469,6 +469,11 @@ app.post('/api/cuentas/login', (req, res) => {
   res.json({ alias: cuenta.alias, token: cuenta.token, perfil: cuenta.perfil });
 });
 
+// Comprobación de vida para el hosting (health check)
+app.get('/salud', (_req, res) => {
+  res.json({ ok: true, eventos: eventos.size, cuentas: cuentas.size });
+});
+
 // Rutas de página (SPA sencilla: cada pantalla es un HTML propio)
 app.get('/e/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'app.html')));
 app.get('/pantalla/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'pantalla.html')));

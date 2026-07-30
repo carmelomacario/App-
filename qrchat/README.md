@@ -116,25 +116,50 @@ npm start
 Para probar con dos personas: abre una ventana normal y otra de incógnito
 (los perfiles se guardan por pestaña en `sessionStorage`).
 
-## Desplegar
+## Desplegar 🚀
 
-⚠️ Esta app usa **WebSockets** (Socket.IO), así que **no puede desplegarse en
-Netlify Functions** como las otras apps del repo. Opciones gratuitas o baratas
-que funcionan directamente:
+> ⚠️ **¿Por qué no en Netlify?** QRChat necesita un **servidor permanente con
+> WebSockets** (chat en tiempo real, gente conectada a la vez, colas, purgas).
+> Netlify solo ejecuta funciones sueltas que se encienden y apagan por
+> petición: ahí esta app no puede funcionar. Las alternativas de abajo son
+> igual de sencillas y también tienen plan gratuito.
 
-- **Render.com** → New Web Service → conectar el repo, *Root Directory* `qrchat`,
-  *Build* `npm install`, *Start* `npm start`.
-- **Railway.app** / **Fly.io** → igual de sencillo, detectan Node automáticamente.
-- Cualquier VPS con Node 18+: `npm install && npm start` (variable `PORT` opcional).
+### Opción A — Render.com (recomendada, 1 clic) 🟢
 
-El servidor detecta su URL pública automáticamente (cabeceras
-`x-forwarded-proto`/`x-forwarded-host`), así que los QR generados apuntan
-siempre al dominio correcto.
+El repo ya incluye `render.yaml` en la raíz con todo configurado:
 
-> Nota: al ser todo en memoria, si el servidor se reinicia se pierden los
-> eventos activos. Para este caso de uso (chats de una noche) es lo deseado,
-> pero tenlo en cuenta si el hosting "duerme" la app por inactividad
-> (en Render free tier, por ejemplo).
+1. Crea cuenta en [render.com](https://render.com) (puedes entrar con GitHub).
+2. **New → Blueprint** → conecta este repositorio (`carmelomacario/App-`).
+3. Render lee `render.yaml`, crea el servicio `qrchat` y lo despliega.
+4. Te da una URL tipo `https://qrchat.onrender.com` → esa es la app.
+   Entra, crea un evento y proyecta el QR. ✅
+
+Notas del plan gratuito de Render:
+- La app **se duerme tras ~15 min sin visitas** y tarda ~30 s en despertar.
+  Como todo vive en memoria, si se duerme a mitad de un evento, el evento se
+  pierde. Para una noche real: entra a la web 5 minutos antes de abrir, o
+  paga el plan Starter (~7 $/mes) que no duerme.
+- El disco es efímero: las **cuentas** (`data/cuentas.json`) se pierden al
+  redesplegar. Con el plan de pago puedes añadir un disco persistente.
+
+### Opción B — Railway.app / Fly.io / Koyeb (con Docker) 🐳
+
+El directorio `qrchat/` incluye un `Dockerfile` listo:
+
+- **Railway**: New Project → Deploy from GitHub repo → Root Directory `qrchat`.
+  Detecta el Dockerfile y lo despliega solo.
+- Cualquier VPS con Docker:
+  `docker build -t qrchat qrchat/ && docker run -d -p 80:3000 qrchat`
+
+### Opción C — Un ordenador del propio local 💻
+
+Para una discoteca con conexión estable, el servidor puede correr en un PC
+del local (Node 18+): `cd qrchat && npm install && npm start`. Con un túnel
+tipo Cloudflare Tunnel (gratis) obtienes la URL pública para el QR.
+
+En todos los casos el servidor detecta su URL pública automáticamente
+(cabeceras `x-forwarded-proto`/`x-forwarded-host`), así que los QR generados
+apuntan siempre al dominio correcto. Hay un health check en `/salud`.
 
 ## Estructura
 
