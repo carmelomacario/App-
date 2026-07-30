@@ -42,7 +42,7 @@
         <div class="kpi"><b id="k-estancia">–</b><span>estancia media (min)</span></div>
         <div class="kpi"><b id="k-sexos">–</b><span>🕺 chicos / 💃 chicas</span></div>
         <div class="kpi"><b id="k-cola">–</b><span>en cola de espera</span></div>
-        <div class="kpi"><b id="k-mensajes">–</b><span>mensajes (general + privados)</span></div>
+        <div class="kpi"><b id="k-mensajes">–</b><span>mensajes privados</span></div>
         <div class="kpi"><b id="k-fotos">–</b><span>fotos compartidas</span></div>
         <div class="kpi destacado"><b id="k-contactos">–</b><span>🤝 contactos guardados</span></div>
       </div>
@@ -133,7 +133,7 @@
       $('k-estancia').textContent = d.estanciaMediaMin;
       $('k-sexos').textContent = `${d.sexos.h} / ${d.sexos.m}`;
       $('k-cola').textContent = d.enCola;
-      $('k-mensajes').textContent = d.mensajesGeneral + d.mensajesPrivados;
+      $('k-mensajes').textContent = d.mensajesPrivados;
       $('k-fotos').textContent = d.fotos;
       $('k-contactos').textContent = d.contactos;
       pintarGrafica(d.serie);

@@ -21,11 +21,10 @@
     yo: null,            // { id, token, perfil }
     evento: null,
     usuarios: [],        // perfiles públicos
-    general: [],
     privados: new Map(), // otroId -> [mensajes]
     noLeidos: new Map(), // otroId -> nº
     bloqueados: new Set(),
-    vistaActual: 'general',
+    vistaActual: 'gente',
     privadoAbierto: null, // otroId del chat privado abierto
     emojiElegido: '🙂',
     sexoElegido: null,
@@ -223,7 +222,6 @@
     }
     estado.socket?.emit('salir', { motivo });
     sessionStorage.removeItem(claveSesion);
-    estado.general = [];
     estado.privados = new Map();
     estado.noLeidos = new Map();
     mostrarFin(titulo, sub);
@@ -508,7 +506,6 @@
       estado.yo = { id: resp.userId, token: resp.token, perfil: resp.perfil };
       estado.evento = resp.evento;
       estado.usuarios = resp.usuarios;
-      estado.general = resp.general;
       estado.bloqueados = new Set(resp.bloqueados);
       estado.privados = new Map();
       for (const [clave, msgs] of Object.entries(resp.privados)) {
@@ -522,11 +519,6 @@
     socket.on('espera:admitido', alUnirse);
     socket.on('espera:posicion', ({ posicion }) => {
       $('espera-posicion').textContent = posicion;
-    });
-
-    socket.on('general:mensaje', (m) => {
-      estado.general.push(m);
-      if (estado.vistaActual === 'general') pintarGeneral();
     });
 
     socket.on('privado:mensaje', (m) => {
@@ -545,12 +537,11 @@
     // Alguien abandonó el espacio: eliminamos todo rastro suyo también aquí
     socket.on('usuario:purgado', ({ userId }) => {
       if (userId === estado.yo?.id) return; // nuestra propia purga se gestiona en salirDelEspacio
-      estado.general = estado.general.filter((m) => m.de !== userId);
       estado.privados.delete(userId);
       estado.noLeidos.delete(userId);
       estado.bloqueados.delete(userId);
       pintarBadges();
-      if (estado.vistaActual === 'general') pintarGeneral();
+      if (estado.vistaActual === 'gente') pintarGente();
       if (estado.vistaActual === 'privados') pintarListaPrivados();
       if (estado.vistaActual === 'chat-privado' && estado.privadoAbierto === userId) {
         cambiarVista('privados');
@@ -570,8 +561,8 @@
     socket.on('usuarios:cambio', (usuarios) => {
       estado.usuarios = usuarios;
       $('chat-info').textContent = textoPersonas(usuarios.length);
-      if (estado.vistaActual === 'general') pintarGeneral();
       if (estado.vistaActual === 'gente') pintarGente();
+      if (estado.vistaActual === 'chat-privado') pintarPrivado();
       if (estado.vistaActual === 'privados') pintarListaPrivados();
       if (estado.vistaActual === 'chat-privado') pintarCabeceraPrivado();
     });
@@ -603,7 +594,7 @@
     mostrarPantalla('pantalla-chat');
     $('chat-evento').textContent = estado.evento.nombre;
     $('chat-info').textContent = textoPersonas(estado.usuarios.length);
-    pintarGeneral();
+    pintarGente();
     pintarBadges();
     aplicarMarcaAgua();
     vigilarZona();
@@ -616,7 +607,6 @@
     }
     for (const v of document.querySelectorAll('.vista')) v.classList.remove('activa');
     $('vista-' + nombre).classList.add('activa');
-    if (nombre === 'general') pintarGeneral();
     if (nombre === 'gente') pintarGente();
     if (nombre === 'privados') pintarListaPrivados();
   }
@@ -667,7 +657,6 @@
     }
   }
 
-  const pintarGeneral = () => pintarLista($('mensajes-general'), estado.general);
   const pintarPrivado = () =>
     pintarLista($('mensajes-privado'), estado.privados.get(estado.privadoAbierto) || []);
 
@@ -776,11 +765,6 @@
 
   /* ─────────────────────────── Envíos ─────────────────────────── */
 
-  function enviarGeneral(texto, foto) {
-    if (!texto && !foto) return;
-    estado.socket.emit('general:mensaje', { texto, foto }, () => {});
-  }
-
   function enviarPrivado(texto, foto) {
     if (!texto && !foto) return;
     const para = estado.privadoAbierto;
@@ -800,11 +784,6 @@
       b.onclick = () => cambiarVista(b.dataset.vista);
     }
 
-    $('btn-enviar-general').onclick = () => {
-      const t = $('texto-general').value.trim();
-      $('texto-general').value = '';
-      enviarGeneral(t, null);
-    };
     $('btn-enviar-privado').onclick = () => {
       const t = $('texto-privado').value.trim();
       $('texto-privado').value = '';
@@ -812,7 +791,7 @@
     };
 
     // Enviar con Enter (Mayús+Enter hace salto de línea)
-    for (const [area, boton] of [['texto-general', 'btn-enviar-general'], ['texto-privado', 'btn-enviar-privado']]) {
+    for (const [area, boton] of [['texto-privado', 'btn-enviar-privado']]) {
       $(area).addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
@@ -822,16 +801,12 @@
     }
 
     // Fotos en chats
-    let destinoFoto = 'general';
-    $('btn-foto-general').onclick = () => { destinoFoto = 'general'; $('input-foto-chat').click(); };
-    $('btn-foto-privado').onclick = () => { destinoFoto = 'privado'; $('input-foto-chat').click(); };
+    $('btn-foto-privado').onclick = () => $('input-foto-chat').click();
     $('input-foto-chat').onchange = async (ev) => {
       const f = ev.target.files[0];
       ev.target.value = '';
       if (!f) return;
-      const foto = await comprimirImagen(f);
-      if (destinoFoto === 'general') enviarGeneral('', foto);
-      else enviarPrivado('', foto);
+      enviarPrivado('', await comprimirImagen(f));
     };
 
     $('btn-volver-privado').onclick = () => cambiarVista('privados');
@@ -893,8 +868,8 @@
       else estado.bloqueados.delete(id);
       estado.socket.emit('bloquear', { userId: id, bloquear });
       $('modal-persona').classList.add('oculto');
-      pintarGeneral();
       if (estado.vistaActual === 'gente') pintarGente();
+      if (estado.vistaActual === 'chat-privado') pintarPrivado();
     };
 
     // Mi perfil: editar nombre, foto y bio en cualquier momento

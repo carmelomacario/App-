@@ -13,9 +13,9 @@ paso en persona.
    apodo, sexo (🕺 chico / 💃 chica / ✨ otro), avatar emoji o foto, y una
    pequeña bio. El sexo se muestra en los perfiles y hay contadores de
    chicos/chicas en la lista de gente y en la pantalla de proyección.
-4. Dentro tienen:
-   - 💬 **Canal general** del evento (texto y fotos)
-   - 🕺 **Gente**: lista de perfiles de los asistentes
+4. Dentro tienen (no hay canal general: ATMO es descubrir y hablar en privado):
+   - 🕺 **Gente**: perfiles de los asistentes, con ficha estilo WhatsApp
+     (la foto — o el emoji — en grande)
    - 💌 **Privados**: conversaciones 1 a 1 (texto y fotos)
    - 🚫 **Bloqueo**: cualquier persona puede bloquear a otra y dejar de recibir
      sus mensajes (sin que la otra persona lo sepa)

@@ -34,7 +34,6 @@ app.use(express.static(PUBLIC_DIR));
 
 const HORAS_DEFECTO = 12;
 const HORAS_MAX = 48;
-const MAX_MENSAJES_GENERAL = 300;
 const MAX_MENSAJES_PRIVADO = 200;
 const MAX_FOTO_BYTES = 2.5 * 1024 * 1024; // data-URL ya comprimida en cliente
 
@@ -747,24 +746,8 @@ io.on('connection', (socket) => {
     revisarCola(e); // si entró una chica, puede abrir hueco a alguien en espera
   });
 
-  /* Mensaje al canal general (texto y/o foto) */
-  socket.on('general:mensaje', (datos = {}, cb) => {
-    const { ev, yo } = socket.data;
-    if (!ev || !yo) return;
-    const texto = limpiarTexto(datos.texto, 1000);
-    const foto = fotoValida(datos.foto) ? datos.foto : null;
-    if (!texto && !foto) return cb?.({ error: 'Mensaje vacío' });
-
-    const msg = { id: crypto.randomUUID(), de: yo.id, texto, foto, ts: Date.now() };
-    ev.general.push(msg);
-    ev.stats.mensajesGeneral++;
-    if (foto) ev.stats.fotos++;
-    if (ev.general.length > MAX_MENSAJES_GENERAL) ev.general.shift();
-    io.to(`evento:${ev.codigo}`).emit('general:mensaje', msg);
-    cb?.({ ok: true });
-  });
-
-  /* Mensaje privado 1 a 1 */
+  /* Mensaje privado 1 a 1 (no hay canal general: ATMO es descubrir gente
+     en «Gente» y hablar en privado) */
   socket.on('privado:mensaje', (datos = {}, cb) => {
     const { ev, yo } = socket.data;
     if (!ev || !yo) return;

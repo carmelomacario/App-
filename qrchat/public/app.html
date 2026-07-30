@@ -49,6 +49,14 @@
       border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
     }
     .modal .avatar-preview { width: 132px; height: 132px; font-size: 64px; }
+    /* Ficha de perfil estilo WhatsApp: la foto (o el emoji) a lo grande */
+    .foto-grande {
+      width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
+      background: radial-gradient(circle at 50% 42%, #232634, var(--fondo-3) 75%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 150px; line-height: 1; margin-bottom: 14px; user-select: none;
+    }
+    .foto-grande img { width: 100%; height: 100%; object-fit: cover; }
     #visor { z-index: 60; cursor: zoom-out; }
     #visor img { max-width: 96vw; max-height: 92vh; border-radius: 14px; }
     .sexos { display: flex; gap: 8px; }
@@ -256,22 +264,12 @@
     </header>
 
     <nav class="pestanas">
-      <button data-vista="general" class="activa">💬 General</button>
-      <button data-vista="gente">🕺 Gente <span class="badge oculto" id="badge-gente"></span></button>
+      <button data-vista="gente" class="activa">🕺 Gente</button>
       <button data-vista="privados">💌 Privados <span class="badge oculto" id="badge-privados"></span></button>
     </nav>
 
     <div class="contenido">
-      <div class="vista activa" id="vista-general">
-        <div class="lista-mensajes" id="mensajes-general"></div>
-        <div class="compositor">
-          <button class="boton-icono" id="btn-foto-general" title="Enviar foto">📷</button>
-          <textarea id="texto-general" rows="1" placeholder="Escribe al canal general…"></textarea>
-          <button class="boton" id="btn-enviar-general">➤</button>
-        </div>
-      </div>
-
-      <div class="vista" id="vista-gente"></div>
+      <div class="vista activa" id="vista-gente"></div>
 
       <div class="vista" id="vista-privados"></div>
 
@@ -373,7 +371,7 @@
   <!-- Modal: perfil de otra persona -->
   <div class="modal-fondo oculto" id="modal-persona">
     <div class="tarjeta modal">
-      <div class="avatar-preview" id="modal-avatar">🙂</div>
+      <div class="foto-grande" id="modal-avatar">🙂</div>
       <h2 id="modal-nombre"></h2>
       <p class="suave" id="modal-bio"></p>
       <div class="acciones">
