@@ -32,6 +32,19 @@
       <input id="nombre" type="text" maxlength="60" placeholder="Sala Luna · Sábado noche" />
       <label for="horas">Duración (horas hasta que todo se borre)</label>
       <input id="horas" type="number" min="1" max="48" value="12" />
+
+      <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; color:var(--texto)">
+        <input type="checkbox" id="geovallado" style="width:auto" />
+        📍 Limitar el chat al espacio físico (recomendado)
+      </label>
+      <div id="opciones-geo" class="oculto">
+        <label for="radio">Radio del espacio en metros (desde donde estás ahora)</label>
+        <input id="radio" type="number" min="30" max="1000" value="100" />
+        <p class="suave" style="font-size:12px; margin:6px 0 0">
+          Quien salga del radio (o cierre la app) será eliminado por completo:
+          perfil, fotos y todos sus mensajes.
+        </p>
+      </div>
       <div style="margin-top:20px">
         <button class="boton" id="crear" style="width:100%">🎉 Crear evento y generar QR</button>
       </div>
@@ -59,14 +72,28 @@
 
   <script>
     const $ = (id) => document.getElementById(id);
+
+    $('geovallado').addEventListener('change', () => {
+      $('opciones-geo').classList.toggle('oculto', !$('geovallado').checked);
+    });
+
     $('crear').addEventListener('click', async () => {
       $('crear').disabled = true;
       $('error').textContent = '';
       try {
+        // Con geovallado, el centro del espacio es la posición actual del organizador
+        let geo = null;
+        if ($('geovallado').checked) {
+          const pos = await new Promise((ok, mal) =>
+            navigator.geolocation.getCurrentPosition(ok, mal, { enableHighAccuracy: true, timeout: 20000 })
+          ).catch(() => null);
+          if (!pos) throw new Error('Activa la ubicación para poder delimitar el espacio del evento.');
+          geo = { lat: pos.coords.latitude, lng: pos.coords.longitude, radio: Number($('radio').value) || 100 };
+        }
         const respuesta = await fetch('/api/eventos', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre: $('nombre').value, horas: Number($('horas').value) }),
+          body: JSON.stringify({ nombre: $('nombre').value, horas: Number($('horas').value), geo }),
         });
         if (!respuesta.ok) throw new Error('No se pudo crear el evento');
         const ev = await respuesta.json();

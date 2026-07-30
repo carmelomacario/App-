@@ -33,6 +33,11 @@ const MAX_MENSAJES_GENERAL = 300;
 const MAX_MENSAJES_PRIVADO = 200;
 const MAX_FOTO_BYTES = 2.5 * 1024 * 1024; // data-URL ya comprimida en cliente
 
+// Al abandonar el espacio (desconexión, cierre de la app, salir del radio…)
+// se purga TODO lo de esa persona. La gracia cubre cortes breves de cobertura.
+const GRACIA_MS = Number(process.env.QRCHAT_GRACIA_MS) || 5 * 60 * 1000;
+const SWEEP_MS = Number(process.env.QRCHAT_SWEEP_MS) || 30 * 1000;
+
 /** @type {Map<string, Evento>} */
 const eventos = new Map();
 
@@ -85,12 +90,40 @@ function finalizarEvento(ev) {
   console.log(`[qrchat] Evento ${ev.codigo} finalizado y borrado`);
 }
 
-// Limpieza periódica de eventos caducados
+/**
+ * Borra por completo a una persona del evento: perfil, foto, sus mensajes
+ * del canal general y todas sus conversaciones privadas (para ambas partes).
+ * Se avisa al resto de clientes para que también lo eliminen de su pantalla.
+ */
+function purgarUsuario(ev, userId, motivo) {
+  const u = ev.usuarios.get(userId);
+  if (!u) return;
+  ev.usuarios.delete(userId);
+  ev.general = ev.general.filter((m) => m.de !== userId);
+  for (const clave of Array.from(ev.privados.keys())) {
+    if (clave.split('|').includes(userId)) ev.privados.delete(clave);
+  }
+  for (const otro of ev.usuarios.values()) otro.bloqueados.delete(userId);
+  io.to(`evento:${ev.codigo}`).emit('usuario:purgado', { userId });
+  io.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
+  if (u.socketId) io.sockets.sockets.get(u.socketId)?.disconnect(true);
+  console.log(`[qrchat] ${ev.codigo}: usuario purgado (${motivo})`);
+}
+
+// Limpieza periódica: eventos caducados y personas que abandonaron el espacio
 setInterval(() => {
   for (const ev of eventos.values()) {
-    if (Date.now() > ev.expiraEn) finalizarEvento(ev);
+    if (Date.now() > ev.expiraEn) {
+      finalizarEvento(ev);
+      continue;
+    }
+    for (const u of Array.from(ev.usuarios.values())) {
+      if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > GRACIA_MS) {
+        purgarUsuario(ev, u.id, 'ausencia prolongada');
+      }
+    }
   }
-}, 60 * 1000);
+}, SWEEP_MS);
 
 /* ─────────────────────────── Utilidades de datos ─────────────────────────── */
 
@@ -130,10 +163,19 @@ app.post('/api/eventos', async (req, res) => {
   let horas = Number(req.body?.horas) || HORAS_DEFECTO;
   horas = Math.min(Math.max(horas, 1), HORAS_MAX);
 
+  // Geovallado opcional: centro + radio del espacio físico del evento
+  let geo = null;
+  const g = req.body?.geo;
+  if (g && Number.isFinite(Number(g.lat)) && Number.isFinite(Number(g.lng))) {
+    const radio = Math.min(Math.max(Number(g.radio) || 100, 30), 1000);
+    geo = { lat: Number(g.lat), lng: Number(g.lng), radio };
+  }
+
   const codigo = generarCodigo();
   const ev = {
     codigo,
     nombre,
+    geo,
     creadoEn: Date.now(),
     expiraEn: Date.now() + horas * 3600 * 1000,
     adminToken: crypto.randomUUID(),
@@ -149,6 +191,7 @@ app.post('/api/eventos', async (req, res) => {
   res.json({
     codigo,
     nombre,
+    geo: ev.geo,
     url,
     qr,
     expiraEn: ev.expiraEn,
@@ -165,6 +208,7 @@ app.get('/api/eventos/:codigo', async (req, res) => {
   res.json({
     codigo: ev.codigo,
     nombre: ev.nombre,
+    geo: ev.geo,
     url,
     qr,
     expiraEn: ev.expiraEn,
@@ -213,12 +257,14 @@ io.on('connection', (socket) => {
         foto: fotoValida(datos.foto) ? datos.foto : null,
         online: true,
         socketId: socket.id,
+        desconectadoEn: null,
         bloqueados: new Set(),
       };
       e.usuarios.set(usuario.id, usuario);
     } else {
       usuario.online = true;
       usuario.socketId = socket.id;
+      usuario.desconectadoEn = null;
     }
 
     ev = e;
@@ -236,7 +282,7 @@ io.on('connection', (socket) => {
       userId: usuario.id,
       token: usuario.token,
       perfil: perfilPublico(usuario),
-      evento: { codigo: e.codigo, nombre: e.nombre, expiraEn: e.expiraEn },
+      evento: { codigo: e.codigo, nombre: e.nombre, geo: e.geo, expiraEn: e.expiraEn },
       usuarios: listaUsuarios(e),
       general: e.general,
       privados: misPrivados,
@@ -304,22 +350,22 @@ io.on('connection', (socket) => {
     cb?.({ ok: true, perfil: perfilPublico(yo) });
   });
 
-  /* Salir del evento borrando el perfil */
-  socket.on('salir', () => {
+  /* Abandonar el espacio: se borra TODO lo de esta persona al instante */
+  socket.on('salir', (datos = {}) => {
     if (!ev || !yo) return;
-    ev.usuarios.delete(yo.id);
-    for (const clave of Array.from(ev.privados.keys())) {
-      if (clave.split('|').includes(yo.id)) ev.privados.delete(clave);
-    }
-    socket.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
+    const motivo = datos.motivo === 'fuera-de-zona' ? 'salió del espacio' : 'salida voluntaria';
+    const e = ev;
+    const id = yo.id;
     ev = null;
     yo = null;
+    purgarUsuario(e, id, motivo);
   });
 
   socket.on('disconnect', () => {
     if (!ev || !yo) return;
     yo.online = false;
     yo.socketId = null;
+    yo.desconectadoEn = Date.now();
     socket.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
   });
 });

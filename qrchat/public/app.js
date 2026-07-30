@@ -20,7 +20,12 @@
     emojiElegido: '🙂',
     fotoPerfil: null,
     personaModal: null,
+    vigilanciaGeo: null,  // id de watchPosition
+    fueraDesde: null,     // desde cuándo estamos fuera del radio
   };
+
+  // Tiempo seguido fuera del radio antes de expulsar (evita saltos del GPS)
+  const FUERA_MS = 45 * 1000;
 
   /* ───────────────────────── Utilidades ───────────────────────── */
 
@@ -66,6 +71,76 @@
     $(id).classList.remove('oculto');
   }
 
+  function mostrarFin(titulo, sub) {
+    $('fin-titulo').textContent = titulo;
+    if (sub) $('fin-sub').innerHTML = sub;
+    mostrarPantalla('pantalla-fin');
+  }
+
+  function distanciaMetros(a, b) {
+    const R = 6371000;
+    const rad = (x) => (x * Math.PI) / 180;
+    const dLat = rad(b.lat - a.lat);
+    const dLng = rad(b.lng - a.lng);
+    const s =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+
+  /* Abandono del espacio: se borra todo, aquí y en el servidor */
+  function salirDelEspacio(motivo, titulo, sub) {
+    if (estado.vigilanciaGeo !== null) {
+      navigator.geolocation.clearWatch(estado.vigilanciaGeo);
+      estado.vigilanciaGeo = null;
+    }
+    estado.socket?.emit('salir', { motivo });
+    sessionStorage.removeItem(claveSesion);
+    estado.general = [];
+    estado.privados = new Map();
+    estado.noLeidos = new Map();
+    mostrarFin(titulo, sub);
+  }
+
+  /* Vigila la posición: si sales del radio del evento un rato, fuera y borrado */
+  function vigilarZona() {
+    const geo = estado.evento?.geo;
+    if (!geo || !('geolocation' in navigator) || estado.vigilanciaGeo !== null) return;
+    estado.vigilanciaGeo = navigator.geolocation.watchPosition(
+      (pos) => {
+        const d = distanciaMetros(
+          { lat: pos.coords.latitude, lng: pos.coords.longitude },
+          geo
+        );
+        // Margen por imprecisión del GPS (máx. 100 m) para no expulsar dentro del local
+        const fuera = d > geo.radio + Math.min(pos.coords.accuracy || 0, 100);
+        if (fuera) {
+          if (!estado.fueraDesde) estado.fueraDesde = Date.now();
+          else if (Date.now() - estado.fueraDesde > FUERA_MS) {
+            salirDelEspacio(
+              'fuera-de-zona',
+              'Has salido del espacio del evento 📍',
+              'Tu perfil, tus fotos y todos tus mensajes<br/>se han borrado por completo.'
+            );
+          }
+        } else {
+          estado.fueraDesde = null;
+        }
+      },
+      (err) => {
+        // Si retiran el permiso de ubicación en un evento geovallado, fuera
+        if (err.code === err.PERMISSION_DENIED) {
+          salirDelEspacio(
+            'fuera-de-zona',
+            'Ubicación desactivada 📍',
+            'Este evento requiere compartir ubicación mientras estás dentro.<br/>Tu perfil y tus mensajes se han borrado.'
+          );
+        }
+      },
+      { enableHighAccuracy: true, maximumAge: 15000, timeout: 30000 }
+    );
+  }
+
   /* ─────────────────────── Pantalla de perfil ─────────────────── */
 
   function prepararPerfil() {
@@ -91,11 +166,24 @@
       $('avatar-preview').innerHTML = `<img src="${estado.fotoPerfil}" alt="" />`;
     };
 
-    $('btn-entrar').onclick = () => {
+    $('btn-entrar').onclick = async () => {
       const nombre = $('perfil-nombre').value.trim();
       if (!nombre) {
         $('perfil-error').textContent = 'Ponte un nombre o apodo para entrar.';
         return;
+      }
+      // Evento geovallado: hace falta permiso de ubicación para entrar
+      if (estado.geoEvento) {
+        $('perfil-error').textContent = '';
+        try {
+          await new Promise((ok, mal) =>
+            navigator.geolocation.getCurrentPosition(ok, mal, { timeout: 20000 })
+          );
+        } catch {
+          $('perfil-error').textContent =
+            'Este evento solo funciona dentro del local: activa la ubicación para entrar.';
+          return;
+        }
       }
       conectar({
         nombre,
@@ -108,11 +196,13 @@
     // Muestra el nombre del evento antes de entrar
     fetch('/api/eventos/' + codigo)
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((ev) => ($('perfil-evento').textContent = '📍 ' + ev.nombre))
-      .catch(() => {
-        $('fin-titulo').textContent = 'Este evento no existe o ya ha finalizado';
-        mostrarPantalla('pantalla-fin');
-      });
+      .then((ev) => {
+        estado.geoEvento = ev.geo || null;
+        $('perfil-evento').innerHTML =
+          '📍 ' + escaparHtml(ev.nombre) +
+          (ev.geo ? '<br/><small>Evento limitado al espacio físico: al salir del recinto todo se borra.</small>' : '');
+      })
+      .catch(() => mostrarFin('Este evento no existe o ya ha finalizado'));
   }
 
   /* ─────────────────────── Conexión Socket.IO ─────────────────── */
@@ -168,6 +258,21 @@
       }
     });
 
+    // Alguien abandonó el espacio: eliminamos todo rastro suyo también aquí
+    socket.on('usuario:purgado', ({ userId }) => {
+      if (userId === estado.yo?.id) return; // nuestra propia purga se gestiona en salirDelEspacio
+      estado.general = estado.general.filter((m) => m.de !== userId);
+      estado.privados.delete(userId);
+      estado.noLeidos.delete(userId);
+      estado.bloqueados.delete(userId);
+      pintarBadges();
+      if (estado.vistaActual === 'general') pintarGeneral();
+      if (estado.vistaActual === 'privados') pintarListaPrivados();
+      if (estado.vistaActual === 'chat-privado' && estado.privadoAbierto === userId) {
+        cambiarVista('privados');
+      }
+    });
+
     socket.on('usuarios:cambio', (usuarios) => {
       estado.usuarios = usuarios;
       $('chat-info').textContent = textoPersonas(usuarios.length);
@@ -178,7 +283,7 @@
 
     socket.on('evento:finalizado', () => {
       sessionStorage.removeItem(claveSesion);
-      mostrarPantalla('pantalla-fin');
+      mostrarFin('El evento ha finalizado 🌙');
     });
 
     socket.on('disconnect', () => {
@@ -199,6 +304,7 @@
     $('chat-info').textContent = textoPersonas(estado.usuarios.length);
     pintarGeneral();
     pintarBadges();
+    vigilarZona();
   }
 
   function cambiarVista(nombre) {
@@ -428,10 +534,12 @@
 
     // Mi perfil: de momento, opción de salir del evento
     $('btn-mi-perfil').onclick = () => {
-      if (confirm('¿Quieres salir del evento? Tu perfil y tus chats privados se borrarán.')) {
-        estado.socket.emit('salir');
-        sessionStorage.removeItem(claveSesion);
-        location.href = '/';
+      if (confirm('¿Quieres salir del evento? Tu perfil, tus fotos y TODOS tus mensajes se borrarán.')) {
+        salirDelEspacio(
+          'voluntario',
+          'Has salido del evento 👋',
+          'Tu perfil, tus fotos y todos tus mensajes se han borrado por completo.'
+        );
       }
     };
   }

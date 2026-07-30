@@ -20,6 +20,31 @@ paso en persona.
 5. Cuando el evento expira (1–48 h), **todo se borra automáticamente**: perfiles,
    fotos y mensajes. No hay base de datos: todo vive solo en memoria.
 
+## Borrado total al abandonar el espacio 🧹
+
+El chat solo existe mientras estás en el sitio. En cuanto alguien **abandona el
+espacio del evento**, se elimina TODO lo suyo — perfil, foto, sus mensajes del
+canal general y sus conversaciones privadas (también del móvil de la otra
+persona) — tanto en el servidor como en las pantallas del resto de asistentes:
+
+| Forma de abandonar | Qué pasa |
+|---|---|
+| **Salir del recinto** (evento geovallado) | La app vigila la posición; tras ~45 s fuera del radio, purga inmediata |
+| **Salir voluntariamente** (botón 👤 → salir) | Purga inmediata |
+| **Cerrar la app / quedarse sin conexión** | Purga tras 5 min de gracia (cubre cortes breves de cobertura) |
+| **Retirar el permiso de ubicación** (evento geovallado) | Purga inmediata |
+| **Fin del evento** | Se borra el evento completo |
+
+El **geovallado** es opcional: al crear el evento, el organizador marca
+«Limitar el chat al espacio físico», y el centro del espacio es su posición en
+ese momento, con un radio configurable de 30–1000 m (por defecto 100 m). Con
+geovallado activo, los asistentes deben conceder permiso de ubicación para
+entrar. Se aplica un margen según la precisión del GPS (hasta 100 m) para no
+expulsar a nadie por mala señal dentro del local.
+
+La gracia y el barrido se pueden ajustar con variables de entorno:
+`QRCHAT_GRACIA_MS` (por defecto 300000) y `QRCHAT_SWEEP_MS` (30000).
+
 ## Ejecutar en local
 
 ```bash
