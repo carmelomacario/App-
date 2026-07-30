@@ -39,6 +39,27 @@ solo de chicos:
 - Es un chat anónimo sin verificación, así que el sexo es declarativo: el
   equilibrio ordena el ambiente, pero no puede impedir que alguien mienta.
 
+## Cuentas guardadas ⭐ (gratis ahora, de pago en el futuro)
+
+Opción para quien va a muchos eventos: **crear una cuenta** con alias + PIN que
+guarda el perfil (nombre, sexo, avatar/foto y bio) y lo reutiliza en cualquier
+evento con un solo toque («⭐ Entrar como…»). Los usuarios con cuenta lucen
+una ⭐ junto a su nombre.
+
+- Es la **única persistencia real** de la app: se guarda en `data/cuentas.json`
+  (fuera de git) con el PIN cifrado (scrypt + sal). Los chats siguen siendo
+  100 % efímeros: la cuenta solo guarda el perfil, jamás mensajes.
+- Los cambios de perfil hechos dentro de un evento se guardan automáticamente
+  en la cuenta.
+- **Monetización preparada**: con la variable de entorno
+  `QRCHAT_CUENTAS_DE_PAGO=1` la creación de cuentas nuevas queda bloqueada con
+  el mensaje «es una opción de pago» (HTTP 402) — ahí es donde se integrará la
+  pasarela de pago (p. ej. Stripe). Las cuentas ya creadas siguen funcionando.
+- La interfaz ya avisa: «Gratis por ahora · más adelante será de pago».
+- Nota de despliegue: en hostings con disco efímero (Render free) el fichero
+  de cuentas se pierde al redesplegar; para producción usa un disco persistente
+  o una base de datos.
+
 ## Borrado total al abandonar el espacio 🧹
 
 El chat solo existe mientras estás en el sitio. En cuanto alguien **abandona el

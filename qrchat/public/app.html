@@ -173,6 +173,22 @@
       </div>
       <p class="suave centrado" style="font-size:12px">Tu perfil y todos los mensajes se borran automáticamente al terminar el evento.</p>
       <p class="centrado" id="perfil-error" style="color:#ff6b6b"></p>
+
+      <div style="margin-top:16px; border-top:1px solid var(--borde); padding-top:14px">
+        <div id="cuenta-anonima">
+          <button class="boton boton-secundario" id="btn-abrir-cuenta" style="width:100%">⭐ Crear cuenta / Ya tengo cuenta</button>
+          <p class="suave centrado" style="font-size:12px; margin-bottom:0">
+            Guarda tu perfil y úsalo en cualquier evento.
+            <b style="color:var(--neon-2)">Gratis por ahora</b> · más adelante será de pago.
+          </p>
+        </div>
+        <div id="cuenta-conectada" class="oculto">
+          <button class="boton" id="btn-entrar-cuenta" style="width:100%">⭐ Entrar con mi cuenta</button>
+          <p class="suave centrado" style="font-size:12px; margin-bottom:0">
+            <a href="#" id="btn-cerrar-sesion" style="color:var(--texto-suave)">Cerrar sesión</a>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -242,6 +258,33 @@
       <h1 class="marca" style="font-size:40px">QRChat</h1>
       <h2 id="fin-titulo">El evento ha finalizado 🌙</h2>
       <p class="suave" id="fin-sub">Todos los perfiles y mensajes se han borrado.<br />¡Gracias por venir!</p>
+    </div>
+  </div>
+
+  <!-- Modal: cuenta guardada (crear / iniciar sesión) -->
+  <div class="modal-fondo oculto" id="modal-cuenta">
+    <div class="tarjeta modal" style="text-align:left">
+      <h2 class="centrado">⭐ Tu cuenta</h2>
+      <p class="suave centrado" style="font-size:13px">
+        Guarda tu perfil (nombre, sexo, foto y bio) y reutilízalo en cualquier evento.<br />
+        <b style="color:var(--neon-2)">Gratis por ahora</b> · más adelante será de pago.
+      </p>
+      <div class="sexos" id="cuenta-modos">
+        <button data-modo="crear" class="activo">Crear cuenta</button>
+        <button data-modo="entrar">Ya tengo cuenta</button>
+      </div>
+      <label>Alias (único, 3-20 caracteres)</label>
+      <input type="text" id="cuenta-alias" maxlength="20" placeholder="ej: ana_gc" autocapitalize="none" />
+      <label>PIN (mínimo 4 caracteres)</label>
+      <input type="password" id="cuenta-pin" maxlength="30" />
+      <p class="suave" id="cuenta-nota" style="font-size:12px">
+        Se guardará el perfil que has rellenado arriba (nombre, sexo, avatar/foto y bio).
+      </p>
+      <p id="cuenta-error" style="color:#ff6b6b; font-size:13px"></p>
+      <div class="acciones">
+        <button class="boton" id="cuenta-aceptar">Crear cuenta y entrar</button>
+        <button class="boton boton-secundario" id="cuenta-cancelar">Cancelar</button>
+      </div>
     </div>
   </div>
 

@@ -3,6 +3,15 @@
   const $ = (id) => document.getElementById(id);
   const codigo = location.pathname.split('/').pop().toUpperCase();
   const claveSesion = 'qrchat:' + codigo;
+  const CLAVE_CUENTA = 'qrchat:cuenta'; // cuenta guardada (persiste entre eventos)
+
+  function cuentaGuardada() {
+    try {
+      return JSON.parse(localStorage.getItem(CLAVE_CUENTA));
+    } catch {
+      return null;
+    }
+  }
 
   const EMOJIS = ['🙂','😎','🥳','😈','🦄','🔥','💃','🕺','🍹','🎧','🌙','⚡','👽','🐯','🌵','💜','🎭','🍒'];
   const SEXO_ICONO = { h: '🕺', m: '💃', x: '✨' };
@@ -176,36 +185,124 @@
       $('avatar-preview').innerHTML = `<img src="${estado.fotoPerfil}" alt="" />`;
     };
 
-    $('btn-entrar').onclick = async () => {
-      const nombre = $('perfil-nombre').value.trim();
-      if (!nombre) {
+    // Evento geovallado: hace falta permiso de ubicación para entrar
+    const pedirUbicacion = async () => {
+      if (!estado.geoEvento) return true;
+      $('perfil-error').textContent = '';
+      try {
+        await new Promise((ok, mal) =>
+          navigator.geolocation.getCurrentPosition(ok, mal, { timeout: 20000 })
+        );
+        return true;
+      } catch {
+        $('perfil-error').textContent =
+          'Este evento solo funciona dentro del local: activa la ubicación para entrar.';
+        return false;
+      }
+    };
+
+    const validarPerfil = () => {
+      if (!$('perfil-nombre').value.trim()) {
         $('perfil-error').textContent = 'Ponte un nombre o apodo para entrar.';
-        return;
+        return false;
       }
       if (!estado.sexoElegido) {
         $('perfil-error').textContent = 'Indica tu sexo para entrar.';
+        return false;
+      }
+      return true;
+    };
+
+    const perfilDelFormulario = () => ({
+      nombre: $('perfil-nombre').value.trim(),
+      sexo: estado.sexoElegido,
+      emoji: estado.emojiElegido,
+      bio: $('perfil-bio').value.trim(),
+      foto: estado.fotoPerfil,
+    });
+
+    $('btn-entrar').onclick = async () => {
+      if (!validarPerfil()) return;
+      if (!(await pedirUbicacion())) return;
+      conectar(perfilDelFormulario());
+    };
+
+    /* ── Cuenta guardada: crear / iniciar sesión / entrar con ella ── */
+
+    const refrescarZonaCuenta = () => {
+      const c = cuentaGuardada();
+      $('cuenta-anonima').classList.toggle('oculto', !!c);
+      $('cuenta-conectada').classList.toggle('oculto', !c);
+      if (c) $('btn-entrar-cuenta').textContent = `⭐ Entrar como ${c.nombre || c.alias}`;
+    };
+    refrescarZonaCuenta();
+
+    let modoCuenta = 'crear';
+    for (const b of $('cuenta-modos').children) {
+      b.onclick = () => {
+        modoCuenta = b.dataset.modo;
+        for (const x of $('cuenta-modos').children) x.classList.toggle('activo', x === b);
+        $('cuenta-aceptar').textContent = modoCuenta === 'crear' ? 'Crear cuenta y entrar' : 'Iniciar sesión y entrar';
+        $('cuenta-nota').classList.toggle('oculto', modoCuenta !== 'crear');
+        $('cuenta-error').textContent = '';
+      };
+    }
+
+    $('btn-abrir-cuenta').onclick = () => {
+      $('cuenta-error').textContent = '';
+      $('modal-cuenta').classList.remove('oculto');
+    };
+    $('cuenta-cancelar').onclick = () => $('modal-cuenta').classList.add('oculto');
+    $('modal-cuenta').onclick = (e) => {
+      if (e.target === $('modal-cuenta')) $('modal-cuenta').classList.add('oculto');
+    };
+
+    $('cuenta-aceptar').onclick = async () => {
+      const alias = $('cuenta-alias').value.trim();
+      const pin = $('cuenta-pin').value;
+      $('cuenta-error').textContent = '';
+      if (modoCuenta === 'crear' && !validarPerfil()) {
+        $('cuenta-error').textContent = 'Rellena antes tu perfil (nombre y sexo) en el formulario.';
         return;
       }
-      // Evento geovallado: hace falta permiso de ubicación para entrar
-      if (estado.geoEvento) {
-        $('perfil-error').textContent = '';
-        try {
-          await new Promise((ok, mal) =>
-            navigator.geolocation.getCurrentPosition(ok, mal, { timeout: 20000 })
-          );
-        } catch {
-          $('perfil-error').textContent =
-            'Este evento solo funciona dentro del local: activa la ubicación para entrar.';
-          return;
-        }
+      $('cuenta-aceptar').disabled = true;
+      try {
+        const ruta = modoCuenta === 'crear' ? '/api/cuentas' : '/api/cuentas/login';
+        const cuerpo = { alias, pin };
+        if (modoCuenta === 'crear') cuerpo.perfil = perfilDelFormulario();
+        const r = await fetch(ruta, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cuerpo),
+        });
+        const datos = await r.json();
+        if (!r.ok) throw new Error(datos.error || 'No se pudo completar.');
+        localStorage.setItem(
+          CLAVE_CUENTA,
+          JSON.stringify({ alias: datos.alias, token: datos.token, nombre: datos.perfil.nombre })
+        );
+        refrescarZonaCuenta();
+        $('modal-cuenta').classList.add('oculto');
+        if (!(await pedirUbicacion())) return;
+        conectar({ cuenta: { alias: datos.alias, token: datos.token } });
+      } catch (e) {
+        $('cuenta-error').textContent = e.message;
+      } finally {
+        $('cuenta-aceptar').disabled = false;
       }
-      conectar({
-        nombre,
-        sexo: estado.sexoElegido,
-        emoji: estado.emojiElegido,
-        bio: $('perfil-bio').value.trim(),
-        foto: estado.fotoPerfil,
-      });
+    };
+
+    $('btn-entrar-cuenta').onclick = async () => {
+      const c = cuentaGuardada();
+      if (!c) return refrescarZonaCuenta();
+      if (!(await pedirUbicacion())) return;
+      conectar({ cuenta: { alias: c.alias, token: c.token } });
+    };
+
+    $('btn-cerrar-sesion').onclick = (e) => {
+      e.preventDefault();
+      localStorage.removeItem(CLAVE_CUENTA);
+      refrescarZonaCuenta();
     };
 
     // Muestra el nombre del evento antes de entrar
@@ -232,6 +329,13 @@
 
     const alUnirse = (resp) => {
       if (!resp || resp.error) {
+        if (resp?.cuentaInvalida) {
+          // La sesión de la cuenta caducó: la olvidamos y volvemos a empezar
+          localStorage.removeItem(CLAVE_CUENTA);
+          alert(resp.error);
+          location.reload();
+          return;
+        }
         if (guardado) {
           // La sesión guardada ya no vale: pedimos perfil de nuevo
           sessionStorage.removeItem(claveSesion);
@@ -412,7 +516,7 @@
         <div class="persona" data-user="${u.id}">
           ${avatarHtml(u)}
           <div class="datos">
-            <div class="nombre">${escaparHtml(u.nombre)} ${SEXO_ICONO[u.sexo] || ''} ${estado.bloqueados.has(u.id) ? '🚫' : ''}</div>
+            <div class="nombre">${escaparHtml(u.nombre)} ${SEXO_ICONO[u.sexo] || ''}${u.registrado ? ' ⭐' : ''} ${estado.bloqueados.has(u.id) ? '🚫' : ''}</div>
             <div class="bio">${escaparHtml(u.bio || '')}</div>
           </div>
           <div class="punto ${u.online ? 'online' : ''}"></div>
@@ -485,7 +589,7 @@
     const u = usuario(id);
     estado.personaModal = id;
     $('modal-avatar').innerHTML = u.foto ? `<img src="${u.foto}" alt="" />` : u.emoji;
-    $('modal-nombre').textContent = `${u.nombre} ${SEXO_ICONO[u.sexo] || ''}`;
+    $('modal-nombre').textContent = `${u.nombre} ${SEXO_ICONO[u.sexo] || ''}${u.registrado ? ' ⭐' : ''}`;
     $('modal-bio').textContent = u.bio || 'Sin descripción';
     $('modal-bloquear').textContent = estado.bloqueados.has(id) ? '✅ Desbloquear' : '🚫 Bloquear';
     $('modal-persona').classList.remove('oculto');

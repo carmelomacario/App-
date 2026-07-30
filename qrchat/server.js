@@ -6,6 +6,7 @@
  */
 
 const path = require('path');
+const fs = require('fs');
 const crypto = require('crypto');
 const express = require('express');
 const http = require('http');
@@ -37,6 +38,11 @@ const MAX_FOTO_BYTES = 2.5 * 1024 * 1024; // data-URL ya comprimida en cliente
 // se purga TODO lo de esa persona. La gracia cubre cortes breves de cobertura.
 const GRACIA_MS = Number(process.env.QRCHAT_GRACIA_MS) || 5 * 60 * 1000;
 const SWEEP_MS = Number(process.env.QRCHAT_SWEEP_MS) || 30 * 1000;
+
+// Cuentas guardadas: gratis por ahora; al activar este flag la CREACIÓN de
+// cuentas nuevas queda bloqueada (paso previo a integrar el cobro). Las
+// cuentas ya existentes siguen funcionando.
+const CUENTAS_DE_PAGO = process.env.QRCHAT_CUENTAS_DE_PAGO === '1';
 
 /** @type {Map<string, Evento>} */
 const eventos = new Map();
@@ -117,6 +123,7 @@ function perfilPublico(u) {
     bio: u.bio,
     foto: u.foto,
     online: u.online,
+    registrado: !!u.cuentaAlias,
   };
 }
 
@@ -134,6 +141,64 @@ function contarSexos(ev) {
     else x++;
   }
   return { h, m, x };
+}
+
+/* ──────────────── Cuentas guardadas (única persistencia real) ────────────── */
+/* Los chats siguen siendo 100 % efímeros; solo se guarda el PERFIL de quien
+   decide crear una cuenta: alias + PIN (cifrado) + nombre/sexo/emoji/bio/foto. */
+
+const DATA_DIR = path.join(__dirname, 'data');
+const FICHERO_CUENTAS = path.join(DATA_DIR, 'cuentas.json');
+
+/** @type {Map<string, Cuenta>} alias normalizado → cuenta */
+let cuentas = new Map();
+// Cuenta = { alias, aliasNorm, sal, hash, token, perfil, creadaEn }
+
+function cargarCuentas() {
+  try {
+    const crudo = JSON.parse(fs.readFileSync(FICHERO_CUENTAS, 'utf8'));
+    cuentas = new Map(Object.entries(crudo));
+    console.log(`[qrchat] ${cuentas.size} cuentas cargadas`);
+  } catch {
+    cuentas = new Map();
+  }
+}
+cargarCuentas();
+
+let guardadoPendiente = null;
+function guardarCuentas() {
+  clearTimeout(guardadoPendiente);
+  guardadoPendiente = setTimeout(() => {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(FICHERO_CUENTAS, JSON.stringify(Object.fromEntries(cuentas)));
+  }, 250);
+}
+
+function normalizarAlias(alias) {
+  const a = String(alias || '').trim().toLowerCase();
+  return /^[a-z0-9_.-]{3,20}$/.test(a) ? a : null;
+}
+
+function hashPin(pin, sal) {
+  return crypto.scryptSync(String(pin), sal, 32).toString('hex');
+}
+
+function perfilDeCuenta(datos) {
+  return {
+    nombre: limpiarTexto(datos?.nombre, 30),
+    sexo: ['h', 'm', 'x'].includes(datos?.sexo) ? datos.sexo : 'x',
+    emoji: limpiarTexto(datos?.emoji, 4) || '🙂',
+    bio: limpiarTexto(datos?.bio, 120),
+    foto: fotoValida(datos?.foto) ? datos.foto : null,
+  };
+}
+
+// Valida las credenciales que llegan con «unirse»; null si no hay/no valen
+function cuentaPorToken(credenciales) {
+  const aliasNorm = normalizarAlias(credenciales?.alias);
+  if (!aliasNorm || !credenciales?.token) return null;
+  const c = cuentas.get(aliasNorm);
+  return c && c.token === credenciales.token ? c : null;
 }
 
 /* ─────────────────── Equilibrio chicos/chicas y cola ─────────────────────── */
@@ -156,11 +221,11 @@ function actualizarPosicionesCola(ev) {
 function revisarCola(ev) {
   let cambio = false;
   while (ev.cola.length && hayHuecoParaChico(ev)) {
-    const { socket, datos } = ev.cola.shift();
+    const { socket, datos, cuenta } = ev.cola.shift();
     cambio = true;
     if (!socket.connected) continue;
     socket.data.enCola = null;
-    const carga = admitir(socket, ev, datos);
+    const carga = admitir(socket, ev, datos, cuenta);
     socket.emit('espera:admitido', carga);
     socket.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
   }
@@ -176,7 +241,7 @@ function sacarDeCola(ev, socket) {
 /* ─────────────────────────── Alta en el evento ───────────────────────────── */
 
 // Crea (o recupera) el usuario, lo mete en la sala y devuelve el estado inicial
-function admitir(socket, ev, datos) {
+function admitir(socket, ev, datos, cuenta) {
   let usuario = null;
   if (datos.userId && datos.token) {
     const previo = ev.usuarios.get(datos.userId);
@@ -184,14 +249,17 @@ function admitir(socket, ev, datos) {
   }
 
   if (!usuario) {
+    // Con cuenta, el perfil sale de lo guardado en la cuenta
+    const base = cuenta ? cuenta.perfil : datos;
     usuario = {
       id: crypto.randomUUID(),
       token: crypto.randomUUID(),
-      nombre: limpiarTexto(datos.nombre, 30),
-      sexo: ['h', 'm', 'x'].includes(datos.sexo) ? datos.sexo : 'x',
-      emoji: limpiarTexto(datos.emoji, 4) || '🙂',
-      bio: limpiarTexto(datos.bio, 120),
-      foto: fotoValida(datos.foto) ? datos.foto : null,
+      nombre: limpiarTexto(base.nombre, 30),
+      sexo: ['h', 'm', 'x'].includes(base.sexo) ? base.sexo : 'x',
+      emoji: limpiarTexto(base.emoji, 4) || '🙂',
+      bio: limpiarTexto(base.bio, 120),
+      foto: fotoValida(base.foto) ? base.foto : null,
+      cuentaAlias: cuenta ? cuenta.aliasNorm : null,
       online: true,
       socketId: socket.id,
       desconectadoEn: null,
@@ -344,6 +412,63 @@ app.get('/api/eventos/:codigo', async (req, res) => {
   });
 });
 
+/* ── Cuentas guardadas ── */
+
+// Crear cuenta (gratis por ahora; con el flag de pago activo se bloquea)
+app.post('/api/cuentas', (req, res) => {
+  if (CUENTAS_DE_PAGO) {
+    return res.status(402).json({
+      error: 'Crear una cuenta es ahora una opción de pago. ¡Muy pronto podrás contratarla aquí!',
+      dePago: true,
+    });
+  }
+  const aliasNorm = normalizarAlias(req.body?.alias);
+  if (!aliasNorm) {
+    return res.status(400).json({ error: 'Alias no válido: 3-20 caracteres, solo letras, números, ".", "-" o "_".' });
+  }
+  if (cuentas.has(aliasNorm)) {
+    return res.status(409).json({ error: 'Ese alias ya está cogido. Prueba con otro.' });
+  }
+  const pin = String(req.body?.pin || '');
+  if (pin.length < 4 || pin.length > 30) {
+    return res.status(400).json({ error: 'El PIN debe tener entre 4 y 30 caracteres.' });
+  }
+  const perfil = perfilDeCuenta(req.body?.perfil);
+  if (!perfil.nombre) {
+    return res.status(400).json({ error: 'El perfil necesita un nombre.' });
+  }
+  const sal = crypto.randomBytes(16).toString('hex');
+  const cuenta = {
+    alias: limpiarTexto(req.body.alias, 20),
+    aliasNorm,
+    sal,
+    hash: hashPin(pin, sal),
+    token: crypto.randomUUID(),
+    perfil,
+    creadaEn: Date.now(),
+  };
+  cuentas.set(aliasNorm, cuenta);
+  guardarCuentas();
+  console.log(`[qrchat] Cuenta creada: ${aliasNorm}`);
+  res.json({ alias: cuenta.alias, token: cuenta.token, perfil: cuenta.perfil });
+});
+
+// Iniciar sesión con alias + PIN
+app.post('/api/cuentas/login', (req, res) => {
+  const aliasNorm = normalizarAlias(req.body?.alias);
+  const cuenta = aliasNorm && cuentas.get(aliasNorm);
+  const pin = String(req.body?.pin || '');
+  if (!cuenta || pin.length < 4) {
+    return res.status(401).json({ error: 'Alias o PIN incorrectos.' });
+  }
+  const intento = Buffer.from(hashPin(pin, cuenta.sal));
+  const bueno = Buffer.from(cuenta.hash);
+  if (intento.length !== bueno.length || !crypto.timingSafeEqual(intento, bueno)) {
+    return res.status(401).json({ error: 'Alias o PIN incorrectos.' });
+  }
+  res.json({ alias: cuenta.alias, token: cuenta.token, perfil: cuenta.perfil });
+});
+
 // Rutas de página (SPA sencilla: cada pantalla es un HTML propio)
 app.get('/e/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'app.html')));
 app.get('/pantalla/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'pantalla.html')));
@@ -371,21 +496,31 @@ io.on('connection', (socket) => {
     const esReconexion =
       datos.userId && datos.token && e.usuarios.get(datos.userId)?.token === datos.token;
 
+    // Entrada con cuenta guardada: el perfil sale de la cuenta
+    let cuenta = null;
+    if (!esReconexion && datos.cuenta) {
+      cuenta = cuentaPorToken(datos.cuenta);
+      if (!cuenta) {
+        return cb?.({ error: 'Tu sesión ha caducado. Vuelve a iniciar sesión en tu cuenta.', cuentaInvalida: true });
+      }
+    }
+
     if (!esReconexion) {
-      if (!limpiarTexto(datos.nombre, 30)) {
+      const perfilBase = cuenta ? cuenta.perfil : datos;
+      if (!limpiarTexto(perfilBase.nombre, 30)) {
         return cb?.({ error: 'Elige un nombre para tu perfil.' });
       }
       // Equilibrio: si es chico y no hay hueco, pasa a la cola de espera
-      const sexo = ['h', 'm', 'x'].includes(datos.sexo) ? datos.sexo : 'x';
+      const sexo = ['h', 'm', 'x'].includes(perfilBase.sexo) ? perfilBase.sexo : 'x';
       if (sexo === 'h' && !hayHuecoParaChico(e)) {
         sacarDeCola(e, socket); // por si reintenta: no duplicar
-        e.cola.push({ socket, datos });
+        e.cola.push({ socket, datos, cuenta });
         socket.data.enCola = e;
         return cb?.({ enEspera: true, posicion: e.cola.length, total: e.cola.length });
       }
     }
 
-    const carga = admitir(socket, e, datos);
+    const carga = admitir(socket, e, datos, cuenta);
     cb?.(carga);
     socket.to(`evento:${e.codigo}`).emit('usuarios:cambio', listaUsuarios(e));
     revisarCola(e); // si entró una chica, puede abrir hueco a alguien en espera
@@ -450,6 +585,12 @@ io.on('connection', (socket) => {
     if (datos.emoji !== undefined) yo.emoji = limpiarTexto(datos.emoji, 4) || yo.emoji;
     if (datos.bio !== undefined) yo.bio = limpiarTexto(datos.bio, 120);
     if (datos.foto !== undefined) yo.foto = fotoValida(datos.foto) ? datos.foto : null;
+    // Con cuenta guardada, los cambios de perfil se guardan también en ella
+    if (yo.cuentaAlias && cuentas.has(yo.cuentaAlias)) {
+      const cuenta = cuentas.get(yo.cuentaAlias);
+      cuenta.perfil = { nombre: yo.nombre, sexo: yo.sexo, emoji: yo.emoji, bio: yo.bio, foto: yo.foto };
+      guardarCuentas();
+    }
     io.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
     cb?.({ ok: true, perfil: perfilPublico(yo) });
   });
