@@ -702,14 +702,14 @@
     }
     // Ordenadas por último mensaje
     ids.sort((a, b) => {
-      const ua = estado.privados.get(a).at(-1)?.ts || 0;
-      const ub = estado.privados.get(b).at(-1)?.ts || 0;
+      const la = estado.privados.get(a); const ua = la[la.length - 1]?.ts || 0;
+      const lb = estado.privados.get(b); const ub = lb[lb.length - 1]?.ts || 0;
       return ub - ua;
     });
     v.innerHTML = ids
       .map((id) => {
         const u = usuario(id);
-        const ultimo = estado.privados.get(id).at(-1);
+        const hilo = estado.privados.get(id); const ultimo = hilo[hilo.length - 1];
         const noLeidos = estado.noLeidos.get(id) || 0;
         const resumen = ultimo?.texto || (ultimo?.foto ? '📷 Foto' : '');
         return `

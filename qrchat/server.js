@@ -28,7 +28,25 @@ const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
 app.use(express.json({ limit: '1mb' }));
-app.use(express.static(PUBLIC_DIR));
+
+// Caché: HTML/JS/CSS se revalidan SIEMPRE (evita que Safari/iPhone se quede
+// con una versión vieja tras un redespliegue); fuentes e iconos, una semana.
+app.use(
+  express.static(PUBLIC_DIR, {
+    setHeaders(res, ruta) {
+      if (/\.(html|js|css|webmanifest)$/.test(ruta)) {
+        res.setHeader('Cache-Control', 'no-cache');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=604800');
+      }
+    },
+  })
+);
+
+function enviarPagina(res, fichero) {
+  res.setHeader('Cache-Control', 'no-cache');
+  res.sendFile(path.join(PUBLIC_DIR, fichero));
+}
 
 /* ──────────────────────────── Almacén en memoria ─────────────────────────── */
 
@@ -689,9 +707,9 @@ app.get('/api/eventos/:codigo/panel', (req, res) => {
 });
 
 // Rutas de página (SPA sencilla: cada pantalla es un HTML propio)
-app.get('/e/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'app.html')));
-app.get('/pantalla/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'pantalla.html')));
-app.get('/panel/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'panel.html')));
+app.get('/e/:codigo', (_req, res) => enviarPagina(res, 'app.html'));
+app.get('/pantalla/:codigo', (_req, res) => enviarPagina(res, 'pantalla.html'));
+app.get('/panel/:codigo', (_req, res) => enviarPagina(res, 'panel.html'));
 
 /* ─────────────────────────────── Socket.IO ───────────────────────────────── */
 

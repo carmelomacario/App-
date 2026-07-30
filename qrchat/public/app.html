@@ -4,12 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>ATMO</title>
-  <link rel="stylesheet" href="/estilo.css" />
+  <link rel="stylesheet" href="/estilo.css?v=4" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <style>
-    body { height: 100dvh; overflow: hidden; }
-    .pantalla { height: 100dvh; display: flex; flex-direction: column; }
+    body { height: 100vh; height: 100dvh; overflow: hidden; }
+    .pantalla { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
 
     /* ── Pantalla de perfil ─────────────────────────────── */
     #pantalla-perfil { justify-content: center; padding: 20px; overflow-y: auto; }
@@ -51,12 +51,13 @@
     .modal .avatar-preview { width: 132px; height: 132px; font-size: 64px; }
     /* Ficha de perfil estilo WhatsApp: la foto (o el emoji) a lo grande */
     .foto-grande {
-      width: 100%; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
+      width: 100%; height: 320px; aspect-ratio: 1 / 1; border-radius: 18px; overflow: hidden;
       background: radial-gradient(circle at 50% 42%, #232634, var(--fondo-3) 75%);
       display: flex; align-items: center; justify-content: center;
       font-size: 150px; line-height: 1; margin-bottom: 14px; user-select: none;
     }
     .foto-grande img { width: 100%; height: 100%; object-fit: cover; }
+    @supports (aspect-ratio: 1 / 1) { .foto-grande { height: auto; } }
     #visor { z-index: 60; cursor: zoom-out; }
     #visor img { max-width: 96vw; max-height: 92vh; border-radius: 14px; }
     .sexos { display: flex; gap: 8px; }
@@ -76,7 +77,8 @@
     /* ── Protección anticapturas (disuasión + trazabilidad) ── */
     /* Marca de agua con la identidad del espectador sobre chats y fotos */
     .marca-agua {
-      position: absolute; inset: 0; pointer-events: none; z-index: 45;
+      position: absolute; top: 0; right: 0; bottom: 0; left: 0; inset: 0;
+      pointer-events: none; z-index: 45;
       background-repeat: repeat;
     }
     #pantalla-chat { position: relative; }
@@ -99,7 +101,8 @@
     header {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 14px calc(10px); border-bottom: 1px solid var(--borde);
-      background: rgba(15, 15, 16, 0.92); backdrop-filter: blur(8px);
+      background: rgba(15, 15, 16, 0.92);
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     }
     header .titulo { flex: 1; min-width: 0; }
     header .titulo h2 { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -125,7 +128,7 @@
     }
 
     .contenido { flex: 1; overflow: hidden; position: relative; }
-    .vista { position: absolute; inset: 0; display: none; flex-direction: column; }
+    .vista { position: absolute; top: 0; right: 0; bottom: 0; left: 0; inset: 0; display: none; flex-direction: column; }
     .vista.activa { display: flex; }
 
     /* ── Mensajes ───────────────────────────────────────── */
@@ -183,7 +186,8 @@
 
     /* ── Modal perfil ajeno ─────────────────────────────── */
     .modal-fondo {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 30;
+      position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0;
+      background: rgba(0,0,0,0.65); z-index: 30;
       display: flex; align-items: center; justify-content: center; padding: 20px;
     }
     .modal { max-width: 380px; width: 100%; text-align: center; }
@@ -420,7 +424,24 @@
     <div class="marca-agua" id="marca-agua-visor"></div>
   </div>
 
+  <!-- Chivato de errores (en ES5 a propósito: funciona hasta en Safari viejos
+       y captura incluso errores de carga del resto de scripts) -->
+  <script>
+    window.onerror = function (mensaje, origen, linea) {
+      var b = document.getElementById('error-global');
+      if (!b) {
+        b = document.createElement('div');
+        b.id = 'error-global';
+        b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999;' +
+          'background:#7a1f22;color:#fff;font-size:12px;padding:8px 12px;' +
+          'font-family:monospace;word-break:break-all';
+        document.body.appendChild(b);
+      }
+      b.textContent = '⚠ Error: ' + mensaje + ' (' + (origen || '').split('/').pop() + ':' + linea + ') — haz captura y envíanosla';
+      return false;
+    };
+  </script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/app.js"></script>
+  <script src="/app.js?v=4"></script>
 </body>
 </html>
