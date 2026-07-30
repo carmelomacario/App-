@@ -83,6 +83,43 @@
     $('visor').classList.remove('oculto');
   }
 
+  /* ── Protección anticapturas ──────────────────────────────────
+     Una web no puede IMPEDIR capturas de pantalla (eso lo controla el
+     sistema operativo), así que la defensa real es la disuasión:
+     todo lo que ves lleva tu propia identidad en marca de agua, de modo
+     que cualquier captura difundida delata a quien la hizo. */
+
+  function aplicarMarcaAgua() {
+    const texto = `${estado.yo.perfil.nombre} · ${estado.yo.id.slice(0, 8)} · ${codigo}`;
+    const seguro = texto.replace(/[<>&'"]/g, '');
+    const svg =
+      `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='190'>` +
+      `<text x='10' y='105' font-family='sans-serif' font-size='15' fill='rgba(255,255,255,0.07)' transform='rotate(-24 150 95)'>${seguro}</text>` +
+      `</svg>`;
+    const fondo = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
+    $('marca-agua').style.backgroundImage = fondo;
+    $('marca-agua-visor').style.backgroundImage = fondo;
+  }
+
+  function activarProteccion() {
+    // Difuminar el contenido cuando la app pasa a segundo plano
+    // (las miniaturas del selector de apps no muestran el chat)
+    const alCambiar = () => {
+      document.body.classList.toggle('difuminado', document.hidden);
+    };
+    document.addEventListener('visibilitychange', alCambiar);
+    window.addEventListener('blur', () => document.body.classList.add('difuminado'));
+    window.addEventListener('focus', () => document.body.classList.remove('difuminado'));
+
+    // Sin menú contextual ni "guardar imagen" con pulsación larga
+    document.addEventListener('contextmenu', (e) => {
+      if (e.target.closest('#pantalla-chat, #visor')) e.preventDefault();
+    });
+    document.addEventListener('dragstart', (e) => {
+      if (e.target.tagName === 'IMG') e.preventDefault();
+    });
+  }
+
   function mostrarPantalla(id) {
     for (const p of document.querySelectorAll('.pantalla')) p.classList.add('oculto');
     $(id).classList.remove('oculto');
@@ -449,6 +486,7 @@
     $('chat-info').textContent = textoPersonas(estado.usuarios.length);
     pintarGeneral();
     pintarBadges();
+    aplicarMarcaAgua();
     vigilarZona();
   }
 
@@ -736,7 +774,10 @@
       };
       if (miFotoNueva !== undefined) cambios.foto = miFotoNueva;
       estado.socket.emit('perfil:editar', cambios, (resp) => {
-        if (resp?.perfil) estado.yo.perfil = resp.perfil;
+        if (resp?.perfil) {
+          estado.yo.perfil = resp.perfil;
+          aplicarMarcaAgua(); // la marca lleva el nombre: mantenerla al día
+        }
         $('modal-mi-perfil').classList.add('oculto');
       });
     };
@@ -759,6 +800,7 @@
 
   prepararPerfil();
   prepararChatUI();
+  activarProteccion();
 
   // Si ya teníamos sesión en este evento, reconectamos sin pedir perfil
   if (sessionStorage.getItem(claveSesion)) conectar(null);

@@ -49,6 +49,28 @@
     }
     #espera-posicion { font-size: 56px; font-weight: 800; color: var(--neon-2); }
 
+    /* ── Protección anticapturas (disuasión + trazabilidad) ── */
+    /* Marca de agua con la identidad del espectador sobre chats y fotos */
+    .marca-agua {
+      position: absolute; inset: 0; pointer-events: none; z-index: 45;
+      background-repeat: repeat;
+    }
+    #pantalla-chat { position: relative; }
+    /* Al pasar la app a segundo plano, el contenido se difumina */
+    body.difuminado #pantalla-chat,
+    body.difuminado #visor { filter: blur(22px); }
+    /* Sin guardar-imagen fácil: ni pulsación larga, ni arrastrar, ni selección */
+    img {
+      -webkit-touch-callout: none;
+      -webkit-user-drag: none;
+      user-drag: none;
+      user-select: none;
+    }
+    .lista-mensajes, .persona, .modal {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
     /* ── Estructura del chat ────────────────────────────── */
     header {
       display: flex; align-items: center; gap: 10px;
@@ -184,6 +206,7 @@
         <button class="boton" id="btn-entrar" style="width:100%">🚀 Entrar al chat</button>
       </div>
       <p class="suave centrado" style="font-size:12px">Tu perfil y todos los mensajes se borran automáticamente al terminar el evento.</p>
+      <p class="suave centrado" style="font-size:12px">🔒 Chats y fotos llevan una <b>marca de agua con la identidad de quien mira</b>: cualquier captura de pantalla es rastreable hasta su autor.</p>
       <p class="centrado" id="perfil-error" style="color:#ff6b6b"></p>
 
       <div style="margin-top:16px; border-top:1px solid var(--borde); padding-top:14px">
@@ -248,6 +271,7 @@
       </div>
     </div>
     <input type="file" id="input-foto-chat" accept="image/*" class="oculto" />
+    <div class="marca-agua" id="marca-agua"></div>
   </div>
 
   <!-- Pantalla: sala de espera (equilibrio chicos/chicas) -->
@@ -342,6 +366,7 @@
   <!-- Visor de fotos a pantalla completa -->
   <div class="modal-fondo oculto" id="visor">
     <img id="visor-img" alt="Foto ampliada" />
+    <div class="marca-agua" id="marca-agua-visor"></div>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>

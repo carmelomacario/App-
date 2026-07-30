@@ -60,6 +60,25 @@ una ⭐ junto a su nombre.
   de cuentas se pierde al redesplegar; para producción usa un disco persistente
   o una base de datos.
 
+## Protección anticapturas 🔒
+
+Una aplicación web **no puede impedir** una captura de pantalla: eso lo
+controla el sistema operativo del móvil (y ni siquiera una app nativa evita
+que alguien fotografíe la pantalla con otro teléfono). La defensa eficaz es
+la **disuasión con trazabilidad**, el mismo enfoque de las apps de banca:
+
+- **Marca de agua personal**: todas las conversaciones y fotos llevan
+  superpuestos, en diagonal y semitransparentes, el nombre, el ID y el evento
+  de **quien está mirando**. Cualquier captura difundida delata a su autor.
+  La marca se actualiza si el usuario cambia su nombre.
+- **Difuminado en segundo plano**: al cambiar de app o de pestaña el chat se
+  emborrona, así las miniaturas del selector de apps no muestran contenido.
+- **Sin guardado fácil de imágenes**: bloqueados la pulsación larga
+  («guardar imagen» de iOS/Android), el arrastre de fotos, el menú contextual
+  y la selección de texto en los mensajes.
+- **Aviso disuasorio** antes de entrar: «cualquier captura es rastreable
+  hasta su autor».
+
 ## Borrado total al abandonar el espacio 🧹
 
 El chat solo existe mientras estás en el sitio. En cuanto alguien **abandona el
