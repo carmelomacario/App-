@@ -77,6 +77,12 @@
     });
   }
 
+  /* Visor de fotos a pantalla completa (toca la foto para ampliarla) */
+  function abrirVisor(src) {
+    $('visor-img').src = src;
+    $('visor').classList.remove('oculto');
+  }
+
   function mostrarPantalla(id) {
     for (const p of document.querySelectorAll('.pantalla')) p.classList.add('oculto');
     $(id).classList.remove('oculto');
@@ -177,13 +183,19 @@
       };
     }
 
-    $('avatar-preview').onclick = () => $('input-foto-perfil').click();
-    $('input-foto-perfil').onchange = async (ev) => {
+    // Foto de perfil: selfie con la cámara frontal o foto de la galería
+    const ponerFotoPerfil = async (ev) => {
       const f = ev.target.files[0];
+      ev.target.value = '';
       if (!f) return;
       estado.fotoPerfil = await comprimirImagen(f);
       $('avatar-preview').innerHTML = `<img src="${estado.fotoPerfil}" alt="" />`;
     };
+    $('avatar-preview').onclick = () => $('input-foto-perfil').click();
+    $('btn-galeria-perfil').onclick = () => $('input-foto-perfil').click();
+    $('btn-selfie-perfil').onclick = () => $('input-selfie-perfil').click();
+    $('input-foto-perfil').onchange = ponerFotoPerfil;
+    $('input-selfie-perfil').onchange = ponerFotoPerfil;
 
     // Evento geovallado: hace falta permiso de ubicación para entrar
     const pedirUbicacion = async () => {
@@ -490,6 +502,11 @@
       const id = av.dataset.user;
       if (id && id !== estado.yo.id) av.onclick = () => abrirModalPersona(id);
     }
+    // Tocar una foto del chat la amplía a pantalla completa
+    for (const img of contenedor.querySelectorAll('img.foto')) {
+      img.style.cursor = 'zoom-in';
+      img.onclick = () => abrirVisor(img.src);
+    }
   }
 
   const pintarGeneral = () => pintarLista($('mensajes-general'), estado.general);
@@ -589,6 +606,8 @@
     const u = usuario(id);
     estado.personaModal = id;
     $('modal-avatar').innerHTML = u.foto ? `<img src="${u.foto}" alt="" />` : u.emoji;
+    $('modal-avatar').style.cursor = u.foto ? 'zoom-in' : 'default';
+    $('modal-avatar').onclick = u.foto ? () => abrirVisor(u.foto) : null;
     $('modal-nombre').textContent = `${u.nombre} ${SEXO_ICONO[u.sexo] || ''}${u.registrado ? ' ⭐' : ''}`;
     $('modal-bio').textContent = u.bio || 'Sin descripción';
     $('modal-bloquear').textContent = estado.bloqueados.has(id) ? '✅ Desbloquear' : '🚫 Bloquear';
@@ -657,6 +676,9 @@
 
     $('btn-volver-privado').onclick = () => cambiarVista('privados');
 
+    // El visor se cierra tocando en cualquier sitio
+    $('visor').onclick = () => $('visor').classList.add('oculto');
+
     // Cancelar la espera en la cola de equilibrio
     $('btn-cancelar-espera').onclick = () => {
       estado.socket?.emit('salir', {});
@@ -695,14 +717,18 @@
       $('mi-bio').value = p.bio || '';
       $('modal-mi-perfil').classList.remove('oculto');
     };
-    $('mi-avatar').onclick = () => $('input-foto-mi-perfil').click();
-    $('input-foto-mi-perfil').onchange = async (ev) => {
+    const cambiarMiFoto = async (ev) => {
       const f = ev.target.files[0];
       ev.target.value = '';
       if (!f) return;
       miFotoNueva = await comprimirImagen(f);
       $('mi-avatar').innerHTML = `<img src="${miFotoNueva}" alt="" />`;
     };
+    $('mi-avatar').onclick = () => $('input-foto-mi-perfil').click();
+    $('btn-galeria-mi-perfil').onclick = () => $('input-foto-mi-perfil').click();
+    $('btn-selfie-mi-perfil').onclick = () => $('input-selfie-mi-perfil').click();
+    $('input-foto-mi-perfil').onchange = cambiarMiFoto;
+    $('input-selfie-mi-perfil').onchange = cambiarMiFoto;
     $('mi-guardar').onclick = () => {
       const cambios = {
         nombre: $('mi-nombre').value.trim(),

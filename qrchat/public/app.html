@@ -27,6 +27,14 @@
       border-radius: 10px; padding: 6px 9px; cursor: pointer;
     }
     .emojis button.activo { border-color: var(--neon-1); background: #2a1626; }
+    .fila-foto { display: flex; gap: 8px; justify-content: center; margin: 8px 0 2px; }
+    .boton-foto {
+      background: var(--fondo-3); border: 1px solid var(--borde); color: var(--texto);
+      border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .modal .avatar-preview { width: 132px; height: 132px; font-size: 64px; }
+    #visor { z-index: 60; cursor: zoom-out; }
+    #visor img { max-width: 96vw; max-height: 92vh; border-radius: 14px; }
     .sexos { display: flex; gap: 8px; }
     .sexos button {
       flex: 1; font-size: 15px; font-weight: 600; color: var(--texto);
@@ -149,8 +157,12 @@
       <p class="suave centrado" id="perfil-evento" style="margin-top:0">…</p>
 
       <div class="avatar-preview" id="avatar-preview" title="Toca para subir una foto">🙂</div>
-      <p class="suave centrado" style="font-size:12px; margin:0">Toca el círculo para poner una foto (opcional)</p>
+      <div class="fila-foto">
+        <button type="button" class="boton-foto" id="btn-selfie-perfil">🤳 Hacerme un selfie</button>
+        <button type="button" class="boton-foto" id="btn-galeria-perfil">🖼️ Subir una foto</button>
+      </div>
       <input type="file" id="input-foto-perfil" accept="image/*" class="oculto" />
+      <input type="file" id="input-selfie-perfil" accept="image/*" capture="user" class="oculto" />
 
       <label>Tu nombre o apodo *</label>
       <input type="text" id="perfil-nombre" maxlength="30" placeholder="¿Cómo te llamamos esta noche?" />
@@ -293,8 +305,12 @@
     <div class="tarjeta modal">
       <h2>Mi perfil</h2>
       <div class="avatar-preview" id="mi-avatar" title="Toca para cambiar tu foto" style="cursor:pointer">🙂</div>
-      <p class="suave" style="font-size:12px; margin:0">Toca el círculo para cambiar tu foto</p>
+      <div class="fila-foto">
+        <button type="button" class="boton-foto" id="btn-selfie-mi-perfil">🤳 Selfie</button>
+        <button type="button" class="boton-foto" id="btn-galeria-mi-perfil">🖼️ Galería</button>
+      </div>
       <input type="file" id="input-foto-mi-perfil" accept="image/*" class="oculto" />
+      <input type="file" id="input-selfie-mi-perfil" accept="image/*" capture="user" class="oculto" />
       <div style="text-align:left">
         <label>Tu nombre</label>
         <input type="text" id="mi-nombre" maxlength="30" />
@@ -321,6 +337,11 @@
         <button class="boton boton-secundario" id="modal-cerrar">Cerrar</button>
       </div>
     </div>
+  </div>
+
+  <!-- Visor de fotos a pantalla completa -->
+  <div class="modal-fondo oculto" id="visor">
+    <img id="visor-img" alt="Foto ampliada" />
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
