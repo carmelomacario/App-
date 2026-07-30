@@ -77,9 +77,12 @@
       <p style="margin-top:16px"><img id="res-qr" alt="Código QR del evento" /></p>
       <div class="fila-enlaces">
         <a class="boton" id="res-pantalla" target="_blank">📺 Abrir pantalla para proyectar</a>
+        <a class="boton boton-secundario" id="res-panel" target="_blank">📊 Panel del local (privado)</a>
         <a class="boton boton-secundario" id="res-entrar">📱 Entrar yo al chat</a>
         <button class="boton boton-secundario" id="res-copiar">🔗 Copiar enlace de acceso</button>
       </div>
+      <p class="suave" style="font-size:12px">⚠️ El enlace del panel lleva tu clave de organizador:
+        guárdalo y no lo compartas con los asistentes.</p>
       <div style="text-align:left; margin-top:22px">
         <div class="paso"><b>1.</b> Proyecta o imprime el QR en tu local.</div>
         <div class="paso"><b>2.</b> La gente lo escanea y crea su perfil temporal.</div>
@@ -128,6 +131,7 @@
         $('res-codigo').textContent = ev.codigo;
         $('res-qr').src = ev.qr;
         $('res-pantalla').href = ev.pantalla;
+        $('res-panel').href = ev.panel;
         $('res-entrar').href = ev.url;
         $('res-copiar').onclick = async () => {
           await navigator.clipboard.writeText(ev.url);

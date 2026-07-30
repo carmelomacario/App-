@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATMO · Panel del local</title>
+  <link rel="stylesheet" href="/estilo.css" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <style>
+    main { max-width: 900px; margin: 0 auto; padding: 26px 18px 60px; }
+    .cabecera { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+    .cabecera img { width: 52px; border-radius: 12px; }
+    .cabecera .suave { font-size: 13px; }
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .kpi { background: var(--fondo-2); border: 1px solid var(--borde); border-radius: 14px; padding: 16px; }
+    .kpi b { display: block; font-family: 'Manrope', sans-serif; font-size: 30px; color: var(--azul-claro); }
+    .kpi span { font-size: 12px; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi.destacado b { color: var(--verde); }
+    .grafica { margin-top: 18px; }
+    .grafica canvas { width: 100%; height: 220px; }
+    .dos-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    @media (max-width: 640px) { .dos-col { grid-template-columns: 1fr; } }
+    h3 { font-size: 15px; color: var(--texto-suave); font-weight: 600; margin-bottom: 12px; }
+    .error-panel { text-align: center; padding: 60px 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="cabecera">
+      <img src="/icon.svg" alt="ATMO" />
+      <div>
+        <h2 style="margin:0"><span class="marca">ATMO</span> · Panel del local</h2>
+        <span class="suave" id="evento-info">Cargando…</span>
+      </div>
+    </div>
+
+    <div id="contenido" class="oculto">
+      <div class="kpis">
+        <div class="kpi destacado"><b id="k-aforo">–</b><span>dentro ahora</span></div>
+        <div class="kpi"><b id="k-pico">–</b><span>pico de aforo</span></div>
+        <div class="kpi"><b id="k-entradas">–</b><span>entradas totales</span></div>
+        <div class="kpi"><b id="k-estancia">–</b><span>estancia media (min)</span></div>
+        <div class="kpi"><b id="k-sexos">–</b><span>🕺 chicos / 💃 chicas</span></div>
+        <div class="kpi"><b id="k-cola">–</b><span>en cola de espera</span></div>
+        <div class="kpi"><b id="k-mensajes">–</b><span>mensajes (general + privados)</span></div>
+        <div class="kpi"><b id="k-fotos">–</b><span>fotos compartidas</span></div>
+        <div class="kpi destacado"><b id="k-contactos">–</b><span>🤝 contactos guardados</span></div>
+      </div>
+
+      <div class="tarjeta grafica">
+        <h3>📈 Aforo a lo largo de la noche <span id="sin-datos" class="suave"></span></h3>
+        <canvas id="grafica" width="860" height="220"></canvas>
+        <p class="suave" style="font-size:12px; margin:8px 0 0">
+          <span style="color:var(--azul-claro)">━ total</span> ·
+          <span style="color:#7ab7ff">━ chicos</span> ·
+          <span style="color:var(--verde)">━ chicas</span>
+        </p>
+      </div>
+
+      <p class="suave" style="font-size:12px; margin-top:16px">
+        🔒 Este panel es privado: no compartas su enlace. Se actualiza solo cada pocos segundos.
+        Los datos son agregados y anónimos; al finalizar el evento se borran con él.
+      </p>
+    </div>
+
+    <div id="error" class="error-panel oculto">
+      <h2>No se pudo abrir el panel</h2>
+      <p class="suave" id="error-texto"></p>
+    </div>
+  </main>
+
+  <script>
+    const codigo = location.pathname.split('/').pop().toUpperCase();
+    const clave = new URLSearchParams(location.search).get('clave') || '';
+    const $ = (id) => document.getElementById(id);
+
+    function pintarGrafica(serie) {
+      const lienzo = $('grafica');
+      const ctx = lienzo.getContext('2d');
+      ctx.clearRect(0, 0, lienzo.width, lienzo.height);
+      $('sin-datos').textContent = serie.length < 2 ? '(recopilando datos…)' : '';
+      if (serie.length < 2) return;
+      const margen = 28;
+      const ancho = lienzo.width - margen * 2;
+      const alto = lienzo.height - margen * 2;
+      const maxY = Math.max(4, ...serie.map((p) => p.aforo));
+      const x = (i) => margen + (i / (serie.length - 1)) * ancho;
+      const y = (v) => margen + alto - (v / maxY) * alto;
+
+      // rejilla horizontal
+      ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+      ctx.lineWidth = 1;
+      for (let g = 0; g <= 4; g++) {
+        const gy = margen + (alto / 4) * g;
+        ctx.beginPath(); ctx.moveTo(margen, gy); ctx.lineTo(margen + ancho, gy); ctx.stroke();
+        ctx.fillStyle = 'rgba(255,255,255,0.35)';
+        ctx.font = '11px Inter, sans-serif';
+        ctx.fillText(Math.round(maxY - (maxY / 4) * g), 4, gy + 4);
+      }
+
+      const linea = (campo, color, grosor) => {
+        ctx.strokeStyle = color;
+        ctx.lineWidth = grosor;
+        ctx.beginPath();
+        serie.forEach((p, i) => (i ? ctx.lineTo(x(i), y(p[campo])) : ctx.moveTo(x(i), y(p[campo]))));
+        ctx.stroke();
+      };
+      linea('h', '#7ab7ff', 1.5);
+      linea('m', '#2ECC71', 1.5);
+      linea('aforo', '#2468FD', 2.5);
+    }
+
+    async function refrescar() {
+      const r = await fetch(`/api/eventos/${codigo}/panel?clave=${encodeURIComponent(clave)}`);
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        $('contenido').classList.add('oculto');
+        $('error').classList.remove('oculto');
+        $('error-texto').textContent = e.error || 'Error desconocido';
+        return;
+      }
+      const d = await r.json();
+      $('contenido').classList.remove('oculto');
+      $('error').classList.add('oculto');
+      const horasRestantes = Math.max(0, Math.round((d.expiraEn - Date.now()) / 3600000));
+      $('evento-info').textContent =
+        `${d.nombre} · código ${d.codigo} · quedan ~${horasRestantes} h` +
+        (d.geovallado ? ' · 📍 geovallado' : '') +
+        (d.balance ? ` · ⚖️ margen ${d.balance.margen}` : '');
+      $('k-aforo').textContent = d.aforo;
+      $('k-pico').textContent = d.picoAforo;
+      $('k-entradas').textContent = d.entradas;
+      $('k-estancia').textContent = d.estanciaMediaMin;
+      $('k-sexos').textContent = `${d.sexos.h} / ${d.sexos.m}`;
+      $('k-cola').textContent = d.enCola;
+      $('k-mensajes').textContent = d.mensajesGeneral + d.mensajesPrivados;
+      $('k-fotos').textContent = d.fotos;
+      $('k-contactos').textContent = d.contactos;
+      pintarGrafica(d.serie);
+    }
+
+    refrescar();
+    setInterval(refrescar, 8000);
+  </script>
+</body>
+</html>

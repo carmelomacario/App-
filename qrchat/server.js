@@ -44,6 +44,9 @@ const SWEEP_MS = Number(process.env.QRCHAT_SWEEP_MS) || 30 * 1000;
 // cuentas ya existentes siguen funcionando.
 const CUENTAS_DE_PAGO = process.env.QRCHAT_CUENTAS_DE_PAGO === '1';
 
+// Analítica del evento: cada cuánto se toma una muestra de aforo para la serie
+const MUESTRA_MS = Number(process.env.QRCHAT_MUESTRA_MS) || 5 * 60 * 1000;
+
 /** @type {Map<string, Evento>} */
 const eventos = new Map();
 
@@ -201,6 +204,35 @@ function cuentaPorToken(credenciales) {
   return c && c.token === credenciales.token ? c : null;
 }
 
+/* Guarda el contacto en ambas cuentas (consentimiento mutuo confirmado) */
+function guardarContactoMutuo(ev, a, b) {
+  const cuentaA = cuentas.get(a.cuentaAlias);
+  const cuentaB = cuentas.get(b.cuentaAlias);
+  if (!cuentaA || !cuentaB) return;
+  const ahora = Date.now();
+  const anotar = (cuenta, otro) => {
+    cuenta.contactos = cuenta.contactos || [];
+    if (!cuenta.contactos.some((c) => c.alias === otro.cuentaAlias)) {
+      cuenta.contactos.push({
+        alias: otro.cuentaAlias,
+        nombre: otro.nombre,
+        evento: ev.nombre,
+        ts: ahora,
+      });
+    }
+  };
+  anotar(cuentaA, b);
+  anotar(cuentaB, a);
+  guardarCuentas();
+  ev.stats.contactos++;
+  for (const [u, otro] of [[a, b], [b, a]]) {
+    if (u.online && u.socketId) {
+      io.to(u.socketId).emit('contacto:guardado', { alias: otro.cuentaAlias, nombre: otro.nombre });
+    }
+  }
+  console.log(`[qrchat] ${ev.codigo}: contacto guardado ${a.cuentaAlias} ↔ ${b.cuentaAlias}`);
+}
+
 /* ─────────────────── Equilibrio chicos/chicas y cola ─────────────────────── */
 
 // Un chico puede entrar mientras no supere a las chicas en más del margen
@@ -263,9 +295,12 @@ function admitir(socket, ev, datos, cuenta) {
       online: true,
       socketId: socket.id,
       desconectadoEn: null,
+      entradaEn: Date.now(),
       bloqueados: new Set(),
     };
     ev.usuarios.set(usuario.id, usuario);
+    ev.stats.entradas++;
+    ev.stats.picoAforo = Math.max(ev.stats.picoAforo, ev.usuarios.size);
   } else {
     usuario.online = true;
     usuario.socketId = socket.id;
@@ -310,6 +345,11 @@ function purgarUsuario(ev, userId, motivo) {
   const u = ev.usuarios.get(userId);
   if (!u) return;
   ev.usuarios.delete(userId);
+  ev.stats.salidas++;
+  ev.stats.estanciaTotalMs += Date.now() - (u.entradaEn || Date.now());
+  for (const clave of Array.from(ev.solicitudes)) {
+    if (clave.split('>').includes(userId)) ev.solicitudes.delete(clave);
+  }
   ev.general = ev.general.filter((m) => m.de !== userId);
   for (const clave of Array.from(ev.privados.keys())) {
     if (clave.split('|').includes(userId)) ev.privados.delete(clave);
@@ -333,6 +373,13 @@ setInterval(() => {
       if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > GRACIA_MS) {
         purgarUsuario(ev, u.id, 'ausencia prolongada');
       }
+    }
+    // Muestra periódica de aforo para la gráfica del panel
+    if (Date.now() - ev.ultimaMuestra >= MUESTRA_MS) {
+      ev.ultimaMuestra = Date.now();
+      const { h, m } = contarSexos(ev);
+      ev.stats.serie.push({ ts: Date.now(), aforo: ev.usuarios.size, h, m });
+      if (ev.stats.serie.length > 1000) ev.stats.serie.shift();
     }
   }
 }, SWEEP_MS);
@@ -375,6 +422,20 @@ app.post('/api/eventos', async (req, res) => {
     general: [],
     privados: new Map(),
     cola: [],
+    solicitudes: new Set(), // solicitudes de guardar contacto: "deId>paraId"
+    ultimaMuestra: 0,
+    // Analítica para el panel del organizador
+    stats: {
+      entradas: 0,
+      salidas: 0,
+      picoAforo: 0,
+      mensajesGeneral: 0,
+      mensajesPrivados: 0,
+      fotos: 0,
+      contactos: 0,
+      estanciaTotalMs: 0,
+      serie: [], // muestras periódicas {ts, aforo, h, m}
+    },
   };
   eventos.set(codigo, ev);
 
@@ -390,6 +451,7 @@ app.post('/api/eventos', async (req, res) => {
     qr,
     expiraEn: ev.expiraEn,
     pantalla: `${baseUrl(req)}/pantalla/${codigo}`,
+    panel: `${baseUrl(req)}/panel/${codigo}?clave=${ev.adminToken}`,
   });
 });
 
@@ -474,9 +536,66 @@ app.get('/salud', (_req, res) => {
   res.json({ ok: true, eventos: eventos.size, cuentas: cuentas.size });
 });
 
+// Contactos guardados de una cuenta (nombre y foto se resuelven en vivo)
+app.post('/api/cuentas/contactos', (req, res) => {
+  const cuenta = cuentaPorToken(req.body);
+  if (!cuenta) return res.status(401).json({ error: 'Sesión no válida. Vuelve a iniciar sesión.' });
+  const contactos = (cuenta.contactos || [])
+    .map((c) => {
+      const otra = cuentas.get(c.alias);
+      return {
+        alias: c.alias,
+        nombre: otra?.perfil?.nombre || c.nombre,
+        foto: otra?.perfil?.foto || null,
+        evento: c.evento,
+        ts: c.ts,
+      };
+    })
+    .sort((a, b) => b.ts - a.ts);
+  res.json({ contactos });
+});
+
+/* ── Panel del organizador (analítica B2B) ── */
+app.get('/api/eventos/:codigo/panel', (req, res) => {
+  const ev = eventoActivo(req.params.codigo.toUpperCase());
+  if (!ev) return res.status(404).json({ error: 'Evento no encontrado o finalizado' });
+  if (req.query.clave !== ev.adminToken) {
+    return res.status(403).json({ error: 'Clave de organizador no válida' });
+  }
+  const s = ev.stats;
+  // Estancia media: salidas contabilizadas + estancia en curso de los presentes
+  let estanciaMs = s.estanciaTotalMs;
+  let estancias = s.salidas;
+  for (const u of ev.usuarios.values()) {
+    estanciaMs += Date.now() - (u.entradaEn || Date.now());
+    estancias++;
+  }
+  res.json({
+    codigo: ev.codigo,
+    nombre: ev.nombre,
+    creadoEn: ev.creadoEn,
+    expiraEn: ev.expiraEn,
+    aforo: ev.usuarios.size,
+    picoAforo: s.picoAforo,
+    entradas: s.entradas,
+    salidas: s.salidas,
+    enCola: ev.cola.length,
+    sexos: contarSexos(ev),
+    mensajesGeneral: s.mensajesGeneral,
+    mensajesPrivados: s.mensajesPrivados,
+    fotos: s.fotos,
+    contactos: s.contactos,
+    estanciaMediaMin: estancias ? Math.round(estanciaMs / estancias / 60000) : 0,
+    serie: s.serie,
+    balance: ev.balance,
+    geovallado: !!ev.geo,
+  });
+});
+
 // Rutas de página (SPA sencilla: cada pantalla es un HTML propio)
 app.get('/e/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'app.html')));
 app.get('/pantalla/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'pantalla.html')));
+app.get('/panel/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'panel.html')));
 
 /* ─────────────────────────────── Socket.IO ───────────────────────────────── */
 
@@ -541,6 +660,8 @@ io.on('connection', (socket) => {
 
     const msg = { id: crypto.randomUUID(), de: yo.id, texto, foto, ts: Date.now() };
     ev.general.push(msg);
+    ev.stats.mensajesGeneral++;
+    if (foto) ev.stats.fotos++;
     if (ev.general.length > MAX_MENSAJES_GENERAL) ev.general.shift();
     io.to(`evento:${ev.codigo}`).emit('general:mensaje', msg);
     cb?.({ ok: true });
@@ -565,12 +686,65 @@ io.on('connection', (socket) => {
     const hilo = ev.privados.get(clave);
     const msg = { id: crypto.randomUUID(), de: yo.id, para: destino.id, texto, foto, ts: Date.now() };
     hilo.push(msg);
+    ev.stats.mensajesPrivados++;
+    if (foto) ev.stats.fotos++;
     if (hilo.length > MAX_MENSAJES_PRIVADO) hilo.shift();
 
     if (destino.online && destino.socketId) {
       io.to(destino.socketId).emit('privado:mensaje', msg);
     }
     cb?.({ ok: true, mensaje: msg });
+  });
+
+  /* ── Guardar contacto (Premium): solo con consentimiento MUTUO ──
+     Ambos necesitan cuenta ATMO. El contacto se guarda en las dos cuentas
+     y sobrevive al borrado del evento: es lo único que puede salir de él. */
+
+  socket.on('contacto:solicitar', ({ para } = {}, cb) => {
+    const { ev, yo } = socket.data;
+    if (!ev || !yo) return;
+    if (!yo.cuentaAlias) {
+      return cb?.({ error: 'Necesitas una cuenta ATMO para guardar contactos.', sinCuenta: true });
+    }
+    const destino = ev.usuarios.get(String(para || ''));
+    if (!destino || destino.id === yo.id) return cb?.({ error: 'Persona no disponible.' });
+    if (!destino.cuentaAlias) {
+      return cb?.({ error: 'Esa persona no tiene cuenta ATMO: no se puede guardar su contacto.' });
+    }
+    if (destino.bloqueados.has(yo.id)) {
+      return cb?.({ ok: true, pendiente: true }); // el bloqueo nunca se revela
+    }
+    const miCuenta = cuentas.get(yo.cuentaAlias);
+    if (miCuenta?.contactos?.some((c) => c.alias === destino.cuentaAlias)) {
+      return cb?.({ error: 'Ya tenéis guardado el contacto.' });
+    }
+    // Si la otra persona ya me lo había pedido, hay acuerdo mutuo: se guarda
+    const reciproca = `${destino.id}>${yo.id}`;
+    if (ev.solicitudes.has(reciproca)) {
+      ev.solicitudes.delete(reciproca);
+      guardarContactoMutuo(ev, yo, destino);
+      return cb?.({ ok: true, guardado: true });
+    }
+    ev.solicitudes.add(`${yo.id}>${destino.id}`);
+    if (destino.online && destino.socketId) {
+      io.to(destino.socketId).emit('contacto:solicitud', { de: yo.id, nombre: yo.nombre });
+    }
+    cb?.({ ok: true, pendiente: true });
+  });
+
+  socket.on('contacto:responder', ({ de, aceptar } = {}, cb) => {
+    const { ev, yo } = socket.data;
+    if (!ev || !yo) return;
+    const clave = `${de}>${yo.id}`;
+    if (!ev.solicitudes.has(clave)) return cb?.({ error: 'La solicitud ya no está disponible.' });
+    ev.solicitudes.delete(clave);
+    if (!aceptar) return cb?.({ ok: true });
+    const solicitante = ev.usuarios.get(String(de || ''));
+    if (!solicitante || !solicitante.cuentaAlias || !yo.cuentaAlias) {
+      return cb?.({ error: 'Ya no se puede guardar este contacto.' });
+    }
+    guardarContactoMutuo(ev, solicitante, yo);
+    cb?.({ ok: true, guardado: true });
   });
 
   /* Bloquear / desbloquear: sus privados dejan de llegarte */

@@ -60,6 +60,37 @@ una ⭐ junto a su nombre.
   de cuentas se pierde al redesplegar; para producción usa un disco persistente
   o una base de datos.
 
+## Guardar contactos 🤝 (función Premium)
+
+Lo único que puede sobrevivir al borrado del evento, y **solo con
+consentimiento mutuo**:
+
+- En el perfil de una persona: «🤝 Guardar contacto ✦». La otra persona recibe
+  la solicitud y decide. Si ambos aceptan (o se lo piden mutuamente), el
+  contacto (alias + nombre + evento donde se conocieron) se guarda en las dos
+  cuentas.
+- Requiere que **ambos tengan cuenta ATMO** (⭐) — es el gancho natural hacia
+  la suscripción Premium del plan (9,99 €/mes); hoy es gratis como las cuentas.
+- Los contactos se ven en «Mi perfil → 🤝 Mis contactos» dentro del evento y
+  desde la pantalla de entrada de cualquier evento; nombre y foto se resuelven
+  en vivo desde la cuenta del contacto.
+- Un rechazo no se notifica al solicitante, y el bloqueo hace que las
+  solicitudes se pierdan en silencio.
+
+## Panel del local 📊 (analítica B2B)
+
+Cada evento incluye un **panel privado para el organizador** (enlace con clave
+propia al crear el evento, ruta `/panel/CODIGO?clave=…`):
+
+- **Aforo en vivo**, pico de aforo, entradas y salidas totales.
+- **Proporción chicos/chicas** y personas en cola de espera.
+- **Estancia media** por persona (minutos).
+- **Actividad**: mensajes del general, privados (solo recuento, jamás
+  contenido), fotos compartidas y 🤝 contactos guardados.
+- **Gráfica del aforo a lo largo de la noche** (total, chicos, chicas) con
+  muestras cada 5 min (`QRCHAT_MUESTRA_MS` para ajustar).
+- Los datos son agregados y anónimos, y se borran con el evento.
+
 ## Protección anticapturas 🔒
 
 Una aplicación web **no puede impedir** una captura de pantalla: eso lo

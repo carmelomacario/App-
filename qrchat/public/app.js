@@ -77,6 +77,79 @@
     });
   }
 
+  /* Aviso flotante breve */
+  let toastTemporizador = null;
+  function toast(texto, ms = 3500) {
+    const t = $('toast');
+    t.textContent = texto;
+    t.classList.remove('oculto');
+    clearTimeout(toastTemporizador);
+    toastTemporizador = setTimeout(() => t.classList.add('oculto'), ms);
+  }
+
+  /* ── Contactos guardados (Premium ✦) ─────────────────────────── */
+
+  const solicitudesEntrantes = []; // cola de solicitudes por atender
+
+  function mostrarSiguienteSolicitud() {
+    if (!solicitudesEntrantes.length) {
+      $('modal-solicitud').classList.add('oculto');
+      return;
+    }
+    const s = solicitudesEntrantes[0];
+    $('solicitud-texto').textContent = `${s.nombre} quiere guardar tu contacto`;
+    $('modal-solicitud').classList.remove('oculto');
+  }
+
+  function responderSolicitud(aceptar) {
+    const s = solicitudesEntrantes.shift();
+    if (s) {
+      estado.socket.emit('contacto:responder', { de: s.de, aceptar }, (resp) => {
+        if (resp?.error) toast(resp.error);
+        else if (aceptar && !resp?.guardado) toast('La solicitud ya no estaba disponible.');
+      });
+    }
+    mostrarSiguienteSolicitud();
+  }
+
+  async function cargarContactos() {
+    const c = cuentaGuardada();
+    if (!c) {
+      toast('Inicia sesión en tu cuenta para ver tus contactos.');
+      return;
+    }
+    $('lista-contactos').innerHTML = '<p class="suave centrado">Cargando…</p>';
+    $('modal-contactos').classList.remove('oculto');
+    try {
+      const r = await fetch('/api/cuentas/contactos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ alias: c.alias, token: c.token }),
+      });
+      const datos = await r.json();
+      if (!r.ok) throw new Error(datos.error || 'No se pudieron cargar.');
+      if (!datos.contactos.length) {
+        $('lista-contactos').innerHTML =
+          '<p class="suave centrado">Aún no tienes contactos guardados.<br/>En un evento, abre el perfil de alguien y toca «🤝 Guardar contacto».</p>';
+        return;
+      }
+      $('lista-contactos').innerHTML = datos.contactos
+        .map(
+          (ct) => `
+          <div class="contacto-fila">
+            <div class="avatar-mini">${ct.foto ? `<img src="${ct.foto}" alt="" />` : '⭐'}</div>
+            <div style="min-width:0">
+              <div><b>${escaparHtml(ct.nombre)}</b> <span class="alias">@${escaparHtml(ct.alias)}</span></div>
+              <div class="evento-origen">Os conocisteis en «${escaparHtml(ct.evento)}» · ${new Date(ct.ts).toLocaleDateString('es-ES')}</div>
+            </div>
+          </div>`
+        )
+        .join('');
+    } catch (e) {
+      $('lista-contactos').innerHTML = `<p class="centrado" style="color:#FF4D4F">${escaparHtml(e.message)}</p>`;
+    }
+  }
+
   /* Visor de fotos a pantalla completa (toca la foto para ampliarla) */
   function abrirVisor(src) {
     $('visor-img').src = src;
@@ -454,6 +527,16 @@
       }
     });
 
+    // Solicitudes y confirmaciones de guardar contacto
+    socket.on('contacto:solicitud', (s) => {
+      if (estado.bloqueados.has(s.de)) return;
+      solicitudesEntrantes.push(s);
+      if (solicitudesEntrantes.length === 1) mostrarSiguienteSolicitud();
+    });
+    socket.on('contacto:guardado', ({ nombre }) => {
+      toast(`🤝 ¡Contacto guardado con ${nombre}! Lo tienes en «Mis contactos».`, 5000);
+    });
+
     socket.on('usuarios:cambio', (usuarios) => {
       estado.usuarios = usuarios;
       $('chat-info').textContent = textoPersonas(usuarios.length);
@@ -649,6 +732,8 @@
     $('modal-nombre').textContent = `${u.nombre} ${SEXO_ICONO[u.sexo] || ''}${u.registrado ? ' ⭐' : ''}`;
     $('modal-bio').textContent = u.bio || 'Sin descripción';
     $('modal-bloquear').textContent = estado.bloqueados.has(id) ? '✅ Desbloquear' : '🚫 Bloquear';
+    // Guardar contacto: solo tiene sentido si la otra persona tiene cuenta
+    $('modal-contacto').classList.toggle('oculto', !u.registrado);
     $('modal-persona').classList.remove('oculto');
   }
 
@@ -732,6 +817,37 @@
     $('modal-privado').onclick = () => {
       $('modal-persona').classList.add('oculto');
       abrirPrivado(estado.personaModal);
+    };
+    $('modal-contacto').onclick = () => {
+      const id = estado.personaModal;
+      $('modal-persona').classList.add('oculto');
+      if (!estado.yo?.perfil?.registrado) {
+        toast('✦ Necesitas una cuenta ATMO para guardar contactos (gratis por ahora).', 5000);
+        return;
+      }
+      estado.socket.emit('contacto:solicitar', { para: id }, (resp) => {
+        if (resp?.error) toast(resp.error, 5000);
+        else if (resp?.guardado) { /* el aviso llega por contacto:guardado */ }
+        else toast('🤝 Solicitud enviada. Si acepta, os guardaréis mutuamente.');
+      });
+    };
+
+    // Solicitudes entrantes de contacto
+    $('solicitud-aceptar').onclick = () => responderSolicitud(true);
+    $('solicitud-rechazar').onclick = () => responderSolicitud(false);
+
+    // Mis contactos (desde Mi perfil y desde la pantalla de entrada)
+    $('mi-contactos').onclick = () => {
+      $('modal-mi-perfil').classList.add('oculto');
+      cargarContactos();
+    };
+    $('btn-ver-contactos').onclick = (e) => {
+      e.preventDefault();
+      cargarContactos();
+    };
+    $('contactos-cerrar').onclick = () => $('modal-contactos').classList.add('oculto');
+    $('modal-contactos').onclick = (e) => {
+      if (e.target === $('modal-contactos')) $('modal-contactos').classList.add('oculto');
     };
     $('modal-bloquear').onclick = () => {
       const id = estado.personaModal;

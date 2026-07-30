@@ -27,6 +27,22 @@
       border-radius: 10px; padding: 6px 9px; cursor: pointer;
     }
     .emojis button.activo { border-color: var(--neon-1); background: #14264D; }
+    .etiqueta-premium { color: var(--azul-claro); font-weight: 800; }
+    #toast {
+      position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%);
+      background: var(--fondo-3); border: 1px solid var(--azul); color: var(--texto);
+      padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 600;
+      z-index: 70; box-shadow: 0 6px 24px rgba(0,0,0,0.5); max-width: 90vw; text-align: center;
+    }
+    .contacto-fila {
+      display: flex; align-items: center; gap: 12px; padding: 10px 0;
+      border-bottom: 1px solid var(--borde);
+    }
+    .contacto-fila .avatar-mini { width: 44px; height: 44px; font-size: 24px; border-radius: 50%;
+      background: var(--fondo-3); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+    .contacto-fila .avatar-mini img { width: 100%; height: 100%; object-fit: cover; }
+    .contacto-fila .alias { font-size: 12px; color: var(--azul-claro); }
+    .contacto-fila .evento-origen { font-size: 11px; color: var(--texto-suave); }
     .fila-foto { display: flex; gap: 8px; justify-content: center; margin: 8px 0 2px; }
     .boton-foto {
       background: var(--fondo-3); border: 1px solid var(--borde); color: var(--texto);
@@ -220,6 +236,8 @@
         <div id="cuenta-conectada" class="oculto">
           <button class="boton" id="btn-entrar-cuenta" style="width:100%">⭐ Entrar con mi cuenta</button>
           <p class="suave centrado" style="font-size:12px; margin-bottom:0">
+            <a href="#" id="btn-ver-contactos" style="color:var(--azul-claro)">🤝 Mis contactos</a>
+            &nbsp;·&nbsp;
             <a href="#" id="btn-cerrar-sesion" style="color:var(--texto-suave)">Cerrar sesión</a>
           </p>
         </div>
@@ -345,6 +363,7 @@
       </div>
       <div class="acciones">
         <button class="boton" id="mi-guardar">💾 Guardar cambios</button>
+        <button class="boton boton-secundario" id="mi-contactos">🤝 Mis contactos <span class="etiqueta-premium">✦</span></button>
         <button class="boton boton-secundario" id="mi-salir">👋 Salir del evento</button>
         <button class="boton boton-secundario" id="mi-cerrar">Cerrar</button>
       </div>
@@ -359,11 +378,43 @@
       <p class="suave" id="modal-bio"></p>
       <div class="acciones">
         <button class="boton" id="modal-privado">💌 Enviar mensaje privado</button>
+        <button class="boton boton-secundario" id="modal-contacto">🤝 Guardar contacto <span class="etiqueta-premium">✦</span></button>
         <button class="boton boton-secundario" id="modal-bloquear">🚫 Bloquear</button>
         <button class="boton boton-secundario" id="modal-cerrar">Cerrar</button>
       </div>
     </div>
   </div>
+
+  <!-- Modal: solicitud de guardar contacto entrante -->
+  <div class="modal-fondo oculto" id="modal-solicitud">
+    <div class="tarjeta modal">
+      <div style="font-size:52px">🤝</div>
+      <h2 id="solicitud-texto">…</h2>
+      <p class="suave" style="font-size:13px">Si aceptáis los dos, os guardaréis mutuamente
+        (alias y nombre) y el contacto <b>sobrevivirá al borrado del evento</b>.
+        Es lo único que puede salir de aquí.</p>
+      <div class="acciones">
+        <button class="boton" id="solicitud-aceptar">✅ Aceptar y guardarnos</button>
+        <button class="boton boton-secundario" id="solicitud-rechazar">Ahora no</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: mis contactos guardados -->
+  <div class="modal-fondo oculto" id="modal-contactos">
+    <div class="tarjeta modal" style="max-height:80vh; overflow-y:auto">
+      <h2>🤝 Mis contactos</h2>
+      <p class="suave" style="font-size:13px">Personas con las que decidisteis guardaros.
+        Os encontraréis por el alias en cualquier evento ATMO.</p>
+      <div id="lista-contactos" style="text-align:left"></div>
+      <div class="acciones">
+        <button class="boton boton-secundario" id="contactos-cerrar">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Aviso flotante -->
+  <div id="toast" class="oculto"></div>
 
   <!-- Visor de fotos a pantalla completa -->
   <div class="modal-fondo oculto" id="visor">
