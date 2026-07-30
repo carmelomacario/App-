@@ -1,4 +1,4 @@
-/* QRChat — lógica de la app de chat (cliente) */
+/* ATMO · Vivir el momento — lógica de la app de chat (cliente) */
 (() => {
   const $ = (id) => document.getElementById(id);
   const codigo = location.pathname.split('/').pop().toUpperCase();

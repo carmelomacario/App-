@@ -1,6 +1,6 @@
-# QRChat 💬✨
+# ATMO 💬 · Vivir el momento
 
-Chat **efímero** por código QR para discotecas, fiestas, congresos y eventos.
+App **ATMO** (carpeta técnica `qrchat/`): chat **efímero** por código QR para discotecas, fiestas, congresos y eventos.
 Pensado para facilitar que la gente se conozca sin la presión de dar el primer
 paso en persona.
 

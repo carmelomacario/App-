@@ -4,7 +4,7 @@
 #  se despliega aquí y no en Netlify como las demás apps del repo.)
 services:
   - type: web
-    name: qrchat
+    name: atmo
     runtime: node
     rootDir: qrchat
     plan: free

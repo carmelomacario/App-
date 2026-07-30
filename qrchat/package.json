@@ -1,7 +1,7 @@
 {
-  "name": "qrchat",
+  "name": "atmo",
   "version": "1.0.0",
-  "description": "Chat efímero por QR para eventos, discotecas y espacios sociales",
+  "description": "ATMO · Vivir el momento — chat efímero por QR para eventos y discotecas",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

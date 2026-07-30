@@ -1,11 +1,11 @@
 {
-  "name": "QRChat",
-  "short_name": "QRChat",
-  "description": "Chat efímero por QR para eventos y discotecas",
+  "name": "ATMO · Vivir el momento",
+  "short_name": "ATMO",
+  "description": "Conecta donde sucede. Chat efímero por QR para eventos y discotecas.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b0b12",
-  "theme_color": "#0b0b12",
+  "background_color": "#0F0F10",
+  "theme_color": "#0F0F10",
   "icons": [
     {
       "src": "/icon.svg",

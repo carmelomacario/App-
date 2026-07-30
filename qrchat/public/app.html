@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>QRChat</title>
+  <title>ATMO</title>
   <link rel="stylesheet" href="/estilo.css" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
@@ -26,7 +26,7 @@
       font-size: 22px; background: var(--fondo-3); border: 1px solid var(--borde);
       border-radius: 10px; padding: 6px 9px; cursor: pointer;
     }
-    .emojis button.activo { border-color: var(--neon-1); background: #2a1626; }
+    .emojis button.activo { border-color: var(--neon-1); background: #14264D; }
     .fila-foto { display: flex; gap: 8px; justify-content: center; margin: 8px 0 2px; }
     .boton-foto {
       background: var(--fondo-3); border: 1px solid var(--borde); color: var(--texto);
@@ -41,7 +41,7 @@
       background: var(--fondo-3); border: 1px solid var(--borde);
       border-radius: 12px; padding: 11px 6px; cursor: pointer;
     }
-    .sexos button.activo { border-color: var(--neon-1); background: #2a1626; }
+    .sexos button.activo { border-color: var(--neon-1); background: #14264D; }
     .cuenta-sexos {
       display: flex; justify-content: center; gap: 18px; padding: 10px;
       background: var(--fondo-2); border: 1px solid var(--borde);
@@ -75,7 +75,7 @@
     header {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 14px calc(10px); border-bottom: 1px solid var(--borde);
-      background: rgba(11, 11, 18, 0.9); backdrop-filter: blur(8px);
+      background: rgba(15, 15, 16, 0.92); backdrop-filter: blur(8px);
     }
     header .titulo { flex: 1; min-width: 0; }
     header .titulo h2 { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -122,7 +122,7 @@
     .msg .hora { font-size: 10px; color: var(--texto-suave); text-align: right; margin-top: 3px; }
     .msg img.foto { max-width: 100%; max-height: 260px; border-radius: 10px; margin-top: 4px; display: block; }
     .msg.mio { align-self: flex-end; flex-direction: row-reverse; }
-    .msg.mio .burbuja { background: #33163a; border-color: #5a2470; border-radius: 16px 4px 16px 16px; }
+    .msg.mio .burbuja { background: #14264D; border-color: #2E5FBF; border-radius: 16px 4px 16px 16px; }
     .msg.mio .autor { display: none; }
     .aviso-sistema { text-align: center; font-size: 12px; color: var(--texto-suave); padding: 4px; }
 
@@ -207,7 +207,7 @@
       </div>
       <p class="suave centrado" style="font-size:12px">Tu perfil y todos los mensajes se borran automáticamente al terminar el evento.</p>
       <p class="suave centrado" style="font-size:12px">🔒 Chats y fotos llevan una <b>marca de agua con la identidad de quien mira</b>: cualquier captura de pantalla es rastreable hasta su autor.</p>
-      <p class="centrado" id="perfil-error" style="color:#ff6b6b"></p>
+      <p class="centrado" id="perfil-error" style="color:#FF4D4F"></p>
 
       <div style="margin-top:16px; border-top:1px solid var(--borde); padding-top:14px">
         <div id="cuenta-anonima">
@@ -291,7 +291,9 @@
   <!-- Pantalla: evento finalizado -->
   <div class="pantalla oculto centrado" id="pantalla-fin" style="justify-content:center; padding:20px">
     <div>
-      <h1 class="marca" style="font-size:40px">QRChat</h1>
+      <img src="/icon.svg" alt="" style="width:72px; border-radius:16px; margin-bottom:10px" />
+      <h1 class="marca" style="font-size:40px">ATMO</h1>
+      <div class="lema" style="margin-bottom:18px">Vivir el momento</div>
       <h2 id="fin-titulo">El evento ha finalizado 🌙</h2>
       <p class="suave" id="fin-sub">Todos los perfiles y mensajes se han borrado.<br />¡Gracias por venir!</p>
     </div>
@@ -316,7 +318,7 @@
       <p class="suave" id="cuenta-nota" style="font-size:12px">
         Se guardará el perfil que has rellenado arriba (nombre, sexo, avatar/foto y bio).
       </p>
-      <p id="cuenta-error" style="color:#ff6b6b; font-size:13px"></p>
+      <p id="cuenta-error" style="color:#FF4D4F; font-size:13px"></p>
       <div class="acciones">
         <button class="boton" id="cuenta-aceptar">Crear cuenta y entrar</button>
         <button class="boton boton-secundario" id="cuenta-cancelar">Cancelar</button>

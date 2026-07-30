@@ -1,15 +1,36 @@
-/* QRChat — estilo compartido (ambiente nocturno / neón) */
+/* ATMO · Vivir el momento — estilo compartido según el Manual de Marca v1.0
+   Colores: azul #2468FD · negro #0F0F10 · gris #8C8F96 · blanco #FFFFFF
+   Apoyo:   verde #2ECC71 · rojo #FF4D4F
+   Tipografía: Inter (principal) · Manrope (secundaria/titulares) */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fuentes/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Manrope';
+  src: url('/fuentes/manrope.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
 
 :root {
-  --fondo: #0b0b12;
-  --fondo-2: #14141f;
-  --fondo-3: #1d1d2c;
-  --borde: #2b2b40;
-  --texto: #f2f2f7;
-  --texto-suave: #9a9ab0;
-  --neon-1: #ff2d95;
-  --neon-2: #00e5ff;
-  --degradado: linear-gradient(135deg, #ff2d95, #7b2dff 55%, #00e5ff);
+  --fondo: #0F0F10;
+  --fondo-2: #17181B;
+  --fondo-3: #1F2126;
+  --borde: #2A2D33;
+  --texto: #FFFFFF;
+  --texto-suave: #8C8F96;
+  --azul: #2468FD;
+  --azul-claro: #6EA0FF;   /* azul para texto pequeño sobre fondo oscuro */
+  --verde: #2ECC71;
+  --rojo: #FF4D4F;
+  /* Alias históricos usados por las páginas */
+  --neon-1: var(--azul);
+  --neon-2: var(--azul-claro);
+  --degradado: linear-gradient(135deg, #2468FD, #3D7BFF);
   --radio: 16px;
 }
 
@@ -21,26 +42,39 @@ html, body {
   height: 100%;
   background: var(--fondo);
   color: var(--texto);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Sistema visual ATMO: ondas concéntricas sutiles desde la esquina */
 body {
   background-image:
-    radial-gradient(600px 300px at 15% -5%, rgba(255, 45, 149, 0.18), transparent 70%),
-    radial-gradient(600px 300px at 90% 0%, rgba(0, 229, 255, 0.14), transparent 70%);
+    radial-gradient(circle at 110% -10%, transparent 118px, rgba(36, 104, 253, 0.06) 120px, transparent 123px),
+    radial-gradient(circle at 110% -10%, transparent 198px, rgba(36, 104, 253, 0.05) 200px, transparent 203px),
+    radial-gradient(circle at 110% -10%, transparent 278px, rgba(36, 104, 253, 0.04) 280px, transparent 283px),
+    radial-gradient(600px 380px at 100% 0%, rgba(36, 104, 253, 0.07), transparent 70%);
   background-attachment: fixed;
 }
 
-h1, h2, h3 { margin: 0 0 8px; }
+h1, h2, h3 {
+  margin: 0 0 8px;
+  font-family: 'Manrope', 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.2px;
+}
 
 .marca {
+  font-family: 'Manrope', 'Inter', sans-serif;
   font-weight: 800;
-  letter-spacing: 0.5px;
-  background: var(--degradado);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: 3px;
+  color: var(--texto);
+}
+.marca .logo-marca { color: var(--azul); }
+.lema {
+  color: var(--azul-claro);
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .tarjeta {
@@ -60,11 +94,13 @@ h1, h2, h3 { margin: 0 0 8px; }
   padding: 14px 24px;
   font-size: 16px;
   font-weight: 700;
+  font-family: inherit;
   color: #fff;
-  background: var(--degradado);
+  background: var(--azul);
   cursor: pointer;
   transition: transform 0.1s ease, filter 0.15s ease;
 }
+.boton:hover { filter: brightness(1.1); }
 .boton:active { transform: scale(0.97); }
 .boton:disabled { filter: grayscale(0.6) brightness(0.6); cursor: default; }
 
@@ -74,7 +110,7 @@ h1, h2, h3 { margin: 0 0 8px; }
   color: var(--texto);
 }
 
-input[type="text"], input[type="number"], textarea {
+input[type="text"], input[type="number"], input[type="password"], textarea {
   width: 100%;
   padding: 13px 14px;
   border-radius: 12px;
@@ -82,9 +118,10 @@ input[type="text"], input[type="number"], textarea {
   background: var(--fondo-3);
   color: var(--texto);
   font-size: 16px;
+  font-family: inherit;
   outline: none;
 }
-input:focus, textarea:focus { border-color: var(--neon-1); }
+input:focus, textarea:focus { border-color: var(--azul); }
 
 label { display: block; font-size: 13px; color: var(--texto-suave); margin: 14px 0 6px; }
 
