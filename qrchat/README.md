@@ -10,7 +10,9 @@ paso en persona.
 2. La app genera un **código QR** que se puede proyectar en pantalla o imprimir
    (hay una vista `pantalla` a pantalla completa con contador de gente en vivo).
 3. Los asistentes **escanean el QR** con el móvil y crean un **perfil temporal**:
-   apodo, avatar emoji o foto, y una pequeña bio.
+   apodo, sexo (🕺 chico / 💃 chica / ✨ otro), avatar emoji o foto, y una
+   pequeña bio. El sexo se muestra en los perfiles y hay contadores de
+   chicos/chicas en la lista de gente y en la pantalla de proyección.
 4. Dentro tienen:
    - 💬 **Canal general** del evento (texto y fotos)
    - 🕺 **Gente**: lista de perfiles de los asistentes
@@ -19,6 +21,23 @@ paso en persona.
      sus mensajes (sin que la otra persona lo sepa)
 5. Cuando el evento expira (1–48 h), **todo se borra automáticamente**: perfiles,
    fotos y mensajes. No hay base de datos: todo vive solo en memoria.
+
+## Equilibrio chicos/chicas ⚖️
+
+Opcional al crear el evento (activado por defecto). Evita que el chat se llene
+solo de chicos:
+
+- Los chicos **nunca pueden superar a las chicas en más del margen** elegido
+  (1–20, por defecto 5). El margen inicial permite que el evento arranque
+  aunque todavía no haya chicas.
+- Cada chica que entra **abre hueco a un chico más**, así que a medida que se
+  llena el evento la proporción tiende al 1-1.
+- El chico que no cabe **no es rechazado**: pasa a una **cola de espera** con
+  su posición visible y **entra automáticamente** en cuanto entra una chica o
+  alguien deja el evento.
+- Quien elige «✨ Otro» entra siempre libremente y no cuenta en la proporción.
+- Es un chat anónimo sin verificación, así que el sexo es declarativo: el
+  equilibrio ordena el ambiente, pero no puede impedir que alguien mienta.
 
 ## Borrado total al abandonar el espacio 🧹
 

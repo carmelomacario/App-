@@ -5,6 +5,7 @@
   const claveSesion = 'qrchat:' + codigo;
 
   const EMOJIS = ['🙂','😎','🥳','😈','🦄','🔥','💃','🕺','🍹','🎧','🌙','⚡','👽','🐯','🌵','💜','🎭','🍒'];
+  const SEXO_ICONO = { h: '🕺', m: '💃', x: '✨' };
 
   const estado = {
     socket: null,
@@ -18,6 +19,7 @@
     vistaActual: 'general',
     privadoAbierto: null, // otroId del chat privado abierto
     emojiElegido: '🙂',
+    sexoElegido: null,
     fotoPerfil: null,
     personaModal: null,
     vigilanciaGeo: null,  // id de watchPosition
@@ -158,6 +160,14 @@
     }
     cont.children[0].classList.add('activo');
 
+    const sexos = $('lista-sexos');
+    for (const b of sexos.children) {
+      b.onclick = () => {
+        estado.sexoElegido = b.dataset.sexo;
+        for (const x of sexos.children) x.classList.toggle('activo', x === b);
+      };
+    }
+
     $('avatar-preview').onclick = () => $('input-foto-perfil').click();
     $('input-foto-perfil').onchange = async (ev) => {
       const f = ev.target.files[0];
@@ -170,6 +180,10 @@
       const nombre = $('perfil-nombre').value.trim();
       if (!nombre) {
         $('perfil-error').textContent = 'Ponte un nombre o apodo para entrar.';
+        return;
+      }
+      if (!estado.sexoElegido) {
+        $('perfil-error').textContent = 'Indica tu sexo para entrar.';
         return;
       }
       // Evento geovallado: hace falta permiso de ubicación para entrar
@@ -187,6 +201,7 @@
       }
       conectar({
         nombre,
+        sexo: estado.sexoElegido,
         emoji: estado.emojiElegido,
         bio: $('perfil-bio').value.trim(),
         foto: estado.fotoPerfil,
@@ -215,7 +230,7 @@
     const datos = { codigo, ...(perfilNuevo || {}) };
     if (guardado) Object.assign(datos, { userId: guardado.userId, token: guardado.token });
 
-    socket.emit('unirse', datos, (resp) => {
+    const alUnirse = (resp) => {
       if (!resp || resp.error) {
         if (guardado) {
           // La sesión guardada ya no vale: pedimos perfil de nuevo
@@ -224,6 +239,13 @@
           return;
         }
         $('perfil-error').textContent = resp?.error || 'No se pudo entrar.';
+        mostrarPantalla('pantalla-perfil');
+        return;
+      }
+      // Equilibrio chicos/chicas: a la cola hasta que se libere un hueco
+      if (resp.enEspera) {
+        $('espera-posicion').textContent = resp.posicion;
+        mostrarPantalla('pantalla-espera');
         return;
       }
       sessionStorage.setItem(claveSesion, JSON.stringify({ userId: resp.userId, token: resp.token }));
@@ -238,6 +260,12 @@
         if (otro) estado.privados.set(otro, msgs);
       }
       iniciarChat();
+    };
+
+    socket.emit('unirse', datos, alUnirse);
+    socket.on('espera:admitido', alUnirse);
+    socket.on('espera:posicion', ({ posicion }) => {
+      $('espera-posicion').textContent = posicion;
     });
 
     socket.on('general:mensaje', (m) => {
@@ -365,13 +393,20 @@
       v.innerHTML = '<div class="aviso-sistema">Todavía no hay nadie más… comparte el QR 📲</div>';
       return;
     }
-    v.innerHTML = otros
+    const c = { h: 0, m: 0, x: 0 };
+    for (const u of estado.usuarios) c[u.sexo] = (c[u.sexo] || 0) + 1;
+    const barra = `<div class="cuenta-sexos">
+        <span>🕺 ${c.h} chico${c.h === 1 ? '' : 's'}</span>
+        <span>💃 ${c.m} chica${c.m === 1 ? '' : 's'}</span>
+        ${c.x ? `<span>✨ ${c.x}</span>` : ''}
+      </div>`;
+    v.innerHTML = barra + otros
       .map(
         (u) => `
         <div class="persona" data-user="${u.id}">
           ${avatarHtml(u)}
           <div class="datos">
-            <div class="nombre">${escaparHtml(u.nombre)} ${estado.bloqueados.has(u.id) ? '🚫' : ''}</div>
+            <div class="nombre">${escaparHtml(u.nombre)} ${SEXO_ICONO[u.sexo] || ''} ${estado.bloqueados.has(u.id) ? '🚫' : ''}</div>
             <div class="bio">${escaparHtml(u.bio || '')}</div>
           </div>
           <div class="punto ${u.online ? 'online' : ''}"></div>
@@ -444,7 +479,7 @@
     const u = usuario(id);
     estado.personaModal = id;
     $('modal-avatar').innerHTML = u.foto ? `<img src="${u.foto}" alt="" />` : u.emoji;
-    $('modal-nombre').textContent = u.nombre;
+    $('modal-nombre').textContent = `${u.nombre} ${SEXO_ICONO[u.sexo] || ''}`;
     $('modal-bio').textContent = u.bio || 'Sin descripción';
     $('modal-bloquear').textContent = estado.bloqueados.has(id) ? '✅ Desbloquear' : '🚫 Bloquear';
     $('modal-persona').classList.remove('oculto');
@@ -511,6 +546,13 @@
     };
 
     $('btn-volver-privado').onclick = () => cambiarVista('privados');
+
+    // Cancelar la espera en la cola de equilibrio
+    $('btn-cancelar-espera').onclick = () => {
+      estado.socket?.emit('salir', {});
+      estado.socket?.disconnect();
+      location.reload();
+    };
 
     // Modal persona
     $('modal-cerrar').onclick = () => $('modal-persona').classList.add('oculto');

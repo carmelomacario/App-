@@ -34,6 +34,21 @@
       <input id="horas" type="number" min="1" max="48" value="12" />
 
       <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; color:var(--texto)">
+        <input type="checkbox" id="equilibrio" style="width:auto" checked />
+        ⚖️ Mantener equilibrio chicos/chicas
+      </label>
+      <div id="opciones-equilibrio">
+        <label for="margen">Margen: cuántos chicos más que chicas se permiten como máximo</label>
+        <input id="margen" type="number" min="1" max="20" value="5" />
+        <p class="suave" style="font-size:12px; margin:6px 0 0">
+          Los primeros chicos entran libremente hasta el margen; después, cada
+          chica que entra abre hueco a un chico más. Quien no cabe espera en
+          cola y entra automáticamente. Así el chat tiende al 1-1 sin quedarse
+          vacío al principio.
+        </p>
+      </div>
+
+      <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; color:var(--texto)">
         <input type="checkbox" id="geovallado" style="width:auto" />
         📍 Limitar el chat al espacio físico (recomendado)
       </label>
@@ -76,6 +91,9 @@
     $('geovallado').addEventListener('change', () => {
       $('opciones-geo').classList.toggle('oculto', !$('geovallado').checked);
     });
+    $('equilibrio').addEventListener('change', () => {
+      $('opciones-equilibrio').classList.toggle('oculto', !$('equilibrio').checked);
+    });
 
     $('crear').addEventListener('click', async () => {
       $('crear').disabled = true;
@@ -93,7 +111,12 @@
         const respuesta = await fetch('/api/eventos', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nombre: $('nombre').value, horas: Number($('horas').value), geo }),
+          body: JSON.stringify({
+            nombre: $('nombre').value,
+            horas: Number($('horas').value),
+            geo,
+            balance: { activo: $('equilibrio').checked, margen: Number($('margen').value) || 5 },
+          }),
         });
         if (!respuesta.ok) throw new Error('No se pudo crear el evento');
         const ev = await respuesta.json();

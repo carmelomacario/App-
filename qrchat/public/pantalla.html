@@ -24,6 +24,7 @@
     <div class="evento" id="nombre">…</div>
     <div class="qr"><img id="qr" alt="Escanea para entrar al chat" /></div>
     <div class="contador">👥 <b id="personas">0</b> personas dentro</div>
+    <div class="contador" id="sexos" style="display:none">🕺 <b id="cuenta-h">0</b> · 💃 <b id="cuenta-m">0</b></div>
     <div class="instruccion">📲 Escanea el código y empieza a conocer gente</div>
   </div>
 
@@ -42,10 +43,20 @@
       document.getElementById('qr').src = ev.qr;
       document.getElementById('personas').textContent = ev.personas;
 
+      const pintarSexos = (h, m) => {
+        document.getElementById('sexos').style.display = '';
+        document.getElementById('cuenta-h').textContent = h;
+        document.getElementById('cuenta-m').textContent = m;
+      };
+      if (ev.sexos) pintarSexos(ev.sexos.h, ev.sexos.m);
+
       const socket = io();
       socket.emit('pantalla:unirse', { codigo });
       socket.on('usuarios:cambio', (usuarios) => {
         document.getElementById('personas').textContent = usuarios.length;
+        const h = usuarios.filter((u) => u.sexo === 'h').length;
+        const m = usuarios.filter((u) => u.sexo === 'm').length;
+        pintarSexos(h, m);
       });
       socket.on('evento:finalizado', () => {
         document.getElementById('nombre').textContent = 'Evento finalizado — ¡gracias por venir! 🌙';

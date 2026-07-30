@@ -27,6 +27,19 @@
       border-radius: 10px; padding: 6px 9px; cursor: pointer;
     }
     .emojis button.activo { border-color: var(--neon-1); background: #2a1626; }
+    .sexos { display: flex; gap: 8px; }
+    .sexos button {
+      flex: 1; font-size: 15px; font-weight: 600; color: var(--texto);
+      background: var(--fondo-3); border: 1px solid var(--borde);
+      border-radius: 12px; padding: 11px 6px; cursor: pointer;
+    }
+    .sexos button.activo { border-color: var(--neon-1); background: #2a1626; }
+    .cuenta-sexos {
+      display: flex; justify-content: center; gap: 18px; padding: 10px;
+      background: var(--fondo-2); border: 1px solid var(--borde);
+      border-radius: 12px; margin-bottom: 12px; font-size: 14px; font-weight: 600;
+    }
+    #espera-posicion { font-size: 56px; font-weight: 800; color: var(--neon-2); }
 
     /* ── Estructura del chat ────────────────────────────── */
     header {
@@ -142,6 +155,13 @@
       <label>Tu nombre o apodo *</label>
       <input type="text" id="perfil-nombre" maxlength="30" placeholder="¿Cómo te llamamos esta noche?" />
 
+      <label>Sexo *</label>
+      <div class="sexos" id="lista-sexos">
+        <button data-sexo="h">🕺 Chico</button>
+        <button data-sexo="m">💃 Chica</button>
+        <button data-sexo="x">✨ Otro</button>
+      </div>
+
       <label>O elige un avatar</label>
       <div class="emojis" id="lista-emojis"></div>
 
@@ -200,6 +220,20 @@
       </div>
     </div>
     <input type="file" id="input-foto-chat" accept="image/*" class="oculto" />
+  </div>
+
+  <!-- Pantalla: sala de espera (equilibrio chicos/chicas) -->
+  <div class="pantalla oculto centrado" id="pantalla-espera" style="justify-content:center; padding:20px">
+    <div class="tarjeta" style="max-width:420px; margin:0 auto">
+      <h2>Un momento… 🕺</h2>
+      <p class="suave">Ahora mismo hay más chicos que chicas y este evento
+        mantiene el equilibrio para que haya buen ambiente.</p>
+      <div id="espera-posicion">–</div>
+      <p class="suave">tu posición en la cola</p>
+      <p class="suave" style="font-size:13px">Entrarás <b>automáticamente</b> en cuanto se libere
+        un sitio. No cierres esta pantalla.</p>
+      <button class="boton boton-secundario" id="btn-cancelar-espera" style="margin-top:10px">Cancelar</button>
+    </div>
   </div>
 
   <!-- Pantalla: evento finalizado -->

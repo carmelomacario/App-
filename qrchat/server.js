@@ -43,10 +43,12 @@ const eventos = new Map();
 
 /*
 Evento = {
-  codigo, nombre, creadoEn, expiraEn, adminToken,
-  usuarios: Map<userId, { id, token, nombre, emoji, bio, foto, online, socketId, bloqueados:Set }>,
+  codigo, nombre, geo, balance, creadoEn, expiraEn, adminToken,
+  usuarios: Map<userId, { id, token, nombre, sexo, emoji, bio, foto,
+                          online, socketId, desconectadoEn, bloqueados:Set }>,
   general: [mensaje],
   privados: Map<claveOrdenada, [mensaje]>,
+  cola: [{ socket, datos }],   // chicos esperando hueco (equilibrio activo)
 }
 mensaje = { id, de, texto?, foto?, ts }
 */
@@ -85,45 +87,11 @@ function eventoActivo(codigo) {
 
 function finalizarEvento(ev) {
   io.to(`evento:${ev.codigo}`).emit('evento:finalizado');
+  for (const { socket } of ev.cola) socket.emit('evento:finalizado');
   io.in(`evento:${ev.codigo}`).disconnectSockets(true);
   eventos.delete(ev.codigo);
   console.log(`[qrchat] Evento ${ev.codigo} finalizado y borrado`);
 }
-
-/**
- * Borra por completo a una persona del evento: perfil, foto, sus mensajes
- * del canal general y todas sus conversaciones privadas (para ambas partes).
- * Se avisa al resto de clientes para que también lo eliminen de su pantalla.
- */
-function purgarUsuario(ev, userId, motivo) {
-  const u = ev.usuarios.get(userId);
-  if (!u) return;
-  ev.usuarios.delete(userId);
-  ev.general = ev.general.filter((m) => m.de !== userId);
-  for (const clave of Array.from(ev.privados.keys())) {
-    if (clave.split('|').includes(userId)) ev.privados.delete(clave);
-  }
-  for (const otro of ev.usuarios.values()) otro.bloqueados.delete(userId);
-  io.to(`evento:${ev.codigo}`).emit('usuario:purgado', { userId });
-  io.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
-  if (u.socketId) io.sockets.sockets.get(u.socketId)?.disconnect(true);
-  console.log(`[qrchat] ${ev.codigo}: usuario purgado (${motivo})`);
-}
-
-// Limpieza periódica: eventos caducados y personas que abandonaron el espacio
-setInterval(() => {
-  for (const ev of eventos.values()) {
-    if (Date.now() > ev.expiraEn) {
-      finalizarEvento(ev);
-      continue;
-    }
-    for (const u of Array.from(ev.usuarios.values())) {
-      if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > GRACIA_MS) {
-        purgarUsuario(ev, u.id, 'ausencia prolongada');
-      }
-    }
-  }
-}, SWEEP_MS);
 
 /* ─────────────────────────── Utilidades de datos ─────────────────────────── */
 
@@ -144,6 +112,7 @@ function perfilPublico(u) {
   return {
     id: u.id,
     nombre: u.nombre,
+    sexo: u.sexo,
     emoji: u.emoji,
     bio: u.bio,
     foto: u.foto,
@@ -154,6 +123,151 @@ function perfilPublico(u) {
 function listaUsuarios(ev) {
   return Array.from(ev.usuarios.values()).map(perfilPublico);
 }
+
+function contarSexos(ev) {
+  let h = 0;
+  let m = 0;
+  let x = 0;
+  for (const u of ev.usuarios.values()) {
+    if (u.sexo === 'h') h++;
+    else if (u.sexo === 'm') m++;
+    else x++;
+  }
+  return { h, m, x };
+}
+
+/* ─────────────────── Equilibrio chicos/chicas y cola ─────────────────────── */
+
+// Un chico puede entrar mientras no supere a las chicas en más del margen
+function hayHuecoParaChico(ev) {
+  if (!ev.balance) return true;
+  const { h, m } = contarSexos(ev);
+  return h - m < ev.balance.margen;
+}
+
+function actualizarPosicionesCola(ev) {
+  ev.cola.forEach(({ socket }, i) =>
+    socket.emit('espera:posicion', { posicion: i + 1, total: ev.cola.length })
+  );
+}
+
+// Cada vez que se libera hueco (entra una chica, alguien sale o es purgado)
+// vamos admitiendo por orden a los que esperan.
+function revisarCola(ev) {
+  let cambio = false;
+  while (ev.cola.length && hayHuecoParaChico(ev)) {
+    const { socket, datos } = ev.cola.shift();
+    cambio = true;
+    if (!socket.connected) continue;
+    socket.data.enCola = null;
+    const carga = admitir(socket, ev, datos);
+    socket.emit('espera:admitido', carga);
+    socket.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
+  }
+  if (cambio) actualizarPosicionesCola(ev);
+}
+
+function sacarDeCola(ev, socket) {
+  const antes = ev.cola.length;
+  ev.cola = ev.cola.filter((x) => x.socket !== socket);
+  if (ev.cola.length !== antes) actualizarPosicionesCola(ev);
+}
+
+/* ─────────────────────────── Alta en el evento ───────────────────────────── */
+
+// Crea (o recupera) el usuario, lo mete en la sala y devuelve el estado inicial
+function admitir(socket, ev, datos) {
+  let usuario = null;
+  if (datos.userId && datos.token) {
+    const previo = ev.usuarios.get(datos.userId);
+    if (previo && previo.token === datos.token) usuario = previo; // reconexión
+  }
+
+  if (!usuario) {
+    usuario = {
+      id: crypto.randomUUID(),
+      token: crypto.randomUUID(),
+      nombre: limpiarTexto(datos.nombre, 30),
+      sexo: ['h', 'm', 'x'].includes(datos.sexo) ? datos.sexo : 'x',
+      emoji: limpiarTexto(datos.emoji, 4) || '🙂',
+      bio: limpiarTexto(datos.bio, 120),
+      foto: fotoValida(datos.foto) ? datos.foto : null,
+      online: true,
+      socketId: socket.id,
+      desconectadoEn: null,
+      bloqueados: new Set(),
+    };
+    ev.usuarios.set(usuario.id, usuario);
+  } else {
+    usuario.online = true;
+    usuario.socketId = socket.id;
+    usuario.desconectadoEn = null;
+  }
+
+  socket.data.ev = ev;
+  socket.data.yo = usuario;
+  socket.join(`evento:${ev.codigo}`);
+
+  // Historial de privados en los que participa (para reconexiones)
+  const misPrivados = {};
+  for (const [clave, msgs] of ev.privados) {
+    if (clave.split('|').includes(usuario.id)) misPrivados[clave] = msgs;
+  }
+
+  return {
+    ok: true,
+    userId: usuario.id,
+    token: usuario.token,
+    perfil: perfilPublico(usuario),
+    evento: {
+      codigo: ev.codigo,
+      nombre: ev.nombre,
+      geo: ev.geo,
+      balance: ev.balance,
+      expiraEn: ev.expiraEn,
+    },
+    usuarios: listaUsuarios(ev),
+    general: ev.general,
+    privados: misPrivados,
+    bloqueados: Array.from(usuario.bloqueados),
+  };
+}
+
+/**
+ * Borra por completo a una persona del evento: perfil, foto, sus mensajes
+ * del canal general y todas sus conversaciones privadas (para ambas partes).
+ * Se avisa al resto de clientes para que también lo eliminen de su pantalla.
+ */
+function purgarUsuario(ev, userId, motivo) {
+  const u = ev.usuarios.get(userId);
+  if (!u) return;
+  ev.usuarios.delete(userId);
+  ev.general = ev.general.filter((m) => m.de !== userId);
+  for (const clave of Array.from(ev.privados.keys())) {
+    if (clave.split('|').includes(userId)) ev.privados.delete(clave);
+  }
+  for (const otro of ev.usuarios.values()) otro.bloqueados.delete(userId);
+  io.to(`evento:${ev.codigo}`).emit('usuario:purgado', { userId });
+  io.to(`evento:${ev.codigo}`).emit('usuarios:cambio', listaUsuarios(ev));
+  if (u.socketId) io.sockets.sockets.get(u.socketId)?.disconnect(true);
+  console.log(`[qrchat] ${ev.codigo}: usuario purgado (${motivo})`);
+  revisarCola(ev); // su hueco puede dar entrada a alguien en espera
+}
+
+// Limpieza periódica: eventos caducados y personas que abandonaron el espacio
+setInterval(() => {
+  for (const ev of eventos.values()) {
+    if (Date.now() > ev.expiraEn) {
+      finalizarEvento(ev);
+      continue;
+    }
+    for (const u of Array.from(ev.usuarios.values())) {
+      if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > GRACIA_MS) {
+        purgarUsuario(ev, u.id, 'ausencia prolongada');
+      }
+    }
+  }
+}, SWEEP_MS);
 
 /* ────────────────────────────────── API ──────────────────────────────────── */
 
@@ -171,17 +285,28 @@ app.post('/api/eventos', async (req, res) => {
     geo = { lat: Number(g.lat), lng: Number(g.lng), radio };
   }
 
+  // Equilibrio chicos/chicas opcional: los chicos nunca superan a las chicas
+  // en más de `margen`; el margen inicial permite arrancar el evento.
+  let balance = null;
+  const b = req.body?.balance;
+  if (b && b.activo) {
+    const margen = Math.min(Math.max(Number(b.margen) || 5, 1), 20);
+    balance = { margen };
+  }
+
   const codigo = generarCodigo();
   const ev = {
     codigo,
     nombre,
     geo,
+    balance,
     creadoEn: Date.now(),
     expiraEn: Date.now() + horas * 3600 * 1000,
     adminToken: crypto.randomUUID(),
     usuarios: new Map(),
     general: [],
     privados: new Map(),
+    cola: [],
   };
   eventos.set(codigo, ev);
 
@@ -192,6 +317,7 @@ app.post('/api/eventos', async (req, res) => {
     codigo,
     nombre,
     geo: ev.geo,
+    balance: ev.balance,
     url,
     qr,
     expiraEn: ev.expiraEn,
@@ -209,10 +335,12 @@ app.get('/api/eventos/:codigo', async (req, res) => {
     codigo: ev.codigo,
     nombre: ev.nombre,
     geo: ev.geo,
+    balance: ev.balance,
     url,
     qr,
     expiraEn: ev.expiraEn,
     personas: ev.usuarios.size,
+    sexos: contarSexos(ev),
   });
 });
 
@@ -223,8 +351,9 @@ app.get('/pantalla/:codigo', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, '
 /* ─────────────────────────────── Socket.IO ───────────────────────────────── */
 
 io.on('connection', (socket) => {
-  let ev = null; // evento al que está unido este socket
-  let yo = null; // usuario de este socket
+  socket.data.ev = null;     // evento al que está unido este socket
+  socket.data.yo = null;     // usuario de este socket
+  socket.data.enCola = null; // evento en cuya cola de espera está
 
   /* La pantalla de proyección solo escucha el contador de personas */
   socket.on('pantalla:unirse', ({ codigo } = {}, cb) => {
@@ -239,60 +368,32 @@ io.on('connection', (socket) => {
     const e = eventoActivo(String(datos.codigo || '').toUpperCase());
     if (!e) return cb?.({ error: 'Este evento no existe o ya ha finalizado.' });
 
-    let usuario = null;
-    if (datos.userId && datos.token) {
-      const previo = e.usuarios.get(datos.userId);
-      if (previo && previo.token === datos.token) usuario = previo; // reconexión
+    const esReconexion =
+      datos.userId && datos.token && e.usuarios.get(datos.userId)?.token === datos.token;
+
+    if (!esReconexion) {
+      if (!limpiarTexto(datos.nombre, 30)) {
+        return cb?.({ error: 'Elige un nombre para tu perfil.' });
+      }
+      // Equilibrio: si es chico y no hay hueco, pasa a la cola de espera
+      const sexo = ['h', 'm', 'x'].includes(datos.sexo) ? datos.sexo : 'x';
+      if (sexo === 'h' && !hayHuecoParaChico(e)) {
+        sacarDeCola(e, socket); // por si reintenta: no duplicar
+        e.cola.push({ socket, datos });
+        socket.data.enCola = e;
+        return cb?.({ enEspera: true, posicion: e.cola.length, total: e.cola.length });
+      }
     }
 
-    if (!usuario) {
-      const nombre = limpiarTexto(datos.nombre, 30);
-      if (!nombre) return cb?.({ error: 'Elige un nombre para tu perfil.' });
-      usuario = {
-        id: crypto.randomUUID(),
-        token: crypto.randomUUID(),
-        nombre,
-        emoji: limpiarTexto(datos.emoji, 4) || '🙂',
-        bio: limpiarTexto(datos.bio, 120),
-        foto: fotoValida(datos.foto) ? datos.foto : null,
-        online: true,
-        socketId: socket.id,
-        desconectadoEn: null,
-        bloqueados: new Set(),
-      };
-      e.usuarios.set(usuario.id, usuario);
-    } else {
-      usuario.online = true;
-      usuario.socketId = socket.id;
-      usuario.desconectadoEn = null;
-    }
-
-    ev = e;
-    yo = usuario;
-    socket.join(`evento:${e.codigo}`);
-
-    // Historial de privados en los que participa (para reconexiones)
-    const misPrivados = {};
-    for (const [clave, msgs] of e.privados) {
-      if (clave.split('|').includes(yo.id)) misPrivados[clave] = msgs;
-    }
-
-    cb?.({
-      ok: true,
-      userId: usuario.id,
-      token: usuario.token,
-      perfil: perfilPublico(usuario),
-      evento: { codigo: e.codigo, nombre: e.nombre, geo: e.geo, expiraEn: e.expiraEn },
-      usuarios: listaUsuarios(e),
-      general: e.general,
-      privados: misPrivados,
-      bloqueados: Array.from(usuario.bloqueados),
-    });
+    const carga = admitir(socket, e, datos);
+    cb?.(carga);
     socket.to(`evento:${e.codigo}`).emit('usuarios:cambio', listaUsuarios(e));
+    revisarCola(e); // si entró una chica, puede abrir hueco a alguien en espera
   });
 
   /* Mensaje al canal general (texto y/o foto) */
   socket.on('general:mensaje', (datos = {}, cb) => {
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     const texto = limpiarTexto(datos.texto, 1000);
     const foto = fotoValida(datos.foto) ? datos.foto : null;
@@ -307,6 +408,7 @@ io.on('connection', (socket) => {
 
   /* Mensaje privado 1 a 1 */
   socket.on('privado:mensaje', (datos = {}, cb) => {
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     const destino = ev.usuarios.get(String(datos.para || ''));
     if (!destino || destino.id === yo.id) return cb?.({ error: 'Persona no disponible' });
@@ -333,6 +435,7 @@ io.on('connection', (socket) => {
 
   /* Bloquear / desbloquear: sus privados dejan de llegarte */
   socket.on('bloquear', ({ userId, bloquear } = {}) => {
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     if (!ev.usuarios.has(userId)) return;
     if (bloquear) yo.bloqueados.add(userId);
@@ -341,6 +444,7 @@ io.on('connection', (socket) => {
 
   /* Editar el propio perfil */
   socket.on('perfil:editar', (datos = {}, cb) => {
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     if (datos.nombre !== undefined) yo.nombre = limpiarTexto(datos.nombre, 30) || yo.nombre;
     if (datos.emoji !== undefined) yo.emoji = limpiarTexto(datos.emoji, 4) || yo.emoji;
@@ -352,16 +456,25 @@ io.on('connection', (socket) => {
 
   /* Abandonar el espacio: se borra TODO lo de esta persona al instante */
   socket.on('salir', (datos = {}) => {
+    if (socket.data.enCola) {
+      sacarDeCola(socket.data.enCola, socket);
+      socket.data.enCola = null;
+      return;
+    }
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     const motivo = datos.motivo === 'fuera-de-zona' ? 'salió del espacio' : 'salida voluntaria';
-    const e = ev;
-    const id = yo.id;
-    ev = null;
-    yo = null;
-    purgarUsuario(e, id, motivo);
+    socket.data.ev = null;
+    socket.data.yo = null;
+    purgarUsuario(ev, yo.id, motivo);
   });
 
   socket.on('disconnect', () => {
+    if (socket.data.enCola) {
+      sacarDeCola(socket.data.enCola, socket);
+      socket.data.enCola = null;
+    }
+    const { ev, yo } = socket.data;
     if (!ev || !yo) return;
     yo.online = false;
     yo.socketId = null;
