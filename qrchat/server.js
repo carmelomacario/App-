@@ -18,6 +18,10 @@ const server = http.createServer(app);
 const io = new Server(server, {
   // Las fotos viajan como data-URL; límite de 4 MB por paquete.
   maxHttpBufferSize: 4 * 1024 * 1024,
+  // Tolerancia alta a cortes breves de radio en el móvil (dentro de un local
+  // la cobertura va y viene): tardamos más en dar una conexión por muerta.
+  pingInterval: 25000,
+  pingTimeout: 60000,
 });
 
 const PORT = process.env.PORT || 3000;
@@ -35,9 +39,13 @@ const MAX_MENSAJES_PRIVADO = 200;
 const MAX_FOTO_BYTES = 2.5 * 1024 * 1024; // data-URL ya comprimida en cliente
 
 // Al abandonar el espacio (desconexión, cierre de la app, salir del radio…)
-// se purga TODO lo de esa persona. La gracia cubre cortes breves de cobertura.
-const GRACIA_MS = Number(process.env.QRCHAT_GRACIA_MS) || 5 * 60 * 1000;
+// se purga TODO lo de esa persona. La gracia cubre móvil bloqueado, ratos en
+// otra app y cortes de cobertura: 15 min por defecto, configurable por evento.
+const GRACIA_MS = Number(process.env.QRCHAT_GRACIA_MS) || 15 * 60 * 1000;
 const SWEEP_MS = Number(process.env.QRCHAT_SWEEP_MS) || 30 * 1000;
+// Cada cuánto se guarda el estado de los eventos en disco para sobrevivir
+// a reinicios del servidor (el estado se borra igualmente al expirar).
+const SNAPSHOT_MS = Number(process.env.QRCHAT_SNAPSHOT_MS) || 45 * 1000;
 
 // Cuentas guardadas: gratis por ahora; al activar este flag la CREACIÓN de
 // cuentas nuevas queda bloqueada (paso previo a integrar el cobro). Las
@@ -99,6 +107,7 @@ function finalizarEvento(ev) {
   for (const { socket } of ev.cola) socket.emit('evento:finalizado');
   io.in(`evento:${ev.codigo}`).disconnectSockets(true);
   eventos.delete(ev.codigo);
+  guardarEventosAhora(); // que tampoco quede rastro en el disco
   console.log(`[qrchat] Evento ${ev.codigo} finalizado y borrado`);
 }
 
@@ -150,8 +159,9 @@ function contarSexos(ev) {
 /* Los chats siguen siendo 100 % efímeros; solo se guarda el PERFIL de quien
    decide crear una cuenta: alias + PIN (cifrado) + nombre/sexo/emoji/bio/foto. */
 
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.QRCHAT_DATA_DIR || path.join(__dirname, 'data');
 const FICHERO_CUENTAS = path.join(DATA_DIR, 'cuentas.json');
+const FICHERO_EVENTOS = path.join(DATA_DIR, 'eventos.json');
 
 /** @type {Map<string, Cuenta>} alias normalizado → cuenta */
 let cuentas = new Map();
@@ -203,6 +213,85 @@ function cuentaPorToken(credenciales) {
   const c = cuentas.get(aliasNorm);
   return c && c.token === credenciales.token ? c : null;
 }
+
+/* ──────── Supervivencia a reinicios: instantánea de eventos en disco ───────
+   Un reinicio del servidor (redespliegue, caída, "sueño" del hosting) no debe
+   matar la fiesta: el estado de los eventos se guarda periódicamente y se
+   restaura al arrancar. Sigue siendo efímero: al expirar el evento (o salir
+   la persona) se borra igual, también del disco. Las fotos de los mensajes
+   no se conservan entre reinicios para mantener la instantánea ligera. */
+
+function serializarEventos() {
+  const lista = [];
+  for (const ev of eventos.values()) {
+    const sinFoto = (m) => (m.foto ? { ...m, foto: null, fotoPerdida: true } : m);
+    lista.push({
+      codigo: ev.codigo,
+      nombre: ev.nombre,
+      geo: ev.geo,
+      balance: ev.balance,
+      creadoEn: ev.creadoEn,
+      expiraEn: ev.expiraEn,
+      adminToken: ev.adminToken,
+      graciaMs: ev.graciaMs,
+      ultimaMuestra: ev.ultimaMuestra,
+      stats: ev.stats,
+      general: ev.general.map(sinFoto),
+      privados: Array.from(ev.privados.entries()).map(([k, msgs]) => [k, msgs.map(sinFoto)]),
+      usuarios: Array.from(ev.usuarios.values()).map((u) => ({
+        ...u,
+        socketId: null,
+        online: false,
+        bloqueados: Array.from(u.bloqueados),
+      })),
+    });
+  }
+  return lista;
+}
+
+function guardarEventosAhora() {
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(FICHERO_EVENTOS, JSON.stringify(serializarEventos()));
+  } catch (e) {
+    console.error('[qrchat] No se pudo guardar el estado de eventos:', e.message);
+  }
+}
+
+function restaurarEventos() {
+  try {
+    const lista = JSON.parse(fs.readFileSync(FICHERO_EVENTOS, 'utf8'));
+    for (const e of lista) {
+      if (Date.now() > e.expiraEn) continue;
+      eventos.set(e.codigo, {
+        ...e,
+        usuarios: new Map(
+          e.usuarios.map((u) => [
+            u.id,
+            {
+              ...u,
+              bloqueados: new Set(u.bloqueados),
+              online: false,
+              socketId: null,
+              // La gracia de ausencia empieza a contar desde el arranque
+              desconectadoEn: Date.now(),
+            },
+          ])
+        ),
+        privados: new Map(e.privados),
+        cola: [],
+        solicitudes: new Set(),
+      });
+    }
+    if (eventos.size) console.log(`[qrchat] ${eventos.size} eventos restaurados tras el reinicio`);
+  } catch {}
+}
+restaurarEventos();
+setInterval(guardarEventosAhora, SNAPSHOT_MS);
+process.on('SIGTERM', () => {
+  guardarEventosAhora();
+  process.exit(0);
+});
 
 /* Guarda el contacto en ambas cuentas (consentimiento mutuo confirmado) */
 function guardarContactoMutuo(ev, a, b) {
@@ -370,7 +459,7 @@ setInterval(() => {
       continue;
     }
     for (const u of Array.from(ev.usuarios.values())) {
-      if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > GRACIA_MS) {
+      if (!u.online && u.desconectadoEn && Date.now() - u.desconectadoEn > (ev.graciaMs || GRACIA_MS)) {
         purgarUsuario(ev, u.id, 'ausencia prolongada');
       }
     }
@@ -409,12 +498,20 @@ app.post('/api/eventos', async (req, res) => {
     balance = { margen };
   }
 
+  // Minutos que alguien puede estar sin conexión antes de purgarlo
+  const ausencia = Number(req.body?.ausenciaMinutos);
+  const graciaMs =
+    Number.isFinite(ausencia) && ausencia >= 1
+      ? Math.min(ausencia, 60) * 60 * 1000
+      : GRACIA_MS;
+
   const codigo = generarCodigo();
   const ev = {
     codigo,
     nombre,
     geo,
     balance,
+    graciaMs,
     creadoEn: Date.now(),
     expiraEn: Date.now() + horas * 3600 * 1000,
     adminToken: crypto.randomUUID(),

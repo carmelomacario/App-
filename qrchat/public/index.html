@@ -37,6 +37,14 @@
       <label for="horas">Duración (horas hasta que todo se borre)</label>
       <input id="horas" type="number" min="1" max="48" value="12" />
 
+      <label for="ausencia">Minutos sin conexión antes de borrar a alguien (1-60)</label>
+      <input id="ausencia" type="number" min="1" max="60" value="15" />
+      <p class="suave" style="font-size:12px; margin:6px 0 0">
+        Cubre el móvil bloqueado, un rato en otra app o mala cobertura sin
+        expulsar a nadie. Si la persona vuelve dentro de ese margen, sigue
+        donde estaba.
+      </p>
+
       <label style="display:flex; align-items:center; gap:10px; cursor:pointer; font-size:14px; color:var(--texto)">
         <input type="checkbox" id="equilibrio" style="width:auto" checked />
         ⚖️ Mantener equilibrio chicos/chicas
@@ -121,6 +129,7 @@
           body: JSON.stringify({
             nombre: $('nombre').value,
             horas: Number($('horas').value),
+            ausenciaMinutos: Number($('ausencia').value) || 15,
             geo,
             balance: { activo: $('equilibrio').checked, margen: Number($('margen').value) || 5 },
           }),

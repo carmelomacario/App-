@@ -121,7 +121,7 @@ persona) — tanto en el servidor como en las pantallas del resto de asistentes:
 |---|---|
 | **Salir del recinto** (evento geovallado) | La app vigila la posición; tras ~45 s fuera del radio, purga inmediata |
 | **Salir voluntariamente** (botón 👤 → salir) | Purga inmediata |
-| **Cerrar la app / quedarse sin conexión** | Purga tras 5 min de gracia (cubre cortes breves de cobertura) |
+| **Cerrar la app / quedarse sin conexión** | Purga tras el margen de ausencia del evento (15 min por defecto, configurable 1–60 al crearlo) |
 | **Retirar el permiso de ubicación** (evento geovallado) | Purga inmediata |
 | **Fin del evento** | Se borra el evento completo |
 
@@ -133,7 +133,26 @@ entrar. Se aplica un margen según la precisión del GPS (hasta 100 m) para no
 expulsar a nadie por mala señal dentro del local.
 
 La gracia y el barrido se pueden ajustar con variables de entorno:
-`QRCHAT_GRACIA_MS` (por defecto 300000) y `QRCHAT_SWEEP_MS` (30000).
+`QRCHAT_GRACIA_MS` (por defecto 900000 = 15 min) y `QRCHAT_SWEEP_MS` (30000).
+El móvil bloqueado o un rato en otra app NO expulsan a nadie mientras vuelva
+dentro del margen; al volver a la app, la reconexión es inmediata y, si aun
+así caducó la sesión, el formulario de entrada aparece relleno con el último
+perfil usado en ese móvil para volver con un toque.
+
+## Supervivencia a reinicios 🔁
+
+Un reinicio del servidor (redespliegue, caída, «sueño» del hosting) ya no mata
+la fiesta: el estado de los eventos se guarda en disco cada ~45 s
+(`QRCHAT_SNAPSHOT_MS`) y al apagarse ordenadamente (SIGTERM), y se restaura al
+arrancar. La gente reconecta con su mismo perfil y el historial de texto; las
+fotos de los mensajes no se conservan entre reinicios (se marcan como «foto no
+disponible») para mantener la instantánea ligera. Al expirar el evento, la
+copia en disco se borra también.
+
+> Nota Render free: su disco es efímero y NO sobrevive a redespliegues ni al
+> «sueño»; la instantánea protege sobre todo en VPS/Docker o en Render con
+> disco persistente (plan de pago, montar `data/`). En el plan gratuito, la
+> defensa contra el sueño es el ping de UptimeRobot a `/salud` cada 5 min.
 
 ## Ejecutar en local
 

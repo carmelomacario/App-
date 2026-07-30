@@ -346,8 +346,37 @@
     $('btn-entrar').onclick = async () => {
       if (!validarPerfil()) return;
       if (!(await pedirUbicacion())) return;
+      // Recordamos el perfil en este móvil: si algo te expulsa, vuelves con un toque
+      try {
+        localStorage.setItem('qrchat:ultimo-perfil', JSON.stringify(perfilDelFormulario()));
+      } catch {}
       conectar(perfilDelFormulario());
     };
+
+    // Si ya entraste alguna vez desde este móvil, el formulario viene relleno
+    try {
+      const ultimo = JSON.parse(localStorage.getItem('qrchat:ultimo-perfil') || 'null');
+      if (ultimo) {
+        $('perfil-nombre').value = ultimo.nombre || '';
+        $('perfil-bio').value = ultimo.bio || '';
+        if (ultimo.sexo) {
+          estado.sexoElegido = ultimo.sexo;
+          for (const b of $('lista-sexos').children) {
+            b.classList.toggle('activo', b.dataset.sexo === ultimo.sexo);
+          }
+        }
+        if (ultimo.foto) {
+          estado.fotoPerfil = ultimo.foto;
+          $('avatar-preview').innerHTML = `<img src="${ultimo.foto}" alt="" />`;
+        } else if (ultimo.emoji) {
+          estado.emojiElegido = ultimo.emoji;
+          $('avatar-preview').innerHTML = ultimo.emoji;
+          for (const b of $('lista-emojis').children) {
+            b.classList.toggle('activo', b.textContent === ultimo.emoji);
+          }
+        }
+      }
+    } catch {}
 
     /* ── Cuenta guardada: crear / iniciar sesión / entrar con ella ── */
 
@@ -459,9 +488,10 @@
           return;
         }
         if (guardado) {
-          // La sesión guardada ya no vale: pedimos perfil de nuevo
+          // La sesión guardada ya no vale: pedimos perfil de nuevo (relleno)
           sessionStorage.removeItem(claveSesion);
           mostrarPantalla('pantalla-perfil');
+          toast('Tu sesión caducó por ausencia. Entra de nuevo: tus datos ya están rellenos ✨', 6000);
           return;
         }
         $('perfil-error').textContent = resp?.error || 'No se pudo entrar.';
@@ -557,7 +587,13 @@
 
     socket.io.on('reconnect', () => {
       const s = JSON.parse(sessionStorage.getItem(claveSesion) || 'null');
-      if (s) socket.emit('unirse', { codigo, userId: s.userId, token: s.token }, () => {});
+      if (s) socket.emit('unirse', { codigo, userId: s.userId, token: s.token }, alUnirse);
+    });
+
+    // Al volver a la app (desbloquear el móvil, cambiar de pestaña),
+    // forzamos la reconexión inmediata en vez de esperar al reintento
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && !socket.connected) socket.connect();
     });
   }
 
@@ -602,6 +638,7 @@
           <div class="autor">${escaparHtml(autor.nombre)}</div>
           ${m.texto ? `<div class="texto">${escaparHtml(m.texto)}</div>` : ''}
           ${m.foto ? `<img class="foto" src="${m.foto}" alt="Foto" />` : ''}
+          ${!m.foto && m.fotoPerdida ? '<div class="suave" style="font-size:12px">📷 Foto no disponible</div>' : ''}
           <div class="hora">${hora(m.ts)}</div>
         </div>
       </div>`;
