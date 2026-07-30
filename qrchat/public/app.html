@@ -245,6 +245,27 @@
     </div>
   </div>
 
+  <!-- Modal: mi perfil (editar nombre, foto y bio) -->
+  <div class="modal-fondo oculto" id="modal-mi-perfil">
+    <div class="tarjeta modal">
+      <h2>Mi perfil</h2>
+      <div class="avatar-preview" id="mi-avatar" title="Toca para cambiar tu foto" style="cursor:pointer">🙂</div>
+      <p class="suave" style="font-size:12px; margin:0">Toca el círculo para cambiar tu foto</p>
+      <input type="file" id="input-foto-mi-perfil" accept="image/*" class="oculto" />
+      <div style="text-align:left">
+        <label>Tu nombre</label>
+        <input type="text" id="mi-nombre" maxlength="30" />
+        <label>Algo sobre ti</label>
+        <textarea id="mi-bio" maxlength="120" rows="2"></textarea>
+      </div>
+      <div class="acciones">
+        <button class="boton" id="mi-guardar">💾 Guardar cambios</button>
+        <button class="boton boton-secundario" id="mi-salir">👋 Salir del evento</button>
+        <button class="boton boton-secundario" id="mi-cerrar">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: perfil de otra persona -->
   <div class="modal-fondo oculto" id="modal-persona">
     <div class="tarjeta modal">

@@ -304,6 +304,7 @@
     socket.on('usuarios:cambio', (usuarios) => {
       estado.usuarios = usuarios;
       $('chat-info').textContent = textoPersonas(usuarios.length);
+      if (estado.vistaActual === 'general') pintarGeneral();
       if (estado.vistaActual === 'gente') pintarGente();
       if (estado.vistaActual === 'privados') pintarListaPrivados();
       if (estado.vistaActual === 'chat-privado') pintarCabeceraPrivado();
@@ -370,11 +371,16 @@
   }
 
   function pintarLista(contenedor, mensajes) {
+    // Solo auto-bajamos si ya estábamos cerca del final (no molestar al leer)
+    const cercaDelFinal =
+      !contenedor.dataset.pintado ||
+      contenedor.scrollHeight - contenedor.scrollTop - contenedor.clientHeight < 140;
     contenedor.innerHTML = mensajes
       .filter((m) => !estado.bloqueados.has(m.de))
       .map(htmlMensaje)
       .join('') || '<div class="aviso-sistema">Aún no hay mensajes. ¡Rompe el hielo! 🧊</div>';
-    contenedor.scrollTop = contenedor.scrollHeight;
+    contenedor.dataset.pintado = '1';
+    if (cercaDelFinal) contenedor.scrollTop = contenedor.scrollHeight;
     // Tocar un avatar abre el perfil de esa persona
     for (const av of contenedor.querySelectorAll('.avatar-mini[data-user]')) {
       const id = av.dataset.user;
@@ -574,8 +580,41 @@
       if (estado.vistaActual === 'gente') pintarGente();
     };
 
-    // Mi perfil: de momento, opción de salir del evento
+    // Mi perfil: editar nombre, foto y bio en cualquier momento
+    let miFotoNueva; // undefined = sin cambios; null = quitar; string = nueva foto
     $('btn-mi-perfil').onclick = () => {
+      const p = estado.yo?.perfil;
+      if (!p) return;
+      miFotoNueva = undefined;
+      $('mi-avatar').innerHTML = p.foto ? `<img src="${p.foto}" alt="" />` : p.emoji;
+      $('mi-nombre').value = p.nombre;
+      $('mi-bio').value = p.bio || '';
+      $('modal-mi-perfil').classList.remove('oculto');
+    };
+    $('mi-avatar').onclick = () => $('input-foto-mi-perfil').click();
+    $('input-foto-mi-perfil').onchange = async (ev) => {
+      const f = ev.target.files[0];
+      ev.target.value = '';
+      if (!f) return;
+      miFotoNueva = await comprimirImagen(f);
+      $('mi-avatar').innerHTML = `<img src="${miFotoNueva}" alt="" />`;
+    };
+    $('mi-guardar').onclick = () => {
+      const cambios = {
+        nombre: $('mi-nombre').value.trim(),
+        bio: $('mi-bio').value.trim(),
+      };
+      if (miFotoNueva !== undefined) cambios.foto = miFotoNueva;
+      estado.socket.emit('perfil:editar', cambios, (resp) => {
+        if (resp?.perfil) estado.yo.perfil = resp.perfil;
+        $('modal-mi-perfil').classList.add('oculto');
+      });
+    };
+    $('mi-cerrar').onclick = () => $('modal-mi-perfil').classList.add('oculto');
+    $('modal-mi-perfil').onclick = (e) => {
+      if (e.target === $('modal-mi-perfil')) $('modal-mi-perfil').classList.add('oculto');
+    };
+    $('mi-salir').onclick = () => {
       if (confirm('¿Quieres salir del evento? Tu perfil, tus fotos y TODOS tus mensajes se borrarán.')) {
         salirDelEspacio(
           'voluntario',
