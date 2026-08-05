@@ -1,0 +1,290 @@
+[
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_MELAN",
+  "nombre": "Rossana Plus Melan",
+  "colores": [
+   "Frambuesa",
+   "Celeste"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41599"
+  }
+ },
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_BENICIA",
+  "nombre": "Rossana Plus Benicia",
+  "colores": [
+   "Azul",
+   "Rosa"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41601"
+  }
+ },
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_DEVAN",
+  "nombre": "Rossana Plus Devan",
+  "colores": [
+   "Celeste",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41599 (revisar)"
+  }
+ },
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_IRACEN",
+  "nombre": "Rossana Plus Iracen",
+  "colores": [
+   "Celeste",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41600"
+  }
+ },
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_NEYMAR",
+  "nombre": "Rossana Plus Neymar",
+  "colores": [
+   "Malva",
+   "Celeste"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41599 (revisar)"
+  }
+ },
+ {
+  "categoria": "Juegos de sábana",
+  "seccionId": 10,
+  "seccion": "HOGAR",
+  "categoriaId": 143,
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-08-05T09:00:00.000Z",
+  "modificado": "2026-08-05T09:00:00.000Z",
+  "codigo": "ROSSANA_SALVINA",
+  "nombre": "Rossana Plus Salvina",
+  "colores": [
+   "Azul",
+   "Rosa"
+  ],
+  "tallas": [
+   {
+    "t": "90"
+   },
+   {
+    "t": "135"
+   },
+   {
+    "t": "150"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% microfibra",
+   "packing": "",
+   "fabricante": "Rossana Plus",
+   "lavado": "Tacto suave · Fácil planchado · Secado rápido · Lavable a máquina · Oeko-Tex Standard 100",
+   "origen": "",
+   "refProveedor": "41599 (revisar)"
+  }
+ }
+]
