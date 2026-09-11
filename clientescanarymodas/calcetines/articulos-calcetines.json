@@ -1,0 +1,928 @@
+[
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_PC_UNIVERSAL_DIPLOMATICO",
+  "nombre": "Pierre Cardin · Universal Diplomático",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Marino",
+   "Negro",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón de calidad (Cotone sulla pelle)",
+   "packing": "Pack de 3",
+   "fabricante": "Pierre Cardin",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_PC_WOMAN_QUARTER",
+  "nombre": "Pierre Cardin · Woman's Quarter",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Marino",
+   "Negro",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "35-40"
+   },
+   {
+    "t": "40-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Pack de 3",
+   "fabricante": "Pierre Cardin",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_PC_LISO_PA4002",
+  "nombre": "Pierre Cardin · Calcetín liso PA4002",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Negro",
+   "Gris",
+   "Marino"
+  ],
+  "tallas": [
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "50% algodón · 45% poliéster · 5% elastano",
+   "packing": "Pack de 3",
+   "fabricante": "Pierre Cardin",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_JOMA_SPORT_SERIES",
+  "nombre": "Joma Sport Series · Calcetín deportivo",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Negro",
+   "Verde",
+   "Azul",
+   "Blanco/Rojo",
+   "Blanco/Amarillo",
+   "Negro/Amarillo"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "6 diseños",
+   "fabricante": "Joma",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_KAPPA_93894897",
+  "nombre": "Kappa · Deportivo 93.89.48.97",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Negro",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "66% algodón · 32% poliéster · 2% elastano",
+   "packing": "Pack de 3",
+   "fabricante": "Kappa",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_KAPPA_93896915",
+  "nombre": "Kappa · 93.89.69.15",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco",
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "70% algodón · 28% poliéster · 2% elastano",
+   "packing": "Pack de 2 (Blanco+Negro)",
+   "fabricante": "Kappa",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_KAPPA_61465",
+  "nombre": "Kappa · 61465 (blanco)",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "71% algodón · 27% poliéster · 2% elastano",
+   "packing": "Pack de 3",
+   "fabricante": "Kappa",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_KAPPA_61458",
+  "nombre": "Kappa · 61458 (negro)",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "36-41"
+   },
+   {
+    "t": "39-42"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "78% algodón · 10% poliamida · 10% poliéster · 2% elastano",
+   "packing": "Pack de 3",
+   "fabricante": "Kappa",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_KAPPA_ALPINE_93896815",
+  "nombre": "Kappa · Alpine 93.89.68.15",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Negro",
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "64% algodón · 32% poliéster · 3% elastodieno · 1% elastano",
+   "packing": "Pack de 2 (Negro+Blanco)",
+   "fabricante": "Kappa",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_QS_SNEAKER_93156962",
+  "nombre": "Quiksilver · Sneaker 93.15.69.62",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco",
+   "Negro",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Pack de 3",
+   "fabricante": "Quiksilver",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_QS_QUARTER_93157262",
+  "nombre": "Quiksilver · Quarter 93.15.72.62",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Pack de 3",
+   "fabricante": "Quiksilver",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_QS_QUARTER_93157362",
+  "nombre": "Quiksilver · Quarter 93.15.73.62",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco",
+   "Negro",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Pack de 3",
+   "fabricante": "Quiksilver",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_COBERCOX_SIN_GOMA",
+  "nombre": "Cobercox · Liso sin goma",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "85% algodón · 13% poliamida · 3% elastano",
+   "packing": "Pack de 3 · Sin goma",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_COBERCOX_MEDICAL",
+  "nombre": "Cobercox · Medical (pies sensibles)",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Negro",
+   "Marino",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "Talla única"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "100% algodón",
+   "packing": "Sin elástico · Paquete 12",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_COBERCOX_INVISIBLE_MUJER",
+  "nombre": "Cobercox · Invisible Mujer",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Blanco",
+   "Negro",
+   "Beige",
+   "Gris"
+  ],
+  "tallas": [
+   {
+    "t": "35-40"
+   },
+   {
+    "t": "40-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Silicona antideslizante · Paquete 12",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_COBERCOX_TOBILLERO_HOMBRE",
+  "nombre": "Cobercox · Tobillero Hombre",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco"
+  ],
+  "tallas": [
+   {
+    "t": "40-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "85% algodón · 10% poliamida · 5% elastano",
+   "packing": "Paquete 12",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_COBERCOX_TOBILLERO_MUJER",
+  "nombre": "Cobercox · Tobillero Mujer",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco",
+   "Negro",
+   "Surtido (blanco/negro/gris)"
+  ],
+  "tallas": [
+   {
+    "t": "35-39"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Paquete 12",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_SPORT_BANDERA",
+  "nombre": "Sport Bandera",
+  "categoria": "Deportivos",
+  "categoriaId": 311,
+  "colores": [
+   "Blanco",
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "39-42"
+   },
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "Algodón suave",
+   "packing": "Paquete 12 · Detalle bandera",
+   "fabricante": "Cobercox",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_GED_1808",
+  "nombre": "GED 1808 · Calcetín liso",
+  "categoria": "Vestir",
+  "categoriaId": 310,
+  "colores": [
+   "Negro"
+  ],
+  "tallas": [
+   {
+    "t": "43-46"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "90% algodón · 8% poliamida · 2% elastano",
+   "packing": "Pack de 3 · Paquete 12",
+   "fabricante": "GED",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_RODFER_FANTASIA_HOMBRE",
+  "nombre": "Rodfer · Fantasía Hombre (sin costuras)",
+  "categoria": "Fantasía",
+  "categoriaId": 313,
+  "colores": [
+   "Surtido colores y dibujos"
+  ],
+  "tallas": [
+   {
+    "t": "Talla única"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "75% algodón · 22% poliamida · 3% elastano",
+   "packing": "Sin costuras · Caja 24",
+   "fabricante": "Rodfer",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ },
+ {
+  "seccionId": 601,
+  "seccion": "Calcetines",
+  "tipoId": null,
+  "tipo": null,
+  "precio": 0,
+  "portes": 0,
+  "tiposSujetador": [],
+  "agotadas": [],
+  "novedad": true,
+  "activo": true,
+  "pendienteRevision": false,
+  "carpetaId": null,
+  "codigoA3": null,
+  "copas": [],
+  "minUnidadesPorColor": 0,
+  "udsPorPack": 1,
+  "fotos": [],
+  "creado": "2026-09-11T09:00:00.000Z",
+  "modificado": "2026-09-11T09:00:00.000Z",
+  "codigo": "CALC_RODFER_FANTASIA_MUJER",
+  "nombre": "Rodfer · Fantasía Mujer (sin costuras)",
+  "categoria": "Fantasía",
+  "categoriaId": 313,
+  "colores": [
+   "Surtido colores y dibujos"
+  ],
+  "tallas": [
+   {
+    "t": "35-38"
+   },
+   {
+    "t": "39-42"
+   }
+  ],
+  "fichaTecnica": {
+   "composicion": "40% modal · 35% acrílico · 22% poliamida · 3% elastano",
+   "packing": "Sin costuras · Caja 24",
+   "fabricante": "Rodfer",
+   "lavado": "Suave y transpirable · Lavable a máquina",
+   "origen": "",
+   "refProveedor": ""
+  }
+ }
+]
